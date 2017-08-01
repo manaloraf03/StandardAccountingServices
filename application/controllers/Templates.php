@@ -546,7 +546,7 @@ class Templates extends CORE_Controller {
 
                 //preview on browser
                 if($type=='preview'){
-                    $file_name=$info[0]->slip_no;
+                    $file_name=$info[0]->adjustment_code;
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
                     $content=$this->load->view('template/adjustment_content',$data,TRUE); //load the template
