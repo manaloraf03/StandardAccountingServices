@@ -41,7 +41,7 @@ class Service_journal extends CORE_Controller
         $data['methods']=$this->Payment_method_model->get_list('is_active=TRUE AND is_deleted=FALSE');
 
         $data['title'] = 'Service Journal';
-        $this->load->view('service_journal_view', $data);
+        $this->load->view('Service_journal_view', $data);
     }
 
 

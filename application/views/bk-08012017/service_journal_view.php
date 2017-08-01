@@ -834,7 +834,7 @@ $(document).ready(function(){
 
         dtReview=$('#tbl_service_review').DataTable({
             "bLengthChange":false,
-            "ajax" : "service_invoice/transaction/service-for-review",
+            "ajax" : "Service_invoice/transaction/service-for-review",
             "columns": [
                 {
                     "targets": [0],

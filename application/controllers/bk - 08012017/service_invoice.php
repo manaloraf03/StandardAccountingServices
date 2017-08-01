@@ -296,7 +296,6 @@ function response_rows_invoice($filter_value){
                     'service_invoice.service_invoice_no',
                     'service_invoice.address',
                     'service_invoice.remarks',
-                    'service_invoice.is_journal_posted',
                     'DATE_FORMAT(service_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
                    'DATE_FORMAT(service_invoice.date_due,"%m/%d/%Y") as date_due',
                     'customers.customer_name',

@@ -152,7 +152,7 @@
             <table id="tbl_service_invoice" cellspacing="0" width="100%" style="">
                 <thead class="">
                 <tr>
-                <!--     <th></th> -->
+                    <th></th>
                     <th>Invoice #</th>
                     <th>Invoice Date</th>
                     <th>Due Date</th>
@@ -688,21 +688,21 @@ $(document).ready(function(){
                 "searchPlaceholder":"Search Invoice"
             },
             "columns": [
-                // {
-                //     "targets": [0],
-                //     "class":          "",
-                //     "orderable":      false,
-                //     "data":           null,
-                //     "defaultContent": ""
-                // },
-                { targets:[0],data: "service_invoice_no" },
-                { targets:[1],data: "date_invoice" },
-                { targets:[2],data: "date_due" },
-                { targets:[3],data: "customer_name" },
-                { targets:[4],data: "department_name" },
-                { targets:[5],data: "remarks" },
                 {
-                    targets:[6],
+                    "targets": [0],
+                    "class":          "details-control",
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ""
+                },
+                { targets:[1],data: "service_invoice_no" },
+                { targets:[2],data: "date_invoice" },
+                { targets:[3],data: "date_due" },
+                { targets:[4],data: "customer_name" },
+                { targets:[5],data: "department_name" },
+                { targets:[6],data: "remarks" },
+                {
+                    targets:[7],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -981,15 +981,6 @@ $(document).ready(function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.service_invoice_id;
-            _is_journal_posted=data.is_journal_posted;
-
-            if(_is_journal_posted > 0){
-                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Edit: Invoice is already Posted in Service Journal."});
-            }
-            else{
-
-
-
             $('#span_invoice_no').html(data.service_invoice_no);
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -1035,19 +1026,13 @@ $(document).ready(function(){
                 }
             });
             showList(false);
-        }
         });
         $('#tbl_service_invoice tbody').on('click','button[name="remove_info"]',function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.service_invoice_id;
             //alert(_selectedID);
-            _is_journal_posted=data.is_journal_posted;
-        if(_is_journal_posted > 0){
-                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Delete: Invoice is already Posted in Sales Journal."});
-            } else{
             $('#modal_confirmation').modal('show');
-        }
         });
         //track every changes on numeric fields
         $('#tbl_items tbody').on('keyup','input.numeric,input.number',function(){

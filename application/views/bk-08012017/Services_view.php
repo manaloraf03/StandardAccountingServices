@@ -191,7 +191,7 @@
                                                 <table id="tbl_services" class="" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>    
-                                                      <!--   <th></th> -->
+                                                        <th></th>
                                                         <th>PLU</th>
                                                         <th>Service Description</th>
                                                         <th>Service Amount</th>
@@ -459,20 +459,20 @@ $(document).ready(function(){
             "pageLength":15,
             "ajax" : "Services/transaction/list",
             "columns": [
-                // {
-                //     "targets": [0],
-                //     "class":          "",
-                //     "orderable":      false,
-                //     "data":           null,
-                //     "defaultContent": ""
-                // },
-                { targets:[0],data: "service_code" },
-                { targets:[1],data: "service_desc" },
-                { targets:[2],data: "service_amount" ,
+                {
+                    "targets": [0],
+                    "class":          "details-control",
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ""
+                },
+                { targets:[1],data: "service_code" },
+                { targets:[2],data: "service_desc" },
+                { targets:[3],data: "service_amount" ,
                       render: $.fn.dataTable.render.number( ',', '.', 2 )
                 },
                 {
-                    targets:[3],
+                    targets:[4],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"   data-toggle="tooltip" data-placement="top" title="Edit" style="margin-left:-5px;"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info"  data-toggle="tooltip" data-placement="top" title="Move to trash" style="margin-right:-5px;"><i class="fa fa-trash-o"></i> </button>';
