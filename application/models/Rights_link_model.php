@@ -77,7 +77,7 @@ class Rights_link_model extends CORE_Model{
                                           (67,'13','13-3','Service Unit Management'),
                                           (68,'13','13-4','Service Management'),
                                           (69,'9','9-17','Aging of Receivables'),
-                                          (69,'9','9-18','Aging of Payables')
+                                          (70,'9','9-18','Aging of Payables')
 
                                           ON DUPLICATE KEY UPDATE
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
