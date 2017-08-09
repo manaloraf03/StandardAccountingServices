@@ -62,6 +62,82 @@ class Sales_invoice_model extends CORE_Model
         return $this->db->query($sql)->result();
     }
 
+    function get_customer_soa($date, $customer_id, $status, $payment_date)
+    {
+        $sql = "SELECT 
+                *,
+                IF(m.balance = 0, m.payment_amount, m.balance) balance_amount
+                FROM (SELECT
+                    sales.*,
+                    payments.receipt_no,
+                    payments.date_paid,
+                    IFNULL(sales.total_after_tax,0) receivable_amount,
+                    IFNULL(payments.payment_amount,0) payment_amount,
+                    (IFNULL(sales.total_after_tax,0) - IFNULL(payments.payment_amount,0)) balance,
+                    IF(IFNULL(payments.payment_amount,0) != IFNULL(sales.total_after_tax,0),'unpaid','paid') status
+                FROM
+                (
+                    SELECT
+                    si.*,
+                    c.customer_name,
+                    IFNULL(si.address,c.address) customer_address,
+                    c.contact_name
+                    FROM
+                    sales_invoice si
+                    LEFT JOIN customers c ON c.customer_id = si.customer_id
+                    WHERE si.is_deleted=FALSE
+                    AND si.is_active=TRUE
+                    AND si.customer_id = $customer_id
+                    ".($date = null ? "AND YEAR(date_invoice) = YEAR(NOW())" : "AND MONTH(date_invoice) $date AND YEAR(date_invoice) = YEAR(NOW())")."
+                ) sales
+
+                LEFT JOIN
+
+                (
+                    SELECT
+                        rp.*,
+                        rpl.sales_invoice_id,
+                        SUM(IFNULL(rpl.receivable_amount,0)) receivable_amount,
+                        SUM(IFNULL(rpl.payment_amount,0)) payment_amount
+                    FROM
+                    receivable_payments_list rpl
+                    INNER JOIN receivable_payments rp ON rp.payment_id = rpl.payment_id
+                    WHERE rp.is_deleted=FALSE
+                    AND rp.is_active=TRUE
+                    AND rp.customer_id = $customer_id
+                    AND MONTH(rp.date_paid) = MONTH(NOW()) AND YEAR(rp.date_paid) = YEAR(NOW())
+                    GROUP BY rpl.sales_invoice_id
+                ) payments
+
+                ON sales.sales_invoice_id = payments.sales_invoice_id) m HAVING balance > 0";
+
+        return $this->db->query($sql)->result();
+    }
+
+    function get_customer_payments($customer_id) 
+    {
+        $sql = "SELECT * FROM
+        (SELECT
+            rp.*,
+            c.customer_name,
+            rpl.sales_invoice_id,
+            GROUP_CONCAT(rp.receipt_no) receipt_no_desc,
+            IFNULL(rpl.receivable_amount,0) receivable_amount,
+            SUM(IFNULL(rpl.payment_amount,0)) payment_amount,
+            (IFNULL(rpl.receivable_amount,0) - SUM(IFNULL(rpl.payment_amount,0))) balance
+        FROM
+        receivable_payments_list rpl
+        INNER JOIN receivable_payments rp ON rp.payment_id = rpl.payment_id
+        LEFT JOIN customers c ON c.customer_id = rp.customer_id
+        WHERE rp.is_deleted=FALSE
+        AND rp.is_active=TRUE
+        AND rp.customer_id = $customer_id
+        AND MONTH(rp.date_paid) = MONTH(NOW()) AND YEAR(NOW())
+        GROUP BY rpl.sales_invoice_id) m HAVING balance > 0";
+
+        return $this->db->query($sql)->result();
+    }
+
     function get_aging_receivables()
     {
         $sql = "SELECT

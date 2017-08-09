@@ -35,8 +35,6 @@ class Cogs extends CORE_Controller
         
     }
 
-
-
     function transaction($txn=null){
         switch($txn){
             case 'print':
@@ -54,6 +52,7 @@ class Cogs extends CORE_Controller
                 $this->load->view('template/cogs_report',$data);
 
                 break;
+
             case 'merchandise-inventory':
                 $m_products=$this->Products_model;
 
@@ -68,21 +67,21 @@ class Cogs extends CORE_Controller
                 echo json_encode($response);
 
                 break;
+
             case 'merchandise-inventory-ending':
                 $m_products=$this->Products_model;
 
-                $start=$this->input->get('start',TRUE);
-                $end=$this->input->get('end',TRUE);
+                $start=date('Y-m-d', strtotime($this->input->get('start',TRUE)));
+                $end=date('Y-m-d', strtotime($this->input->get('end',TRUE)));
                 $depid=$this->input->get('depid',TRUE);
-
-
-
 
                 $response['data']=$m_products->get_inventory_costing($end,$depid);
                 echo json_encode($response);
 
                 break;
+
             case 'purchases':
+
                 $m_purchases=$this->Delivery_invoice_item_model;
 
                 $start=date('Y-m-d',strtotime($this->input->get('start',TRUE)));
@@ -111,8 +110,6 @@ class Cogs extends CORE_Controller
 
                 );
                 echo json_encode($response);
-
-
                 break;
         }
     }

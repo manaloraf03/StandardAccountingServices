@@ -23,7 +23,6 @@
 
 <script type="text/javascript" src="assets/demo/demo-switcher.js"></script>
 
-
 <!-- PNotify -->
 <script type="text/javascript" src="assets/plugins/notify/pnotify.core.js"></script>
 <script type="text/javascript" src="assets/plugins/notify/pnotify.buttons.js"></script>

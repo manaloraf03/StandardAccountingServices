@@ -256,7 +256,7 @@ tr:nth-child(even) {
 
                                                                 <tr>
 
-                                                                    <td width="80" align="left">Less : <a href="#" style="font-size: 16px;font-weight: 600;">Merchandise Inventory -End </a> <br />Inventory as of date 02/02/2017</td>
+                                                                    <td width="80" align="left">Less : <a href="#" style="font-size: 16px;font-weight: 600;">Merchandise Inventory -End </a> <br />Inventory</td>
                                                                     <td width="20%" style="text-align: right;color:white;background-color: #3be00b"><span class="total_avg_cost" style="font-size: 16px;font-weight: 600;">1,500.00</span></td>
 
                                                                 </tr>
@@ -276,12 +276,6 @@ tr:nth-child(even) {
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                            <tr>
-                                                                                <td>Product 1</td>
-                                                                                <td align="right">1</td>
-                                                                                <td align="right">450.00</td>
-                                                                                <td align="right">Total</td>
-                                                                            </tr>
                                                                             </tbody>
                                                                             <tfoot>
                                                                             <tr>
@@ -334,7 +328,7 @@ tr:nth-child(even) {
         <footer role="contentinfo">
             <div class="clearfix">
                 <ul class="list-unstyled list-inline pull-left">
-                    <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                    <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                 </ul>
                 <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
             </div>
@@ -421,9 +415,6 @@ tr:nth-child(even) {
                 var totalInventoryCostEnd=getFloat($('.total_avg_cost_ending').first().text());
                 var cog=totalGoodsForSale-totalInventoryCostEnd;
 
-
-
-
                 var form = document.createElement("form");
                 form.setAttribute("method", "post");
                 form.setAttribute("action", "Cogs/transaction/print");
@@ -466,15 +457,11 @@ tr:nth-child(even) {
 
                 form.submit();
 
-
-
-
             });
 
             $('#btn_refresh').click(function(){
                 reloadList();
             });
-
 
             $('#txt_start,#txt_end').on('change',function(){
                 $('.period_start').text($('#txt_start').val());
@@ -528,7 +515,6 @@ tr:nth-child(even) {
                         { targets:[1],data: "BalanceQty" },
                         { targets:[2],data: "AvgCost" },
                         { targets:[3],data: "TotalAvgCost" }
-
                     ],
 
                     "footerCallback": function ( row, data, start, end, display ) {

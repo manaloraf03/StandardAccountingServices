@@ -129,6 +129,7 @@
                                 <li class="<?php echo (in_array('9-15',$this->session->user_rights)?'':'hidden'); ?>"><a href="AR_Receivable">AR Reports</a></li>
                                 <li class="<?php echo (in_array('9-17',$this->session->user_rights)?'':'hidden'); ?>"><a href="Aging_receivables">Aging of Receivables</a></li>
                                 <li class="<?php echo (in_array('9-18',$this->session->user_rights)?'':'hidden'); ?>"><a href="Aging_payables">Aging of Payables</a></li>
+                                <li class="<?php echo (in_array('9-19',$this->session->user_rights)?'':'hidden'); ?>"><a href="SOA">Statement of Account</a></li>
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('8',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-pie-chart"></i><span>Sales & Purchasing</span></a>
