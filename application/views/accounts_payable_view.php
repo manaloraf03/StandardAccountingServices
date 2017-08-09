@@ -251,7 +251,7 @@
                                                             <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
                                                             <hr />
 
-                                                            <label class="col-lg-2"> * Txn # :</label>
+                                                            <label class="col-lg-2"> <b>*</b> Txn # :</label>
                                                             <div class="col-lg-4">
 
                                                                 <div class="input-group">
@@ -265,7 +265,7 @@
 
                                                             </div>
 
-                                                            <label class="col-lg-2"> * Date :</label>
+                                                            <label class="col-lg-2"><b>*</b> Date :</label>
                                                             <div class="col-lg-4">
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
@@ -275,7 +275,7 @@
                                                                 </div>
                                                             </div>
                                                             <br /><br />
-                                                            <label class="col-lg-2"> * Supplier :</label>
+                                                            <label class="col-lg-2"><b>*</b> Supplier :</label>
                                                             <div class="col-lg-10">
                                                                 <select id="cbo_suppliers" name="supplier_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Supplier name is required." required>
                                                                     <option value="0">[ Create New Supplier ]</option>
@@ -286,7 +286,7 @@
                                                             </div>
 
                                                             <br /><br />
-                                                            <label class="col-lg-2"> * Department :</label>
+                                                            <label class="col-lg-2"><b>*</b> Department :</label>
                                                             <div class="col-lg-10">
                                                                 <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                                                     <option value="0">[ Create New Department ]</option>
@@ -317,7 +317,7 @@
                                                                     <tbody>
                                                                     <tr>
                                                                         <td>
-                                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
                                                                                 <?php foreach($accounts as $account){ ?>
                                                                                     <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                                                                 <?php } ?>
@@ -334,7 +334,7 @@
 
                                                                     <tr>
                                                                         <td>
-                                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
                                                                                 <?php foreach($accounts as $account){ ?>
                                                                                     <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                                                                 <?php } ?>
@@ -389,7 +389,7 @@
                                         <table id="table_hidden" class="hidden">
                                             <tr>
                                                 <td>
-                                                    <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                                    <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true">
                                                         <?php foreach($accounts as $account){ ?>
                                                             <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                                         <?php } ?>
@@ -648,7 +648,7 @@
 
                         <div class="col-md-12" style="padding-left: 30px;">
                             <div class="form-group">
-                                <label>* Department :</label>
+                                <label><b>*</b> Department :</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-users"></i>
@@ -991,6 +991,7 @@
                 var i=$(this).select2('val');
                 if(i==0){ //new department
                     _cboDepartments.select2('val',null);
+
                     $('#modal_new_department').modal('show');
                 }
             });

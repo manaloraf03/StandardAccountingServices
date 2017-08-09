@@ -38,10 +38,10 @@
             margin-bottom: 32px;
         }
         .alert-danger, .alert-danger h1, .alert-danger h2, .alert-danger h3, .alert-danger h4, .alert-danger h5, .alert-danger h6, .alert-danger small {
-            color: #dd191d;
+            color: #E9EDEF;
         }
         .alert-danger {
-            color: #dd191d;
+            color: #E9EDEF;
             background-color: #f9bdbb;
             border-color: #e84e40;
         }
@@ -184,7 +184,7 @@
                 <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                     <div class="row">
                         <div class="col-sm-4">
-                            <font color="red"><b>*</b></font> Department : <br />
+                            <b>*</b> Department : <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -193,7 +193,7 @@
                             </select>
                         </div>
                         <div class="col-sm-2 col-sm-offset-4">
-                            <font color="red"><b>*</b></font> Invoice Date : <br />
+                            <b>*</b> Invoice Date : <br />
                             <div class="input-group">
                                 <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -204,7 +204,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <font color="red"><b>*</b></font> Customer : <br />
+                            <b>*</b> Customer : <br />
                             <select name="customer" id="cbo_customers" data-error-msg="Customer is required." required>
                                 <option value="0">[ Create New Customer ]</option>
                                 <?php foreach($customers as $customer){ ?>
@@ -222,7 +222,7 @@
                             </select>
                         </div>
                         <div class="col-sm-2">
-                            <font color="red"><b>*</b></font> Due Date : <br />
+                            <b>*</b> Due Date : <br />
                             <div class="input-group">
                                 <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Due" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -379,7 +379,7 @@
                         <div class="col-md-8">
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><b>*</b> Customer Name :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -392,7 +392,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Contact Person :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><b>*</b> Contact Person :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -405,14 +405,14 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><b>*</b> Address :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="fa fa-home"></i>
                                          </span>
-                                         <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                         <textarea name="address" class="form-control" data-error-msg="Customer address is required!" placeholder="Address" required ></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -485,7 +485,7 @@
         </div><!---content---->
     </div>
 </div><!---modal-->
-<div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
+<div id="modal_new_salesperson" class="modal fade" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
@@ -498,7 +498,7 @@
                         <div class="">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Salesperson Code :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>*</b> Salesperson Code :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="salesperson_code" class="form-control" placeholder="Salesperson Code" data-error-msg="Salesperson Code is required!" required>
                                     </div>
@@ -506,7 +506,7 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>*</b> First name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
                                     </div>
@@ -522,7 +522,7 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>*</b> Last name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="lastname" class="form-control" placeholder="Lastname" data-error-msg="Lastname is required!" required>
                                     </div>
@@ -538,9 +538,9 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><b>*</b> <strong>Department :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!">
+                                        <select name="department_id" id="cbo_department" class="form-control" live-search="true" data-error-msg="Department is required!" required>
                                             <option value="0">[ Create New Department ]</option>
                                             <?php foreach($departments as $department) { ?>
                                                 <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
@@ -579,7 +579,7 @@
                     <div class="row" style="margin: 1%;">
                         <div class="col-lg-12">
                             <div class="form-group" style="margin-bottom:0px;">
-                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <label class=""><b>*</b> Department Name :</label>
                                 <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
                             </div>
                         </div>
@@ -612,7 +612,7 @@
                     <div class="row" style="margin: 1%;">
                         <div class="col-lg-12">
                             <div class="form-group" style="margin-bottom:0px;">
-                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <label class=""><b>*</b> Department Name :</label>
                                 <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
                             </div>
                         </div>
@@ -812,6 +812,8 @@ $(document).ready(function(){
             if(i == 0) {
                 //clearFields($('#modal_new_salesperson').find('form'));
                 _cboSalesperson.select2('val',null);
+                clearFields($('#frm_salesperson'));
+
                 $('#modal_new_salesperson').modal('show');
                 $('#salesperson_title').text('Create New Salesperson');
             }
@@ -847,7 +849,9 @@ $(document).ready(function(){
             var i=$(this).select2('val');
             if(i==0){ //new customer
                 //clearFields($('#modal_new_customer').find('form'));
+
                 _cboCustomers.select2('val',null)
+                clearFields($('#frm_customer_new'));
                 $('#modal_new_customer').modal('show');
             }
             var obj_customers=$('#cbo_customers').find('option[value="' + i + '"]');
@@ -928,6 +932,7 @@ $(document).ready(function(){
             var btn=$(this);
             if(validateRequiredFields($('#frm_customer_new'))){
                 var data=$('#frm_customer_new').serializeArray();
+                data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
                 $.ajax({
                     "dataType":"json",
                     "type":"POST",
@@ -984,7 +989,7 @@ $(document).ready(function(){
             _is_journal_posted=data.is_journal_posted;
 
             if(_is_journal_posted > 0){
-                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Edit: Invoice is already Posted in Service Journal."});
+                showNotification({title:"Error!",stat:"error",msg:"Cannot Edit: Invoice is already Posted in Service Journal."});
             }
             else{
 
@@ -1044,7 +1049,7 @@ $(document).ready(function(){
             //alert(_selectedID);
             _is_journal_posted=data.is_journal_posted;
         if(_is_journal_posted > 0){
-                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Delete: Invoice is already Posted in Sales Journal."});
+                showNotification({title:" Error!",stat:"error",msg:"Cannot Delete: Invoice is already Posted in Sales Journal."});
             } else{
             $('#modal_confirmation').modal('show');
         }

@@ -129,7 +129,7 @@
                                                 <form id="frm_location" role="form" class="form-horizontal row-border">
                                                     <div class="form-group">
                                                         <div style="padding-left: 10px;">
-                                                            <strong>* Location Name :</strong>
+                                                            <strong><B> * </B> Location Name :</strong>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div class="input-group">

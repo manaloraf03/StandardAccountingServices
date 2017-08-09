@@ -213,7 +213,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            Department * : <br />
+                           <b>* </b> Department : <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -239,7 +239,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                            Adjustment type * : <br />
+                           <b>* </b> Adjustment type : <br />
                             <select name="adjustment_type" id="cbo_adjustments" data-error-msg="Adjustment Type is required" required>
                                 <option value="IN" selected>Adjustment IN</option>
                                 <option value="OUT">Adjustment OUT</option>
@@ -427,7 +427,7 @@
 
 <div id="modal_new_department" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>New Department</h4>
@@ -438,7 +438,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Department :</label>
+                        <label><b>* </b> Department :</label>
                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-users"></i>
@@ -461,7 +461,7 @@
                 <button id="btn_create_department" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Create</button>
                 <button id="btn_close_close_department" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
 </div><!---modal-->
 
@@ -666,9 +666,9 @@ $(document).ready(function(){
             }
         }).on('keyup', this, function (event) {
             if (event.keyCode == 13) {
-                //$('.tt-suggestion:first').click();
-                _objTypeHead.typeahead('close');
-                _objTypeHead.typeahead('val','');
+                $('.tt-suggestion:first').click();
+                // _objTypeHead.typeahead('close');
+                // _objTypeHead.typeahead('val','');
             }
         }).bind('typeahead:select', function(ev, suggestion) {
 

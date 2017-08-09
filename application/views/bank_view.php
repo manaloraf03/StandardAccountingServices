@@ -174,7 +174,7 @@
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">
-                    <div class="modal-content"><!---content--->
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
@@ -188,7 +188,7 @@
                             <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
             </div><!---modal-->
 
@@ -201,7 +201,7 @@
                         <div class="modal-body">
                             <form id="frm_bank" role="form" class="form-horizontal row-border">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong>* Bank Code :</strong></label>
+                                    <label class="col-md-4 control-label"><strong><B> * </B> Bank Code :</strong></label>
                                     <div class="col-md-8">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -213,7 +213,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong>* Bank :</strong></label>
+                                    <label class="col-md-4 control-label"><strong><B> * </B> Bank :</strong></label>
                                     <div class="col-md-8">
                                         <div class="input-group col-md-12">
                                             <input type="text" name="bank_name" class="form-control" placeholder="Bank" data-error-msg="Bank is required!" required>
@@ -222,7 +222,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong>* Account Number :</strong></label>
+                                    <label class="col-md-4 control-label"><strong><B> * </B> Account Number :</strong></label>
                                     <div class="col-md-8">
                                         <div class="input-group col-md-12">
                                             <input type="text" name="account_number" class="form-control" placeholder="Account Number" data-error-msg="Account Number is required!" required>
@@ -231,7 +231,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong>* Account Type :</strong></label>
+                                    <label class="col-md-4 control-label"><strong><B> * </B> Account Type :</strong></label>
                                     <div class="col-md-8">
                                         <select name="account_type" class="form-control" id="account_type" data-error-msg="Account Type is required!" placeholder="Account Type" required>
                                             <option value="" disabled selected>Select Account Type</option>
@@ -454,19 +454,28 @@ $(document).ready(function(){
 
     var validateRequiredFields=function(){
         var stat=true;
-
         $('div.form-group').removeClass('has-error');
-        $('input[required],textarea','#frm_bank').each(function(){
-            if($(this).val()==""){
-                showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
-                $(this).closest('div.form-group').addClass('has-error');
-                stat=false;
-                return false;
-            }
+        $('input[required],textarea[required],select[required]').each(function(){
+                if($(this).is('select')){
+                    if($(this).val()==0 || $(this).val()==null || $(this).val()==undefined || $(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
+                }else{
+                    if($(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
+                }
         });
         return stat;
-    };
-
+        };
     var createBank=function(){
         var _data=$('#frm_bank').serializeArray();
 

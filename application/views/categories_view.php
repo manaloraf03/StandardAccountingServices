@@ -260,7 +260,7 @@
                                         <div class="">
                                             <div class="col-xs-12">
                                                 <div class="form-group">
-                                                    <label class="col-xs-12 col-md-4 control-label "><strong>* Category Name :</strong></label>
+                                                    <label class="col-xs-12 col-md-4 control-label "><strong><B> * </B> Category Name :</strong></label>
                                                     <div class="col-xs-12 col-md-8">
                                                         <div class="input-group">
                                                             <span class="input-group-addon">
@@ -271,7 +271,7 @@
                                                     </div>
                                                 </div><br/>
                                                 <div class="form-group">
-                                                    <label class="col-md-4 control-label"><strong>* Category Description :</strong></label>
+                                                    <label class="col-md-4 control-label"><strong><B> * </B> Category Description :</strong></label>
                                                     <div class="col-md-8">
                                                         <textarea name="category_desc" class="form-control" data-error-msg="Category Description is required!" placeholder="Description" required></textarea>
                                                     </div>

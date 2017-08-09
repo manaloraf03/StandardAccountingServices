@@ -542,7 +542,7 @@
 
                     <div class="col-sm-5">
 
-                        Department :<br />
+                       <b>* </b>  Department :<br />
 
                         <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
 
@@ -590,7 +590,7 @@
 
                     <div class="col-sm-5">
 
-                        Customer : <br />
+                       <b>* </b>  Customer : <br />
 
                         <select name="customer" id="cbo_customers" data-error-msg="Customer is required." required>
 
@@ -616,7 +616,7 @@
 
                     <div class="col-sm-4">
 
-                        Sales person :<br/>
+                        SalesPerson :<br/>
 
                         <select name="salesperson_id" id="cbo_salesperson">
 
@@ -1296,7 +1296,7 @@
 
                                 <div class="form-group">
 
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Salesperson Code :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>* </b>  Salesperson Code :</strong></label>
 
                                     <div class="col-xs-12 col-md-8">
 
@@ -1312,7 +1312,7 @@
 
                                 <div class="form-group">
 
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>* </b>  First name :</strong></label>
 
                                     <div class="col-xs-12 col-md-8">
 
@@ -1344,7 +1344,7 @@
 
                                 <div class="form-group">
 
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>* </b>  Last name :</strong></label>
 
                                     <div class="col-xs-12 col-md-8">
 
@@ -1376,7 +1376,7 @@
 
                                 <div class="form-group">
 
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>* </b>  Department :</strong></label>
 
                                     <div class="col-xs-12 col-md-8">
 
@@ -1466,7 +1466,7 @@
 
                     <div class="form-group">
 
-                        <label><font color="red">*</font> Department :</label>
+                        <label><b>* </b> Department :</label>
 
                         <div class="input-group">
 
@@ -2015,6 +2015,7 @@ $(document).ready(function(){
             if(i == 0) {
 
                 //clearFields($('#modal_new_salesperson').find('form'));
+                clearFields($('#modal_new_salesperson'));
 
                 _cboSalesperson.select2('val',null);
 
@@ -2527,6 +2528,7 @@ $(document).ready(function(){
         _cboDepartments.on('select2:select', function(){
 
             if (_cboDepartments.val() == 0) {
+                _cboDepartments.select2('val',null);
 
                 clearFields($('#frm_department_new'));
 
@@ -2543,6 +2545,8 @@ $(document).ready(function(){
         _cboDepartment.on('select2:select', function(){
 
             if (_cboDepartment.val() == 0) {
+                _cboDepartment.select2('val',null);
+
 
                 clearFields($('#frm_department_new_sp'));
 
@@ -2563,10 +2567,8 @@ $(document).ready(function(){
             var i=$(this).select2('val');
 
             if(i==0){ //new customer
-
-                //clearFields($('#modal_new_customer').find('form'));
-
-                _cboCustomers.select2('val',null)
+                clearFields($('#frm_customer'));
+                _cboCustomers.select2('val',null);
 
                 $('#modal_new_customer').modal('show');
 

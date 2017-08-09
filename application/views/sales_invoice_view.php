@@ -37,14 +37,6 @@
             padding: 24px;
             margin-bottom: 32px;
         }
-        .alert-danger, .alert-danger h1, .alert-danger h2, .alert-danger h3, .alert-danger h4, .alert-danger h5, .alert-danger h6, .alert-danger small {
-            color: #dd191d;
-        }
-        .alert-danger {
-            color: #dd191d;
-            background-color: #f9bdbb;
-            border-color: #e84e40;
-        }
         #tbl_items td,#tbl_items tr,#tbl_items th{
             table-layout: fixed;
            border: 1px solid gray;
@@ -183,7 +175,7 @@
                 <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
                     <div class="row">
                         <div class="col-sm-4">
-                            <font color="red"><b>*</b></font> Department : <br />
+                            <b>*</b> Department : <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -192,7 +184,7 @@
                             </select>
                         </div>
                         <div class="col-sm-2 col-sm-offset-6">
-                            <font color="red"><b>*</b></font> Invoice Date : <br />
+                            <b>*</b> Invoice Date : <br />
                             <div class="input-group">
                                 <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -203,7 +195,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <font color="red"><b>*</b></font> Customer : <br />
+                            <b>*</b>Customer : <br />
                             <select name="customer" id="cbo_customers" data-error-msg="Customer is required." required>
                                 <option value="0">[ Create New Customer ]</option>
                                 <?php foreach($customers as $customer){ ?>
@@ -230,7 +222,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <font color="red"><b>*</b></font> Due Date : <br />
+                            <b>*</b> Due Date : <br />
                             <div class="input-group">
                                 <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Due" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -450,7 +442,7 @@
                         <div class="col-md-8">
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><b>*</b> Customer Name :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -463,7 +455,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Contact Person :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><b>*</b>Contact Person :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -476,7 +468,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><b>*</b> Address :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -556,7 +548,7 @@
         </div><!---content---->
     </div>
 </div><!---modal-->
-<div id="modal_new_salesperson" class="modal fade" tabindex="-1" role="dialog">
+<div id="modal_new_salesperson" class="modal fade" role="dialog">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
@@ -569,7 +561,7 @@
                         <div class="">
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Salesperson Code :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>*</b>Salesperson Code :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="salesperson_code" class="form-control" placeholder="Salesperson Code" data-error-msg="Salesperson Code is required!" required>
                                     </div>
@@ -577,7 +569,7 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> First name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>*</b> First name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="firstname" class="form-control" placeholder="Firstname" data-error-msg="Firstname is required!" required>
                                     </div>
@@ -593,7 +585,7 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong><font color="red">*</font> Last name :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><strong><b>*</b> Last name :</strong></label>
                                     <div class="col-xs-12 col-md-8">
                                         <input type="text" name="lastname" class="form-control" placeholder="Lastname" data-error-msg="Lastname is required!" required>
                                     </div>
@@ -609,9 +601,9 @@
                             </div><br><br>
                             <div class="col-xs-12">
                                 <div class="form-group">
-                                    <label class="col-xs-12 col-md-4 control-label "><strong>Department :</strong></label>
+                                    <label class="col-xs-12 col-md-4 control-label "><b>*</b><strong>Department :</strong></label>
                                     <div class="col-xs-12 col-md-8">
-                                        <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!">
+                                        <select name="department_id" id="cbo_department" class="form-control" data-error-msg="Department is required!" required>
                                             <option value="0">[ Create New Department ]</option>
                                             <?php foreach($departments as $department) { ?>
                                                 <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
@@ -650,7 +642,7 @@
                     <div class="row" style="margin: 1%;">
                         <div class="col-lg-12">
                             <div class="form-group" style="margin-bottom:0px;">
-                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <label class=""><b>*</b>Department Name :</label>
                                 <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
                             </div>
                         </div>
@@ -683,7 +675,7 @@
                     <div class="row" style="margin: 1%;">
                         <div class="col-lg-12">
                             <div class="form-group" style="margin-bottom:0px;">
-                                <label class=""><font color="red">*</font> Department Name :</label>
+                                <label class=""><b>*</b> Department Name :</label>
                                 <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
                             </div>
                         </div>
@@ -870,9 +862,10 @@ $(document).ready(function(){
                 return false;
             }
             if (event.keyCode == 13) {
-                //$('.tt-suggestion:first').click();
-                _objTypeHead.typeahead('close');
-                _objTypeHead.typeahead('val','');
+             
+                $('.tt-suggestion:first').click();
+                // _objTypeHead.typeahead('close');    -- changed due to barcode scan not working
+                // _objTypeHead.typeahead('val',''); -- changed due to barcode scan not working
             }
         }).bind('typeahead:select', function(ev, suggestion) {
             //console.log(suggestion);
@@ -1123,6 +1116,7 @@ $(document).ready(function(){
             var btn=$(this);
             if(validateRequiredFields($('#frm_customer_new'))){
                 var data=$('#frm_customer_new').serializeArray();
+                data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
                 $.ajax({
                     "dataType":"json",
                     "type":"POST",

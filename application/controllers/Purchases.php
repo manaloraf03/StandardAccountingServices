@@ -16,8 +16,13 @@ class Purchases extends CORE_Controller
         $this->load->model('Delivery_invoice_model');
         $this->load->model('Refproduct_model');
         $this->load->model('Departments_model');
-        $this->load->library('email');
         $this->load->model('Users_model');
+        $this->load->model('Company_model');
+        $this->load->model('Email_settings_model');
+        $this->load->library('email');
+        
+
+        $this->load->library('M_pdf');
 
 
     }
@@ -441,6 +446,104 @@ class Purchases extends CORE_Controller
                         $response['msg']='Purchase order successfully approved.';
                         echo json_encode($response);
                     }
+                    break;
+
+
+
+                    case 'email':
+
+                        $m_purchases=$this->Purchases_model;
+                        $m_po_items=$this->Purchase_items_model;
+                        $m_company=$this->Company_model;
+                        $m_email=$this->Email_settings_model;
+                        $filter_value = $id_filter;
+
+                        $info=$m_purchases->get_list(
+                                $filter_value,
+                                'purchase_order.*,CONCAT_WS(" ",purchase_order.terms,purchase_order.duration)as term_description,suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.contact_no',
+                                array(
+                                    array('suppliers','suppliers.supplier_id=purchase_order.supplier_id','left')
+                                )
+                            );
+                        $email=$m_email->get_list();
+                        $company=$m_company->get_list();
+
+                        $data['purchase_info']=$info[0];
+                        $data['company_info']=$company[0];
+                        $data['po_items']=$m_po_items->get_list(
+                                array('purchase_order_id'=>$filter_value),
+                                'purchase_order_items.*,products.product_desc,units.unit_name',
+
+                                array(
+                                    array('products','products.product_id=purchase_order_items.product_id','left'),
+                                    array('units','units.unit_id=purchase_order_items.unit_id','left')
+                                )
+                                
+                            );
+                            $file_name=$info[0]->po_no;
+                            $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                            $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                            $content=$this->load->view('template/po_content_new',$data,TRUE); //load the template
+                            $pdf->setFooter('{PAGENO}');
+                            $pdf->WriteHTML($content);
+                            //download it.
+        
+                            $content = $pdf->Output('', 'S');
+                            // Set SMTP Configuration
+                            $emailConfig = [
+                                'protocol' => 'smtp', 
+                                'smtp_host' => 'ssl://smtp.googlemail.com', 
+                                'smtp_port' => 465, 
+                                'smtp_user' => $email[0]->email_address, 
+                                'smtp_pass' => $email[0]->password, 
+                                'mailtype' => 'html', 
+                                'charset' => 'iso-8859-1'
+                            ];
+
+                            // Set your email information
+                            
+                            $from = [
+                                'email' => $email[0]->email_from,
+                                'name' => $email[0]->name_from
+                            ];
+
+                            $to = array($info[0]->email_address);
+                            $subject = 'Purchase Order';
+                          //  $message = 'Type your gmail message here';
+                            $message = $email[0]->default_message;
+
+                            // Load CodeIgniter Email library
+                            $this->load->library('email', $emailConfig);
+                            // Sometimes you have to set the new line character for better result
+                            $this->email->set_newline("\r\n");
+                            // Set email preferences
+                            $this->email->from($from['email'], $from['name']);
+                            $this->email->to($to);
+                            $this->email->subject($subject);
+                            $this->email->message($message);
+                            $this->email->attach($content, 'attachment', $file_name , 'application/pdf');
+                            $this->email->set_mailtype("html");
+                            // Ready to send email and check whether the email was successfully sent
+                            if (!$this->email->send()) {
+                                // Raise error message
+                            $response['title']='Try Again!';
+                            $response['stat']='error';
+                            $response['msg']='Please check the Email Address of your Supplier or your Internet Connection.';
+
+                            echo json_encode($response);
+                            } else {
+                                // Show success notification or other things here
+                            $response['title']='Success!';
+                            $response['stat']='success';
+                            $response['msg']='Email Sent successfully.';
+
+                            echo json_encode($response);
+                                                }
+
+
+                                            
+
+
                     break;
             }
 

@@ -204,17 +204,17 @@ function get_customer_payment($customer_id){
 
 // get sales invoice count associated with Customer
 function get_sales_invoice_count($sales_invoice_id){
-$sql="
-SELECT * FROM receivable_payments 
-LEFT JOIN receivable_payments_list 
-ON receivable_payments_list.payment_id = receivable_payments.payment_id 
-WHERE receivable_payments_list.sales_invoice_id = $sales_invoice_id 
-AND receivable_payments.is_active = TRUE 
-AND receivable_payments.is_deleted = FALSE";
+                $sql="
+                SELECT * FROM receivable_payments 
+                LEFT JOIN receivable_payments_list 
+                ON receivable_payments_list.payment_id = receivable_payments.payment_id 
+                WHERE receivable_payments_list.sales_invoice_id = $sales_invoice_id 
+                AND receivable_payments.is_active = TRUE 
+                AND receivable_payments.is_deleted = FALSE";
 
 
-return $this->db->query($sql)->result();
-}
+                return $this->db->query($sql)->result();
+                }
 
 
 }

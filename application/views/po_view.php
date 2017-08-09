@@ -188,6 +188,7 @@
                 <thead class="">
                 <tr>
                     <th></th>
+                    <th>Email</th>
                     <th>PO#</th>
                     <th>Vendor</th>
                     <th>Terms</th>
@@ -790,13 +791,22 @@ $(document).ready(function(){
                     "data":           null,
                     "defaultContent": ""
                 },
-                { targets:[1],data: "po_no" },
-                { targets:[2],data: "supplier_name" },
-                { targets:[3],data: "term_description" },
-                { targets:[4],data: "approval_status" },
-                { targets:[5],data: "order_status" },
+                
                 {
-                    targets:[6],data: null,
+                    targets:[1],
+                    render: function (data, type, full, meta){
+                        var btn_email='<button id="btn_email" class="btn-primary btn" style="margin-left:-15px;" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope-o"></i> <span class="display" style="display:none;"></span></button> ';
+
+                        return '<center>'+btn_email+'</center>';
+                    }
+                },
+                { targets:[2],data: "po_no" },
+                { targets:[3],data: "supplier_name" },
+                { targets:[4],data: "term_description" },
+                { targets:[5],data: "approval_status" },
+                { targets:[6],data: "order_status" },
+                {
+                    targets:[7],data: null,
                     render: function (data, type, full, meta){
                         var _attribute='';
                         //console.log(data.is_email_sent);
@@ -811,15 +821,16 @@ $(document).ready(function(){
 
                 },
                 {
-                    targets:[7],
+                    targets:[8],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
                         var btn_message='<a href="Po_messages?id='+full.purchase_order_id+'" target="_blank" class="btn btn-green btn-sm" name="message_po" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Message"><i class="fa fa-envelope-o"></i> </a>';
+                 
 
                         return '<center>'+btn_edit+'&nbsp;'+btn_message+'&nbsp;'+btn_trash+'</center>';
                     }
-                }
+                },
             ]
         });
 
@@ -1050,24 +1061,42 @@ $(document).ready(function(){
 
 
 
-        $('#tbl_purchases tbody').on('click','#btn_email',function(){
-            _selectRowObj=$(this).parents('tr').prev();
-            var d=dt.row(_selectRowObj).data();
-            var btn=$(this);
+        // $('#tbl_purchases tbody').on('click','#btn_email',function(){
+        //     _selectRowObj=$(this).parents('tr').prev();
+        //     var d=dt.row(_selectRowObj).data();
+        //     var btn=$(this);
 
+        //     $.ajax({
+        //         "dataType":"json",
+        //         "type":"POST",
+        //         "url":"Email/send/po/"+ d.purchase_order_id,
+        //         "data": {email:$(this).data('supplier-email')},
+        //         "beforeSend" : function(){
+        //             showSpinningProgress(btn);
+        //         }
+        //     }).done(function(response){
+        //         showNotification(response);
+        //         dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+        //     }).always(function(){
+        //         showSpinningProgress(btn);
+        //     });
+        // });
+
+        $('#tbl_purchases tbody').on('click','#btn_email',function(){
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+            _selectRowObj=$(this).closest('tr');
+            var data=dt.row(_selectRowObj).data();
+            _selectedID=data.purchase_order_id;
+            var btn=$(this);
+        
             $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Email/send/po/"+ d.purchase_order_id,
-                "data": {email:$(this).data('supplier-email')},
-                "beforeSend" : function(){
-                    showSpinningProgress(btn);
-                }
+                "url":"Purchases/transaction/email/"+_selectedID,
+                "beforeSend": showSpinningProgress(btn)
             }).done(function(response){
                 showNotification(response);
-                dt.row(_selectRowObj).data(response.row_updated[0]).draw();
-            }).always(function(){
-                showSpinningProgress(btn);
+    
             });
         });
 
@@ -1277,6 +1306,7 @@ $(document).ready(function(){
         });
 
 
+
         $('#btn_cancel').click(function(){
             showList(true);
         });
@@ -1463,6 +1493,7 @@ $(document).ready(function(){
         });
     };
 
+
     var showList=function(b){
         if(b){
             $('#div_user_list').show();
@@ -1486,6 +1517,8 @@ $(document).ready(function(){
         $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
+
+
 
     var clearFields=function(f){
         $('input,textarea',f).val('');

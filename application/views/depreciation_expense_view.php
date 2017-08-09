@@ -141,6 +141,27 @@
                                                        <th>Book Value</th>
                                                     </tr>
                                                 </thead>
+                                                                                                        <tfoot>
+                                                            <tr>
+                                                                <td colspan="3" style="text-align:right;"><b>Current Page Total :</b></td>
+                                                                <td  style="text-align:right;" id="Sumacquisition"></td>
+                                                                <td></td>
+                                                                <td  style="text-align:right;" id="Sumsalvage"></td>
+                                                                <td  style="text-align:right;" id="Summonthly"></td>
+                                                                <td  style="text-align:right;" id="Sumaccumulative"></td>
+                                                                <td  style="text-align:right;" id="Sumbook"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="3" style="text-align:right;"><b>Grand Total :</b></td>
+                                                                <td  style="text-align:right;" id="Sumofallacquisition"></td>
+                                                                <td></td>
+                                                                <td  style="text-align:right;" id="Sumofallsalvage"></td>
+                                                                <td  style="text-align:right;" id="Sumofallmonthly"></td>
+                                                                <td  style="text-align:right;" id="Sumofallaccumulative"></td>
+                                                                <td  style="text-align:right;" id="Sumofallbook"></td>
+
+                                                            </tr>
+                                                        </tfoot>
                                                 <tbody></tbody>
                                             </table>
                                         </div>
@@ -266,6 +287,113 @@ $(document).ready(function(){
                     }
                 }
             ]
+            ,
+                    "footerCallback": function ( row, data, start, end, display ) {
+                        var api = this.api(), data;
+                       // console.log(data);
+             
+                        // Remove the formatting to get integer data for summation
+                        var intVal = function ( i ) {
+                            return typeof i === 'string' ?
+                                i.replace(/[\$,]/g, '')*1 :
+                                typeof i === 'number' ?
+                                    i : 0;
+                        };
+             
+                        // Total over this page
+                        pageTotalAmount = api
+                            .column( 3, { page: 'current'} )
+                            .data()
+                            .reduce( function (a, b) {
+                                console.log(intVal(a) + intVal(b));
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+
+                        pageTotalAmount5 = api
+                            .column( 5, { page: 'current'} )
+                            .data()
+                            .reduce( function (a, b) {
+                                console.log(intVal(a) + intVal(b));
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        pageTotalAmount6 = api
+                            .column( 6, { page: 'current'} )
+                            .data()
+                            .reduce( function (a, b) {
+                                console.log(intVal(a) + intVal(b));
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        pageTotalAmount7 = api
+                            .column( 7, { page: 'current'} )
+                            .data()
+                            .reduce( function (a, b) {
+                                console.log(intVal(a) + intVal(b));
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        pageTotalAmount8 = api
+                            .column( 8, { page: 'current'} )
+                            .data()
+                            .reduce( function (a, b) {
+                                console.log(intVal(a) + intVal(b));
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        // Total over all pages
+                        totalAmount = api
+                            .column(3)
+                            .data()
+                            .reduce( function (a, b) {
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        totalAmount5 = api
+                            .column(5)
+                            .data()
+                            .reduce( function (a, b) {
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        totalAmount6 = api
+                            .column(6)
+                            .data()
+                            .reduce( function (a, b) {
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        totalAmount7 = api
+                            .column(7)
+                            .data()
+                            .reduce( function (a, b) {
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        totalAmount8 = api
+                            .column(8)
+                            .data()
+                            .reduce( function (a, b) {
+                                return intVal(a) + intVal(b);
+                            }, 0 );
+
+                        //total of every category hahaha
+                         $('#Sumacquisition').html('<b> '+accounting.formatNumber(pageTotalAmount,2)+'</b>');
+                         $('#Sumsalvage').html('<b> '+accounting.formatNumber(pageTotalAmount5,2)+'</b>');
+                         $('#Summonthly').html('<b> '+accounting.formatNumber(pageTotalAmount6,2)+'</b>');
+                         $('#Sumaccumulative').html('<b> '+accounting.formatNumber(pageTotalAmount7,2)+'</b>');
+                         $('#Sumbook').html('<b> '+accounting.formatNumber(pageTotalAmount8,2)+'</b>');
+
+
+
+                         $('#Sumofallacquisition').html('<b> '+accounting.formatNumber(totalAmount,2)+'</b>');
+                         $('#Sumofallsalvage').html('<b> '+accounting.formatNumber(totalAmount5,2)+'</b>');
+                         $('#Sumofallmonthly').html('<b> '+accounting.formatNumber(totalAmount6,2)+'</b>');
+                         $('#Sumofallaccumulative').html('<b> '+accounting.formatNumber(totalAmount7,2)+'</b>');
+                         $('#Sumofallbook').html('<b> '+accounting.formatNumber(totalAmount8,2)+'</b>');
+
+                    }
         });
 
         dt.order([ 1, 'asc' ]).draw();

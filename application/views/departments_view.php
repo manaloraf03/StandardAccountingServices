@@ -150,7 +150,7 @@
                                 <div class="row" style="margin: 1%;">
                                     <div class="col-lg-12">
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Department Name * :</label>
+                                            <label class=""><B> * </B> Department Name :</label>
                                             <textarea name="department_name" class="form-control" data-error-msg="Department Name is required!" placeholder="Department name" required></textarea>
 
                                         </div>
@@ -293,6 +293,7 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             //showList(false);
+            clearFields($('#frm_department'));
             $('#department_title').text('New Department');
             $('#modal_new_department').modal('show');
         });

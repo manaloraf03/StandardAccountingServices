@@ -199,7 +199,7 @@
                         <div class="modal-body">
                             <form id="frm_account_class" role="form" class="form-horizontal row-border">
                                 <div class="form-group">
-                                    <label class="col-md-3 col-md-offset-1 control-label"><strong>* Account Class :</strong></label>
+                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><B>* </B> Account Class :</strong></label>
                                     <div class="col-md-7">
                                         <input type="text" name="account_class" class="form-control" placeholder="Account Class" data-error-msg="Unit name is required!" required>
                                     </div>
@@ -213,7 +213,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-md-offset-1 control-label"><strong>* Account Type :</strong></label>
+                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><B>* </B> Account Type :</strong></label>
                                     <div class="col-md-7">
                                         <select name="account_type_id" id="account_type_id" data-error-msg="Account Type is required!" placeholder="Account Type" required>
                                             <option value="" disabled selected>Select Account Type</option>
@@ -299,8 +299,9 @@ $(document).ready(function(){
 
         _cboAccountType = $('#account_type_id').select2({
             placeholder: "Please select account type.",
-            allowClear: false
+            allowClear: true
         });
+         _cboAccountType.select2('val',null);
     }();
 
     var bindEventHandlers=(function(){
@@ -329,6 +330,7 @@ $(document).ready(function(){
             _txnMode="new";
             $('#modal-title').text('New Account Class');
             $('#modal_account_class').modal('show');
+            _cboAccountType.select2('val',null);
             clearFields();
         });
 
@@ -398,18 +400,59 @@ $(document).ready(function(){
     })();
 
     var validateRequiredFields=function(){
-        var stat=true;
+        // var stat=true;
 
+        // $('div.form-group').removeClass('has-error');
+        // $('input[required],textarea','#frm_account_class').each(function(){
+        //     if($(this).val()==""){
+        //         showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+        //         $(this).closest('div.form-group').addClass('has-error');
+        //         stat=false;
+        //         return false;
+        //     }
+        // });
+        // return stat;
+
+
+
+
+        var stat=true;
         $('div.form-group').removeClass('has-error');
-        $('input[required],textarea','#frm_account_class').each(function(){
-            if($(this).val()==""){
-                showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
-                $(this).closest('div.form-group').addClass('has-error');
-                stat=false;
-                return false;
-            }
+        $('input[required],select[required]').each(function(){
+                if($(this).is('select')){
+                    if($(this).val()==0 || $(this).val()==null || $(this).val()==undefined || $(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
+                }else{
+                    if($(this).val()==""){
+                        showNotification({title:"Error!",stat:"error",msg:$(this).data('error-msg')});
+                        $(this).closest('div.form-group').addClass('has-error');
+                        $(this).focus();
+                        stat=false;
+                        return false;
+                    }
+                }
         });
         return stat;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     };
 
     var createAccountClass=function(){

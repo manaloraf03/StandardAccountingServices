@@ -77,6 +77,9 @@
     .panel.panel-default .panel-heading {
         border-color: transparent;
     }
+    b{
+        color:#ffad33!important;
+    }
 
     /*input[type="text"]:focus {
         height: 50px;

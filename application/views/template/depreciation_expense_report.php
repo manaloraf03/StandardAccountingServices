@@ -35,7 +35,13 @@
 			<th>Book Value</th>
 		</thead>
 		<tbody>
-			<?php foreach ($depreciation_expenses as $depreciation_expense) { ?>
+			<?php 
+			$totalacquisition = 0;
+			$totalsalvage = 0;
+			$totaldepreciation = 0;
+			$totalaccumulative = 0;
+			$totalbook  = 0;
+		foreach ($depreciation_expenses as $depreciation_expense) { ?>
 			<tr>
 				<td><?php echo $depreciation_expense->asset_code; ?></td>
 				<td><?php echo $depreciation_expense->asset_description; ?></td>
@@ -47,7 +53,29 @@
 				<td align="right"><?php echo number_format($depreciation_expense->accu_dep,2); ?></td>
 				<td align="right"><?php echo number_format($depreciation_expense->book_value,2); ?></td>
 			</tr>
-			<?php } ?>
+			<?php
+			// Total ofall categories
+
+			$totalacquisition += $depreciation_expense->acquisition_cost;
+			$totalsalvage += $depreciation_expense->salvage_value ;
+			$totaldepreciation += $depreciation_expense->depreciation_expense ;
+			$totalaccumulative += $depreciation_expense->accu_dep ;
+			$totalbook += $depreciation_expense->book_value ;
+
+
+			 } ?>
+
+			<tr>
+			<td colspan="2"></td>
+			<td><b>TOTAL</b></td>
+			<td align="right"><b><?php  echo number_format($totalacquisition,2);  ?></b></td>
+			<td></td>
+			<td align="right"><b><?php echo number_format($totalsalvage,2);  ?></b> </td>
+			<td align="right"><b><?php echo number_format($totaldepreciation,2);  ?> </b></td>
+			<td align="right"><b><?php echo number_format($totalaccumulative,2); ?> </b></td>
+			<td align="right"><b><?php echo number_format($totalbook,2);  ?> </b></td>
+
+			</tr>
 		</tbody>
 	</table>
 </body>

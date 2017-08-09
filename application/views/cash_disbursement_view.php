@@ -304,7 +304,7 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        Txn # * :<br />
+                       <b> * </b> Txn #  :<br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-code"></i>
@@ -313,7 +313,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                        Date * :<br />
+                       <b> * </b> Date  :<br />
                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -324,7 +324,7 @@
 
 
                     <div class="col-lg-4 col-lg-offset-2">
-                        Method of Payment * :<br />
+                        <b> * </b> Method of Payment  :<br />
                         <select id="cbo_pay_type" name="payment_method" class="form-control" data-error-msg="Payment method is required." required>
                             <?php foreach($payment_methods as $payment_method){ ?>
                                 <option value='<?php echo $payment_method->payment_method_id; ?>'><?php echo $payment_method->payment_method; ?></option>
@@ -337,14 +337,14 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        Reference type * :<br />
+                        <b> * </b> Reference type :<br />
                         <select id="cbo_refType" class="form-control" name="ref_type" data-error-msg="Reference type is required." required>
                             <option value="CV" selected>CV</option>
                             <option value="JV">JV</option>
                         </select>
                     </div>
                     <div class="col-lg-3">
-                        Reference # * :<br />
+                        <b> * </b> Reference # :<br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-code"></i>
@@ -365,7 +365,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        Supplier * :<br />
+                        <b> * </b> Supplier  :<br />
                         <select id="cbo_suppliers" name="supplier_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Supplier name is required." required>
                             <option value="0">[ Create New Supplier ]</option>
                             <?php foreach($suppliers as $supplier){ ?>
@@ -380,7 +380,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </span>
-                            <input type="text" name="check_date" id="check_date" class="date-picker form-control" data-error-msg="Check date is required!">
+                            <input type="text" name="check_date" id="check_date" class="date-picker form-control" data-error-msg="Check date is required!" >
                         </div>
                     </div>
 
@@ -398,7 +398,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        Department * :<br />
+                       <b> * </b> Department  :<br />
                         <select id="cbo_branch" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                             <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
@@ -408,7 +408,7 @@
                     </div>
 
                     <div class="col-lg-4 col-lg-offset-2">
-                        Amount * :<br />
+                      <b> * </b>  Amount  :<br />
                         <input class="form-control text-center numeric" id="cash_amount" type="text" maxlength="12" value="0.00" name="amount" required data-error-msg="Amount is Required!">
                     </div>
                 </div>
@@ -438,7 +438,7 @@
                         <tr>
                             <td>
 
-                                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
                                     <?php $i=0; foreach($accounts as $account){ ?>
                                         <option value='<?php echo $account->account_id; ?>' <?php echo ($i==0?'':''); ?>><?php echo $account->account_title; ?></option>
                                         <?php $i++; } ?>
@@ -455,7 +455,7 @@
 
                         <tr>
                             <td>
-                                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true">
                                     <?php $i=0; foreach($accounts as $account){ ?>
                                         <option value='<?php echo $account->account_id; ?>' <?php echo ($i==0?'':''); ?> > <?php echo $account->account_title; ?> </option>
                                         <?php $i++; } ?>
@@ -525,7 +525,7 @@
     <table id="table_hidden" class="hidden">
         <tr>
             <td width="30%">
-                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
                     <?php $i=0; foreach($accounts as $account){ ?>
                         <option value='<?php echo $account->account_id; ?>' <?php echo ($i==0?'':''); ?>><?php echo $account->account_title; ?></option>
                         <?php $i++; } ?>
@@ -630,7 +630,7 @@
             </div>
 
             <div class="modal-body">
-                Filter by Bank * :<br />
+                <b> * </b> Filter by Bank  :<br />
                 <select id="cbo_banks" class="form-control">
                     <option value="0">All Banks</option>
                     <?php foreach($bank_refs as $bank){ ?>
@@ -638,7 +638,7 @@
                     <?php } ?>
                 </select>
 
-                Period Start * :<br />
+                <b> * </b> Period Start :<br />
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-calendar"></i>
@@ -646,7 +646,7 @@
                     <input type="text" id="txt_start" class="date-picker form-control" value="<?php echo date('m/d/Y'); ?>">
                 </div>
 
-                Period End * :<br />
+                <b> * </b> Period End :<br />
                 <div class="input-group">
                     <span class="input-group-addon">
                         <i class="fa fa-calendar"></i>
@@ -680,7 +680,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Department :</label>
+                        <label><b> * </b> Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
@@ -919,7 +919,7 @@
             <div class="modal-body">
                 <form id="frm_bank" role="form" class="form-horizontal row-border">
                     <div class="form-group">
-                        <label class="col-md-4 control-label"><strong>* Bank Code :</strong></label>
+                        <label class="col-md-4 control-label"><strong><b> * </b> Bank Code :</strong></label>
                         <div class="col-md-8">
                             <div class="input-group">
                                 <span class="input-group-addon">
@@ -931,7 +931,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label"><strong>* Bank :</strong></label>
+                        <label class="col-md-4 control-label"><strong><b> * </b> Bank :</strong></label>
                         <div class="col-md-8">
                             <div class="input-group col-md-12">
                                 <input type="text" name="bank_name" class="form-control" placeholder="Bank" data-error-msg="Bank is required!" required>
@@ -940,7 +940,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label"><strong>* Account Number :</strong></label>
+                        <label class="col-md-4 control-label"><strong><b> * </b> Account Number :</strong></label>
                         <div class="col-md-8">
                             <div class="input-group col-md-12">
                                 <input type="text" name="account_number" class="form-control" placeholder="Account Number" data-error-msg="Account Number is required!" required>
@@ -949,7 +949,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label"><strong>* Account Type :</strong></label>
+                        <label class="col-md-4 control-label"><strong><b> * </b> Account Type :</strong></label>
                         <div class="col-md-8">
                             <select name="account_type" class="form-control" id="cbo_account_type" data-error-msg="Account Type is required!" placeholder="Account Type" required>
                                 <option value="" disabled selected>Select Account Type</option>

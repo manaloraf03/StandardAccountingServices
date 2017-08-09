@@ -215,7 +215,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                Receipt type * : <br />
+                                                               <b>* </b>  Receipt type : <br />
                                                                 <select id="cbo_receipt_type" name="receipt_type">
                                                                     <option value="1" selected>Official Receipt</option>
                                                                     <option value="2">Acknowledgement Receipt</option>
@@ -237,7 +237,7 @@
 
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                Receipt # * : <br />
+                                                                <b>* </b> Receipt # : <br />
                                                                 <div class="input-group">
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-code"></i>
@@ -246,11 +246,11 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                                Payment Date * : <br />
+                                                               <b>* </b>  Payment Date * : <br />
                                                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                         <i class="fa fa-calendar"></i>
-                                    </span>
+                                                                    <span class="input-group-addon">
+                                                                         <i class="fa fa-calendar"></i>
+                                                                    </span>
                                                                     <input type="text" name="date_paid" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date of Payment" data-error-msg="Payment Date is required!" required>
                                                                 </div>
                                                             </div>
@@ -266,7 +266,7 @@
 
                                                         <div class="row" style="">
                                                             <div class="col-lg-12">
-                                                                Method  * : <br />
+                                                                <b>* </b>  Payment Method  : <br />
                                                                 <select id="cbo_payment_method" name="payment_method" class="form-control">
                                                                     <?php foreach($methods as $method){ ?>
                                                                         <option value="<?php echo $method->payment_method_id; ?>"><?php echo $method->payment_method; ?></option>
@@ -281,11 +281,11 @@
 
                                                             <div class="col-lg-12">
                                                                 <label class="a-inline"><input type="radio" name="check_date_type" value="1" checked>Dated</label>
-                                                                <label class="radio-inline"><input type="radio" name="check_date_type" value="2">Posted Dated</label>
+                                                                <label class="radio-inline"><input type="radio" name="check_date_type" value="2">Post Dated</label>
                                                             </div>
 
                                                             <div class="col-lg-12">
-                                                                Check #  * : <br />
+                                                                <b>* </b>  Check #   : <br />
                                                                 <div class="input-group">
                                                                     <input type="text" name="check_no" class="form-control">
                                                                      <span class="input-group-addon">
@@ -297,7 +297,7 @@
 
 
                                                             <div class="col-lg-12">
-                                                                Check Date  * : <br />
+                                                                <b>* </b>  Check Date : <br />
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                          <i class="fa fa-calendar"></i>
@@ -704,7 +704,7 @@
                 //$('.toggle-fullscreen').click();
                 clearFields($('#div_payment_fields'));
                 showList(false);
-
+                
                 _cboReceiptType.select2('val',1); //set official receipt as default
 
             });

@@ -88,7 +88,7 @@
 
                             <ol class="breadcrumb" style="margin:0;">
                                 <li><a href="dashboard">Dashboard</a></li>
-                                <li><a href="categories">Salesperson</a></li>
+                                <li><a href="Salesperson">Salesperson</a></li>
                             </ol>
 
                             <div class="container-fluid">

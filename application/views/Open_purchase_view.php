@@ -214,7 +214,7 @@
                 <thead>
                 <tr>
           
-                    <th>Sales Order No.</th>
+                    <th>Purchase Order No.</th>
                     <th>Date</th>
                     <th>Product Code</th>
                     <th>Product Desription</th>

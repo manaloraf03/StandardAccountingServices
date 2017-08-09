@@ -215,7 +215,7 @@
                 </div> <!-- #page-content -->
             </div>
 
-            <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+            <div id="modal_confirmation" class="modal fade" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -272,7 +272,7 @@
             </div>
 
 
-            <div id="modal_create_service" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+            <div id="modal_create_service" class="modal fade" role="dialog"><!--modal-->
                 <div class="modal-dialog" style="width: 75%;">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:#2ecc71;">
@@ -287,7 +287,7 @@
                                     <div class="col-lg-4">
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">PLU / Service Code * :</label>
+                                            <label class=""><b>*</b>PLU / Service Code :</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-file-code-o"></i>
@@ -297,12 +297,12 @@
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                <label class="">Service Description * :</label>
+                                                <label class=""><b>*</b> Service Description :</label>
                                                 <textarea name="service_desc" id="service_desc" class="form-control" data-error-msg="Service Description is required." required></textarea>
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Unit of Measurement * :</label>
+                                            <label class=""><b>*</b> Unit of Measurement  :</label>
                                             <select name="service_unit" id="service_unit" class="indexing" data-error-msg="Unit is required." required>
                                              
                                                 <option value="0">[ Create Unit ]</option>

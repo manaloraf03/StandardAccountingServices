@@ -217,7 +217,7 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-6">
-                                Receipt/Voucher type * : <br />
+                                <b>* </b> Receipt/Voucher type  : <br />
                                 <select id="cbo_receipt_type" name="receipt_type" class="form-control">
                                     <option value="1" selected>CV</option>
                                     <option value="2">JV</option>
@@ -228,7 +228,7 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                Department * : <br />
+                                <b>* </b> Department  : <br />
                                 <select id="cbo_branch" name="department" class="form-control">
                                     <?php foreach($departments as $department){ ?>
                                         <option value="<?php echo $department->department_id; ?>" selected><?php echo $department->department_name; ?></option>
@@ -239,7 +239,7 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                Receipt # * : <br />
+                                <b>* </b> Receipt #  : <br />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-code"></i>
@@ -248,7 +248,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                Payment Date * : <br />
+                                <b>* </b> Payment Date  : <br />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                          <i class="fa fa-calendar"></i>
@@ -268,7 +268,7 @@
 
                         <div class="row" style="">
                             <div class="col-lg-12">
-                                Method  * : <br />
+                                <b>* </b> Method : <br />
                                 <select id="cbo_payment_method" name="payment_method" class="form-control">
                                     <?php foreach($methods as $method){ ?>
                                         <option value="<?php echo $method->payment_method_id; ?>"><?php echo $method->payment_method; ?></option>
@@ -283,11 +283,11 @@
 
                             <div class="col-lg-12">
                                 <label class="radio-inline"><input type="radio" name="check_date_type" value="1" checked>Dated</label>
-                                <label class="radio-inline"><input type="radio" name="check_date_type" value="2">Posted Dated</label>
+                                <label class="radio-inline"><input type="radio" name="check_date_type" value="2">Post Dated</label>
                             </div>
 
                             <div class="col-lg-12">
-                                Check #  * : <br />
+                                <b>* </b> Check #  : <br />
                                 <div class="input-group">
                                     <input type="text" name="check_no" class="form-control">
                                                                      <span class="input-group-addon">
@@ -299,7 +299,7 @@
 
 
                             <div class="col-lg-12">
-                                Check Date  * : <br />
+                               <b>* </b> Check Date : <br />
                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                          <i class="fa fa-calendar"></i>

@@ -311,7 +311,7 @@
                                     <span><strong><i class="fa fa-bars"></i>  Info</strong></span>
                                     <hr />
 
-                                    <label class="col-lg-2"> * Txn # :</label>
+                                    <label class="col-lg-2"><b>*</b>  Txn # :</label>
                                     <div class="col-lg-4">
 
                                         <div class="input-group">
@@ -325,7 +325,7 @@
 
                                     </div>
 
-                                    <label class="col-lg-2"> * Date :</label>
+                                    <label class="col-lg-2"> <b>*</b> Date :</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
                                     <span class="input-group-addon">
@@ -342,7 +342,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"> * Customer :</label>
+                                    <label class="col-lg-2"> <b>*</b> Customer :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_customers" name="customer_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
                                             <option value="0">[ Create New Customer ]</option>
@@ -355,7 +355,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"> * Department :</label>
+                                    <label class="col-lg-2"><b>*</b> Department :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                             <option value="0">[ Create New Department ]</option>
@@ -691,7 +691,7 @@
 
                         <div class="col-md-12" style="padding-left: 30px;">
                             <div class="form-group">
-                                <label>* Department :</label>
+                                <label><b>*</b> Department :</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-users"></i>

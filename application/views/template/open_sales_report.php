@@ -45,9 +45,9 @@
 <table  width="100%" cellpadding="3" cellspacing="0" border="1">
 <thead>
 <tr>
-<td colspan="7"><strong>PO # : </strong><?php echo $batchNo->so_no; ?></strong></td>
+<td colspan="7"><strong>SO # : </strong><?php echo $batchNo->so_no; ?></strong></td>
 </tr>
-	<th width="10%" align="left">Purchase Order No</th>
+	<th width="10%" align="left">Sales Order No</th>
 	<th width="10%" align="left">Date</th>
 	<th  width="10%" align="left">Product Code</th>
 	<th  width="30%" align="left">Product Description</th>

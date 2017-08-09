@@ -273,7 +273,7 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                                    <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
                                                         <?php foreach($accounts as $account){ ?>
                                                             <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                                         <?php } ?>
@@ -290,7 +290,7 @@
 
                                             <tr>
                                                 <td>
-                                                    <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                                    <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
                                                         <?php foreach($accounts as $account){ ?>
                                                             <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                                         <?php } ?>
@@ -345,7 +345,7 @@
                 <table id="table_hidden" class="hidden">
                     <tr>
                         <td>
-                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true">
                                 <?php foreach($accounts as $account){ ?>
                                     <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
                                 <?php } ?>
@@ -638,7 +638,7 @@
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-home"></i>
                                                      </span>
-                                                     <textarea name="address" class="form-control" data-error-msg="Supplier address is required!" placeholder="Address" required ></textarea>
+                                                     <textarea name="address" class="form-control" data-error-msg="Address is required!" placeholder="Address" required ></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -759,7 +759,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label>* Department :</label>
+                        <label><b>*</b> Department :</label>
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-users"></i>
@@ -1532,7 +1532,6 @@ $(document).ready(function(){
     };
 
     var showSpinningProgress=function(e){
-        $(e).toggleClass('disabled');
         $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
     };
 

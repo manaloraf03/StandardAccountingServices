@@ -285,7 +285,7 @@
 
                     <td>
 
-                        <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                        <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true">
 
                             <?php foreach($accounts as $account){ ?>
 
@@ -305,9 +305,9 @@
 
                     <td>
 
-                        <button type="button" class="btn btn-primary add_account"><i class="fa fa-plus" style="color: white;"></i></button>
+                        <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
 
-                        <button type="button" class="btn btn-red remove_account"><i class="fa fa-times" style="color: white;"></i></button>
+                        <button type="button" class="btn btn-default remove_account"><i class="fa fa-plus-circle" style="color: red;"></i></button>
 
                     </td>
 

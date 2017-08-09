@@ -162,7 +162,7 @@
 
 
 
-                                    <label class="col-lg-2"> * Txn # :</label>
+                                    <label class="col-lg-2"> <b>*</b> Txn # :</label>
 
                                     <div class="col-lg-10">
 
@@ -176,7 +176,7 @@
 
 
 
-                                    <label class="col-lg-2"> * Date :</label>
+                                    <label class="col-lg-2"> <b>*</b> Date :</label>
 
                                     <div class="col-lg-10">
 
@@ -190,7 +190,7 @@
 
 
 
-                                    <label class="col-lg-2"> * Supplier : </label>
+                                    <label class="col-lg-2"> <b>*</b> Supplier : </label>
 
                                     <div class="col-lg-10">
 
@@ -216,7 +216,7 @@
 
 
 
-                                    <label class="col-lg-2"> * Branch : </label>
+                                    <label class="col-lg-2"> <b>*</b> Branch : </label>
 
                                     <div class="col-lg-10">
 
@@ -298,7 +298,7 @@
 
                                             <td>
 
-                                                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" title="Please select Student">
+                                                <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
 
                                                     <?php foreach($accounts as $account){ ?>
 

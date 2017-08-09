@@ -337,7 +337,12 @@ class Templates extends CORE_Controller {
                             $pdf->WriteHTML($content);
                             //download it.
                             $pdf->Output();
+
                         }
+
+
+                    
+
 
 
 
@@ -1213,6 +1218,8 @@ class Templates extends CORE_Controller {
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output($pdfFilePath,"D");
+
+
 
                 }
 
@@ -2148,15 +2155,17 @@ class Templates extends CORE_Controller {
                 $data['subsidiary_info']=$journal_info[0];
                 $data['supplier_subsidiary']=$m_journal_info->get_account_subsidiary($account_Id,$start_Date,$end_Date);
 
-                /*if ($type == 'preview' || $type == null) {
+                if ($type == 'preview' || $type == null) {
                     $pdf = $this->m_pdf->load("A4-L");
                     $content=$this->load->view('template/account_subsidiary_report',$data,TRUE);
                 }
 
                 $pdf->setFooter('{PAGENO}');
                 $pdf->WriteHTML($content);
-                $pdf->Output();*/
+                $pdf->Output();
 
+
+exit;
                  $this->load->view('template/account_subsidiary_report',$data);
             break;
 
@@ -2178,11 +2187,14 @@ class Templates extends CORE_Controller {
                 if ($type == 'preview' || $type == null) {
                     $pdf = $this->m_pdf->load("A4-L");
                     $content=$this->load->view('template/account_receivable_sched_report',$data,TRUE);
+
                 }
 
                 $pdf->setFooter('{PAGENO}');
                 $pdf->WriteHTML($content);
                 $pdf->Output();
+
+
                 break;
 
 
@@ -2203,6 +2215,7 @@ class Templates extends CORE_Controller {
 
 
                 if ($type == 'preview' || $type == null) {
+
                     $pdf = $this->m_pdf->load("A4-L");
                     $content=$this->load->view('template/account_payable_sched_report',$data,TRUE);
                 }

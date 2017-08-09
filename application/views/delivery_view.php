@@ -320,7 +320,7 @@
             <div class="row">
 
                 <div class="col-sm-5">
-                    Department * : <br />
+                   <b>*</b> Department : <br />
                     <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                         <option value="0">[ Create New Department ]</option>
                         <?php foreach($departments as $department){ ?>
@@ -344,7 +344,7 @@
             <div class="row">
 
                 <div class="col-sm-5">
-                    Supplier :<br />
+                    <b>*</b> Supplier :<br />
                     <select name="supplier" id="cbo_suppliers" data-error-msg="Supplier is required." required>
                         <option value="0">[ Create New Supplier ]</option>
                         <?php foreach($suppliers as $supplier){ ?>
@@ -369,7 +369,7 @@
 
                 <div class="col-sm-3 col-sm-offset-4" style="display: none;">
                     Tax type :<br />
-                    <select name="tax_type" id="cbo_tax_type">
+                    <select name="tax_type" id="cbo_tax_type" required data-error-msg="Tax Type is required !">
                         <?php foreach($tax_types as $tax_type){ ?>
                             <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
                         <?php } ?>
@@ -415,7 +415,7 @@
                     <th style="display: none;">V.I</th> <!-- vat input -->
                     <th style="display: none;">N.V</th> <!-- net of vat -->
                     <td style="display: none;">Item ID</td><!-- product id -->
-                    <td style="color:white;"><center><strong>Action</strong></center></td>
+                    <th style="color:white;"><center><strong>Action</strong></center></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -578,7 +578,7 @@
                     <div class="row" style="margin: 1%;">
                         <div class="col-lg-12">
                             <div class="form-group" style="margin-bottom:0px;">
-                                <label>* Department :</label>
+                                <label><b>*</b> Department :</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-users"></i>
@@ -1011,7 +1011,7 @@ $(document).ready(function(){
         var raw_data = <?php echo json_encode($products); ?>;
 
         var products = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1','purchase_cost'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
             local : raw_data
         });
@@ -1047,7 +1047,7 @@ $(document).ready(function(){
                         '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                     ].join('\n'),
 
-                    suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{cost}}</td></tr></table>')
+                    suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
 
                 }
             }).on('keyup', this, function (event) {
@@ -1055,9 +1055,9 @@ $(document).ready(function(){
                     return false;
                 }
                 if (event.keyCode == 13) {
-                    //$('.tt-suggestion:first').click();
-                    _objTypeHead.typeahead('close');
-                    _objTypeHead.typeahead('val','');
+                    $('.tt-suggestion:first').click();
+                    // _objTypeHead.typeahead('close'); -- changed due to barcode scan not working
+                    // _objTypeHead.typeahead('val',''); -- changed due to barcode scan not working
                 }
             }).bind('typeahead:select', function(ev, suggestion) {
 
