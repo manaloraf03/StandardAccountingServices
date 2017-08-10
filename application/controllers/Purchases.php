@@ -19,7 +19,7 @@ class Purchases extends CORE_Controller
         $this->load->model('Users_model');
         $this->load->model('Company_model');
         $this->load->model('Email_settings_model');
-        $this->load->library('email');
+
         
 
         $this->load->library('M_pdf');
@@ -399,11 +399,61 @@ class Purchases extends CORE_Controller
                     break;
 
 
+                // case 'mark-approved': //called on DASHBOARD when approved button is clicked
+                //     $m_purchases=$this->Purchases_model;
+                //     $purchase_order_id=$this->input->post('purchase_order_id',TRUE);
+
+
+
+                //     $m_purchases->set('date_approved','NOW()'); //treat NOW() as function and not string, set date of approval
+                //     $m_purchases->approved_by_user=$this->session->user_id; //deleted by user
+                //     $m_purchases->approval_id=1; //1 means approved
+                //     if($m_purchases->modify($purchase_order_id)){
+
+                //         $info=$m_purchases->get_list(
+                //             $purchase_order_id,
+                //             array(
+                //                 'user_accounts.user_email',
+                //                 'purchase_order.po_no'
+                //             ),
+                //             array(
+                //                 array('user_accounts','user_accounts.user_id=purchase_order.posted_by_user','left')
+                //             )
+                //         );
+
+                //         if(strlen($info[0]->user_email)>0){ //if email is found, notify the user who posted it
+                //             $email_setting  = array('mailtype'=>'html');
+                //             $this->email->initialize($email_setting);
+
+                //             $this->email->from('jdevsystems@jdevsolution.com', 'Paul Christian Rueda');
+                //             $this->email->to($info[0]->user_email);
+                //             //$this->email->cc('another@another-example.com');
+                //             //$this->email->bcc('them@their-example.com');
+
+                //             $this->email->subject('PO Notification!');
+                //             $this->email->message('<p>Good Day!</p><br /><br /><p>Hi! your Purchase Order '.$info[0]->po_no.' is already approved. Kindly check your account.</p>');
+                //             //$this->email->set_mailtype('html');
+
+                //             $this->email->send();
+                //         }
+
+
+
+
+
+                //         $response['title']='Success!';
+                //         $response['stat']='success';
+                //         $response['msg']='Purchase order successfully approved.';
+                //         echo json_encode($response);
+                //     }
+                //     break;
+
                 case 'mark-approved': //called on DASHBOARD when approved button is clicked
                     $m_purchases=$this->Purchases_model;
                     $purchase_order_id=$this->input->post('purchase_order_id',TRUE);
 
-
+                    $m_email=$this->Email_settings_model;
+                    $email=$m_email->get_list();
 
                     $m_purchases->set('date_approved','NOW()'); //treat NOW() as function and not string, set date of approval
                     $m_purchases->approved_by_user=$this->session->user_id; //deleted by user
@@ -422,18 +472,39 @@ class Purchases extends CORE_Controller
                         );
 
                         if(strlen($info[0]->user_email)>0){ //if email is found, notify the user who posted it
-                            $email_setting  = array('mailtype'=>'html');
-                            $this->email->initialize($email_setting);
+                            $emailConfig = [
+                                'protocol' => 'smtp', 
+                                'smtp_host' => 'ssl://smtp.googlemail.com', 
+                                'smtp_port' => 465, 
+                                'smtp_user' => $email[0]->email_address, 
+                                'smtp_pass' => $email[0]->password, 
+                                'mailtype' => 'html', 
+                                'charset' => 'iso-8859-1'
+                            ];
 
-                            $this->email->from('jdevsystems@jdevsolution.com', 'Paul Christian Rueda');
-                            $this->email->to($info[0]->user_email);
-                            //$this->email->cc('another@another-example.com');
-                            //$this->email->bcc('them@their-example.com');
+                            // Set your email information
+                            
+                            $from = [
+                                'email' => $email[0]->email_from,
+                                'name' => $email[0]->name_from
+                            ];
 
-                            $this->email->subject('PO Notification!');
-                            $this->email->message('<p>Good Day!</p><br /><br /><p>Hi! your Purchase Order '.$info[0]->po_no.' is already approved. Kindly check your account.</p>');
-                            //$this->email->set_mailtype('html');
+                            $to = array($info[0]->user_email);
+                            $subject = 'Purchase Order';
+                          //  $message = 'Type your gmail message here';
+                            $message = '<p>Good Day!</p><br /><br /><p>Hi! your Purchase Order '.$info[0]->po_no.' is already approved. Kindly check your account.</p>';
 
+                            // Load CodeIgniter Email library
+                            $this->load->library('email', $emailConfig);
+                            // Sometimes you have to set the new line character for better result
+                            $this->email->set_newline("\r\n");
+                            // Set email preferences
+                            $this->email->from($from['email'], $from['name']);
+                            $this->email->to($to);
+                            $this->email->subject($subject);
+                            $this->email->message($message);
+                         
+                            $this->email->set_mailtype("html");
                             $this->email->send();
                         }
 
@@ -447,7 +518,6 @@ class Purchases extends CORE_Controller
                         echo json_encode($response);
                     }
                     break;
-
 
 
                     case 'email':
