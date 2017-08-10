@@ -84,7 +84,7 @@
 
         <tr>
             <td style="padding: 4px;" width="50%"><strong>TXN # :</strong> <?php echo $journal_info->txn_no; ?></td>
-            <td style="padding: 4px;" width="50%"><strong>AMOUNT :</strong> <?php echo date("m/d/Y", strtotime($journal_info->amount,2)); ?></td>
+            <td style="padding: 4px;" width="50%"><strong>AMOUNT :</strong> <?php echo $journal_info->amount; ?></td>
         </tr>        
         <tr>
             <td style="padding: 4px;" colspan="2"><strong>PARTICULAR :</strong></td>

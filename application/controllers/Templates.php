@@ -423,7 +423,117 @@ class Templates extends CORE_Controller {
                 break;
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             //****************************************************
+
+
+            case 'service-invoice-dropdown': //delivery invoice
+                $m_info=$this->Service_invoice_model;
+                $m_items=$this->Service_invoice_item_model;
+                $type=$this->input->get('type',TRUE);
+                $info=$m_info->get_list($filter_value,
+                    'service_invoice.*, 
+                     departments.department_name,
+                     customers.customer_name,
+                     salesperson.firstname,
+                     salesperson.lastname',
+                    array(
+                        array('departments', 'departments.department_id=service_invoice.department_id','left'),
+                        array('customers', 'customers.customer_id=service_invoice.customer_id','left'),
+                        array('salesperson','salesperson.salesperson_id=service_invoice.salesperson_id', 'left')
+                        )
+                    );
+
+                $data['item_info']=$m_items->get_list(array('service_invoice_items.service_invoice_id'=>$filter_value),
+                    'service_invoice_items.*,
+                     services.service_desc,
+                     service_unit.service_unit_name
+                    ',
+                    array(
+                        array('services','services.service_id=service_invoice_items.service_id','left'),
+                        array('service_unit','service_unit.service_unit_id=service_invoice_items.service_id','left')
+                        )
+                    );
+                $data['service']=$info[0];
+                $m_company=$this->Company_model;
+                $company=$m_company->get_list();
+                $data['company_info']=$company[0];
+
+
+                    
+                    
+                            
+                if($type=='fullview'||$type==null){
+                    echo $this->load->view('template/service_invoice_content',$data,TRUE);
+                    echo $this->load->view('template/service_invoice_content_menus',$data,TRUE);
+                        }
+                if($type=='html'){
+                    $file_name=$info[0]->service_invoice_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/service_invoice_content',$data,TRUE);//load the template
+                    $pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                    // echo $this->load->view('template/service_invoice_content',$data,TRUE);
+                }
+
+                break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //***********************************************88
             case 'issuance': //delivery invoice
                 $m_issuance=$this->Issuance_model;
                 $m_dr_items=$this->Issuance_item_model;

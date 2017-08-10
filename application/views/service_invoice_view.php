@@ -54,7 +54,7 @@
             float: left;
         }
         td.details-control {
-            background: url('assets/img/print.png') no-repeat center center;
+            background: url('assets/img/Folder_Closed.png') no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
@@ -152,7 +152,7 @@
             <table id="tbl_service_invoice" cellspacing="0" width="100%" style="">
                 <thead class="">
                 <tr>
-                <!--     <th></th> -->
+                    <th></th>
                     <th>Invoice #</th>
                     <th>Invoice Date</th>
                     <th>Due Date</th>
@@ -688,21 +688,21 @@ $(document).ready(function(){
                 "searchPlaceholder":"Search Invoice"
             },
             "columns": [
-                // {
-                //     "targets": [0],
-                //     "class":          "",
-                //     "orderable":      false,
-                //     "data":           null,
-                //     "defaultContent": ""
-                // },
-                { targets:[0],data: "service_invoice_no" },
-                { targets:[1],data: "date_invoice" },
-                { targets:[2],data: "date_due" },
-                { targets:[3],data: "customer_name" },
-                { targets:[4],data: "department_name" },
-                { targets:[5],data: "remarks" },
                 {
-                    targets:[6],
+                    "targets": [0],
+                    "class":          "details-control",
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ""
+                },
+                { targets:[1],data: "service_invoice_no" },
+                { targets:[2],data: "date_invoice" },
+                { targets:[3],data: "date_due" },
+                { targets:[4],data: "customer_name" },
+                { targets:[5],data: "department_name" },
+                { targets:[6],data: "remarks" },
+                {
+                    targets:[7],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-danger btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -806,6 +806,46 @@ $(document).ready(function(){
     }();
     var bindEventHandlers=(function(){
         var detailRows = [];
+
+        $('#tbl_service_invoice tbody').on( 'click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dt.row( tr );
+            var idx = $.inArray( tr.attr('id'), detailRows );
+
+            if ( row.child.isShown() ) {
+                tr.removeClass( 'details' );
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice( idx, 1 );
+            }
+            else {
+                tr.addClass( 'details' );
+                //console.log(row.data());
+                var d=row.data();
+
+                $.ajax({
+                    "dataType":"html",
+                    "type":"POST",
+                    "url":"Templates/layout/service-invoice-dropdown/"+ d.service_invoice_id,
+                    "beforeSend" : function(){
+                        row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
+                    }
+                }).done(function(response){
+                    row.child( response,'no-padding' ).show();
+                    // Add to the 'open' array
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+                });
+
+
+
+
+            }
+        } );
+
+
 
         _cboSalesperson.on('select2:select',function(e){
             var i=$(this).select2('val');
