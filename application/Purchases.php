@@ -601,7 +601,12 @@ class Purchases extends CORE_Controller
                             $response['msg']='Email Sent successfully.';
 
                             echo json_encode($response);
-                            }
+                                                }
+
+
+                                            
+
+
                     break;
             }
 

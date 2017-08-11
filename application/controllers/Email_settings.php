@@ -19,46 +19,41 @@ class Email_settings extends CORE_Controller
         $data['_switcher_settings'] = $this->load->view('template/elements/switcher', '', TRUE);
         $data['_side_bar_navigation'] = $this->load->view('template/elements/side_bar_navigation', '', TRUE);
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
-        $data['title'] = 'Company Information';
-
-  
+        $data['title'] = 'Email Settings';
 
         $company=$this->Email_settings_model->get_list();
         $data['company']=$company[0];
         (in_array('6-6',$this->session->user_rights)? 
         $this->load->view('email_settings_view', $data)
         :redirect(base_url('dashboard')));
-        
     }
 
     function transaction($txn = null) {
 
         switch($txn){
 
+            case 'get-email':
+                $m_email=$this->Email_settings_model;
+
+                $email = $m_email->get_list();
+
+                $response['data']=$email[0];
+
+                echo json_encode($response);
+                break;
+
             case 'create':
-                $m_company=$this->Email_settings_model;
+                $m_email=$this->Email_settings_model;
 
-                $m_company->delete(1);
+                $m_email->delete(1);
 
-                $m_company->email_id=1;
-                $m_company->email_address=$this->input->post('email_address',TRUE);
-                $m_company->password=$this->input->post('password',TRUE);
-                $m_company->name_from=$this->input->post('name_from',TRUE);
-                $m_company->email_from=$this->input->post('email_from',TRUE);
-                $m_company->default_message=$this->input->post('default_message',TRUE);
-
-                // $m_company->company_address=$this->input->post('company_address',TRUE);
-                // $m_company->email_address=$this->input->post('email_address',TRUE);
-                // $m_company->mobile_no=$this->input->post('mobile_no',TRUE);
-                // $m_company->landline=$this->input->post('landline',TRUE);
-                // $m_company->tin_no=$this->input->post('tin_no',TRUE);
-                // $m_company->registered_to=$this->input->post('registered_to',TRUE);
-                // $m_company->logo_path=$this->input->post('photo_path',TRUE);
-                // $m_company->tax_type_id=$this->input->post('tax_type_id',TRUE);
-                // $m_company->rdo_no=$this->input->post('rdo_no',TRUE);
-                // $m_company->nature_of_business=$this->input->post('nature_of_business',TRUE);
-                // $m_company->business_type=$this->input->post('business_type',TRUE);
-                $m_company->save();
+                $m_email->email_id=1;
+                $m_email->email_provider=$this->input->post('email_provider',TRUE);
+                $m_email->email_address=$this->input->post('email_address',TRUE);
+                $m_email->password=$this->input->post('password',TRUE);
+                $m_email->name_from=$this->input->post('name_from',TRUE);
+                $m_email->default_message=$this->input->post('default_message',TRUE);
+                $m_email->save();
 
                 $response['title']='Success!';
                 $response['stat']='success';

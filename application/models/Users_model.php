@@ -305,10 +305,10 @@ class Users_model extends CORE_Model{
     }
 
     function validate(){
-        $usertoken=$this->get_user_list($this->session->userdata('user_id'));
-        if($this->session->userdata('token_id') != $usertoken[0]->token_id) {
-            redirect(base_url('Login/transaction/logout'));
-        }
+        // $usertoken=$this->get_user_list($this->session->userdata('user_id'));
+        // if($this->session->userdata('token_id') != $usertoken[0]->token_id) {
+        //     redirect(base_url('Login/transaction/logout'));
+        // }
     }
 
     function get_user_list($id=null){

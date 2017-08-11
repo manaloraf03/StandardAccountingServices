@@ -134,19 +134,31 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Email Settings</b>
                                             </div>
                                             <div class="panel-body">
-
                                                <form id="frm_company" role="form" class="form-horizontal row-border">
-
-
+                                                   <div class="form-group hidden">
+                                                       <label class="col-md-2 col-md-offset-1 control-label">
+                                                           <strong>* E-mail Provider :</strong>
+                                                       </label>
+                                                       <div class="col-md-7">
+                                                           <select id="cbo_email_provider" class="form-control" name="email_provider">
+                                                               <option value="ssl://smtp.googlemail.com" data-value="@gmail.com"><i class="ti ti-google"></i> Gmail</option>
+                                                               <option value="ssl://smtp-mail.outlook.com" data-value="@outlook.com"><i class="ti ti-microsoft-alt"></i> Outlook</option>
+                                                               <option value="ssl://smtp.mail.yahoo.com." data-value="@yahoo.com"><i class="ti ti-yahoo"></i> Yahoo</option>
+                                                           </select>
+                                                       </div>
+                                                   </div>
                                                    <div class="form-group">
                                                        <label class="col-md-2 col-md-offset-1 control-label"><strong>* Email Address :</strong></label>
-                                                       <div class="col-md-7">
+                                                       <div class="col-md-5">
                                                            <div class="input-group">
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-users"></i>
                                                                 </span>
-                                                               <input type="text" name="email_address" class="form-control" value="<?php echo $company->email_address; ?>" placeholder="Company Name" data-error-msg="Company Name is required!" required>
+                                                                <input type="text" name="email_address" class="form-control" value="<?php echo $company->email_address; ?>" placeholder="Company Name" data-error-msg="Company Name is required!" required>
                                                            </div>
+                                                       </div>
+                                                       <div class="col-md-1" style="margin-top: 5px;">
+                                                           <span><strong id="provider_string"></strong></span>
                                                        </div>
                                                    </div>
 
@@ -158,24 +170,10 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-file"></i>
                                                                 </span>
-                                                               <input type="text" name="password" class="form-control" value="<?php echo $company->password; ?>"  data-error-msg="Password is required!" required>
+                                                               <input type="password" name="password" class="form-control" value="<?php echo $company->password; ?>"  data-error-msg="Password is required!" required>
                                                            </div>
                                                        </div>
                                                    </div>
-
-                                                   <div class="form-group">
-                                                       <label class="col-md-2 col-md-offset-1 control-label"><strong>Email (From) :</strong></label>
-                                                       <div class="col-md-7">
-                                                           <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-send"></i>
-                                                                </span>
-                                                               <input type="text" name="email_from" class="form-control" value="<?php echo $company->email_from; ?>" data-error-msg="Email From is required!" required>
-                                                           </div>
-
-                                                       </div>
-                                                   </div>
-
 
                                                    <div class="form-group">
                                                        <label class="col-md-2 col-md-offset-1 control-label"> <strong>Name (From) :</strong></label>
@@ -188,7 +186,6 @@
                                                            </div>
                                                        </div>
                                                    </div>
-
 
                                                    <div class="form-group">
                                                        <label class="col-md-2 col-md-offset-1 control-label"> <strong>Default Message :</strong></label>
@@ -371,9 +368,15 @@
 
 
         var initializeControls=function(){
-
-
-
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Email_settings/transaction/get-email"
+            }).done(function(response){
+                $('#cbo_email_provider option[value="'+response.data.email_provider+'"]').prop('selected',true);
+                $('#provider_string').html($('#cbo_email_provider option:selected').data('value'));
+                $('input[name="email_address"]').val(response.data.email_address.split('@')[0]);
+            });
 
             _company_info=$("#tax_group").select2({
                 placeholder: "Please select Tax type",
@@ -384,19 +387,9 @@
                 placeholder: "Please select business type",
                 allowClear: true
             });
-
-           // _company_info.select2('val', null)
-
-
-
         }();
 
-
-
-
-
-
-        var bindEventHandlers=(function(){
+        var bindEventHandlers=function(){
             var detailRows = [];
 
             $('#tbl_company_info tbody').on( 'click', 'tr td.details-control', function () {
@@ -419,19 +412,13 @@
                     if ( idx === -1 ) {
                         detailRows.push( tr.attr('id') );
                     }
-
-
-
                 }
-            } );
+            });
 
-
-
-             $('#btn_browse').click(function(event){
-                    event.preventDefault();
-                    $('input[name="file_upload[]"]').click();
-             });
-
+            $('#btn_browse').click(function(event){
+                event.preventDefault();
+                $('input[name="file_upload[]"]').click();
+            });
 
             $('#btn_remove_photo').click(function(event){
                 event.preventDefault();
@@ -465,11 +452,6 @@
                         showSpinningProgress(btn);
                     });
                 }
-
-
-
-
-
             });
 
 
@@ -481,17 +463,23 @@
                 });
             });
 
+            $('#cbo_email_provider').on('change',function(){
+                $('#provider_string').html($('#cbo_email_provider option:selected').data('value'));
+            });
+
+            $('input[name="email_address"]').on('keydown',function(event){
+                if (event.shiftKey && event.keyCode === 50){
+                    event.preventDefault();
+                }
+            });
 
             _company_info.on("select2:select", function (e) {
-
                 var i=$(this).select2('val');
                 if(i==0){
                     $(this).select2('val',null)
                     $('#modal_tax_group').modal('show');
                     clearFields($('#modal_tax_group').find('form'));
                 }
-
-
             });
 
 
@@ -551,8 +539,16 @@
                 });
 
 
-        })();
+        }();
 
+        var arrayClean = function(array, thisName) {
+            "use strict";
+            $.each(array, function(index, item) {
+                if (item.name == thisName) {
+                    delete array[index];      
+                }
+            });
+        };
 
         var validateRequiredFields=function(f){
                 var stat=true;
@@ -577,9 +573,6 @@
                               return false;
                           }
                       }
-
-
-
                   });
 
                 return stat;
@@ -589,6 +582,10 @@
         var createCompanyInfo=function(){
             var _data=$('#frm_company').serializeArray();
 
+            arrayClean(_data,'email_address');
+
+            _data.push({name:'email_address',value: $('input[name="email_address"]').val() + $('#provider_string').html() });
+
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
@@ -597,8 +594,6 @@
                 "beforeSend": showSpinningProgress($('#btn_save'))
             });
         };
-
-
 
         var showNotification=function(obj){
             PNotify.removeAll(); //remove all notifications
