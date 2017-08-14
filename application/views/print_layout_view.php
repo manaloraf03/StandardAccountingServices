@@ -148,7 +148,7 @@
 
                     <ol class="breadcrumb" style="margin-bottom: 0px;">
                         <li><a href="dashboard">Dashboard</a></li>
-                        <li><a href="Check_layout">Check Layout</a></li>
+                        <li><a href="Print_layout">Print Layout</a></li>
                     </ol>
 
                     <div class="container-fluid">
@@ -162,18 +162,16 @@
 
                                             <div id="div_tests" class="panel panel-default">
                                                 <div class="panel-heading">
-                                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Check Layout</b>
+                                                    <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Print Layout</b>
                                                 </div>
                                                 <div class="panel-body" style="min-height: 400px;">
                                                     <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-                                                        <table id="tbl_check_layouts" class="" cellspacing="0" width="100%">
+                                                        <table id="tbl_print_layouts" class="" cellspacing="0" width="100%">
                                                             <thead class="table-erp">
                                                             <tr>
 
-                                                                <th>Check Layout</th>
+                                                                <th>Print Layout</th>
                                                                 <th>Description</th>
-                                                                <th>Posted by</th>
-                                                                <th>Layout</th>
                                                                 <th><center>Action</center></th>
                                                             </tr>
                                                             </thead>
@@ -213,7 +211,7 @@
         <div class="modal-content">
             <div class="modal-header" style="background-color:#2ecc71;">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
-                <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>New Check Layout</h4>
+                <h4 class="modal-title" style="color:#ecf0f1 !important;"><span id="modal_mode"> </span>Print Layout</h4>
 
             </div>
 
@@ -222,25 +220,25 @@
                     <div style="border: 1px solid lightgrey;padding: 1%;border-radius: 5px;margin-left: 2%;padding: 2%;">
                         <div class="row">
                             <div class="col-lg-12">
-                                Check Layout * : <br />
-                                <input type="text" name="check_layout" class="form-control" data-error-msg="Check layout is required!" placeholder="Check Layout" required >
+                                Print Layout Name * : <br />
+                                <input type="text" name="layout_name" class="form-control" data-error-msg="layout Name is required!" required >
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-lg-12">
                                 Description : <br />
-                                <textarea name="description" class="form-control"></textarea>
+                                <textarea name="layout_description" class="form-control"></textarea>
 
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-lg-12"><br />
                                 <label class="radio-inline"><input type="radio" name="orientation_layout" id="rdoLandscape" value="0" checked>Landscape (11in x 8.5in)</label>
                                 <label class="radio-inline"><input type="radio" name="orientation_layout" id="rdoPortrait" value="1">Portrait (8.5in x 11in)</label>
                             </div>
                         </div>
+
                     </div>
 
 
@@ -248,7 +246,7 @@
             </div>
 
             <div class="modal-footer">
-                <button id="btn_save_layout" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save Check Layout</button>
+                <button id="btn_save_layout" type="button" class="btn btn-primary"  style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> Save Layout</button>
                 <button id="btn_close_new_supplier" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Cancel</button>
             </div>
 
@@ -300,18 +298,16 @@
             $('#span_amount').draggable({containment:'#div_check_area'});
 
 
-            dt = $('#tbl_check_layouts').DataTable({
+            dt = $('#tbl_print_layouts').DataTable({
                 "dom": '<"toolbar">frtip',
                 "bLengthChange": false,
-                "ajax" : "Check_layout/transaction/list",
+                "ajax" : "Print_layout/transaction/list",
                 "columns": [
 
-                    { targets:[0],data: "check_layout" },
-                    { targets:[1],data: "description" },
-                    { targets:[2],data: "posted_by_user" },
-                    { targets:[3],data: "layout" },
+                    { targets:[0],data: "layout_name" },
+                    { targets:[1],data: "layout_description" },
                     {
-                        targets:[4],
+                        targets:[2],
                         render: function (data, type, full, meta){
                             var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                             var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -324,8 +320,8 @@
             });
 
             var createToolBarButton=function(){
-                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Check Layout" >'+
-                    '<i class="fa fa-plus"></i> New Check Layout</button>';
+                var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Print Layout" >'+
+                    '<i class="fa fa-plus"></i> New Print Layout</button>';
                 $("div.toolbar").html(_btnNew);
             }();
 
@@ -343,11 +339,11 @@
                 $('#modal_new_layout').modal('show');
             });
 
-            $('#tbl_check_layouts tbody').on('click','button[name="remove_info"]',function(){
+            $('#tbl_print_layouts tbody').on('click','button[name="remove_info"]',function(){
 
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
-                _selectedID=data.check_layout_id;
+                _selectedID=data.layout_id;
 
                 removeLayout().done(function(response){
                     if(response.stat=="success"){
@@ -358,24 +354,24 @@
             });
 
 
-            $('#tbl_check_layouts tbody').on('click','button[name="set_scale"]',function(){
+            $('#tbl_print_layouts tbody').on('click','button[name="set_scale"]',function(){
 
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
-                _selectedID=data.check_layout_id;
+                _selectedID=data.layout_id;
 
-                window.open("Check_positions?id="+_selectedID,"Check Scale", "location=0,status=0,scrollbars=0,width=700,height=400");
+                window.open("Layout_positions?id="+_selectedID,"Check Scale", "location=0,status=0,scrollbars=0,width=1367,height=750");
 
             });
 
 
-            $('#tbl_check_layouts tbody').on('click','button[name="edit_info"]',function(){
+            $('#tbl_print_layouts tbody').on('click','button[name="edit_info"]',function(){
 
                 _txnMode="edit";
 
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
-                _selectedID=data.check_layout_id;
+                _selectedID=data.layout_id;
 
 
                 if(data.is_portrait==1){
@@ -455,7 +451,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Check_layout/transaction/create",
+                "url":"Print_layout/transaction/create",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save_layout'))
             });
@@ -471,7 +467,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Check_layout/transaction/update",
+                "url":"Print_layout/transaction/update",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save_layout'))
             });
@@ -482,7 +478,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Check_layout/transaction/delete",
+                "url":"Print_layout/transaction/delete",
                 "data":{layout_id : _selectedID}
             });
         };
