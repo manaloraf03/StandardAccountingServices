@@ -2,6 +2,14 @@
     .static-sidebar-wrapper {
         transition: .2s;
     }
+
+    .sidebar nav.widget-body > ul.acc-menu li.secondChild > a {
+        background: #161616;
+    }
+
+    .sidebar nav.widget-body > ul.acc-menu ul {
+        padding: 0!important;
+    }
 </style>
 <div class="static-sidebar-wrapper sidebar-default">
     <div class="static-sidebar">
@@ -24,7 +32,6 @@
                     <ul class="acc-menu">
                         <li class="nav-separator"><span>Explore</span></li>
                         <li><a href="Dashboard"><i class="ti ti-home"></i><span>Dashboard</span><span class="badge badge-orange">0</span></a></li>
-
                         <li class="<?php echo (in_array('13',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-view-list-alt"></i><span>Services</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('13-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="service_invoice">Service Invoice</a></li>
@@ -96,7 +103,8 @@
                                 <li class="<?php echo (in_array('10-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Depreciation_expense">Depreciation Expense Report</a></li>
                             </ul>
                         </li>
-                        <li class="<?php echo (in_array('6',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-settings"></i><span>Settings</span></a>
+                        <li class="<?php echo (in_array('6',$this->session->parent_rights)?'':'hidden'); ?>">
+                            <a href="#"><i class="ti ti-settings"></i><span>Settings</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('6-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Tax">Setup Tax</a></li>
                                 <li class="<?php echo (in_array('6-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_titles">Setup Chart of Accounts</a></li>
@@ -110,33 +118,59 @@
                                 <li class="<?php echo (in_array('6-9',$this->session->user_rights)?'':'hidden'); ?>"><a href="DBBackup">Backup Database</a></li>
                             </ul>
                         </li>
-                        <li class="<?php echo (in_array('9',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-bar-chart"></i><span>Accounting Reports</span></a>
-                            <ul class="acc-menu">
-                                <li class="<?php echo (in_array('9-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Balance_sheet">Balance Sheet</a></li>
-                                <li class="<?php echo (in_array('9-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Income_statement">Income Statement</a></li>
-                                <li class="<?php echo (in_array('9-9',$this->session->user_rights)?'':'hidden'); ?>"><a href="Annual_income_statement">Annual Income Report</a></li>
-                                <li class="<?php echo (in_array('9-16',$this->session->user_rights)?'':'hidden'); ?>"><a href="Comparative_income">Comparative Income Report</a></li>
-                                <li class="<?php echo (in_array('9-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Trial_balance">Trial Balance</a></li>
-                                <li class="<?php echo (in_array('9-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_receivable_schedule">AR Schedule</a></li>
-                                <li class="<?php echo (in_array('9-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_payable_schedule">AP Schedule</a></li>
-                                <li class="<?php echo (in_array('9-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Customer_Subsidiary">Customer Subsidiary</a></li>
-                                <li class="<?php echo (in_array('9-7',$this->session->user_rights)?'':'hidden'); ?>"><a href="Supplier_Subsidiary">Supplier Subsidiary</a></li>
-                                <li class="<?php echo (in_array('9-8',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_Subsidiary">Account Subsidiary</a></li>
-                                <li class="<?php echo (in_array('9-10',$this->session->user_rights)?'':'hidden'); ?>"><a href="Vat_relief_report">Vat Relief Report</a></li>
-                                <li class="<?php echo (in_array('9-11',$this->session->user_rights)?'':'hidden'); ?>"><a href="Schedule_expense">Schedule of Expense</a></li>
-                                <li class="<?php echo (in_array('9-12',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cogs">Cost of Goods</a></li>
-                                <li class="<?php echo (in_array('9-13',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_report">Replenishment Report</a></li>
-                                <li class="<?php echo (in_array('9-14',$this->session->user_rights)?'':'hidden'); ?>"><a href="TAccount">T-Accounts</a></li>
-                                <li class="<?php echo (in_array('9-15',$this->session->user_rights)?'':'hidden'); ?>"><a href="AR_Receivable">AR Reports</a></li>
-                                <li class="<?php echo (in_array('9-17',$this->session->user_rights)?'':'hidden'); ?>"><a href="Aging_receivables">Aging of Receivables</a></li>
-                                <li class="<?php echo (in_array('9-18',$this->session->user_rights)?'':'hidden'); ?>"><a href="Aging_payables">Aging of Payables</a></li>
-                                <li class="<?php echo (in_array('9-19',$this->session->user_rights)?'':'hidden'); ?>"><a href="SOA">Statement of Account</a></li>
+                        <li class="<?php echo (in_array('9',$this->session->parent_rights)?'':'hidden'); ?>">
+                            <a href="#"><i class="ti ti-bar-chart"></i><span>Accounting Reports</span></a>
+                            <ul class="acc-menu parent-menu">
+                                <li class="hasChild secondChild">
+                                    <a href="#"><span>Client</span></a>
+                                    <ul class="acc-menu">
+                                        <li class="<?php echo (in_array('9-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Customer_Subsidiary">Customer Subsidiary</a></li>
+                                        <li class="<?php echo (in_array('9-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_receivable_schedule">AR Schedule</a></li>
+                                        <li class="<?php echo (in_array('9-15',$this->session->user_rights)?'':'hidden'); ?>"><a href="AR_Receivable">AR Reports</a></li>
+                                        <li class="<?php echo (in_array('9-17',$this->session->user_rights)?'':'hidden'); ?>"><a href="Aging_receivables">Aging of Receivables</a></li>
+                                        <li class="<?php echo (in_array('9-19',$this->session->user_rights)?'':'hidden'); ?>"><a href="SOA">Statement of Account</a></li>
+                                    </ul>
+                                </li>
+                                <li class="hasChild secondChild">
+                                    <a href="#"><span>Vendor</span></a>
+                                    <ul class="acc-menu">
+                                        <li class="<?php echo (in_array('9-7',$this->session->user_rights)?'':'hidden'); ?>"><a href="Supplier_Subsidiary">Supplier Subsidiary</a></li>
+                                        <li class="<?php echo (in_array('9-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_payable_schedule">AP Schedule</a></li>
+                                        <li class="<?php echo (in_array('9-18',$this->session->user_rights)?'':'hidden'); ?>"><a href="Aging_payables">Aging of Payables</a></li>
+                                    </ul>
+                                </li>
+                                <li class="hasChild secondChild">
+                                    <a href="#"><span>Financial Reports</span></a>
+                                    <ul class="acc-menu">
+                                        <li class="<?php echo (in_array('9-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Income_statement">Income Statement</a></li>
+                                        <li class="<?php echo (in_array('9-9',$this->session->user_rights)?'':'hidden'); ?>"><a href="Annual_income_statement">Annual Income Report</a></li>
+                                        <li class="<?php echo (in_array('9-16',$this->session->user_rights)?'':'hidden'); ?>"><a href="Comparative_income">Comparative Income Report</a></li>
+                                        <li class="<?php echo (in_array('9-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Trial_balance">Trial Balance</a></li>
+                                        <li class="<?php echo (in_array('9-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Balance_sheet">Balance Sheet</a></li>
+                                    </ul>
+                                </li>
+                                <li class="hasChild secondChild">
+                                    <a href="#"><span>Other Accounting Report</span></a>
+                                    <ul class="acc-menu">
+                                        <li class="<?php echo (in_array('9-14',$this->session->user_rights)?'':'hidden'); ?>"><a href="TAccount">T-Accounts</a></li>
+                                        <li class="<?php echo (in_array('9-11',$this->session->user_rights)?'':'hidden'); ?>"><a href="Schedule_expense">Schedule of Expense</a></li>
+                                        <li class="<?php echo (in_array('9-8',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_Subsidiary">Account Subsidiary</a></li>
+                                        <li class="<?php echo (in_array('9-13',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_report">Replenishment Report</a></li>
+                                    </ul>
+                                </li>
+                                <li class="hasChild secondChild">
+                                    <a href="#"><span>Cost</span></a>
+                                    <ul class="acc-menu">
+                                        <li class="<?php echo (in_array('9-12',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cogs">Cost of Goods</a></li>
+                                        <li class="<?php echo (in_array('9-10',$this->session->user_rights)?'':'hidden'); ?>"><a href="Vat_relief_report">Vat Relief Report</a></li>
+                                        <li class="<?php echo (in_array('8-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Inventory">Inventory</a></li>
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('8',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#"><i class="ti ti-pie-chart"></i><span>Sales & Purchasing</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('8-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Sales_detailed_summary">Sales Report</a></li>
-                                <li class="<?php echo (in_array('8-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Inventory">Inventory</a></li>
                                 <li class="<?php echo (in_array('8-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Purchase_Invoice_Report">Purchase Invoice Report</a></li>
                             </ul>
                         </li>
