@@ -316,53 +316,35 @@
                                                 <div id="intro">
                                                     <h4 class="welcome-msg">Hi
                                                         <b>
-                                                            <?php 
-                                                                echo $this->session->user_fullname;
-                                                            ?>
-                                                        </b>, here is a rundown of your business' performance<br>and how your collections are doing individually. 
+                                                            <?php echo $this->session->user_fullname; ?>
+                                                        </b> here is a rundown of your business' performance<br>and how your collections are doing individually. 
                                                     </h4>
                                                     <hr>
                                                 </div>
                                                 <h3><b class="fa fa-dashboard"></b> DASHBOARD</h3>
                                                 <div class="row">
-                                                    <div class="col-xs-12 col-sm-2">
+                                                    <div class="col-xs-12 col-sm-3">
                                                         <div class="data-container text-center">
-                                                            <h2><strong><?php echo number_format($receivables->Balance,2); ?></strong></h2>
+                                                            <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0.00' : number_format($receivables->Balance,2)); ?></strong></h2>
                                                             <h4><b>Accounts Receivables</b></h4>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-2">
+                                                    <div class="col-xs-12 col-sm-3">
                                                         <div class="data-container text-center">
-                                                            <h2><strong><?php echo number_format($payables->Balance,2); ?></strong></h2>
+                                                            <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0.00' : number_format($payables->Balance,2)); ?></strong></h2>
                                                             <h4><b>Accounts Payables</b></h4>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-2">
+                                                    <div class="col-xs-12 col-sm-3">
                                                         <div class="data-container text-center">
-                                                            <h2><strong><?php echo $customer_count; ?></strong></h2>
+                                                            <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0' : $customer_count); ?></strong></h2>
                                                             <h4><b>Customers</b></h4>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-2">
+                                                    <div class="col-xs-12 col-sm-3">
                                                         <div class="data-container text-center">
-                                                            <h2><strong><?php echo $suppliers_count; ?></strong></h2>
+                                                            <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0' : $suppliers_count); ?></strong></h2>
                                                             <h4><b>Suppliers</b></h4>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xs-12 col-sm-4">
-                                                        <div class="data-container">
-                                                            <strong>Sales for this Week</strong>
-                                                            <div id="sparkline1" class="m-b-md"></div>
-                                                            <br>
-                                                            <div class="row seven-cols">
-                                                                <div class="col-sm-1 col-md-1">Sun</div>
-                                                                <div class="col-sm-1 col-md-1">Mon</div>
-                                                                <div class="col-sm-1 col-md-1">Tues</div>
-                                                                <div class="col-sm-1 col-md-1">Wed</div>
-                                                                <div class="col-sm-1 col-md-1">Thurs</div>
-                                                                <div class="col-sm-1 col-md-1">Fri</div>
-                                                                <div class="col-sm-1 col-md-1">Sat</div>
-                                                              </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -400,11 +382,11 @@
                                                             </table>
                                                       </div>
                                                     </div>
-                                                    <div class="col-xs-12 col-sm-4">
+                                                    <div class="col-xs-12 <?php echo ($this->session->user_group_id == 1 ? 'col-sm-4' : 'col-sm-12' ); ?>">
                                                       <div id="style-1" class="data-container" style="min-height: 700px; max-height: 700px; overflow-y: scroll;">
                                                         <h3><i class="fa fa-rss" style="color: #ffad33;"></i> ACTIVITY FEED</h3>
                                                         <div class="v-timeline vertical-container">
-                                                            <?php echo $news_feed; ?>
+                                                            <?php echo ($this->session->user_group_id != 1 ? '' : $news_feed); ?>
                                                         </div>
                                                       </div>
                                                     </div>
@@ -464,7 +446,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
           datasets: [
             {
               label: 'Income (Last Year)',
-              data: <?php echo json_encode($previous_year_income_monthly); ?>,
+              data: <?php echo ($this->session->user_group_id != 1 ? 0 : json_encode($previous_year_income_monthly)); ?>,
               backgroundColor: [
                   'rgba(255, 152, 0, .1)'
               ],
@@ -475,7 +457,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
             },
             {
               label: 'Income (Current Year)',
-              data: <?php echo json_encode($current_year_income_monthly); ?>,
+              data: <?php echo ($this->session->user_group_id != 1 ? 0 : json_encode($current_year_income_monthly)); ?>,
               backgroundColor: [
                   'rgba(255, 255, 255, .1)'
               ],
@@ -504,7 +486,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
           datasets: [
             {
               label: 'Income (Current Year)',
-              data: <?php echo json_encode($current_year_income_monthly); ?>,
+              data: <?php echo ($this->session->user_group_id != 1 ? 0 : json_encode($current_year_income_monthly)); ?>,
               backgroundColor: [
                   'rgba(255, 152, 0, .2)',
                   'rgba(255, 152, 0, .2)',
@@ -537,7 +519,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
             },
             {
               label: 'Expense (Current Year)',
-              data: <?php echo json_encode($expense_monthly); ?>,
+              data: <?php echo ($this->session->user_group_id != 1 ? 0 : json_encode($expense_monthly)); ?>,
               backgroundColor: [
                   'rgba(255, 255, 255, .1)',
                   'rgba(255, 255, 255, .1)',
