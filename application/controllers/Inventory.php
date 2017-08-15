@@ -13,7 +13,8 @@ class Inventory extends CORE_Controller
                 'Departments_model',
                 'Company_model',
                 'Users_model',
-                'Products_model'
+                'Products_model',
+                'Account_integration_model'
             )
         );
     }
@@ -43,7 +44,13 @@ class Inventory extends CORE_Controller
                 $date = date('Y-m-d',strtotime($this->input->post('date',TRUE)));
                 $depid = $this->input->post('depid',TRUE);
 
-                $response['data'] = $m_products->get_product_list_inventory($date,$depid);
+                $account_integration =$this->Account_integration_model;
+                $a_i=$account_integration->get_list();
+                $account =$a_i[0]->sales_invoice_inventory;
+
+                $response['data'] = $m_products->get_product_list_inventory($date,$depid,$account);
+
+
                 echo json_encode($response);
                 break;
             case 'preview-inventory':

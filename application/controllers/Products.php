@@ -27,6 +27,7 @@ class Products extends CORE_Controller
         $this->load->model('Delivery_invoice_model');
         $this->load->model('Delivery_invoice_item_model');
         $this->load->model('Users_model');
+        $this->load->model('Account_integration_model');
     }
 
     public function index() {
@@ -317,6 +318,12 @@ class Products extends CORE_Controller
                 break;
 
             case 'product-history':
+                $account_integration =$this->Account_integration_model;
+                $a_i=$account_integration->get_list();
+
+                $account =$a_i[0]->sales_invoice_inventory;
+
+
                 $product_id=$this->input->get('id');
                 $department_id=($this->input->get('depid')==null||$this->input->get('depid')==0?0:$this->input->get('depid'));
                 $as_of_date=$this->input->get('date');
@@ -328,7 +335,7 @@ class Products extends CORE_Controller
                 }
 
                 $m_products=$this->Products_model;
-                $data['products']=$m_products->get_product_history($product_id,$department_id,$date);
+                $data['products']=$m_products->get_product_history($product_id,$department_id,$date,$account);
                 $data['product_id']=$product_id;
                 //$this->load->view('Template/product_history_menus',$data);
 

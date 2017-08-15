@@ -80,7 +80,110 @@ class Products_model extends CORE_Model {
             return $result[0]->on_hand;
     }
 
-    function get_product_history($product_id,$depid=0,$as_of_date=null){
+
+// THIS IS THE OLD GET PRODUCT HISTORY QUERY BEFORE THE INTEGRATION OF SALES INVOICE 08152017
+    // function get_product_history($product_id,$depid=0,$as_of_date=null){
+    //     $this->db->query("SET @nBalance:=0.00;");
+    //     $sql="
+
+
+    //             SELECT n.*,p.product_desc,@nBalance:=(@nBalance+(n.in_qty-n.out_qty)) as balance
+
+    //             FROM
+
+    //             (SELECT m.*
+
+    //             FROM
+    //             (SELECT
+
+    //             (ai.date_adjusted) as txn_date,
+    //             ai.adjustment_code as ref_no,
+    //             ('Adjustment In')as type,
+    //             '' as Description,
+    //             aii.product_id,aii.exp_date,aii.`batch_no`,
+    //             (aii.adjust_qty) as in_qty,
+    //             0 as out_qty
+
+
+    //             FROM adjustment_info as ai
+    //             INNER JOIN `adjustment_items` as aii ON aii.adjustment_id=ai.adjustment_id
+    //             WHERE ai.adjustment_type='IN' AND ai.is_active=TRUE AND ai.is_deleted=FALSE
+    //             AND aii.product_id=$product_id ".($depid==0?"":" AND ai.department_id=".$depid)."
+    //             ".($as_of_date==null?"":" AND ai.date_adjusted<='".$as_of_date."'")."
+
+
+    //             UNION ALL
+
+
+    //             SELECT
+
+    //             (ai.date_adjusted) as txn_date,
+    //             ai.adjustment_code as ref_no,
+    //             ('Adjustment Out')as type,
+    //             '' as Description,
+    //             aii.product_id,aii.exp_date,aii.`batch_no`,
+    //             0 as in_qty,
+    //             (aii.adjust_qty)  as out_qty
+
+
+    //              FROM adjustment_info as ai
+    //             INNER JOIN `adjustment_items` as aii ON aii.adjustment_id=ai.adjustment_id
+    //             WHERE ai.adjustment_type='OUT' AND ai.is_active=TRUE AND ai.is_deleted=FALSE ".($depid==0?"":" AND ai.department_id=".$depid)."
+    //             AND aii.product_id=$product_id ".($as_of_date==null?"":" AND ai.date_adjusted<='".$as_of_date."'")."
+
+
+
+    //             UNION ALL
+
+
+
+    //             SELECT
+
+    //             di.date_delivered as txn_date,
+    //             di.dr_invoice_no as ref_no,
+    //             ('Purchase Invoice') as type,
+    //             CONCAT(IFNULL(s.supplier_name,''),' (Supplier)') as Description,
+    //             dii.product_id,
+    //             dii.exp_date,dii.batch_no,
+    //             (dii.dr_qty)as in_qty,0 as out_qty
+
+    //             FROM (delivery_invoice as di
+    //             LEFT JOIN suppliers as s ON s.supplier_id=di.supplier_id)
+    //             INNER JOIN delivery_invoice_items as dii
+    //             ON dii.dr_invoice_id=di.dr_invoice_id
+    //             WHERE di.is_active=TRUE AND di.is_deleted=FALSE ".($depid==0?"":" AND di.department_id=".$depid)."
+    //             AND dii.product_id=$product_id ".($as_of_date==null?"":" AND di.date_delivered<='".$as_of_date."'")."
+
+
+
+
+    //             UNION ALL
+
+
+    //             SELECT
+
+    //             ii.date_issued as txn_date,
+    //             ii.slip_no as ref_no,
+    //             'Issuance' as type,
+    //             ii.issued_to_person as Description,
+
+    //             iit.product_id,iit.exp_date,iit.batch_no,0 as in_qty,
+    //             issue_qty as out_qty
+
+    //             FROM issuance_info as ii
+    //             INNER JOIN issuance_items as iit ON iit.issuance_id=ii.issuance_id
+
+    //             WHERE ii.is_active=TRUE AND ii.is_deleted=FALSE ".($depid==0?"":" AND ii.issued_department_id=".$depid)."
+    //             AND iit.product_id=$product_id ".($as_of_date==null?"":" AND ii.date_issued<='".$as_of_date."'")."
+
+
+    //             ) as m ORDER BY m.txn_date ASC) as n  LEFT JOIN products as p ON n.product_id=p.product_id";
+
+    //     return $this->db->query($sql)->result();
+    // }
+
+     function get_product_history($product_id,$depid=0,$as_of_date=null,$account){
+
         $this->db->query("SET @nBalance:=0.00;");
         $sql="
 
@@ -150,10 +253,38 @@ class Products_model extends CORE_Model {
                 INNER JOIN delivery_invoice_items as dii
                 ON dii.dr_invoice_id=di.dr_invoice_id
                 WHERE di.is_active=TRUE AND di.is_deleted=FALSE ".($depid==0?"":" AND di.department_id=".$depid)."
-                AND dii.product_id=$product_id ".($as_of_date==null?"":" AND di.date_delivered<='".$as_of_date."'")."
+                AND dii.product_id=$product_id
+                 ".($as_of_date==null?"":" AND di.date_delivered<='".$as_of_date."'")."
 
 
+                ".($account==TRUE?" 
 
+
+                 UNION ALL
+                
+                SELECT 
+                si.date_invoice as txn_date,
+                si.sales_inv_no as ref_no,
+                ('Sales Invoice') as type,
+                CONCAT(IFNULL(c.customer_name,''),' (Customer)') as Description,
+                sii.product_id,
+                sii.exp_date,sii.batch_no,
+                0 as in_qty, (sii.inv_qty) as out_qty
+                 FROM 
+                (sales_invoice as si
+                LEFT JOIN customers c ON c.customer_id=si.customer_id)
+                                
+                INNER JOIN
+                sales_invoice_items sii ON sii.sales_invoice_id = si.sales_invoice_id
+
+                WHERE si.is_active = TRUE AND si.is_deleted = FALSE  ".($depid==0?"":" AND di.department_id=".$depid)."
+                AND sii.product_id = $product_id
+
+
+                ".($as_of_date==null?"":" AND si.date_invoice<='".$as_of_date."'")."
+
+
+                ":" ")."
 
                 UNION ALL
 
@@ -621,12 +752,35 @@ class Products_model extends CORE_Model {
 
 
     //function that returns product inventory on specified date
-    function get_product_list_inventory($as_of_date,$depid=null){
-        $sql="SELECT core.*,(ReceiveQty+AdjustInQty-IssueQty-AdjustOut)as CurrentQty
+    function get_product_list_inventory($as_of_date,$depid=null,$account){
+
+
+        $sql="SELECT core.*,
+            /* CurrentQty IF/ELSE generated for Account Integration
+                IF account integration (Sales_invoice_inventory) is TRUE(1)
+                then GET the --on_hand-- quantity where sales_invoice QTY is already computed
+
+                ELSE 
+
+
+
+                (ReceiveQty+AdjustInQty-IssueQty-AdjustOut)as CurrentQty
+                This  query is used to compute QTY without sales_invoice
+
+
+
+              */
+
+             ".($account==TRUE?" 
+                    core.on_hand as CurrentQty
+             ":" 
+                    (ReceiveQty+AdjustInQty-IssueQty-AdjustOut)as CurrentQty
+             ")."
+       
 
                 FROM
 
-                (SELECT pQ.product_id,pQ.product_code,pQ.product_desc,pQ.category_name,pQ.unit_name,
+                (SELECT pQ.product_id,pQ.product_code,pQ.product_desc,pQ.category_name,pQ.unit_name,pQ.on_hand,
                 IFNULL(recQ.ReceivedQTY,0)as ReceiveQty,
                 IFNULL(issQ.IssueQty,0)as IssueQty,
                 IFNULL(aInQ.AdjustInQty,0)as AdjustInQty,
@@ -634,7 +788,7 @@ class Products_model extends CORE_Model {
 
                 FROM
 
-                (SELECT p.product_id,p.product_code,p.product_desc,c.category_name,u.unit_name FROM products as p
+                (SELECT p.product_id,p.product_code,p.product_desc,c.category_name,u.unit_name,p.on_hand FROM products as p
                 LEFT JOIN categories as c ON c.category_id=p.category_id
                 LEFT JOIN units as u ON u.unit_id=p.unit_id
                 WHERE
