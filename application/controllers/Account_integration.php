@@ -115,6 +115,7 @@ class Account_integration extends CORE_Controller
 
                 $m_integration->retained_earnings_id=$this->input->post('retained_earnings_id',TRUE);
                 $m_integration->petty_cash_account_id=$this->input->post('petty_cash_account_id',TRUE);
+                $m_integration->sales_invoice_inventory=$this->get_numeric_value($this->input->post('sales_invoice_inventory',TRUE));
 
                 $m_integration->save();
 

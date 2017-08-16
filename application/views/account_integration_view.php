@@ -331,6 +331,20 @@ div.dataTables_info {
                             </div>
                         </div>
 
+                        <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Inventory</strong></span></h4>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> * Sales Invoice Integration :</label>
+                            <div class="col-md-7">
+                                <select name="sales_invoice_inventory" class="cbo_accounts"   id="cbo_inventory" data-error-msg="Inventory is required." required>
+                               
+
+                                <option value="1" <?php echo ($current_accounts->sales_invoice_inventory == 1 ? 'selected' :'')   ?> >Enable</option>
+                                <option value="0" <?php echo ($current_accounts->sales_invoice_inventory == 0 ? 'selected' :'')   ?>> Disable</option>
+                                </select>
+
+                                <span class="help-block m-b-none">Please select if Sales Invoices will be included in the Inventory computation.</span>
+                            </div>
+                        </div>
 
                         <hr />
 
@@ -616,7 +630,6 @@ $(document).ready(function(){
 
     var initializeControls=function(){
 
-
         dt=$('#tbl_account_year').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
@@ -652,6 +665,7 @@ $(document).ready(function(){
         });
 
 
+        // $('#cbo_inventory').select2('val', 0);
 
     }();
 
@@ -773,6 +787,7 @@ $(document).ready(function(){
 
     var saveSettings=function(){
         var _data=$('#frm_account_integration').serializeArray();
+        console.log(_data);
 
         return $.ajax({
             "dataType":"json",
