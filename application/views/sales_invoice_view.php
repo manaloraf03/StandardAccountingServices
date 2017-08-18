@@ -15,7 +15,6 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
@@ -36,11 +35,6 @@
             border-style: solid;
             padding: 24px;
             margin-bottom: 32px;
-        }
-        #tbl_items td,#tbl_items tr,#tbl_items th{
-            table-layout: fixed;
-           border: 1px solid gray;
-            border-collapse: collapse;
         }
         .toolbar{
             float: left;
@@ -115,7 +109,7 @@
             margin-bottom: 15px;
         }
     </style>
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/light-theme.css" rel="stylesheet">
 </head>
 <body class="animated-content"  style="font-family: tahoma;">
 <?php echo $_top_navigation; ?>
@@ -136,12 +130,13 @@
 <div class="col-md-12">
 <div id="div_sales_invoice_list">
     <div class="panel panel-default">
-        <div class="panel-heading">
+        <!-- <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Invoice</b>
-        </div>
-        <div class="panel-body table-responsive">
-            <table id="tbl_sales_invoice" cellspacing="0" width="100%" style="">
-                <thead class="">
+        </div> -->
+        <div class="panel-body table-responsive" style="border-top:5px solid #607d8b;">
+        <h1>Sales Invoice</h1><hr>
+            <table id="tbl_sales_invoice" class="table table-striped" cellspacing="0" width="100%" style="">
+                <thead class="table-erp" style="background-color: #607d8b!important;">
                 <tr>
                     <th></th>
                     <th>Invoice #</th>
@@ -168,7 +163,7 @@
                 <strong><a id="btn_receive_so" href="#" style="text-decoration: none; color: white;">Create from Sales Order</a></strong>
             </div>
         </div>
-        <div class="panel-body" style="padding-bottom: 0%;padding-top: 0%;">
+        <div class="panel-body" style="padding-bottom: 0%;padding-top: 0%; border-top: 5px solid #d1d1d1;">
         <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
             <form id="frm_sales_invoice" role="form" class="form-horizontal">
                 <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4>
@@ -240,14 +235,14 @@
                 </div>
             </form>
         </div>
-        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+        <div>
             <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
             <div id="custom-templates">
                 <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
             </div><br />
             <form id="frm_items">
                 <div class="table-responsive">
-                    <table id="tbl_items" cellspacing="0" width="100%" style="font-font:tahoma;">
+                    <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                         <thead class="">    
                         <tr>
                             <th width="10%">Qty</th>

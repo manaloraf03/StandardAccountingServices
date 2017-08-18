@@ -18,16 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
+    <link type="text/css" href="assets/css/light-theme.css" rel="stylesheet">
 
     <style>
         html{
-            zoom: 0.8;
-            zoom: 80%;
+            zoom: 0.9;
+            zoom: 85%;
         }
 
         .toolbar{
@@ -96,9 +95,8 @@
                                             </div>
                                             <div class="panel-body table-responsive">
 
-                                                <table id="tbl_units" cellspacing="0" width="100%">
-
-                                                    <thead class="table-erp">
+                                                <table id="tbl_units" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
                                                     <tr>
                                                         <th>Unit Name</th>
                                                         <th>Unit Description</th>

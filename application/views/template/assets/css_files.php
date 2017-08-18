@@ -14,103 +14,29 @@
 
 <link rel="stylesheet" href="assets/plugins/pace/themes/blue/pace-theme-loading-bar.css" /><!-- progress bar -->
 
-
-<style>
-    table.custom-design{
-        width: 100%;
+<style type="text/css">
+    .modal-backdrop {
+        display: none;
     }
-
-    .group-box {
-        padding: 1%; 
-        border: 1px solid lightgray;
-        border-radius: 5px;
-    }
-
-    .form-control {
-        border: 1px solid #aaa!important;
-    }
-
-    .breadcrumb {
-        margin-bottom: 0!important;
-    }
-
     
-    .form-control:focus{
-        border-color: #03a9f4!important;
-        -webkit-box-shadow: 0px 0px 22px 2px #03a9f4!important;
-        -moz-box-shadow: 0px 0px 22px 2px #03a9f4!important;
-        box-shadow: 0px 0px 22px 2px #03a9f4!important;
-    }
-
-    table.custom-design > tbody > tr > td{
-        border:1px solid #acb8b1;
-        padding: 7px;
-    }
-
-    table.custom-design > thead > tr > th{
-        border:1px solid #acb8b1;
-        padding: 7px;
-
-    }
-
-    table.custom-design > tfoot > tr > td{
-        border:1px solid #acb8b1;
-        padding: 7px;
-
-    }
-
-    /*.fade {
-        height: 100% !important;
-    }*/
-
-    .custom-design-header{
-        background-color: #4f9f63;
+    .panel-body {
+    	border-top: 5px solid #607d8b!important;
     }
 
     .panel {
-        border: none;
-        -webkit-box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
-        -moz-box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
-        box-shadow: 0px 0px 12px -1px rgba(156,151,156,1);
+        border: 1px solid #d1d1d1!important;
+        border-top-width: 0!important;
+        border-radius: 0;
+       -webkit-box-shadow: 0px 0px 13px 1px rgba(153,153,153,1)!important;
+		-moz-box-shadow: 0px 0px 13px 1px rgba(153,153,153,1)!important;
+		box-shadow: 0px 0px 13px 1px rgba(153,153,153,1)!important;
     }
 
-    .panel.panel-default .panel-heading {
-        border-color: transparent;
-    }
-    b{
-        color:#ffad33!important;
+    .btn-default {
+    	color: black!important;
     }
 
-    /*input[type="text"]:focus {
-        height: 50px;
-        color: #FFF !important;
-        font-size: 20px;
-        font-weight: bold;
-        background: #03a9f4;
-        transition: 0.2s;
+    #btn_new {
+    	margin-top: 0!important;
     }
-
-    textarea:focus {
-        height: 80px;
-        color: #616161;
-        font-size: 20px;
-        font-weight: bold;
-        background: #ffed4c !important;
-        transition: 0.8s;
-
-        border-color: #03a9f4 !important;
-        -webkit-box-shadow: 0px 0px 220px 220px #03a9f4!important;
-        -moz-box-shadow: 0px 0px 220px 220px #03a9f4!important;
-        box-shadow: 0px 0px 220px 220px #03a9f4!important;
-
-
-    }
-
-    select:focus {
-        color: #616161;
-        font-weight: bold;
-        background: #ffed4c !important;
-        transition: 0.1s;
-    }*/
-
 </style>

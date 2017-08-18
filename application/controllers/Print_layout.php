@@ -10,7 +10,9 @@ class Print_layout extends CORE_Controller
         $this->load->model(array(
             'Users_model',
             'Check_layout_model',
-            'Print_layout_model'
+            'Print_layout_model',
+            'Module_layout_model',
+            'Company_model'
         ));
     }
 
@@ -55,111 +57,90 @@ class Print_layout extends CORE_Controller
                 $response['row_added']=$m_layout->get_list($layout_id);
                 echo json_encode($response);
 
-
                 break;
 
-
-
-            case 'update':
-                $m_layout=$this->Print_layout_model;
-
-                $layout_id=$this->input->post('layout_id',TRUE);
-
-
-                if($this->input->post('type',TRUE)=="scale-only"){
-
-                    // $m_layout->set('date_modified','NOW()');
-                    $m_layout->particular_pos_left=$this->input->post('particular_pos_left',TRUE);
-                    $m_layout->particular_pos_top=$this->input->post('particular_pos_top',TRUE);
-                    $m_layout->particular_font_family=str_replace('"','',$this->input->post('particular_font_family',TRUE));
-                    $m_layout->particular_font_size=$this->input->post('particular_font_size',TRUE);
-                    $m_layout->particular_is_italic=$this->input->post('particular_is_italic',TRUE);
-                    $m_layout->particular_is_bold=($this->input->post('particular_is_bold',TRUE)=="400"?"normal":"bold");
-
-                    $m_layout->company_name_pos_left=$this->input->post('company_name_pos_left',TRUE);
-                    $m_layout->company_name_pos_top=$this->input->post('company_name_pos_top',TRUE);
-                    $m_layout->company_name_font_family=str_replace('"','',$this->input->post('company_name_font_family',TRUE));
-                    $m_layout->company_name_font_size=$this->input->post('company_name_font_size',TRUE);
-                    $m_layout->company_name_is_italic=$this->input->post('company_name_is_italic',TRUE);
-                    $m_layout->company_name_is_bold=($this->input->post('company_name_is_bold',TRUE)=="400"?"normal":"bold");
-
-
-                    $m_layout->company_address_pos_left=$this->input->post('company_address_pos_left',TRUE);
-                    $m_layout->company_address_pos_top=$this->input->post('company_address_pos_top',TRUE);
-                    $m_layout->company_address_font_family=str_replace('"','',$this->input->post('company_address_font_family',TRUE));
-                    $m_layout->company_address_font_size=$this->input->post('company_address_font_size',TRUE);
-                    $m_layout->company_address_is_italic=$this->input->post('company_address_is_italic',TRUE);
-                    $m_layout->company_address_is_bold=($this->input->post('company_address_is_bold',TRUE)=="400"?"normal":"bold");
-
-                    $m_layout->company_contact_pos_left=$this->input->post('company_contact_pos_left',TRUE);
-                    $m_layout->company_contact_pos_top=$this->input->post('company_contact_pos_top',TRUE);
-                    $m_layout->company_contact_font_family=str_replace('"','',$this->input->post('company_contact_font_family',TRUE));
-                    $m_layout->company_contact_font_size=$this->input->post('company_contact_font_size',TRUE);
-                    $m_layout->company_contact_is_italic=$this->input->post('company_contact_is_italic',TRUE);
-                    $m_layout->company_contact_is_bold=($this->input->post('company_contact_is_bold',TRUE)=="400"?"normal":"bold");
-
-
-
-
-                    $m_layout->company_photo_pos_left=$this->input->post('company_photo_pos_left',TRUE);
-                    $m_layout->company_photo_pos_top=$this->input->post('company_photo_pos_top',TRUE);
-                    $m_layout->company_photo_width=$this->input->post('company_photo_width',TRUE);
-                    $m_layout->company_photo_height=$this->input->post('company_photo_height',TRUE);
-
-
-
-
-
-                    // $m_layout->words_pos_left=$this->input->post('words_pos_left',TRUE);
-                    // $m_layout->words_pos_top=$this->input->post('words_pos_top',TRUE);
-
-                    // $m_layout->words_font_family=str_replace('"','',$this->input->post('words_font_family',TRUE));
-                    // $m_layout->words_font_size=$this->input->post('words_font_size',TRUE);
-                    // $m_layout->words_is_italic=$this->input->post('words_is_italic',TRUE);
-                    // $m_layout->words_is_bold=($this->input->post('words_is_bold',TRUE)=="400"?"normal":"bold");
-
-
-                    // $m_layout->amount_pos_left=$this->input->post('amount_pos_left',TRUE);
-                    // $m_layout->amount_pos_top=$this->input->post('amount_pos_top',TRUE);
-
-                    // $m_layout->amount_font_family=str_replace('"','',$this->input->post('amount_font_family',TRUE));
-                    // $m_layout->amount_font_size=$this->input->post('amount_font_size',TRUE);
-                    // $m_layout->amount_is_italic=$this->input->post('amount_is_italic',TRUE);
-                    // $m_layout->amount_is_bold=($this->input->post('amount_is_bold',TRUE)=="400"?"normal":"bold");
-
-
-                    // $m_layout->date_pos_left=$this->input->post('date_pos_left',TRUE);
-                    // $m_layout->date_pos_top=$this->input->post('date_pos_top',TRUE);
-
-                    // $m_layout->date_font_family=str_replace('"','',$this->input->post('date_font_family',TRUE));
-                    // $m_layout->date_font_size=$this->input->post('date_font_size',TRUE);
-                    // $m_layout->date_is_italic=$this->input->post('date_is_italic',TRUE);
-                    // $m_layout->date_is_bold=($this->input->post('date_is_bold',TRUE)=="400"?"normal":"bold");
-
-
-                    // $m_layout->posted_by_user=$this->session->user_id;
-                    $m_layout->modify($layout_id);
-
-                }else{
+            case 'update-page':
+                    $m_layout=$this->Print_layout_model;
+                    $layout_id=$this->input->post('layout_id',TRUE);
 
                     $m_layout->layout_name=$this->input->post('layout_name',TRUE);
                     $m_layout->layout_description=$this->input->post('layout_description',TRUE);
                     $m_layout->is_portrait=($this->input->post('is_portrait',TRUE)==1?1:0); //not sure why posted value 0 is NULL is backend
-                    // $m_layout->posted_by_user=$this->session->user_id;
                     $m_layout->modify($layout_id);
-
 
                     $response['title']='Success!';
                     $response['stat']='success';
-                    $response['msg']='Check layout successfully updated.';
-                   $response['row_updated']=$m_layout->get_list($layout_id);
+                    $response['msg']='Print layout successfully updated.';
+                    $response['row_updated']=$m_layout->get_list($layout_id);
                     echo json_encode($response);
+                break;
+
+            case 'update':
+
+                $layout_id=$this->input->post('layout_id',TRUE);
+
+                $m_module_layout = $this->Module_layout_model;
+                $m_module_layout->delete_via_fk($layout_id);
+
+                $display_text = $this->input->post('display_text',TRUE);
+                $field_name = $this->input->post('field_name',TRUE);
+                $tag = $this->input->post('tag',TRUE);
+                $pos_top = $this->input->post('pos_top',TRUE);
+                $pos_bottom = $this->input->post('pos_bottom',TRUE);
+                $pos_left = $this->input->post('pos_left',TRUE);
+                $pos_right = $this->input->post('pos_right',TRUE);
+                $font = $this->input->post('font',TRUE);
+                $font_color = $this->input->post('font-color',TRUE);
+                $font_size = $this->input->post('font-size',TRUE);
+                $is_bold = $this->input->post('is_bold',TRUE);
+                $is_italic = $this->input->post('is_italic',TRUE);
+                $height = $this->input->post('height',TRUE);
+                $width = $this->input->post('width',TRUE);
+                $parent = $this->input->post('parent',TRUE);
+
+                for($i=0;$i<count($field_name);$i++)
+                {
+                    $m_module_layout->layout_id = $layout_id;
+                    $m_module_layout->display_text = $display_text[$i];
+                    $m_module_layout->field_name = $field_name[$i];
+                    $m_module_layout->tag = $tag[$i];
+                    $m_module_layout->pos_top = $pos_top[$i];
+                    $m_module_layout->pos_bottom = $pos_bottom[$i];
+                    $m_module_layout->pos_left = $pos_left[$i];
+                    $m_module_layout->pos_right = $pos_right[$i];
+                    $m_module_layout->font = $font[$i];
+                    $m_module_layout->font_color = $font_color[$i];
+                    $m_module_layout->font_size = $font_size[$i];
+                    $m_module_layout->is_bold = $is_bold[$i];
+                    $m_module_layout->is_italic = $is_italic[$i];
+                    $m_module_layout->height = $height[$i];
+                    $m_module_layout->width = $width[$i];
+                    $m_module_layout->parent = $parent[$i];
+                    $m_module_layout->save();
                 }
 
+                $response['title']='Success!';
+                $response['stat']='success';
+                $response['msg']='Print layout successfully updated.';
 
-
+                echo json_encode($response);
 
                 break;
+
+            case 'print':
+                    $m_module_layout = $this->Module_layout_model;
+
+                    $layout_id = $this->input->get('layout');
+
+                    $company_info = $this->Company_model->get_list();
+
+                    $data['company_info'] = $company_info[0];
+                    
+                    $data['module_layouts'] = $m_module_layout->get_list('layout_id='.$layout_id);
+                    
+                    $this->load->view('template/print_layout_content',$data);
+                break;
+
             case 'delete':
                 $m_layout=$this->Print_layout_model;
 
@@ -175,30 +156,12 @@ class Print_layout extends CORE_Controller
                     echo json_encode($response);
                 }
 
+                break;
+
         }
 
 
     }
-
-
-    // function response_rows($filter){
-    //     $m_layout=$this->Check_layout_model;
-
-    //     return $m_layout->get_list(
-    //         $filter,
-
-    //         array(
-    //             'check_layout.*',
-    //             'IF(check_layout.is_portrait,"Portrait","Landscape") as layout',
-    //             'CONCAT_WS(" ",ua.user_fname,ua.user_lname) as posted_by_user'
-    //         ),
-
-    //         array(
-    //             array('user_accounts as ua','ua.user_id=check_layout.posted_by_user','left')
-    //         )
-
-    //     );
-    // }
 
 
 

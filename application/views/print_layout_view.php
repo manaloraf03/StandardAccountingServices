@@ -165,7 +165,7 @@
                                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Print Layout</b>
                                                 </div>
                                                 <div class="panel-body" style="min-height: 400px;">
-                                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+                                                    <div style="">
                                                         <table id="tbl_print_layouts" class="" cellspacing="0" width="100%">
                                                             <thead class="table-erp">
                                                             <tr>
@@ -334,8 +334,6 @@
 
             $('#btn_new').click(function(){
                 _txnMode="new";
-
-
                 $('#modal_new_layout').modal('show');
             });
 
@@ -467,7 +465,7 @@
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
-                "url":"Print_layout/transaction/update",
+                "url":"Print_layout/transaction/update-page",
                 "data":_data,
                 "beforeSend": showSpinningProgress($('#btn_save_layout'))
             });

@@ -7,9 +7,13 @@ class Layout_positions extends CORE_Controller
     function __construct() {
         parent::__construct('');
         $this->validate_session();
-        $this->load->model('Print_layout_model');
+        $this->load->model(
+            array(
+                'Print_layout_model',
+                'Module_layout_model'
+            )
+        );
         $this->load->library('M_pdf');
-
     }
 
     public function index() {
@@ -22,6 +26,7 @@ class Layout_positions extends CORE_Controller
 
         $id=$this->input->get('id');
         $layout_info=$this->Print_layout_model->get_list($id);
+        $data['module_layouts'] = $this->Module_layout_model->get_list('layout_id = '.$id);
         $data['layouts']=$layout_info[0];
 
         $this->load->view('print_scale_view', $data);

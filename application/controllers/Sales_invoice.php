@@ -486,10 +486,6 @@ class Sales_invoice extends CORE_Controller
                 }
 
 
-
-
-
-
                 //mark Items as deleted
                 $m_invoice->set('date_deleted','NOW()'); //treat NOW() as function and not string
                 $m_invoice->deleted_by_user=$this->session->user_id;//user that deleted the record
