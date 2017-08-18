@@ -227,6 +227,8 @@ class Login extends CORE_Controller {
 
                         $m_users=$this->Users_model;
                         $m_users->is_online=1;
+                        date_default_timezone_set('Asia/Manila');
+                        $m_users->last_seen=date("Y-m-d H:i:s");
                         $m_users->token_id = $tktToken;
                         $m_users->modify($result->row()->user_id);
 

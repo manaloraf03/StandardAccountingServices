@@ -20,14 +20,15 @@ class Service_journal extends CORE_Controller
                 'Sales_invoice_model',
                 'Departments_model',
                 'Accounting_period_model',
-                'Service_invoice_model'
+                'Service_invoice_model',
+                'Users_model'
             )
         );
 
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);

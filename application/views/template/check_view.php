@@ -12,7 +12,7 @@
                 echo "size : A4 landscape;";
             }
         ?>
-            margin: -1.1in -1.1in -1.1in -1.1in;
+    /*        margin: -1.1in -1.1in -1.1in -1.1in;*/
         }
 
 

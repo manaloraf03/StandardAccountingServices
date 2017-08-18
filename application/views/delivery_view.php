@@ -369,7 +369,7 @@
 
                 <div class="col-sm-3 col-sm-offset-4" style="display: none;">
                     Tax type :<br />
-                    <select name="tax_type" id="cbo_tax_type" required data-error-msg="Tax Type is required !">
+                    <select name="tax_type" id="cbo_tax_type"  data-error-msg="Tax Type is required !">
                         <?php foreach($tax_types as $tax_type){ ?>
                             <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
                         <?php } ?>

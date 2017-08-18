@@ -17,11 +17,12 @@ class Service_invoice extends CORE_Controller
         $this->load->model('Service_invoice_model');
         $this->load->model('Service_invoice_item_model');
         $this->load->model('Services_model');
+        $this->load->model('Users_model');
 
     }
 
     public function index() {
-
+        $this->Users_model->validate();
         //default resources of the active view
         $data['_def_css_files'] = $this->load->view('template/assets/css_files', '', TRUE);
         $data['_def_js_files'] = $this->load->view('template/assets/js_files', '', TRUE);
