@@ -15,28 +15,16 @@
 	    <?php echo $_def_css_files; ?>
 
       	<link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
 	    <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
 	    <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
 	    <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
 	    <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
 	    <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   									<!-- Custom Checkboxes / iCheck -->
-
 	    <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
 	    <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
 	    <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-	    
 	    <?php echo $_def_js_files; ?>	
-
 	    <?php echo $_switcher_settings; ?>
-
-
 	    <!-- Date range use moment.js same as full calendar plugin -->
 	    <script src="assets/plugins/fullcalendar/moment.min.js"></script>
 	    <!-- Data picker -->

@@ -90,11 +90,11 @@
 
                                     <div id="div_unit_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+<!--                                             <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Units</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
-
+                                            <h2 class="h2-panel-heading">Units</h2><hr>
                                                 <table id="tbl_units" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                     <tr>

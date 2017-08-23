@@ -47,7 +47,7 @@
       border: none!important;
   }
 
-  tr:nth-child(even){
+/*  tr:nth-child(even){
       background: #414141 !important;
       border: none!important;
   }
@@ -64,7 +64,7 @@
       -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
       -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
       box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-  }
+  }*/
 </style>
 
 

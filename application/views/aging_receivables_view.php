@@ -18,19 +18,11 @@
         <?php echo $_def_css_files; ?>
 
         <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-        <link href="assets/css/dark-theme.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
         <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
         <style>
-
-            html {
-                zoom: 0.8;
-                zoom: 80%;
-            }
-
             .toolbar{
                 float: left;
             }
@@ -97,12 +89,13 @@
 
                                     <div id="div_tax_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+                                           <!--  <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Aging of Receivables</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_aging" class="" cellspacing="0" width="100%">
-                                                    <thead class="table-erp">
+                                            <h2 class="h2-panel-heading">Aging of Receivables</h2><hr>
+                                                <table id="tbl_aging" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead class="">
                                                     <tr>
                                                         <th>Customer Name</th>
                                                         <th>Current</th>
@@ -211,8 +204,28 @@
                         render:function(data,type,full,meta){
                             return (data == 0 ? '' : accounting.formatNumber(data,2));
                         }
+                    },
+                    {
+                        visible:false,
+                        targets:[6],data: "is_sales"
                     }
                 ],
+                "order": [[ 6, 'asc' ]],
+                "drawCallback": function ( settings ) {
+                    var api = this.api();
+                    var rows = api.rows( {page:'current'} ).nodes();
+                    var last=null;
+         
+                    api.column(6, {page:'current'} ).data().each( function ( group, i ) {
+                        if ( last !== group ) {
+                            $(rows).eq( i ).before(
+                                '<tr class="group"><td colspan="6" style="background:#eaeaea;"><strong>'+(group == 1 ? 'PER SALES' : 'PER SERVICES')+'</strong></td></tr>'
+                            );
+                            
+                            last = group;
+                        }
+                    } );
+                },
                 "footerCallback": function(a,b,c){
                     var api = this.api(), data;
                     // Remove the formatting to get integer data for summation

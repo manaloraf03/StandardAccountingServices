@@ -18,16 +18,11 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
     <style>
-        html {
-            zoom: 0.8;
-            zoom: 85%;
-        }
 
         .toolbar{
             float: left;
@@ -85,10 +80,11 @@
 
                     <div class="container-fluid">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <!-- <div class="panel-heading">
                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Depreciation Expense</b>
-                            </div>
+                            </div> -->
                             <div class="panel-body">
+                            <h2 class="h2-panel-heading">Depreciation Expense</h2><hr>
                                 <div class="row">
                                     <div class="container-fluid">
                                         <div class="container-fluid group-box">
@@ -127,7 +123,7 @@
                                         <br>
                                         <div class="container-fluid group-box">
                                             <button class="btn btn-primary pull-left" id="btn_print"><i class="fa fa-print"></i>&nbsp; Print Report</button>
-                                            <table id="tbl_depreciation" width="100%" class="">
+                                            <table id="tbl_depreciation" class="table table-striped" width="100%" class="">
                                                 <thead>
                                                     <tr>
                                                        <th>Asset Code</th>

@@ -61,6 +61,24 @@
     	</thead>
     	<tbody>
             <?php $sum_current = 0; $sum_thirty = 0; $sum_fortyfive = 0; $sum_sixty = 0; $sum_ninety = 0; ?>
+            <tr>
+                <td colspan="6"><strong>PER SERVICES</strong></td>
+            </tr>
+            <?php foreach($receivables as $receivable) { ?>
+                <?php if ($receivable->is_sales == 0) { ?>
+                <tr>
+                    <td><?php echo $receivable->customer_name; ?></td>
+                    <td align="right"><?php echo (number_format($receivable->current,2) == 0 ? '' : number_format($receivable->current,2)); ?></td>
+                    <td align="right"><?php echo (number_format($receivable->thirty_days,2) == 0 ? '' : number_format($receivable->thirty_days,2)); ?></td>
+                    <td align="right"><?php echo (number_format($receivable->fortyfive_days,2) == 0 ? '' : number_format($receivable->fortyfive_days,2)); ?></td>
+                    <td align="right"><?php echo (number_format($receivable->sixty_days,2) == 0 ? '' : number_format($receivable->sixty_days,2)); ?></td>
+                    <td align="right"><?php echo (number_format($receivable->over_ninetydays,2) == 0 ? '' : number_format($receivable->over_ninetydays,2)); ?></td>
+                </tr>
+                <?php } ?>
+            <?php } ?>
+            <tr>
+                <td colspan="6"><strong>PER SALES</strong></td>
+            </tr>
     		<?php foreach($receivables as $receivable) { ?>
                 <?php
                     $sum_current += $receivable->current; 
@@ -69,6 +87,7 @@
                     $sum_sixty += $receivable->sixty_days;
                     $sum_ninety += $receivable->over_ninetydays;
                 ?>
+                <?php if ($receivable->is_sales == 1) { ?>
 	    		<tr>
 	    			<td><?php echo $receivable->customer_name; ?></td>
 	    			<td align="right"><?php echo (number_format($receivable->current,2) == 0 ? '' : number_format($receivable->current,2)); ?></td>
@@ -77,6 +96,7 @@
 	    			<td align="right"><?php echo (number_format($receivable->sixty_days,2) == 0 ? '' : number_format($receivable->sixty_days,2)); ?></td>
 	    			<td align="right"><?php echo (number_format($receivable->over_ninetydays,2) == 0 ? '' : number_format($receivable->over_ninetydays,2)); ?></td>
 	    		</tr>
+                <?php } ?>
     		<?php } ?>
             <tr>
                 <td></td>

@@ -41,7 +41,7 @@
             border: none!important;*/
         }
 
-        tr:hover {
+/*        tr:hover {
             transition: .4s;
             background: #414141 !important;
             color: white;
@@ -54,7 +54,10 @@
             -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         }
-        
+        */
+            table{
+        border:none!important;
+    }
     </style>
 </head>
 <body>
@@ -84,7 +87,7 @@
             <td style="padding: 4px;" colspan="2"><strong>ADDRESS :</strong> <?php echo $journal_info->address; ?></td>
         </tr>
     </table><br>
-    <table width="100%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;" border="0">
+    <table width="100%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;" border="0" class="table table-striped">
             <thead>
             <tr>
                 <td style="border: 1px solid black;text-align: center;padding: 6px;" colspan="5"><strong>ENTRIES</strong></td>

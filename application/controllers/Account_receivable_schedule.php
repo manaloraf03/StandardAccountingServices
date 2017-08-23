@@ -39,9 +39,6 @@ class Account_receivable_schedule extends CORE_Controller
         (in_array('9-4',$this->session->user_rights)? 
         $this->load->view('accounts_receivable_schedule_view', $data)
         :redirect(base_url('dashboard')));
-        
-
-
     }
 
 
@@ -57,9 +54,6 @@ class Account_receivable_schedule extends CORE_Controller
                 echo json_encode($response);
 
                 break;
-
-
-
         }
     }
 

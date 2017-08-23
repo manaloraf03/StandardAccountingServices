@@ -2,13 +2,7 @@
 <body>
 <style>
 
-    #issuance td {
-  
-    }
 
-    #report_header td {
-     
-    }
 
     #issuance tr {
         background: transparent !important;
@@ -17,13 +11,13 @@
     #report_footer th {
 /*        background: #303030 !important;
 */    }
-.report{
+    .report{
 
-border-bottom: 1px solid gray;
+    border-bottom: 1px solid gray;
 
-border-right: none;
-border-left:none;
-border-top:none;
+    border-right: none;
+    border-left:none;
+    border-top:none;
 
 }
     td{
@@ -38,23 +32,24 @@ border-top:none;
 /*        border: none!important;*/
     }
 
-    tr:hover {
+/*    tr:hover {
         transition: .4s;
-/*        background: #414141 !important;*/
+        background: #414141 !important;
         color: white;
     }
-
+    
+*/
     th{
         background-color: transparent!important;
     }
-    tr:hover .btn {
+/*    tr:hover .btn {
         border-color: #494949!important;
         border-radius: 0!important;
         -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
     }
-
+*/
        body {
         font-family: 'Calibri',sans-serif;
         font-size: 12px;
@@ -75,7 +70,9 @@ border-top:none;
     .report-header {
         font-weight: bolder;
     }
-   
+       table{
+        border:none!important;
+    }
           
       </style>
 

@@ -12,7 +12,6 @@
     <meta name="author" content="">
     <?php echo $_def_css_files; ?>
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
@@ -20,10 +19,6 @@
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
     <style>
-        html{
-            zoom: 0.82;
-            zoom: 82%;
-        }
         .toolbar{
             float: left;
         }
@@ -94,7 +89,7 @@ echo $_side_bar_navigation;
 <div class="static-content"  >
 <div class="page-content"><!-- #page-content -->
 <ol class="breadcrumb"  style="margin-bottom: 10px;">
-    <li><a href="Dashboard">Dashboard</a> > </li>
+    <li><a href="Dashboard">Dashboard</a></li>
     <li><a href="Issuances">Issuance</a></li>
 </ol>
 <div class="container-fluid"">
@@ -103,11 +98,12 @@ echo $_side_bar_navigation;
 <div class="col-md-12">
 <div id="div_user_list">
     <div class="panel panel-default">
-        <div class="panel-heading">
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Issuance</b>
-        </div>
+        </div> -->
         <div class="panel-body table-responsive">
-            <table id="tbl_issuances" class="" cellspacing="0" width="100%">
+        <h2 class="h2-panel-heading">Issuance</h2><hr>
+            <table id="tbl_issuances" class="table table-striped" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -126,19 +122,22 @@ echo $_side_bar_navigation;
 </div>
 <div id="div_user_fields" style="display: none;">
 <div class="panel panel-default">
-<div class="panel-heading">
-    <h2 id="item_issuance_title"><i class="fa fa-bars"></i>Item Issuance</h2>
+<!-- <div class="panel-heading">
+
+
     <div class="panel-ctrls" data-actions-container=""></div>
-</div>
+</div> -->
 <div class="panel-body">
+<!--     <h2 id="item_issuance_title"><i class="fa fa-bars"></i>Item Issuance</h2> -->
 <!-- <h2 id="item_issuance_title"></h2> -->
+        <h2 class="h2-panel-heading" id="item_issuance_title">Issuance</h2><hr>
 <div class="row">
     <div class="container-fluid">
         <!--<div class="btn btn-green" style="margin-left: 10px;">
             <strong><a id="btn_receive_si" href="#" style="text-decoration: none; color: white;">Create from Sales Invoice</a></strong>
         </div>-->    
         <form id="frm_issuances" role="form" class="form-horizontal">
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div>
                 <div class="row">
                     <div class="col-xs-12 col-lg-4">
                          Slip # : <br />
@@ -201,7 +200,7 @@ echo $_side_bar_navigation;
     </div>
 </div>
     <br />
-    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+    <div>
         <div class="row">
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -212,7 +211,7 @@ echo $_side_bar_navigation;
                     </div><br />
                     <form id="frm_items">
                         <div class="table-responsive" style="min-height: 200px;padding: 1px;max-height: 400px;overflow: auto;">
-                            <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
+                            <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                                 <thead class="">
                                     <tr>
                                         <th width="10%">Qty</th>
@@ -788,9 +787,9 @@ dt_si = $('#tbl_si_list').DataTable({
             source: products,
             templates: {
                 header: [
-                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                    '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
             }
         }).on('keyup', this, function (event) {
             if (event.keyCode == 13) {

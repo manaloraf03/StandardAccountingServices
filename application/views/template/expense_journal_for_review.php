@@ -1,5 +1,5 @@
 <style>
-
+/*
     .tab-container .nav.nav-tabs li a {
 
         background: #414141 !important;
@@ -26,7 +26,7 @@
 
         color: white !important;
 
-    }
+    }*/
 
 
 
@@ -48,11 +48,11 @@
 
 
 
-    <table class="table_journal_entries_review"  width="97%" style="font-family: tahoma;">
+    <table class="table_journal_entries_review"  width="97%" style="font-family: tahoma;border: none!important">
 
         <tbody>
 
-        <tr class="row_child_tbl_cash_disbursement_list">
+        <tr class="row_child_tbl_cash_disbursement_list" >
 
             <td>
 
@@ -60,7 +60,7 @@
 
 
 
-                <div class="tab-container tab-default">
+                <div class="tab-container tab-default ">
 
                     <ul class="nav nav-tabs">
 
@@ -372,7 +372,7 @@
 
 
 
-                                <table id="tbl_entries_for_review_<?php echo $payment_info->payment_id; ?>" class="" style="width: 100% !important;">
+                                <table id="tbl_entries_for_review_<?php echo $payment_info->payment_id; ?>" class="table table-striped" style="width: 100% !important;">
 
                                     <thead>
 
@@ -437,11 +437,12 @@
                                             <td><input type="text" name="cr_amount[]" class="form-control numeric"  value="<?php echo number_format($entry->cr_amount,2);?>"></td>
 
                                             <td>
-
-                                                <button type="button" class="btn btn-primary add_account"><i class="fa fa-plus" style="color: white;"></i></button>
+                                        <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
+                                        <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
+<!--                                                 <button type="button" class="btn btn-primary add_account"><i class="fa fa-plus" style="color: white;"></i></button>
 
                                                 <button type="button" class="btn btn-red remove_account"><i class="fa fa-times" style="color: white;"></i></button>
-
+ -->
                                             </td>
 
                                         </tr>
@@ -588,7 +589,7 @@
 
 
 
-                                <table class="" style="width: 100% !important;">
+                                <table class="table table-striped" style="width: 100% !important;">
 
                                     <thead>
 
@@ -691,7 +692,7 @@
     }
 
 
-
+/*
     tr:nth-child(even){
 
         background: #414141 !important;
@@ -725,7 +726,7 @@
         -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
 
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-
+*/
     }
 
 </style>

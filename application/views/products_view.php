@@ -18,27 +18,11 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-    <style>
-        html{
-            zoom: 0.82;
-            zoom: 82%;
-        }
-    </style>
-
-
 
     <?php echo $_switcher_settings; ?>
     <?php echo $_def_js_files; ?>
@@ -1084,12 +1068,13 @@ $(document).ready(function(){
                                 <div class="col-md-12">
                                     <div id="div_product_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+<!--                                             <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Products</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
+                                            <h2 class="h2-panel-heading">Products</h2><hr>
                                                 <button class="btn btn-primary" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New product" ><i class="fa fa-plus"></i> Create New Product</button>
-                                                <table id="tbl_products" class="" cellspacing="0" width="100%">
+                                                <table id="tbl_products" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>    
                                                         <th></th>

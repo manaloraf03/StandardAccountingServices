@@ -18,18 +18,9 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
-
     <style>
-
-        html {
-            zoom: 0.8;
-            zoom: 80%;
-        }
 
         .page-content > .breadcrumb {
             margin-bottom: 1px!important; 
@@ -96,12 +87,12 @@
 
                                     <div id="div_location_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+           <!--                                  <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Locations Management</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
-
-                                                <table id="tbl_locations" cellspacing="0" width="100%">
+                                            <h2 class="h2-panel-heading">Locations Managements</h2><hr>
+                                                <table id="tbl_locations" class="table table-striped" cellspacing="0" width="100%">
 
                                                     <thead>
                                                     <tr>
@@ -120,12 +111,13 @@
 
                                     <div id="div_location_fields" class="col-xs-12 col-md-5 col-md-offset-3" style="display: none;">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <h2>location Information</h2>
+<!--                                             <div class="panel-heading">
+                                               
                                                 <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="panel-body">
+                                            <h2 class="h2-panel-heading">Location Information</h2><hr>
                                                 <form id="frm_location" role="form" class="form-horizontal row-border">
                                                     <div class="form-group">
                                                         <div style="padding-left: 10px;">

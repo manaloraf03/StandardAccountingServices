@@ -52,7 +52,7 @@
                                 <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Purchase Order of <?php echo $supplier_info->supplier_name; ?></b> (Open and partially received)</span>
                                 <hr />
                                 <div class="col-lg-12 table-responsive">
-                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="" cellspacing="0" width="100%">
+                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
                                             <th>PO #</th>
@@ -93,7 +93,7 @@
                                 <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Purchase Invoice of <?php echo $supplier_info->supplier_name; ?></b> </span>
                                 <hr />
                                 <div class="col-lg-12 table-responsive">
-                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="" cellspacing="0" width="100%">
+                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
                                             <th>Invoice #</th>
@@ -137,7 +137,7 @@
                                 <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Payments of <?php echo $supplier_info->supplier_name; ?></b> </span>
                                 <hr />
                                 <div class="col-lg-12 table-responsive">
-                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="" cellspacing="0" width="100%">
+                                    <table id="tbl_po_<?php echo $supplier_info->supplier_id; ?>" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
                                             <th>Invoice #</th>

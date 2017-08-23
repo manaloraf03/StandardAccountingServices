@@ -19,18 +19,11 @@
 
         <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
         <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-        <link href="assets/css/dark-theme.css" rel="stylesheet">
         <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
         <style>
-
-            html{
-                zoom: 0.8;
-                zoom: 80%;
-            }
-
             .thead-bg {
                 background: rgba(226,226,226,1);
                 background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 100%);
@@ -117,10 +110,11 @@
                                         <div class="col-md-12">
                                             <div id="div_pcf_list">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+<!--                                                     <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash Journal</b>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="panel-body table-responsive">
+                                                    <h2 class="h2-panel-heading"> Petty Cash Journal</h2><hr>
                                                         <div style="margin-bottom: 15px;">
                                                             <div class="col-xs-12 col-md-3" style="margin-bottom: 10px;">
                                                                 <strong>As of Date :</strong>
@@ -140,7 +134,7 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <table id="tbl_pcf" class="" cellspacing="0" width="100%">
+                                                        <table id="tbl_pcf" class="table table-striped" cellspacing="0" width="100%">
                                                             <thead>
                                                             <tr>
                                                                 <th>Txn Date</th>
@@ -170,22 +164,23 @@
                                                         </table>
                                                     </div>
                                                     <div class="panel-footer">
-                                                        <div class="col-xs-12 col-md-4">
-                                                            <button id="btn_new" class="btn btn-primary" style="height: 33px;width: 200px; margin-bottom: 10px;">
+                                                        <div class="col-xs-12 col-md-8">
+                                                            <button id="btn_new" class="btn btn-primary">
                                                                 <i class="fa fa-clipboard"></i> Post New Expense
                                                             </button>
-                                                            <button id="btn_replenish" class="btn btn-primary" style=" margin-bottom: 10px;">
+                                                            <button id="btn_replenish" class="btn btn-primary" >
                                                                 <i class="fa fa-refresh"></i> Replenish Petty Cash
                                                             </button>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+<!--                                                     <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Petty Cash (Replenished)</b>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="panel-body">
-                                                        <table id="tbl_replenished" class="" cellspacing="0" width="100%">
+                                                    <h2 class="h2-panel-heading">Petty Cash (Replenished)</h2><hr>
+                                                        <table id="tbl_replenished" class="table table-striped" cellspacing="0" width="100%">
                                                             <thead class="thead-bg">
                                                                 <th>Petty Cash Code</th>
                                                                 <th>Period Covered</th>

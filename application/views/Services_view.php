@@ -18,30 +18,18 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.82;
-            zoom: 82%;
-        }
         .select2-container {
             min-width: 100%;
             z-index: 999999999;
         }
     </style>
-
 
 
     <?php echo $_switcher_settings; ?>
@@ -183,13 +171,15 @@
                                 <div class="col-md-12">
                                     <div id="div_service_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+<!--                                             <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Services</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
+                                                <h2 class="h2-panel-heading"> Services</h2><hr>
+                                            <div class="row-panel">
                                                 <button class="btn btn-primary" id="btn_new" style="float: left; text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important;" data-toggle="modal" data-target="" data-placement="left" title="Create New Service" ><i class="fa fa-plus"></i> Create New Service</button>
-                                                <table id="tbl_services" class="" cellspacing="0" width="100%">
-                                                    <thead class="">
+                                                <table id="tbl_services" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
                                                     <tr>    
                                                       <!--   <th></th> -->
                                                         <th>PLU</th>
@@ -202,6 +192,7 @@
 
                                                     </tbody>
                                                 </table>
+                                                </div>
                                             </div>
                                             <div class="panel-footer"></div>
                                         </div>
@@ -362,7 +353,7 @@
 
                         <div class="modal-footer">
                             <button id="btn_save" type="button" class="btn btn-primary" style="background-color:#2ecc71;color:white;"><span></span> Save</button>
-                            <button id="btn_cancel" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                            <button id="btn_cancel" type="button" class="btn " data-dismiss="modal">Cancel</button>
                         </div>
                     </div><!---content---->
                 </div>

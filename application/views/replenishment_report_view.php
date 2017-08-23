@@ -19,27 +19,12 @@
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
     <style>
-        html {
-            zoom: 0.8;
-            zoom: 80%;
-        }
 
-        .thead-bg {
-            background: rgba(226,226,226,1);
-            background: -moz-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 100%);
-            background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(226,226,226,1)), color-stop(50%, rgba(219,219,219,1)), color-stop(51%, rgba(209,209,209,1)), color-stop(100%, rgba(219,219,219,1)));
-            background: -webkit-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 100%);
-            background: -o-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 100%);
-            background: -ms-linear-gradient(top, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 100%);
-            background: linear-gradient(to bottom, rgba(226,226,226,1) 0%, rgba(219,219,219,1) 50%, rgba(209,209,209,1) 51%, rgba(219,219,219,1) 100%);
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#dbdbdb', GradientType=0 );
-        }
 
         .toolbar{
             float: left;
@@ -97,10 +82,11 @@
 
                     <div class="container-fluid">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Replenishment Report</b>
-                            </div>
+                        <!--     <div class="panel-heading">
+                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; </b>
+                            </div> -->
                             <div class="panel-body">
+                            <h2 class="h2-panel-heading">Replenishment Report</h2><hr>
                                 <div class="row">
                                     <div class="container-fluid">
                                         <div class="container-fluid group-box">
@@ -122,8 +108,8 @@
                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
                                                 <i class="fa fa-print"></i> Print Report
                                             </button>
-                                            <table id="tbl_replenishment" class="" width="100%" cellspacing="0">
-                                                <thead class="thead-bg">
+                                            <table id="tbl_replenishment" class="table table-striped" width="100%" cellspacing="0">
+                                                <thead class="">
                                                     <th></th>
                                                     <th>Document # / PCV #</th>
                                                     <th>Particular</th>

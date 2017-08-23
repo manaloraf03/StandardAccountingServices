@@ -44,7 +44,7 @@
             color: white !important;
         }*/
 
-        tr:hover {
+/*        tr:hover {
             transition: .4s;
             background: #414141 !important;
             color: white;
@@ -57,7 +57,10 @@
             -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         }
-
+*/
+    table{
+        border:none!important;
+    }
 	</style>
 </head>
 <body>
@@ -96,7 +99,7 @@
 		</tr>
 	</table>
 	<br>
-	<table width="100%" cellpadding="10" cellspacing="-1"  style="text-align: center;">
+	<table width="100%" cellpadding="10" cellspacing="-1" class="table table-striped" style="text-align: center;">
 		<tr>
 			<td style="padding: 6px;border-bottom: 1px solid gray;"><strong>Description</strong></td>
 			<td style="padding: 6px;border-bottom: 1px solid gray;"><strong>UM</strong></td>

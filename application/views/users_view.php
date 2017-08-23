@@ -13,24 +13,17 @@
     <meta name="author" content="">
 
 
-    <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
+    <?php echo $_def_css_files; ?>
 
 
     <style>
-        html {
-          zoom: 0.8;
-          zoom: 80%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -79,8 +72,8 @@
 
           border: none!important;
         }
-
-
+        
+        
         /*table{
             min-width: 700px;
         }
@@ -99,6 +92,7 @@
         }*/
 
     </style>
+
 </head>
 
 <body class="animated-content">
@@ -132,12 +126,13 @@
                                 <div class="col-md-12">
                                     <div id="div_user_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+                                            <!-- <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; User Accounts</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
-                                                <table id="tbl_user_list" class="" cellspacing="0" width="100%">
-                                                    <thead class="table-erp">
+                                            <h2 class="h2-panel-heading">User Accounts</h2><hr>
+                                                <table id="tbl_user_list" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead class="">
                                                     <tr>
                                                         <th></th>
                                                         <th>Username</th>
@@ -168,7 +163,7 @@
                                                 <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
                                             </div> -->
                                             <div class="panel-body">
-                                            <h2>User Information</h2>
+                                            <h2 class="h2-panel-heading">User Information</h2>
                                             <br>
                                                <form id="frm_users" role="form" class="form-horizontal row-border">
                                                    <div class="form-group">
@@ -883,10 +878,10 @@
         function format ( d ) {
             // `d` is the original data object for the row
             //alert(d.photo_path);
-            return '<br /><table style="margin-left:10%;width: 80%;">' +
+            return '<br /><table style="margin-left:10%;width: 80%;" style="border:none!important">' +
                     '<thead>' +
                     '</thead>' +
-                    '<tbody>' +
+                    '<tbody style="border:none!important">' +
                     '<tr>' +
                     '<td width="20%" class="child">Name : </td><td width="50%"  class="child"><b>'+ d.user_name+'</b></td>' +
                     '<td rowspan="5" valign="top"  class="child"><div class="avatar"  class="child">'+

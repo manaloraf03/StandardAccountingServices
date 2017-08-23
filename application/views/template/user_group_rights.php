@@ -1,5 +1,5 @@
 <style>
-
+/*
     .tab-container .nav.nav-tabs li a {
         background: #414141 !important;
         color: white !important;
@@ -14,11 +14,11 @@
         background: #414141 !important;
         color: white !important;
     }
-    
+    */
 </style>
 
 <center>
-    <table width="100%" style="font-family: tahoma;">
+    <table width="100%" class="table table-striped" style="font-family: tahoma;">
         <tbody>
         <tr class="row_child_tbl_user_group_list">
             <td>
@@ -39,7 +39,7 @@
                             <span style="margin-left: 1%"><b><i class="fa fa-list"></i> User Group Rights</b></span>
                             <hr />
                             <div class="table-responsive">
-                                <table id="tbl_user_group_rights" class="" style="background-color: #1f1f1f;" cellspacing="0" width="100%">
+                                <table id="tbl_user_group_rights" class="table table-striped"  cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
                                         <th width="80%">Description</th>

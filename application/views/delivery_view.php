@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,40 +17,20 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
-
-
     <!-- Datepicker -->
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
-
-
-
-
     <style>
-
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
-
         #tbl_items td,#tbl_items tr,#tbl_items th{
             table-layout: fixed;
             border: 1px solid gray;
             border-collapse: collapse;
         }
-
-
         .toolbar{
             float: left;
         }
@@ -203,12 +184,13 @@
 
 <div id="div_delivery_list">
     <div class="panel panel-default">
-        <div class="panel-heading">
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Purchase Invoice</b>
-        </div>
+        </div> -->
         <div class="panel-body table-responsive">
-
-            <table id="tbl_delivery_invoice" class="" cellspacing="0" width="100%">
+        <div class="row panel-row">
+            <h2 class="h2-panel-heading"> Purchase Invoice</h2><hr>
+            <table id="tbl_delivery_invoice" class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th></th>
@@ -224,6 +206,7 @@
                 <tbody>
                 </tbody>
             </table>
+        </div>
         </div>
         <div class="panel-footer"></div>
     </div>
@@ -244,18 +227,15 @@
 
 
 <div class="panel-body">
-<div>
 
-<div class="row ">
-    <div class="container-fluid">
+<div class="row panel-row">
+
     <form id="frm_deliveries" role="form" class="form-horizontal">
-        <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4>
-
-
-        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+        <h2 class="h2-panel-heading">Invoice # : <span id="span_invoice_no">INV-XXXX</span></h2><hr>
+        <div>
             <div class="row">
                 <div class="col-sm-3">
-                    Invoice #:<br />
+                    <label>Invoice #:</label><br />
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-code"></i>
@@ -265,7 +245,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    Invoice Date :<br />
+                    <label>Invoice Date :</label><br />
                     <div class="input-group">
 
                         <input type="text" name="date_delivered" id="order_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Due Date" data-error-msg="Delivery Date is required!" required>
@@ -285,7 +265,7 @@
 
             <div class="row">
                 <div class="col-sm-3">
-                    PO #:<br />
+                    <label>PO #:</label><br />
                     <div class="input-group">
                         <input type="text" name="po_no" class="form-control" placeholder="PO #">
                          <span class="input-group-addon">
@@ -295,7 +275,7 @@
                 </div>
 
                 <div class="col-sm-2">
-                    Due Date:<br />
+                    <label>Due Date:</label><br />
                     <div class="input-group">
                         <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Due Date" data-error-msg="Due Date is required!" required>
                         <span class="input-group-addon">
@@ -305,7 +285,7 @@
                 </div>
 
                 <div class="col-sm-3 col-sm-offset-4">
-                    Reference #:<br />
+                    <label>Reference #:</label><br />
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-code"></i>
@@ -320,7 +300,7 @@
             <div class="row">
 
                 <div class="col-sm-5">
-                   <b>*</b> Department : <br />
+                   <b class="required">*</b><label> Department :</label> <br />
                     <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                         <option value="0">[ Create New Department ]</option>
                         <?php foreach($departments as $department){ ?>
@@ -330,7 +310,7 @@
                 </div>
 
                 <div class="col-sm-3 col-sm-offset-4">
-                    Terms :<br />
+                    <label>Terms :</label><br />
                     <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -344,7 +324,7 @@
             <div class="row">
 
                 <div class="col-sm-5">
-                    <b>*</b> Supplier :<br />
+                    <b class="required">*</b> <label>Supplier </label>:<br />
                     <select name="supplier" id="cbo_suppliers" data-error-msg="Supplier is required." required>
                         <option value="0">[ Create New Supplier ]</option>
                         <?php foreach($suppliers as $supplier){ ?>
@@ -358,7 +338,7 @@
 
 
                 <div class="col-sm-3 col-sm-offset-4">
-                    Contact Person :<br />
+                    <label>Contact Person :</label><br />
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="fa fa-users"></i>
@@ -368,32 +348,21 @@
                 </div>
 
                 <div class="col-sm-3 col-sm-offset-4" style="display: none;">
-                    Tax type :<br />
+                    <label>Tax type :</label><br />
                     <select name="tax_type" id="cbo_tax_type"  data-error-msg="Tax Type is required !">
                         <?php foreach($tax_types as $tax_type){ ?>
                             <option value="<?php echo $tax_type->tax_type_id; ?>" data-tax-rate="<?php echo $tax_type->tax_rate; ?>"><?php echo $tax_type->tax_type; ?></option>
                         <?php } ?>
                     </select>
                 </div>
-
-
-
-            </div><br />
-
-
-
+            </div><hr />
         </div>
-
-
-
     </form>
-    </div>
+   
 </div>
 
 <div class="row ">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br>
-
-
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
         <div id="custom-templates">
             <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
@@ -401,7 +370,7 @@
 
         <form id="frm_items">
             <div class="table-responsive" style="min-height: 200px;padding: 1px;">
-                <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
+                <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                 <thead class="">
                 <tr>
                     <th width="20%">Qty</th>
@@ -415,7 +384,7 @@
                     <th style="display: none;">V.I</th> <!-- vat input -->
                     <th style="display: none;">N.V</th> <!-- net of vat -->
                     <td style="display: none;">Item ID</td><!-- product id -->
-                    <th style="color:white;"><center><strong>Action</strong></center></td>
+                    <th ><center><strong>Action</strong></center></td>
                 </tr>
                 </thead>
                 <tbody>
@@ -538,7 +507,7 @@
             </div>
 
             <div class="modal-body">
-                <table id="tbl_po_list" class="" cellspacing="0" width="100%">
+                <table id="tbl_po_list" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -1044,10 +1013,10 @@ $(document).ready(function(){
                 source: products,
                 templates: {
                     header: [
-                        '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                        '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                     ].join('\n'),
 
-                    suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
+                    suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
 
                 }
             }).on('keyup', this, function (event) {

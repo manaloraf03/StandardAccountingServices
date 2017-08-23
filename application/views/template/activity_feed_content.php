@@ -7,7 +7,7 @@
     <div class="vertical-timeline-content">
         <div class="p-sm">
             <span class="vertical-date pull-right"><?php echo $activity->time_description; ?></small></span>
-            <span style="color: #ffad33;"><?php echo $activity->username; ?></span><br><i><?php echo $activity->message; ?></i><br> on <?php echo $activity->date; ?>
+            <span style="color: #03a9f4;"><?php echo $activity->username; ?></span><br><i><?php echo $activity->message; ?></i><br> on <?php echo $activity->date; ?>
         </div>
     </div>
 </div>

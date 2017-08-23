@@ -1,6 +1,6 @@
 <style>
 
-    .tab-container .nav.nav-tabs li a {
+/*    .tab-container .nav.nav-tabs li a {
 
         background: #414141 !important;
 
@@ -28,7 +28,7 @@
 
     }
 
-
+*/
 
     table.table_journal_entries_review td {
 
@@ -46,7 +46,7 @@
 
 
 
-    tr:nth-child(even){
+/*    tr:nth-child(even){
 
         background: #414141 !important;
 
@@ -81,7 +81,7 @@
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
 
     }
-
+*/
 
 
 </style>
@@ -246,7 +246,7 @@
 
 
 
-        <table id="tbl_entries_for_review_<?php echo $sales_info->sales_invoice_id; ?>" class="" style="width: 100% !important;">
+        <table id="tbl_entries_for_review_<?php echo $sales_info->sales_invoice_id; ?>" class="table table-striped" style="width: 100% !important;">
 
             <thead>
 
@@ -474,7 +474,7 @@
 
 
 
-        <table class="" style="width: 100% !important;">
+        <table class="table table-striped" style="width: 100% !important;">
 
             <thead>
 

@@ -1,4 +1,4 @@
-<table id="main" style="font-family: 'Roboto', sans-serif; color: black;">
+<table id="main" style="border:none!important;">
 	<tr>
 		<td style="border: 0px !important;background:transparent !important;"><h3>Customer Name : <?php echo $customers; ?></h3></td>
 	</tr>
@@ -7,8 +7,8 @@
 	</tr>
 </table>
 
-<table class="table" style="width:100%;">
-	<thead style="background-color:#2980b9;color:white;">
+<table class="table" style="width:100%;" class="table table-striped">
+	<thead style="">
 	<tr>
 		<th style="width:30%;text-align:left;">Invoice</th>
 		<th style="width:40%;text-align:left;">Remarks</th>
@@ -27,7 +27,5 @@
 </table>
 
 <style>
-	#main td:hover {
-		color:white !important;
-	}
+
 </style>

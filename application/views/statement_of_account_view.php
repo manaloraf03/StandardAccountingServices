@@ -15,20 +15,14 @@
     <meta name="description" content="Avenxo Admin Theme">
     <meta name="author" content="">
 
-    <?php echo $_def_css_files; ?>
+    <?php echo $_def_js_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/dark-theme.css">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.75;
-            zoom: 75%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -61,11 +55,8 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
-        th {
-            background: #1f1f1f!important;
-        }
-
     </style>
+    <?php echo $_def_css_files; ?>
 
 </head>
 
@@ -87,15 +78,16 @@
                     </ol>
                     <div class="container-fluid">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <!-- <div class="panel-heading">
                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Statement of Account</b>
-                            </div>
+                            </div> -->
                             <div class="panel-body">
+                                <h1 style="margin-bottom: 30px;">Statement of Account</h1><hr>
                                 <div class="row">
                                     <div class="container-fluid">
                                         <div class="col-xs-12 col-sm-6">
-                                            <label>* Customer :</label><br>
-                                            <select id="cbo_customers" class="form-control">
+                                            <label><b class="required">*</b> Customer :</label><br>
+                                            <select id="cbo_customers" class="form-control" style="width: 100%">
                                                 <?php foreach($customers as $customer) { ?>
                                                     <option value="<?php echo $customer->customer_id; ?>">
                                                         <?php echo $customer->customer_name; ?>
@@ -103,15 +95,15 @@
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <div class="col-xs-12 col-sm-2"><br>
+                                        <div class="col-xs-12 col-sm-3"><br>
                                             <button id="btn_print" class="btn btn-primary btn-block" style="margin-top: 5px;"><i class="fa fa-print"></i> Print Report</button>
                                         </div>
-                                    </div>
-                                </div><br>
-                                <div class="row">
+                                    </div><br>
+                                </div><hr><br>
+                                <div class="row">   
                                     <div class="container-fluid">
-                                        <table id="tbl_balances" width="100%">
-                                            <th colspan="5" style="background: #085795!important; text-align: center;">PREVIOUS BALANCE</th>
+                                        <table id="tbl_balances" width="100%" class="table table-bordered">
+                                            <th class="th-label" colspan="5"><h4 style="font-weight: bold;">PREVIOUS BALANCE</h4></th>
                                             <tr>
                                                 <th>Invoice #</th>
                                                 <th>Date</th>
@@ -126,7 +118,7 @@
                                                 <td id="total_prev" align="right">0.00</td>
                                             </tr>
 
-                                            <th colspan="5" style="background: #085795!important; text-align: center;">CURRENT BALANCE</th>
+                                            <th colspan="5"><h4 style="font-weight: bold;">CURRENT BALANCE</h4></th>
                                             <tr>
                                                 <th>Invoice #</th>
                                                 <th>Date</th>
@@ -141,7 +133,7 @@
                                                 <td id="total_current" align="right">0.00</td>
                                             </tr>
 
-                                            <th colspan="5" style="background: #085795!important; text-align: center;">PAYMENT</th>
+                                            <th colspan="5"><h4 style="font-weight: bold;">PAYMENT</h4></th>
                                             <tr>
                                                 <th>Receipt #</th>
                                                 <th>Date</th>
@@ -185,7 +177,6 @@
 
 
 <?php echo $_switcher_settings; ?>
-<?php echo $_def_js_files; ?>
 
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>
 <script src="assets/plugins/spinner/dist/ladda.min.js"></script>

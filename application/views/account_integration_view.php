@@ -20,21 +20,15 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
 
 
     <style>
-        body{
-            -moz-transform: scale(.7,.7);
-            zoom: 0.8;
-            zoom: 80%;
-        }
 
-        h4{
+/*        h4{
             color:white;
-        }
+        }*/
         .toolbar{
             float: left;
         }
@@ -61,9 +55,9 @@
             min-width: 100%;
         }
 
-        .dropdown-menu > .active > a,.dropdown-menu > .active > a:hover{
+/*        .dropdown-menu > .active > a,.dropdown-menu > .active > a:hover{
             background-color: dodgerblue;
-        }
+        }*/
 
         @keyframes spin {
             from { transform: scale(1) rotate(0deg); }
@@ -74,25 +68,25 @@
             from { -webkit-transform: rotate(0deg); }
             to { -webkit-transform: rotate(360deg); }
         }
-
+/*
 .tab-primary.tab-container > .nav-tabs > li.active > a {
 background:#1f1f1f!important;color: white !important;border-top: 0.5px solid #ffd65c!important;
 }
 
 .tab-primary.tab-container > .nav-tabs > li > a {
 background: #616161 !important;color: white !important;border-top: 0.5px solid white
-}
+}*/
 
-.table-striped > tbody > tr:nth-child(odd) {
+/*.table-striped > tbody > tr:nth-child(odd) {
     background-color: transparent!important;
     color:white;
 }
 .table-striped > tbody > tr:nth-child(even) {
  background-color: transparent!important;
  color:white;
-}
+}*/
 
-div.dataTables_info {
+/*div.dataTables_info {
     padding-top: 8px;
     color: white;}
 
@@ -103,7 +97,7 @@ div.dataTables_info {
     padding: 16px;
     background-color: #212121!important;
 }
-
+*/
 
         /*table{
             min-width: 700px;
@@ -360,7 +354,7 @@ div.dataTables_info {
                 <div class="tab-pane" id="sched_expense_setting" style="min-height: 300px;">
                     <br />
                    <h8 style="color: white;"> Please specify the group of each account :</h8><br />
-                    <table class="custom-design table-striped">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th width="10%">Account #</th>
@@ -403,9 +397,9 @@ div.dataTables_info {
                             <br />
 
 
-                            <table id="tbl_account_year" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="tbl_account_year" class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr style="color:white;">
+                                    <tr>
                                         <td width="40%">Accounting Period</td>
                                         <td width="15%">Date/Time Closed</td>
                                         <td width="15%">Closed by</td>

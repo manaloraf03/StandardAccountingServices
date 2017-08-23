@@ -1,5 +1,5 @@
 <style>
-
+/*
     .tab-container .nav.nav-tabs li a {
 
         background: #414141 !important;
@@ -29,7 +29,7 @@
     }
 
 
-
+*/
     table.table_journal_entries_review td {
 
         border: 0px !important;
@@ -45,7 +45,7 @@
     }
 
 
-
+/*
     tr:nth-child(even){
 
         background: #414141 !important;
@@ -81,7 +81,7 @@
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
 
     }
-
+*/
 
 
 </style>
@@ -94,7 +94,7 @@
 
     <table class="table_journal_entries_review"  width="97%" style="font-family: tahoma;">
 
-        <tbody>
+        <tbody style="border: none!important;">
 
         <tr>
 
@@ -104,7 +104,7 @@
 
 
 
-                <div class="tab-container tab-default">
+                <div class="tab-container tab-default" >
 
                     <ul class="nav nav-tabs">
 
@@ -414,7 +414,7 @@
 
 
 
-                                <table id="tbl_entries_for_review_<?php echo $payment_info->payment_id; ?>" class="" style="width: 100% !important;">
+                                <table id="tbl_entries_for_review_<?php echo $payment_info->payment_id; ?>" class="table table-striped" style="width: 100% !important;">
 
                                     <thead>
 
@@ -630,7 +630,7 @@
 
 
 
-                                <table class="" style="width: 100% !important;">
+                                <table class="table table-striped" style="width: 100% !important;">
 
                                     <thead>
 

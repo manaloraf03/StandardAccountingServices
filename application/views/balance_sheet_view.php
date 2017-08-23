@@ -19,18 +19,12 @@
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .select2-container{
             min-width: 100%;
         }

@@ -33,7 +33,7 @@
  /*       border: none!important;*/
     }
 
-    tr:hover {
+/*    tr:hover {
         transition: .4s;
         background: #414141 !important;
         color: white;
@@ -45,12 +45,15 @@
         -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+    }*/
+        table{
+        border:none!important;
     }
 </style>
 
 <div>
 
-    <table width="100%">
+    <table width="100%" border="0"> 
         <tr class="row_child_tbl_sales_order">
             <td class="bottom-only" width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px;  text-align: left;"></td>
             <td  class="bottom-only" width="90%" class="align-center">
@@ -60,7 +63,7 @@
             </td>
         </tr>
     </table><hr>
-    <center><table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;">
+    <center><table width="95%" cellpadding="5" style="font-family: tahoma;font-size: 11;" border="0">
             <tr>
                 <td width="45%" valign="top" style="border: none;">
                     <span>Supplier :</span><br /><br />

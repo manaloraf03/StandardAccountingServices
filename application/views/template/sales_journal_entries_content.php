@@ -28,9 +28,6 @@
             font-weight: bolder;
         }
 
-        hr {
-            border-top: 3px solid #404040;
-        }
 
         tr {
 /*            border: none!important;*/
@@ -41,7 +38,8 @@
             border: none!important;*/
         }
 
-        tr:hover {
+
+/*        tr:hover {
             transition: .4s;
             background: #414141 !important;
             color: white;
@@ -53,12 +51,14 @@
             -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
             -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-        }
-        
+        }*/
+            table{
+        border:none!important;
+    }
     </style>
 </head>
 <body>
-    <table width="100%">
+    <table width="100%" style="border:none!important;">
         <tr>
             <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
             <td width="90%" class="align-center">
@@ -71,7 +71,7 @@
     <div class="">
         <h3 class="report-header"><strong>ACCOUNTS RECEIVABLE JOURNAL</strong></h3>
     </div>
-    <table width="100%" border="1" cellspacing="-1">
+    <table width="100%"" cellspacing="-1">
         <tr>
             <td style="padding: 4px;" colspan="3"><strong>TXN # :</strong> <?php echo $journal_info->txn_no; ?></td>
         </tr>

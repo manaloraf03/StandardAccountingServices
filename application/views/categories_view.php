@@ -18,19 +18,10 @@
         <?php echo $_def_css_files; ?>
 
         <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-        <link href="assets/css/dark-theme.css" rel="stylesheet">
-
         <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
         <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-         <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
-
         <style>
-            html{
-                zoom: 0.8;
-                zoom: 80%;
-            }
-             
-            .bg-color {
+/*            .bg-color {
                 background-image: url('assets/img/main-bg.jpg');
                 background-repeat: no-repeat;
                 background-size: 100% 100%;
@@ -64,16 +55,16 @@
                 box-shadow: none!important;
                 background-color: transparent!important;
                 color: white;
-            }
+            }*/
 
-            .modal-header,
+/*            .modal-header,
             .panel-heading {
                 background-color: rgba(64, 64, 64, .8)!important;
             }
 
             .panel-body {
                 background-color: rgba(64, 64, 64, .5)!important;
-            }
+            }*/
 
 /*            tr:nth-child(even) {
                 background-color: rgba(64, 64, 64, .3)!important;
@@ -90,9 +81,9 @@
                 border: 1px solid #afafaf;
             }
 */
-            table {
+/*            table {
                 color: white;
-            }
+            }*/
               
             .toolbar{
                 float: left;
@@ -155,13 +146,13 @@
 
                                             <div id="div_category_list">
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading">
+                <!--                                     <div class="panel-heading">
                                                         <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Categories</b>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="panel-body table-responsive">
-
-                                                        <table id="tbl_categories" class="" cellspacing="0" width="100%">
-                                                            <thead class="table-erp">
+                                                    <h2 class="h2-panel-heading">Categories</h2><hr>
+                                                        <table id="tbl_categories" class="table table-striped" cellspacing="0" width="100%">
+                                                            <thead class="">
 
                                                             <tr>
                                                                 <th>Category Name</th>

@@ -18,27 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-         <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.75;
-            zoom: 75%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -54,7 +42,7 @@
         #tbl_purchases td:nth-child(n+5){
             text-align: right;
         }
-tr:hover {
+/*tr:hover {
     transition: .4s;
     background: transparent!important;
     color: white!important;
@@ -67,7 +55,7 @@ tr:nth-child(odd) {
 }
 tr:nth-child(even) {
     background-color: transparent!important;
-}
+}*/
     </style>
 
 </head>
@@ -87,7 +75,7 @@ tr:nth-child(even) {
                 <div class="page-content"><!-- #page-content -->
 
 
-                    <div class="container-fluid" style="padding: 5px;!important;">
+                    <div class="container-fluid" style="padding-top: 15px;!important;">
                         <div data-widget-group="group1">
                             <div class="row">
                                 <div class="col-md-12">
@@ -98,12 +86,13 @@ tr:nth-child(even) {
 
 
                                             <div class="panel panel-default" style="border-radius: 0px;border: 1px solid lightgrey;min-height: 800px;">
-                                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Cost of Goods Sold</b></div></a>
+                                               <!--  <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> </b></div></a> -->
 
 
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">
-                                                        <div style="border: 1px solid #a0a4a5;padding: 8px;border-radius: 0px;padding-bottom: 10px;">
+                                                    <h2 class="h2-panel-heading">Cost of Goods Sold</h2><hr>
+                                                        <div>
                                                             <div class="row">
 
                                                                 <div class="col-lg-6">
@@ -144,7 +133,7 @@ tr:nth-child(even) {
                                                         </div>
 
                                                         <div class="row" style="margin-bottom: 5px;margin-top: 5px;">
-                                                            <div class="col-lg-3">
+                                                            <div class="col-lg-5">
                                                                 <button id="btn_print" class="btn btn-primary col-lg-8" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
 
                                                                 <button id="btn_refresh" class="btn btn-green" style="text-transform: none;margin-left: 5px;"><i class="fa fa-refresh"></i> Refresh</button>
@@ -166,7 +155,7 @@ tr:nth-child(even) {
                                                                     <td style="padding:10px 10px 40px 10px;" colspan="1">
 
 
-                                                                        <table id="tbl_beginning_inventory" class="custom-design">
+                                                                        <table id="tbl_beginning_inventory" class="custom-design table table-striped">
 
                                                                             <thead>
                                                                                 <tr>
@@ -209,7 +198,7 @@ tr:nth-child(even) {
                                                                     <td style="padding:10px 10px 40px 10px;" colspan="1">
 
 
-                                                                        <table id="tbl_purchases" class="custom-design">
+                                                                        <table id="tbl_purchases" class="custom-design table table-striped">
 
                                                                             <thead>
                                                                                 <tr>
@@ -265,7 +254,7 @@ tr:nth-child(even) {
                                                                     <td style="padding:10px 10px 40px 10px;" colspan="1">
 
 
-                                                                        <table id="tbl_ending_inventory" class="custom-design">
+                                                                        <table id="tbl_ending_inventory" class="custom-design table table-striped">
 
                                                                             <thead>
                                                                             <tr>

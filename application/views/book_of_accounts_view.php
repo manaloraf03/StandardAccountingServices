@@ -18,29 +18,14 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
-    <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
-
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
+    <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-            overflow-x: hidden;
-        }
-
         div.dataTables_filter input {
             margin-top: 10px;
         }
@@ -61,7 +46,7 @@
             text-align: right;
         }
 
-        .tab-warning.tab-container > .nav-tabs > li.active > a {
+/*        .tab-warning.tab-container > .nav-tabs > li.active > a {
         background: #414141 !important;
         color: white!important;
         border-top: 2px solid orange!important;
@@ -72,7 +57,7 @@
         background: transparent!important;
         color: white!important;
         }
-
+*/
     </style>
 
 </head>
@@ -103,10 +88,11 @@
 <div id="div_payable_list">
 <div class="panel-group panel-default" id="accordionA">
 <div class="panel panel-default" style="border-radius: 6px;min-height: 670px;">
-<a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> T-Accounts Report</b></div></a>
+<!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> T-Accounts Report</b></div></a> -->
 <div id="collapseTwo" class="collapse in">
 <div class="panel-body">
-<div style="border: 1px solid #a0a4a5;padding: 10px;border-radius: 5px;padding-bottom: 2%;">
+<h2 class="h2-panel-heading">T-Accounts Report</h2><hr>
+<div style="">
     <div class="row">
         <div class="col-xs-12 col-lg-3">
             Period Start * :<br />
@@ -143,7 +129,7 @@
         <div class="tab-content">
             <div id="gje" class="tab-pane fade in active">
                     <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_gje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                    <table id="tbl_gje" style="margin-top: 10px;"  cellspacing="0" width="100%">
+                    <table id="tbl_gje" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
                             <th></th>
@@ -170,7 +156,7 @@
 
             <div id="cdj" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_cdj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                <table id="tbl_cdj" style="margin-top: 10px;"  cellspacing="0" width="100%">
+                <table id="tbl_cdj" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -200,7 +186,7 @@
 
             <div id="pje" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                <table id="tbl_pje" style="margin-top: 10px;"  cellspacing="0" width="100%">
+                <table id="tbl_pje" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -230,7 +216,7 @@
 
             <div id="sje" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                <table id="tbl_sje" style="margin-top: 10px;"  cellspacing="0" width="100%">
+                <table id="tbl_sje" style="margin-top: 10px;"  class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -260,7 +246,7 @@
 
             <div id="pcf" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pcf" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                <table id="tbl_pcf" style="margin-top: 10px;"  cellspacing="0" width="100%">
+                <table id="tbl_pcf" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -290,7 +276,7 @@
 
             <div id="crj" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_crj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                <table id="tbl_crj" style="margin-top: 10px;"  cellspacing="0" width="100%">
+                <table id="tbl_crj" style="margin-top: 10px;" class="table table-striped"  cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>

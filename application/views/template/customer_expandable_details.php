@@ -49,7 +49,7 @@
                             <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Sales Order of <?php echo $customer_info->customer_name; ?></b> (Open and partially received)</span>
                             <hr />
                             <div class="col-lg-12 table-responsive">
-                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="" cellspacing="0" width="100%">
+                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="table table-striped" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
 
@@ -96,7 +96,7 @@
                             <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Sales Invoice of <?php echo $customer_info->customer_name; ?></b> </span>
                             <hr />
                             <div class="col-lg-12 table-responsive">
-                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="" cellspacing="0" width="100%">
+                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="table table-striped" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
 
@@ -143,7 +143,7 @@
                              <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Payments of <?php echo $customer_info->customer_name; ?></b> </span>
                              <hr />
                             <div class="col-lg-12 table-responsive">
-                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="" cellspacing="0" width="100%">
+                                <table id="tbl_so_<?php echo $customer_info->customer_id; ?>" class="table table-striped" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
 

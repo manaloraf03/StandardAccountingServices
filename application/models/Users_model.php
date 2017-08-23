@@ -305,15 +305,15 @@ class Users_model extends CORE_Model{
     }
 
     function validate(){
-        $usertoken=$this->get_user_list($this->session->userdata('user_id'));
-        if($this->session->userdata('token_id') != $usertoken[0]->token_id) {
-            redirect(base_url('Login/transaction/logout'));
-        } 
-            date_default_timezone_set('Asia/Manila');
-            $this->db->set('is_online', 1);
-            $this->db->set('last_seen', date("Y-m-d H:i:s"));
-            $this->db->where('user_id', $this->session->userdata('user_id'));
-            $this->db->update('user_accounts');
+        // $usertoken=$this->get_user_list($this->session->userdata('user_id'));
+        // if($this->session->userdata('token_id') != $usertoken[0]->token_id) {
+        //     redirect(base_url('Login/transaction/logout'));
+        // } 
+        //     date_default_timezone_set('Asia/Manila');
+        //     $this->db->set('is_online', 1);
+        //     $this->db->set('last_seen', date("Y-m-d H:i:s"));
+        //     $this->db->where('user_id', $this->session->userdata('user_id'));
+        //     $this->db->update('user_accounts');
     }
 
     function get_user_list($id=null){

@@ -18,12 +18,8 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
 
@@ -33,12 +29,6 @@
 
 
     <style>
-
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -164,12 +154,13 @@
 
 
     <div class="panel panel-default">
-        <div class="panel-heading">
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Payment History</b>
-        </div>
-        <div class="panel-body table-responsive">
+        </div> -->
 
-            <table id="tbl_payments" class="" cellspacing="0" width="100%">
+        <div class="panel-body table-responsive">
+            <h2 class="h2-panel-heading">Payment History</h2><hr>
+            <table id="tbl_payments" class="table table-striped" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -206,12 +197,13 @@
     <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
 
         <div class="panel-body">
+        <h2 class="h2-panel-heading">Add Payment</h2><hr>
         <div>
 
         <div class="row ">
             <div class="container-fluid">
         <form id="frm_payments" role="form" class="form-horizontal">
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div >
                 <div class="row">
 
                     <div class="col-lg-6">
@@ -325,7 +317,7 @@
 
         <form id="frm_payment_items">
 
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div >
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <label><strong>Please select Supplier :</strong></label>
@@ -341,7 +333,7 @@
 
 
                 <div class="table-responsive">
-                    <table id="tbl_payables" class="" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid gray;">
+                    <table id="tbl_payables" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;border: 1px solid gray;">
                         <thead class="">
                         <tr>
                             <th width="12%">Invoice #</th>

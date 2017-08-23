@@ -18,17 +18,11 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
     <style>
-        html {
-            zoom: 0.8;
-            zoom: 85%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -96,13 +90,14 @@
 
                     <div class="container-fluid">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                           <!--  <div class="panel-heading">
                                 <b style="color:white;font-size: 12pt;" class="panel-title"><i class="fa fa-bars"></i> Recurring Template </b>
-                            </div>
+                            </div> -->
                             <div class="panel-body">
+                            <h2 class="h2-panel-heading">Recurring Template</h2><hr>
                                 <div id="panel_list">
                                     <button id="btn_create" class="btn btn-primary pull-left" style="text-transform: capitalize;"><i class="fa fa-plus"></i>&nbsp; Create New Template</button>
-                                    <table id="tbl_recurring_templates" class="" width="100%">
+                                    <table id="tbl_recurring_templates" class="table table-striped" width="100%">
                                         <thead>
                                             <th>Book Type</th>
                                             <th>Template Code</th>
@@ -166,7 +161,7 @@
                                             </div><br>
                                             <div class="container-fluid group-box">
                                                 <div style="width: 100%;">
-                                                    <table id="tbl_entries" class="">
+                                                    <table id="tbl_entries" class="table table-striped">
                                                         <thead class="">
                                                         <tr>
                                                             <th style="width: 30%;">Account</th>

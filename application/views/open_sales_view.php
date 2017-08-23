@@ -16,40 +16,20 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
-
-
     <!-- Datepicker -->
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
-
-
-
-
     <style>
-
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
-
         #tbl_items td,#tbl_items tr,#tbl_items th{
             table-layout: fixed;
             border: 1px solid gray;
             border-collapse: collapse;
         }
-
-
         .toolbar{
             float: left;
         }
@@ -203,14 +183,15 @@
 
 <div id="div_delivery_list">
     <div class="panel panel-default">
-        <div class="panel-heading">
-            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Open Sales</b>
-        </div>
+<!--         <div class="panel-heading">
+            <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; </b>
+        </div> -->
         <div class="panel-body table-responsive">
+        <h2 class="h2-panel-heading">Open Sales</h2><hr>
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
                     <i class="fa fa-print"></i> Print Report
                 </button>
-            <table id="tbl_delivery_invoice" class="" cellspacing="0" width="100%">
+            <table id="tbl_delivery_invoice" class="table table-striped" cellspacing="0" width="100%">
                 <thead>
                 <tr>
           
@@ -246,7 +227,7 @@
 <footer role="contentinfo">
     <div class="clearfix">
         <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+            <li><h6 style="margin: 0;">&copy; 2016 - JDEV OFFICE SOLUTIONS</h6></li>
         </ul>
         <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
     </div>

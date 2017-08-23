@@ -23,10 +23,6 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <style>
-        html {
-            zoom: 0.8;
-            zoom: 80%;
-        }
 
         .toolbar{
             float: left;
@@ -40,7 +36,7 @@
         tr.details td.details-control {
             background: url('assets/img/Folder_Opened.png') no-repeat center center;
         }
-
+/*
         .nav-tabs {
             border-bottom: none;
         }
@@ -63,7 +59,7 @@
             border: 1px solid white;
             border-top: 1px solid #2196f3; 
             background: transparent;
-        }
+        }*/
 
         .child_table{
             padding: 5px;
@@ -130,7 +126,6 @@
         }
     </style>
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="assets/css/dark-theme.css">
 
 </head>
 
@@ -152,10 +147,11 @@
                     </ol>
                     <div class="container-fluid">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <!-- <div class="panel-heading">
                                <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Bank Reconciliation</b> 
-                            </div>
+                            </div> -->
                             <div class="panel-body">
+                            <h2 class="h2-panel-heading">Bank Reconciliation</h2><hr>
                                 <div class="row">
                                     <div class="container-fluid">
                                         <ul class="nav nav-tabs">
@@ -200,7 +196,7 @@
                                                         <div class="container-fluid group-box">
                                                             <span><strong><i class="fa fa-list"></i> ISSUED CHECKS</strong></span><hr>
                                                             <form id="frm_reconcile">
-                                                            <table id="tbl_bank_reconciliation" width="100%">
+                                                            <table id="tbl_bank_reconciliation" class="table table-striped" width="100%">
                                                                 <thead>
                                                                     <th>Check #</th>
                                                                     <th>Txn Date</th>
@@ -345,11 +341,12 @@
                             </div>
                         </div>
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <!-- <div class="panel-heading">
                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Reconciliation History</b> 
-                            </div>
+                            </div> -->
                             <div class="panel-body">
-                                <table id="tbl_history" width="100%">
+                            <h2 class="h2-panel-heading">Reconciliation History</h2><hr>
+                                <table id="tbl_history" class="table table-striped" width="100%">
                                     <thead>
                                         <th></th>
                                         <th>Date Reconciled</th>

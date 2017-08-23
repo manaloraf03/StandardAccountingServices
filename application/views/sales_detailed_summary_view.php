@@ -18,28 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-            overflow-x: hidden;
-        }
-
         div.dataTables_filter input { 
             margin-top: 10px;
         }
@@ -64,39 +51,6 @@
             text-align: right;
             font-weight: bolder;
         }
-        .tab-warning.tab-container.tab-left > .nav-tabs > li.active > a {
-        border-left-color: #ffc107;
-        background-color: #414141!important;
-        color: white;
-        border-right: none;
-        }
-
-        .tab-warning.tab-container.tab-left > .nav-tabs > li > a {
-        border-left-color: #ffc107;
-        background-color: #414141!important;
-        color: white;
-        border-right: 1px solid white;
-        }
-
-
-
-.tab-primary.tab-container > .nav-tabs > li.active > a {
-    border-top-color: #03a9f4;
-    background-color: #414141!important;
-    color: white;
-    border-bottom: none;
-
-}
-
-.tab-primary.tab-container > .nav-tabs > li > a {
-      
-       background-color: transparent!important;
-        color: white;
-
-
-    }
-
-
 
     </style>
 
@@ -128,10 +82,11 @@
                                     <div id="div_payable_list">
                                         <div class="panel-group panel-default" id="accordionA">
                                             <div class="panel panel-default" style="border-radius: 6px;min-height: 670px;">
-                                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Sales Reports </b></div></a>
+                                              <!--   <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Sales Reports </b></div></a> -->
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">
-                                                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                                                    <h2 class="h2-panel-heading">Sales Report</h2><hr>
+                                                        <div >
                                                             <div class="row">
                                                                 <div class="col-xs-12 col-lg-4">
                                                                     Period Start * :<br />
@@ -177,7 +132,7 @@
                                                                         <div id="customer_detailed" class="tab-pane fade in active">
                                                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                     <i class="fa fa-print"></i> Print Report</button>
-                                                                                <table id="tbl_detailed_customer" style="margin-top: 10px;" class="" cellspacing="0" width="100%">
+                                                                                <table id="tbl_detailed_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
                                                                                         <th>Invoice #</th> 
@@ -209,7 +164,7 @@
                                                                             <div id="customer_summary" class="tab-pane fade in">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                     <i class="fa fa-print"></i> Print Report</button>
-                                                                                <table id="tbl_summary_customer" style="margin-top: 10px;" class="" cellspacing="0" width="100%">
+                                                                                <table id="tbl_summary_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
                                                                                         <th>Customer Code</th>
@@ -250,7 +205,7 @@
                                                                             <div id="salesman_detailed" class="tab-pane fade in active">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
-                                                                                <table id="tbl_detailed_salesman" style="margin-top: 10px;" class="" cellspacing="0" width="100%">
+                                                                                <table id="tbl_detailed_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
                                                                                         <th>Invoice #</th> 
@@ -282,7 +237,7 @@
                                                                             <div id="salesman_summary" class="tab-pane fade in">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
-                                                                                <table id="tbl_summary_salesman" style="margin-top: 10px;" class="" cellspacing="0" width="100%">
+                                                                                <table id="tbl_summary_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
                                                                                         <th>Salesperson Code</th>
@@ -323,7 +278,7 @@
                                                                             <div id="product_detailed" class="tab-pane fade in active">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
-                                                                                <table id="tbl_detailed_product" style="margin-top: 10px;" class="" cellspacing="0" width="100%">
+                                                                                <table id="tbl_detailed_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>    
                                                                                         <th>Invoice #</th> 
@@ -354,7 +309,7 @@
                                                                             <div id="product_summary" class="tab-pane fade in">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
-                                                                                <table id="tbl_summary_product" style="margin-top: 10px;" class="" cellspacing="0" width="100%">
+                                                                                <table id="tbl_summary_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
                                                                                         <th>Product Code</th>

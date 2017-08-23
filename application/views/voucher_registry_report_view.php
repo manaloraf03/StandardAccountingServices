@@ -18,28 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
-    <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
+    <link href="aasets/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-            overflow-x: hidden;
-        }
-
         div.dataTables_filter input { 
             margin-top: 10px;
         }
@@ -89,8 +76,9 @@
 
 	                <div class="container-fluid">
 	                    <div class="panel panel-default">
-	                    	<div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Voucher Registry Report </b></div>
+	                    	<!-- <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i>  </b></div> -->
 		                    <div class="panel-body">
+                            <h2 class="h2-panel-heading">Voucher Registry Report</h2><hr>
 		                    	<div class="row">
 		                    		<div class="container-fluid">
 		                    			<div class="container-fluid group-box">
@@ -116,7 +104,7 @@
 			                    		<div class="container-fluid ">
 			                    			<button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print"  data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report
                                             </button>
-		                    				<table id="tbl_voucher_registry" class="voucher">
+		                    				<table id="tbl_voucher_registry" class="voucher table table-striped">
 		                    					<thead>
 		                    						<th width="10%" style="text-align: left;">CV No.</th>
 		                    						<th width="15%" style="text-align: left;">Covered Date</th>

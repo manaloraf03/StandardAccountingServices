@@ -19,10 +19,6 @@
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
     <style>
-        html{
-            zoom: 0.82;
-            zoom: 82%;
-        }
         #span_invoice_no{
             min-width: 50px;
         }
@@ -133,10 +129,11 @@
         <!-- <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Sales Invoice</b>
         </div> -->
-        <div class="panel-body table-responsive" style="border-top:5px solid #607d8b;">
-        <h1>Sales Invoice</h1><hr>
+        <div class="panel-body table-responsive">
+        <div class="row panel-row">
+        <h2 class="h2-panel-heading">Sales Invoice</h2><hr>
             <table id="tbl_sales_invoice" class="table table-striped" cellspacing="0" width="100%" style="">
-                <thead class="table-erp" style="background-color: #607d8b!important;">
+                <thead >
                 <tr>
                     <th></th>
                     <th>Invoice #</th>
@@ -152,25 +149,27 @@
                 </tbody>
             </table>
         </div>
+        </div>
         <!-- <div class="panel-footer"></div> -->
     </div>
 </div>
 <div id="div_sales_invoice_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
+    <div class="panel panel-default">
         <div class="pull-right">
             <h4 class="sales_invoice_title" style="margin-top: 0%;"></h4>
             <div class="btn btn-green" style="margin-left: 10px;">
                 <strong><a id="btn_receive_so" href="#" style="text-decoration: none; color: white;">Create from Sales Order</a></strong>
             </div>
         </div>
-        <div class="panel-body" style="padding-bottom: 0%;padding-top: 0%; border-top: 5px solid #d1d1d1;">
-        <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
+        <div class="panel-body" >
+        <div class="row panel-row">
             <form id="frm_sales_invoice" role="form" class="form-horizontal">
-                <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4>
-                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                <h2 class="h2-panel-heading">Invoice # : <span id="span_invoice_no">INV-XXXX</span></h4>
+                <div>
+                <hr>
                     <div class="row">
                         <div class="col-sm-4">
-                            <b>*</b> Department : <br />
+                            <b class="required">*</b><label> Department :</label> <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -179,7 +178,7 @@
                             </select>
                         </div>
                         <div class="col-sm-2 col-sm-offset-6">
-                            <b>*</b> Invoice Date : <br />
+                            <b class="required">*</b> <label>Invoice Date :</label> <br />
                             <div class="input-group">
                                 <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -190,7 +189,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <b>*</b>Customer : <br />
+                            <b class="required">*</b><label>Customer :</label> <br />
                             <select name="customer" id="cbo_customers" data-error-msg="Customer is required." required>
                                 <option value="0">[ Create New Customer ]</option>
                                 <?php foreach($customers as $customer){ ?>
@@ -199,7 +198,7 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            Sales person :<br/>
+                            <label>Sales person :</label><br/>
                             <select name="salesperson_id" id="cbo_salesperson">
                                 <option value="0">[ Create New Salesperson ]</option>
                                 <?php foreach($salespersons as $salesperson){ ?>
@@ -208,7 +207,7 @@
                             </select>
                         </div>
                         <div class="col-sm-2">
-                            SO # : <br />
+                            <label>SO # :</label> <br />
                             <div class="input-group">
                                 <input type="text" name="so_no" class="form-control">
                                 <span class="input-group-addon">
@@ -217,7 +216,7 @@
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <b>*</b> Due Date : <br />
+                            <b class="required">*</b><label> Due Date :</label> <br />
                             <div class="input-group">
                                 <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Due" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -228,7 +227,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-8">
-                            Address :<br>
+                            <label>Address :</label><br>
                             <input class="form-control" id="txt_address" type="text" name="address" placeholder="Customer Address">
                         </div>
                     </div>
@@ -236,6 +235,7 @@
             </form>
         </div>
         <div>
+        <hr>
             <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
             <div id="custom-templates">
                 <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
@@ -304,9 +304,9 @@
         <div class="row">
             <div class="container-fluid">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br />
-                <div class="row">
+                <div class="row"><hr>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <label control-label><strong>Remarks :</strong></label>
+                        <label ><strong>Remarks :</strong></label>
                         <div class="col-lg-12" style="padding: 0%;">
                             <textarea name="remarks" id="remarks" class="form-control" placeholder="Remarks"></textarea>
                         </div>
@@ -343,7 +343,7 @@
         </div>
         <br />
     </div>
-    <div class="panel-footer" style="border-top: 3px solid #2980b9">
+    <div class="panel-footer" >
         <div class="row">
             <div class="col-sm-12">
                 <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>Save Changes</button>
@@ -384,7 +384,7 @@
                 <h2 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Sales Order</h2>
             </div>
             <div class="modal-body">
-                <table id="tbl_so_list" cellspacing="0" width="100%">
+                <table id="tbl_so_list" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
                         <th></th>
@@ -695,7 +695,7 @@
 <footer role="contentinfo">
     <div class="clearfix">
         <ul class="list-unstyled list-inline pull-left">
-            <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+            <li><h6 style="margin: 0;">&copy; 2017 - JDEV OFFICE SOLUTIONS</h6></li>
         </ul>
         <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
     </div>
@@ -848,9 +848,9 @@ $(document).ready(function(){
         source: products,
         templates: {
             header: [
-                '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+                '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
             ].join('\n'),
-            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%;">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%;">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
         }
         }).on('keyup', this, function (event) {
             if (_objTypeHead.typeahead('val') == '') {
@@ -1240,7 +1240,7 @@ $(document).ready(function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_invoice_id;
-            $('#span_invoice_no').html(data.sales_inv_no);
+            
             $('input,textarea').each(function(){
                 var _elem=$(this);
                 $.each(data,function(name,value){
@@ -1288,6 +1288,7 @@ $(document).ready(function(){
                     reComputeTotal();
                 }
             });
+            $('#span_invoice_no').html(data.sales_inv_no);
             showList(false);
         }
         });

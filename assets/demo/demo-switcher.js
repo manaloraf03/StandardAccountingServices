@@ -107,9 +107,7 @@ $(function() {
                 $('div.panel-heading').css('background-color',$('#topnav').css('background-color'));
                 $('div.modal-header').css('background-color',$('#topnav').css('background-color'));
 
-
-                $('#tbl_items > thead').css('background-color',$('#topnav').css('background-color'));
-                $('#tbl_entries > thead').css('background-color',$('#topnav').css('background-color'));
+                $('div.panel').css('background-color',$('#topnav').css('background-color'));
                 if(navColor=="navbar-default"||navColor=="navbar-graylight"||navColor=="navbar-bluegraylight"){
                     $('#tbl_items > thead > tr > th').css('color','black');
                     $('#tbl_entries > thead > tr > th').css('color','black');
@@ -130,7 +128,6 @@ $(function() {
 			if (sideColor) {
 				$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').removeClass(sidebarColors).addClass('sidebar-' + sideColor);
 				$('#headernav').removeClass(sidebarColors).addClass('navbar-' + sideColor);
-                $('div.panel').css('border-color',$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').css('background-color'));
 
 			} else if (navColor == null) {
 				$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').removeClass(sidebarColors).addClass('sidebar-black');
@@ -277,9 +274,7 @@ $(function() {
                 $('div.panel-heading').css('background-color',$('#topnav').css('background-color'));
                 $('div.modal-header').css('background-color',$('#topnav').css('background-color'));
 
-
-                $('#tbl_items > thead').css('background-color',$('#topnav').css('background-color'));
-                $('#tbl_entries > thead').css('background-color',$('#topnav').css('background-color'));
+                $('div.panel').css('background-color',$('#topnav').css('background-color'));
                 if(navColor=="navbar-default"||navColor=="navbar-graylight"||navColor=="navbar-bluegraylight"){
                     $('#tbl_items > thead > tr > th').css('color','black');
                     $('#tbl_entries > thead > tr > th').css('color','black');
@@ -464,8 +459,6 @@ $(function() {
 					localStorage.setItem('sidebar-color',"amber");
 				}
 
-
-                $('div.panel').css('border-color',$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').css('background-color'));
 				
 			});
 

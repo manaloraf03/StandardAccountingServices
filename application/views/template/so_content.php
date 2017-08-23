@@ -21,6 +21,9 @@
         .report-header {
             font-weight: bolder;
         }
+            table{
+        border:none!important;
+    }
        
 </style>
 <div>

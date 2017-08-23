@@ -18,36 +18,14 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
-
-
-
-
-
-
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .toolbar{
             float: left;
         }
-
-        #tbl_items td,#tbl_items tr,#tbl_items th{
-            table-layout: fixed;
-            border: 1px solid gray;
-            border-collapse: collapse;
-        }
-
         td.details-control {
             background: url('assets/img/Folder_Closed.png') no-repeat center center;
             cursor: pointer;
@@ -97,10 +75,7 @@
             text-align: right;
         }
 
-
-
         @media screen and (max-width: 480px) {
-
             table{
                 min-width: 800px;
             }
@@ -118,12 +93,6 @@
                 width: 100%;
             }
         }
-
-
-
-
-
-
     </style>
 </head>
 
@@ -160,11 +129,12 @@
                                 <div id="div_payment_list">
 
                                     <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                      <!--   <div class="panel-heading">
                                             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Collection Entry</b>
-                                        </div>
+                                        </div> -->
                                         <div class="panel-body table-responsive">
-                                            <table id="tbl_payments" class="" cellspacing="0" width="100%">
+                                      <h2 class="h2-panel-heading">Collection Entry</h2><hr>             
+                                            <table id="tbl_payments" class="table table-striped" cellspacing="0" width="100%">
                                                 <thead class="">
                                                 <tr>
                                                     <th></th>
@@ -181,52 +151,36 @@
                                                 </thead>
                                                 <tbody>
 
-
-
                                                 </tbody>
                                             </table>
                                         </div>
-
-
-
-
-
                                         <div class="panel-footer"></div>
                                     </div>
-
                                 </div>
 
-
                                 <div id="div_payment_fields" style="display: none;">
-
-                                    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
-
+                                    <div class="panel panel-default">
                                     <div class="panel-body">
-                                    <div>
+                                    <h2 class="h2-panel-heading">Collection Entry</h2><hr>
 
-                                    <div class="row ">
+                                    <div class="row-panel">
                                         <div class="container-fluid">
-
-
                                         <form id="frm_payments" role="form" class="form-horizontal">
-                                            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                                            <div>
                                                 <div class="row">
-
                                                     <div class="col-lg-6">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                               <b>* </b>  Receipt type : <br />
+                                                               <b>* </b>  <label>Receipt type :</label> <br />
                                                                 <select id="cbo_receipt_type" name="receipt_type">
                                                                     <option value="1" selected>Official Receipt</option>
                                                                     <option value="2">Acknowledgement Receipt</option>
                                                                 </select>
                                                             </div>
                                                         </div>
-
-
                                                         <div class="row">
                                                             <div class="col-lg-12">
-                                                                Department * : <br />
+                                                                <label>Department * :</label> <br />
                                                                 <select id="cbo_branch" name="department">
                                                                     <?php foreach($departments as $department){ ?>
                                                                         <option value="<?php echo $department->department_id; ?>" selected><?php echo $department->department_name; ?></option>
@@ -234,10 +188,9 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <b>* </b> Receipt # : <br />
+                                                                <b>* </b> <label>Receipt # :</label> <br />
                                                                 <div class="input-group">
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-code"></i>
@@ -246,7 +199,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                               <b>* </b>  Payment Date * : <br />
+                                                               <b>* </b>  <label>Payment Date * :</label> <br />
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                          <i class="fa fa-calendar"></i>
@@ -254,11 +207,7 @@
                                                                     <input type="text" name="date_paid" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date of Payment" data-error-msg="Payment Date is required!" required>
                                                                 </div>
                                                             </div>
-
                                                         </div>
-
-
-
                                                     </div>
 
 
@@ -266,7 +215,7 @@
 
                                                         <div class="row" style="">
                                                             <div class="col-lg-12">
-                                                                <b>* </b>  Payment Method  : <br />
+                                                                <b>* </b>  <label>Payment Method  :</label> <br />
                                                                 <select id="cbo_payment_method" name="payment_method" class="form-control">
                                                                     <?php foreach($methods as $method){ ?>
                                                                         <option value="<?php echo $method->payment_method_id; ?>"><?php echo $method->payment_method; ?></option>
@@ -285,7 +234,7 @@
                                                             </div>
 
                                                             <div class="col-lg-12">
-                                                                <b>* </b>  Check #   : <br />
+                                                                <b>* </b>  <label>Check #   :</label> <br />
                                                                 <div class="input-group">
                                                                     <input type="text" name="check_no" class="form-control">
                                                                      <span class="input-group-addon">
@@ -294,10 +243,8 @@
                                                                 </div>
                                                             </div>
 
-
-
                                                             <div class="col-lg-12">
-                                                                <b>* </b>  Check Date : <br />
+                                                                <b>* </b>  <label>Check Date :</label> <br />
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                          <i class="fa fa-calendar"></i>
@@ -305,26 +252,15 @@
                                                                     <input type="text" name="check_date" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date of Payment" data-error-msg="Payment Date is required!" required>
                                                                 </div>
                                                             </div>
-
-
-
-
                                                         </div>
-
                                                     </div>
-
-
                                                 </div>
                                             </div>
                                         </form>
-
-                                        <br />
-
-
+                                                    <br>
+                                        <hr>
                                         <form id="frm_payment_items">
-
-                                            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
-
+                                            <div class="row-panel">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <label class="control-label"><strong>Please select Customer first * :</strong></label>
@@ -339,18 +275,16 @@
                                                 <br />
                                                 
                                                 <div class="table-responsive">
-                                                    <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
-
+                                                    <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                                                         <thead class="">    
-                                                        <tr>        
-
-                                                            <th width="12%">Invoice #</th>
-                                                            <th width="12%">Due Date</th>
-                                                            <th width="30%">Remarks</th>
-                                                            <th width="12%" style="text-align: right;">Amount due</th>
-                                                            <th width="14%">Payment</th>
-                                                            <th width="5%">Action</th>
-                                                        </tr>
+                                                            <tr>        
+                                                                <th width="12%">Invoice #</th>
+                                                                <th width="12%">Due Date</th>
+                                                                <th width="30%">Remarks</th>
+                                                                <th width="12%" style="text-align: right;">Amount due</th>
+                                                                <th width="14%">Payment</th>
+                                                                <th width="5%">Action</th>
+                                                            </tr>
                                                         </thead>
                                                         <tbody>
 
@@ -368,27 +302,15 @@
 
                                                         </tfoot>
                                                     </table>
-
-
                                                 </div>
-
-
-
-
                                             </div>
-
-
-
                                         </form>
-
-
                                         <br />
 
                                         <div class="row" style="margin: 3px;">
                                             Remarks :<br />
                                             <textarea name="remarks" class="form-control" placeholder="Remarks"></textarea>
                                         </div>
-
                                         <br /> <br />
 
                                         <div class="row" style="display: none;">
@@ -413,45 +335,19 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                         <div class="row">
                                             <div class="col-sm-12">
                                                 <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span> <i class="fa fa-floppy-o"></i> Record Payment</button>
                                                 <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                             </div>
                                         </div>
-
-
-
-
                                     </div>
-
-
-
-
-
-
-
-
-
-
                                 </div>
-
-
-
-
                             </div>
-
-
-
-
                         </div>
                     </div>
                 </div>
             </div> <!-- .container-fluid -->
-
         </div> <!-- #page-content -->
     </div>
 
@@ -911,10 +807,16 @@
 
             _cboCustomers.select2('val',null);
 
-
-
         };
 
+        var arrayClean = function(thisArray, thisName) {
+            "use strict";
+            $.each(thisArray, function(index, item) {
+                if (item.name == thisName) {
+                    delete array[index];      
+                }
+            });
+        }
 
         var getFloat=function(f){
             return parseFloat(accounting.unformat(f));

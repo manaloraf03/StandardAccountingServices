@@ -19,18 +19,12 @@
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .select2-container{
             min-width: 100%;
         }
@@ -64,7 +58,7 @@
         }
 
         th { border: 1px solid #525252!important; }
-
+/*
         tr:nth-child(even) {
             background: transparent!important;
         }
@@ -78,7 +72,7 @@
             background: transparent!important;
             color: white!important;
         }
-
+*/
     </style>
 
 </head>
@@ -103,34 +97,35 @@
                         <div data-widget-group="group1">
 
                             <div class="panel panel-default">
-                                <div class="panel-heading">
+                                <!-- <div class="panel-heading">
                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Annual Income Statement <?php echo '('.date('Y').')'; ?></b>
                                 </div>
-                                <div class="panel-body" style="overflow-x: auto;">
+ -->                                <div class="panel-body" style="overflow-x: auto;">
+                                <h2 class="h2-panel-heading">Annual Income Statement <?php echo '('.date('Y').')'; ?></h2><hr>
                                     <div class="row">
                                         <div class="container-fluid">
                                             <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
                                                 <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
                                             </div>
-                                            <table width="100%">
+                                            <table width="100%" class="table table-striped">
                                                 <thead>
-                                                    <th width="5%" style="background: #0960a5!important;">Account #</th>
-                                                    <th width="10%" style="background: #0960a5!important;">Account Description</th>
-                                                    <th width="5%" style="background: #074d85!important;">JANUARY</th>
-                                                    <th width="5%" style="background: #074d85!important;">FEBRUARY</th>
-                                                    <th width="5%" style="background: #074d85!important;">MARCH</th>
-                                                    <th width="5%" style="background: #074d85!important;">APRIL</th>
-                                                    <th width="5%" style="background: #074d85!important;">MAY</th>
-                                                    <th width="5%" style="background: #074d85!important;">JUNE</th>
-                                                    <th width="5%" style="background: #074d85!important;">JULY</th>
-                                                    <th width="5%" style="background: #074d85!important;">AUGUST</th>
-                                                    <th width="5%" style="background: #074d85!important;">SEPTEMBER</th>
-                                                    <th width="5%" style="background: #074d85!important;">OCTOBER</th>
-                                                    <th width="5%" style="background: #074d85!important;">NOVEMBER</th>
-                                                    <th width="5%" style="background: #074d85!important;">DECEMBER</th>
+                                                    <th width="5%" >Account #</th>
+                                                    <th width="10%" >Account Description</th>
+                                                    <th width="5%" ">JANUARY</th>
+                                                    <th width="5%" ">FEBRUARY</th>
+                                                    <th width="5%" ">MARCH</th>
+                                                    <th width="5%" ">APRIL</th>
+                                                    <th width="5%" ">MAY</th>
+                                                    <th width="5%" ">JUNE</th>
+                                                    <th width="5%" ">JULY</th>
+                                                    <th width="5%" ">AUGUST</th>
+                                                    <th width="5%" ">SEPTEMBER</th>
+                                                    <th width="5%" ">OCTOBER</th>
+                                                    <th width="5%" ">NOVEMBER</th>
+                                                    <th width="5%" ">DECEMBER</th>
                                                 </thead>
                                                 <tbody>
-                                                    <td colspan="14" style="background:#36474f; text-align: center;"><strong>- INCOME -</strong></td>
+                                                    <td colspan="14" style=" text-align: center;"><strong>- INCOME -</strong></td>
                                                     <?php 
                                                         $jan_inc_bal=0; 
                                                         $feb_inc_bal=0;
@@ -192,7 +187,7 @@
                                                         <td align="right"><?php echo number_format($nov_inc_bal, 2); ?></td>
                                                         <td align="right"><?php echo number_format($dec_inc_bal, 2); ?></td>
                                                     </tr>
-                                                    <td colspan="14" style="background: #36474f; text-align: center;"><strong>- EXPENSES -</strong></td>
+                                                    <td colspan="14" style=" text-align: center;"><strong>- EXPENSES -</strong></td>
                                                     <?php 
                                                         $jan_exp_bal=0; 
                                                         $feb_exp_bal=0;

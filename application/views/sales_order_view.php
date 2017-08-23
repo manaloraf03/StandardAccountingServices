@@ -42,8 +42,6 @@
 
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
 
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
@@ -55,30 +53,9 @@
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
 
 
-
-
-
-
-
-
-
-
-
-
-
     <style>
 
 
-
-        html{
-
-            zoom: 0.8;
-
-            zoom: 80%;
-
-            overflow-x: hidden;
-
-        }
 
 
 
@@ -231,13 +208,7 @@
             }
 
         }
-
-    tr:hover {
-        transition: .4s;
-        background: transparent!important; 
-        color: white!important;
-    }
-
+        
         .numeric{
 
             text-align: right;
@@ -372,7 +343,6 @@
 
 
 
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 
 </head>
 
@@ -452,15 +422,15 @@
 
 
 
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Sales Order</b></div></a>
+<!--         <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Sales Order</b></div></a> -->
 
 
 
         <div class="panel-body table-responsive" >
 
+        <h2 class="h2-panel-heading">Sales Order</h2><hr>
 
-
-            <table id="tbl_sales_order" cellspacing="0" width="100%">
+            <table id="tbl_sales_order"  class="table table-striped" cellspacing="0" width="100%">
 
                 <thead class="">
 
@@ -522,19 +492,15 @@
 
 
 
-<div class="panel-body" style="padding-top: 0;">
-
+<div class="panel-body">
+    <h2 class="h2-panel-heading">SO # : <span id="span_so_no">SO-XXXX</span></h2><hr>
 
 
     <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
 
         <form id="frm_sales_order" role="form" class="form-horizontal">
 
-
-
-            <h4 style="margin-bottom: 6px;"><b>SO # : <span id="span_so_no">SO-XXXX</span></b></h4>
-
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div>
 
 
 
@@ -694,7 +660,7 @@
 
                 <div class="table-responsive">
 
-                        <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
+                        <table id="tbl_items" class="table table-striped"  cellspacing="0" width="100%" style="font-font:tahoma;">
 
 
 
@@ -2173,7 +2139,7 @@ $(document).ready(function(){
 
                     header: [
 
-                        '<table width="100%">'+
+                        '<table class="tt-head">'+
 
                             '<tr>'+
 
@@ -2205,7 +2171,7 @@ $(document).ready(function(){
 
                     suggestion: Handlebars.compile(
 
-                        '<table width="100%">'+
+                        '<table class="tt-items">'+
 
                             '<tr>'+
 
@@ -2813,7 +2779,7 @@ $(document).ready(function(){
             _selectedID=data.sales_order_id;
 
 
-
+            $('#span_so_no').html(data.so_no);
             $('textarea[name="remarks"]').val(data.remarks);
 
 

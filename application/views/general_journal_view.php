@@ -18,7 +18,6 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -34,10 +33,6 @@
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
 
         .toolbar{
             float: left;
@@ -134,38 +129,38 @@
 
 <div id="div_payable_list">
 
-    <div class="panel panel-default" style="background: #303030 !important;">
-
 
         <div class="panel panel-default">
-                <div class="panel-heading">
+<!--                 <div class="panel-heading">
                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; General Journal </b>
-                </div>
+                </div> -->
                 <div class="panel-body table-responsive">
-                    <table id="tbl_accounts_receivable" class="" cellspacing="0" width="100%">
-                        <thead class="">
-                        <tr>
-                            <th></th>
-                            <th>Txn #</th>
-                            <th>Particular</th>
-                            <th>Remarks</th>
-                            <th>Txn Date</th>
-                            <th>Posted</th>
-                            <th>Status</th>
-                            <th><center>Action</center></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-                    </table>
-
+                    <h2 class="h2-panel-heading">General Journal</h2><hr>
+                    <div class="row-panel">
+                        <table id="tbl_accounts_receivable" class="table table-striped" cellspacing="0" width="100%">
+                            <thead class="">
+                            <tr>
+                                <th></th>
+                                <th>Txn #</th>
+                                <th>Particular</th>
+                                <th>Remarks</th>
+                                <th>Txn Date</th>
+                                <th>Posted</th>
+                                <th>Status</th>
+                                <th><center>Action</center></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+    
+                            </tbody>
+                        </table>
+                    </div>
 
                 </div>
             </div>
-        </div>
 
-    </div>
+
+
 
 
 </div>
@@ -174,21 +169,20 @@
 
 
 <div id="div_payable_fields" style="display: none;">
-
-
     <div class="row">
         <div class="col-lg-12">
-
-            <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030;">
+        <div class="panel panel-default">
+            <div class="panel-body table-responsive" >
                 <!-- <div class="panel-heading">
                     <h2>General Journal</h2>
-                    <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body, .panel-footer"}'></div>
+                   
                 </div> -->
-                            <b style="color: white;"><i class="fa fa-bars"></i> General Journal</b><hr />
+              <!--    <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body, .panel-footer"}'></div> -->
+                            <h2 class="h2-panel-heading"> General Journal</h2><hr />
                             <button id="btn_browse_recurring" class="btn btn-primary" style="margin-bottom: 10px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
                             
                                 <form id="frm_journal" role="form" class="form-horizontal">
-                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                                    <div >
                                         <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
                                         <hr />
 
@@ -254,12 +248,10 @@
 
                                     </div><br />
 
-                                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
-                                    <span style="color: white;"><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
-                                    <hr />
-
+                                <div ><hr>
+                                    <span ><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                                     <div style="width: 100%;table-layout:fixed;">
-                                        <table id="tbl_entries" class="">
+                                        <table id="tbl_entries" class="table table-striped">
                                             <thead class="">
                                             <tr>
                                                 <th style="width: 30%;">Account</th>
@@ -365,6 +357,7 @@
 
             </div>
         </div>
+        </div>
     </div>
 
 
@@ -403,7 +396,7 @@
                 <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
             </div>
             <div class="modal-body">
-                <table id="tbl_recurring" class="" width="100%">
+                <table id="tbl_recurring" class="table table-striped" width="100%">
                     <thead>
                         <th>Template Code</th>
                         <th>Template Description</th>

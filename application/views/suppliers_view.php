@@ -18,31 +18,14 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-    <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
-    </style>
 
 
     <?php echo $_switcher_settings; ?>
@@ -563,12 +546,12 @@ $(document).ready(function(){
 
                                     <div id="div_supplier_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+<!--                                             <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Suppliers</b>
                                             </div>
-                                            <div class="panel-body table-responsive">
-
-                                                <table id="tbl_suppliers" class="" cellspacing="0" width="100%">
+ -->                                            <div class="panel-body table-responsive">
+                                            <h2 class="h2-panel-heading">Suppliers</h2><hr>
+                                                <table id="tbl_suppliers" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>&nbsp;&nbsp;</th>

@@ -18,18 +18,9 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
-
     <style>
-        body{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -90,13 +81,13 @@
                                 <div class="col-md-12">
                                     <div id="div_department_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
-                                                <!-- <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; <h1>Department</h1></b> -->
+<!--                                             <div class="panel-heading">
+                                     
                                                 <b style="color: white; font-size: 12pt;"><i style="color: #ffce3a;" class="ti ti-layout-accordion-merged"></i>&nbsp; Departments</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
-
-                                                <table id="tbl_departments" cellspacing="0" width="100%">
+                                            <h2 class="h2-panel-heading">Departments</h2><hr>
+                                                <table id="tbl_departments" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
 
                                                     <tr>
@@ -121,7 +112,7 @@
 
             <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">
-                    <div class="modal-content"><!---content--->
+                    <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                             <h4 class="modal-title" style="color:white;"><span id="modal_mode"> </span>Confirm Deletion</h4>
@@ -135,7 +126,7 @@
                             <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
                             <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                         </div>
-                    </div><!---content---->
+                    </div>
                 </div>
             </div><!---modal-->
             <div id="modal_new_department" class="modal fade" role="dialog">

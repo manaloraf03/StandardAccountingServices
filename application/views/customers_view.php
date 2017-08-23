@@ -16,30 +16,14 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-    </style>
-
     <?php echo $_switcher_settings; ?>
     <?php echo $_def_js_files; ?>
 
@@ -655,12 +639,13 @@
 
                                     <div id="div_customer_list">
                                         <div class="panel panel-default">
-                                            <div class="panel-heading">
+                                           <!--  <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Customers</b>
-                                            </div>                                  
+                                            </div>              -->                     
                                             <div class="panel-body table-responsive">
+                                            <h2 class="h2-panel-heading">Customers</h2><hr>
                                                 <button class="btn btn-primary" id="btn_new" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;margin-bottom: 0px !important; float: left;" data-toggle="modal" data-target="" data-placement="left" title=" New product" ><i class="fa fa-plus"></i>  New Customer</button>
-                                                <table id="tbl_customers" class="" cellspacing="0" width="100%">
+                                                <table id="tbl_customers" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead class="">
                                                     <tr>
                                                         <th>&nbsp;&nbsp;</th>

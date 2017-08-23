@@ -18,7 +18,6 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -32,11 +31,6 @@
 
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .drag_member{
             cursor: pointer;
         }
@@ -161,13 +155,14 @@
                                         <div class="panel-group panel-default" id="accordionA">
 
                                             <div id="div_tests" class="panel panel-default">
-                                                <div class="panel-heading">
+                                                <!-- <div class="panel-heading">
                                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Check Layout</b>
-                                                </div>
+                                                </div> -->
                                                 <div class="panel-body" style="min-height: 400px;">
-                                                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-                                                        <table id="tbl_check_layouts" class="" cellspacing="0" width="100%">
-                                                            <thead class="table-erp">
+                                                <h2 class="h2-panel-heading">Check Layout</h2><hr>
+                                                    <div >
+                                                        <table id="tbl_check_layouts" class="table table-striped" cellspacing="0" width="100%">
+                                                            <thead class="">
                                                             <tr>
 
                                                                 <th>Check Layout</th>

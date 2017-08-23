@@ -19,17 +19,22 @@
 
 
     <style>
-    html{
-        zoom: 0.8;
-        zoom: 80%;
-    }
-
     .data-container {
           border-radius: 5px;
         background: rgba(255, 255, 255, .1);
         padding: 10px;
+        border:1px solid #d4dbdd;
     }
 
+    .text-container{
+      background-color: #45aeda;
+      color:white;
+
+    }
+    .graph-container{
+
+      
+    }
     .toolbar{
         float: left;
     }
@@ -70,9 +75,6 @@
     }
 
     </style>
-
-    <link rel="stylesheet" type="text/css" href="assets/css/dark-theme.css">
-
     <style>
 
         .page-content {
@@ -80,8 +82,8 @@
         }
 
         #tbl_po_list {
-            color: white!important;
-            border: none!important;
+/*            color: white!important;
+            border: none!important;*/
         }
 
         th {
@@ -180,7 +182,7 @@
       .vertical-timeline-content {
           position: relative;
           margin-left: 60px;
-          background-color: rgba(68, 70, 79, 0.5);
+/*          background-color: rgba(68, 70, 79, 0.5);*/
           border-radius: 0.25em;
           border: 1px solid #3d404c;
       }
@@ -244,7 +246,7 @@
       .vertical-timeline-content {
           position: relative;
           margin-left: 60px;
-          background-color: rgba(68, 70, 79, 0.5);
+/*          background-color: rgba(68, 70, 79, 0.5);*/
           border-radius: 0.25em;
           border: 1px solid #3d404c;
       }
@@ -311,38 +313,38 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="panel panel-default" style="overflow-x: hidden!important;"> 
-                                            <div class="panel-body table-responsive">
-                                                <h1><b class="ti ti-bar-chart-alt"></b> <strong>JCORE</strong> Standard Accounting</h1>
+                                            <div class="panel-body table-responsive" style="border-top-color: white!important;">
+                                                <h1 ><b class="ti ti-bar-chart-alt"  style="color: #03a9f4;"></b> <strong style="color: #03a9f4;">JCORE</strong> Standard Accounting</h1>
                                                 <div id="intro">
                                                     <h4 class="welcome-msg">Hi
-                                                        <b>
+                                                        <b style="color: #03a9f4;">
                                                             <?php echo $this->session->user_fullname; ?>
                                                         </b> here is a rundown of your business' performance<br>and how your collections are doing individually. 
                                                     </h4>
-                                                    <hr>
+                                                    <hr style="border-color:#03a9f4!important;border-top:5px solid #03a9f4;">
                                                 </div>
-                                                <h3><b class="fa fa-dashboard"></b> DASHBOARD</h3>
+                                                <h3><b   style="color: #03a9f4;" class="fa fa-dashboard"></b> DASHBOARD</h3>
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-3">
-                                                        <div class="data-container text-center">
+                                                        <div class="data-container text-center text-container">
                                                             <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0.00' : number_format($receivables->Balance,2)); ?></strong></h2>
                                                             <h4><b>Accounts Receivables</b></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-3">
-                                                        <div class="data-container text-center">
+                                                        <div class="data-container text-center text-container">
                                                             <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0.00' : number_format($payables->Balance,2)); ?></strong></h2>
                                                             <h4><b>Accounts Payables</b></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-3">
-                                                        <div class="data-container text-center">
+                                                        <div class="data-container text-center text-container">
                                                             <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0' : $customer_count); ?></strong></h2>
                                                             <h4><b>Customers</b></h4>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-3">
-                                                        <div class="data-container text-center">
+                                                        <div class="data-container text-center text-container">
                                                             <h2><strong><?php echo ($this->session->user_group_id != 1 ? '0' : $suppliers_count); ?></strong></h2>
                                                             <h4><b>Suppliers</b></h4>
                                                         </div>
@@ -350,13 +352,13 @@
                                                 </div>
                                                 <div class="row" style="margin-top: 20px;">
                                                     <div class="col-xs-12 col-sm-6">
-                                                        <div class="data-container text-center">
+                                                        <div class="data-container text-center graph-container">
                                                             <canvas id="salesChart"></canvas>
                                                             <span>Income (Last Year) vs Income (Current Year)</span>
                                                         </div>
                                                     </div>
                                                     <div class="col-xs-12 col-sm-6">
-                                                        <div class="data-container text-center">
+                                                        <div class="data-container text-center graph-container">
                                                             <canvas id="testChart"></canvas>
                                                             <span>Income vs Expense (Current Year)</span>
                                                         </div>
@@ -365,9 +367,9 @@
                                                 <div class="row" style="margin-top: 20px;">
                                                     <div class="col-xs-12 col-sm-8 <?php echo (in_array('7-1',$this->session->user_rights)?'':'hidden'); ?>">
                                                       <div class="data-container table-responsive" style="padding: 20px 15px 20px 15px; min-height: 700px; max-height: 700px;">
-                                                            <h6 class="visible-xs hidden-sm hidden-md hidden-lg po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span style="color: white;">PURCHASE ORDER</span></h6>
-                                                            <h3 class="hidden-xs po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span style="color: white;">PURCHASE ORDER FOR APPROVAL</span></h2>
-                                                            <table id="tbl_po_list" cellspacing="0" width="100%">
+                                                            <h6 class="visible-xs hidden-sm hidden-md hidden-lg po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span >PURCHASE ORDER</span></h6>
+                                                            <h3 class="hidden-xs po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"  style="color: #03a9f4;"></i> <span >PURCHASE ORDER FOR APPROVAL</span></h2>
+                                                            <table id="tbl_po_list" class="table table-striped" cellspacing="0" width="100%">
                                                                 <thead>
                                                                     <th></th>
                                                                     <th>PO #</th>
@@ -384,7 +386,7 @@
                                                     </div>
                                                     <div class="col-xs-12 <?php echo ($this->session->user_group_id == 1 ? 'col-sm-4' : 'col-sm-12' ); ?>">
                                                       <div id="style-1" class="data-container" style="min-height: 700px; max-height: 700px; overflow-y: scroll;">
-                                                        <h3><i class="fa fa-rss" style="color: #ffad33;"></i> ACTIVITY FEED</h3>
+                                                        <h3><i class="fa fa-rss" style="color: #03a9f4"></i> ACTIVITY FEED</h3>
                                                         <div class="v-timeline vertical-container">
                                                             <?php echo ($this->session->user_group_id != 1 ? '' : $news_feed); ?>
                                                         </div>
@@ -437,7 +439,7 @@
 var ctx = document.getElementById("salesChart").getContext('2d');
 var ctxIE = document.getElementById("testChart").getContext('2d');
 
-Chart.defaults.global.defaultFontColor = "#b7b7b7";
+Chart.defaults.global.defaultFontColor = "#000000";
 
   var myChart = new Chart(ctx, {
       type: 'line',
@@ -451,7 +453,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
                   'rgba(255, 152, 0, .1)'
               ],
               borderColor: [
-                  'rgb(255, 152, 0)'
+                  '#0b77a8'
               ],
               borderWidth: 2
             },
@@ -462,7 +464,7 @@ Chart.defaults.global.defaultFontColor = "#b7b7b7";
                   'rgba(255, 255, 255, .1)'
               ],
               borderColor: [
-                  'rgb(255, 255, 255)'
+                  '#03a9f4'
               ],
               borderWidth: 2
             }

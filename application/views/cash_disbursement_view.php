@@ -18,27 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .alert {
             border-width: 0;
             border-style: solid;
@@ -58,12 +46,6 @@
 
         .toolbar{
             float: left;
-        }
-
-        #tbl_entries td,#tbl_entries tr,#tbl_entries th{
-            table-layout: fixed;
-            border: 1px solid gray;
-            border-collapse: collapse;
         }
 
         body {
@@ -194,14 +176,17 @@
     <div class="panel-group panel-default" id="accordionA">
 
 
-        <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Review Expense (Pending)</b></div></a>
+        <div class="panel panel-default">
+            <div class="panel-body panel-responsive" >
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo" style="text-decoration: none;">
+<!--             <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Review Expense (Pending)</b></div> -->
+            <h2 class="h2-panel-heading"> Review Expense (Pending)</h2><hr>
+            </a>
 
             <div id="collapseTwo" class="collapse in">
-                <div class="panel-body">
 
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                        <table id="tbl_expense_for_review" class="" cellspacing="0" width="100%">
+                    <div style="padding: 1%;border-radius: 5px;padding-bottom: 2%;">
+                        <table id="tbl_expense_for_review" class="table table-striped" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
                                 <th></th>
@@ -218,21 +203,22 @@
                             </tbody>
                         </table>
                     </div>
-
-
-                </div>
+            </div>
             </div>
         </div>
 
-
+<br>
 
         <div class="panel panel-default" style="border-radius:6px;">
-              <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Cash Disbursement Journal</b></div></a>
-                <div id="collapseOne" class="collapse in">
-                    <div class="panel-body" style="min-height: 400px;">
+            <div class="panel-body panel-responsive">
+              <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne" style="text-decoration: none;">
+<!--               <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Cash Disbursement Journal</b></div> -->
+            <h2 class="h2-panel-heading">Cash Disbursement Journal</h2><hr>
 
-                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-                            <table id="tbl_cash_disbursement_list" class="" cellspacing="0" width="100%">
+              </a>
+                <div id="collapseOne" class="collapse in">
+                        <div >
+                            <table id="tbl_cash_disbursement_list" class="table-striped table" cellspacing="0" width="100%">
                                 <thead class="">
                                 <tr>
                                     <th></th>
@@ -251,18 +237,20 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>                </div>
                 </div>
         </div>
 
         <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Check Summary</b></div></a>
+
+                    <div class="panel-body panel-responsive" style="min-height: 400px;">
+            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne" style="text-decoration: none;">
+<!--             <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Check Summary</b></div> -->
+    <h2 class="h2-panel-heading"> Check Summary</h2>
+            </a>
                 <div id="collapseOne" class="collapse in">
-                    <div class="panel-body" style="min-height: 400px;">
-
-                        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
-
-                            <table id="tbl_check_list" class="" cellspacing="0" width="100%">
+                        <div >
+                            <table id="tbl_check_list" class="table table-striped" cellspacing="0" width="100%">
                                 <thead style="display:none;background-color:#161616!important;">
                                 <tr>
                                     <th>Bank</th>
@@ -294,17 +282,18 @@
 <div class="row">
 <div class="col-lg-12">
 
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;padding: 1%;margin: 1%;background: #303030 !important;color: white !important;">
-
-        <b><i class="fa fa-bars"></i> Cash Disbursement Journal</b><hr />
+    <div class="panel panel-default" style="margin: 1%;">
+    <div class="panel-body panel-responsive">
+    <h2 class="h2-panel-heading"> Cash Disbursement Journal</h2>
+     <!--    <b><i class="fa fa-bars"></i> Cash Disbursement Journal</b><hr /> -->
         <button id="btn_browse_recurring" class="btn btn-primary" style="margin-bottom: 15px; text-transform: capitalize;"><i class="fa fa-folder-open-o"></i> Browse Recurring Template</button>
         <form id="frm_journal" role="form" class="form-horizontal">
 
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div>
 
                 <div class="row">
                     <div class="col-lg-3">
-                       <b> * </b> Txn #  :<br />
+                       <b class="required"> * </b> <label>Txn #  :</label><br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-code"></i>
@@ -313,7 +302,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3">
-                       <b> * </b> Date  :<br />
+                       <b class="required"> * </b> <label>Date  :</label><br />
                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -324,7 +313,7 @@
 
 
                     <div class="col-lg-4 col-lg-offset-2">
-                        <b> * </b> Method of Payment  :<br />
+                        <b class="required"> * </b> <label>Method of Payment  :</label><br />
                         <select id="cbo_pay_type" name="payment_method" class="form-control" data-error-msg="Payment method is required." required>
                             <?php foreach($payment_methods as $payment_method){ ?>
                                 <option value='<?php echo $payment_method->payment_method_id; ?>'><?php echo $payment_method->payment_method; ?></option>
@@ -337,14 +326,14 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        <b> * </b> Reference type :<br />
+                        <b class="required"> * </b> <label>Reference type :</label><br />
                         <select id="cbo_refType" class="form-control" name="ref_type" data-error-msg="Reference type is required." required>
                             <option value="CV" selected>CV</option>
                             <option value="JV">JV</option>
                         </select>
                     </div>
                     <div class="col-lg-3">
-                        <b> * </b> Reference # :<br />
+                        <b class="required"> * </b> <label>Reference # :</label><br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-code"></i>
@@ -353,7 +342,7 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-lg-offset-2">
-                        Bank :<br />
+                        <label>Bank :</label><br />
                         <select id="cbo_bank" class="form-control" name="bank_id">
                             <option value="create_bank">[Create New Bank]</option>
                             <?php foreach($bank_refs as $bank) { ?>
@@ -365,7 +354,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <b> * </b> Supplier  :<br />
+                        <b class="required"> * </b> <label>Supplier  :</label><br />
                         <select id="cbo_suppliers" name="supplier_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Supplier name is required." required>
                             <option value="0">[ Create New Supplier ]</option>
                             <?php foreach($suppliers as $supplier){ ?>
@@ -375,7 +364,7 @@
                     </div>
 
                     <div class="col-lg-2 col-lg-offset-2">
-                        Check Date :<br />
+                        <label>Check Date :</label><br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
@@ -385,7 +374,7 @@
                     </div>
 
                     <div class="col-lg-2">
-                        Check # :<br />
+                        <label>Check # :</label><br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-list-alt"></i>
@@ -398,7 +387,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                       <b> * </b> Department  :<br />
+                       <b class="required"> * </b> <label>Department  :</label><br />
                         <select id="cbo_branch" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                             <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
@@ -408,7 +397,7 @@
                     </div>
 
                     <div class="col-lg-4 col-lg-offset-2">
-                      <b> * </b>  Amount  :<br />
+                      <b class="required"> * </b>  <label>Amount  :</label><br />
                         <input class="form-control text-center numeric" id="cash_amount" type="text" maxlength="12" value="0.00" name="amount" required data-error-msg="Amount is Required!">
                     </div>
                 </div>
@@ -416,14 +405,14 @@
 
             </div>
 
-            <br />
+            <hr />
 
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <div>
                 <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                 <hr />
 
                 <div style="width: 100%;">
-                    <table id="tbl_entries" class="">
+                    <table id="tbl_entries" class="table-striped table">
                         <thead class="">
                         <tr>
                             <th style="width: 30%;">Account</th>
@@ -521,7 +510,7 @@
             </div>
         </div>
     </div>
-
+    </div>
     <table id="table_hidden" class="hidden">
         <tr>
             <td width="30%">
@@ -582,7 +571,7 @@
                 <h4 class="modal-title" style="color: white;"><i class="fa fa-folder-open-o"></i>  Browse Recurring Templates</h4>
             </div>
             <div class="modal-body">
-                <table id="tbl_recurring" class="" width="100%">
+                <table id="tbl_recurring" class="table table-striped" width="100%">
                     <thead>
                         <th>Template Code</th>
                         <th>Template Description</th>
@@ -1166,15 +1155,15 @@ $(document).ready(function(){
                     if ( last!== group ) {
                         $(rows).eq( i ).before(
                             // '<tr class="group" style="background-color:#161616!important"><td colspan="8" align="left"><b style="text-transform: capitalize;font-size: 15px;color:white;"><i class="fa fa-bars"></i> '+group+'</b></td></tr>' +
-                            '<tr class="group" style="background-color:#161616!important;color:white!important;">'+
-                                    '<td><bstyle="color:white!important;" >Check #</b></td>'+
-                            '<td><b style="color:white!important;">Amount</b></td>'+
-                                    '<td><b style="color:white!important;">Check Date</b></td>'+
-                                    '<td><b style="color:white!important;">Voucher #</b></td>'+
-                                    '<td><b style="color:white!important;">Particular</b></td>'+
-                                    '<td><b style="color:white!important;">Remarks</b></td>'+
-                                    '<td align="center"><b style="color:white!important;">Issued</b></td>'+
-                                    '<td ><center><b style="color:white!important;">Action</b></center></td>'+
+                            '<tr class="group" >'+
+                                    '<td><b>Check #</b></td>'+
+                                    '<td><b >Amount</b></td>'+
+                                    '<td><b >Check Date</b></td>'+
+                                    '<td><b >Voucher #</b></td>'+
+                                    '<td><b >Particular</b></td>'+
+                                    '<td><b>Remarks</b></td>'+
+                                    '<td align="center"><b >Issued</b></td>'+
+                                    '<td ><center><b >Action</b></center></td>'+
                             '</tr>'
                         );
 
@@ -1945,7 +1934,7 @@ $(document).ready(function(){
         $('.numeric').autoNumeric('init');
     };
 
-    function reInitializeDropDownAccounts(tbl,bClear=true){
+    function reInitializeDropDownAccounts(tbl,bClear=false){
         var obj=tbl.find('select.selectpicker');
 
         obj.select2({

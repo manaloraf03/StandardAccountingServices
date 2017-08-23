@@ -18,24 +18,12 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrar-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .alert {
             border-width: 0;
             border-style: solid;
@@ -193,12 +181,12 @@
     <div class="panel-group panel-default" id="accordionA">
 
         <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Review Collection (Pending)</b></div></a>
-            <div id="collapseTwo" class="collapse in">
-                <div class="panel-body">
 
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                        <table id="tbl_collection_for_review" class="" cellspacing="0" width="100%">
+            <div id="collapseTwo" class="collapse in">
+                <div class="panel-body">    
+                    <h2 class="h2-panel-heading">Review Collection (Pending)</h2><hr>
+                    <div >
+                        <table id="tbl_collection_for_review" class="table table-striped" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
                                 <th></th>
@@ -220,14 +208,13 @@
                 </div>
             </div>
         </div>
-
+<br>
         <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="font-family:tahoma;font-size: 12pt;color:white;"><i class="fa fa-bars"></i> Cash Receipt Journal (History)</b></div></a>
             <div id="collapseOne" class="collapse in">
                 <div class="panel-body" style="min-height: 400px;">
-
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 4%;">
-                        <table id="tbl_accounts_receivable" class="" cellspacing="0" width="100%">
+                <h2 class="h2-panel-heading">Cash Receipt Journal (History)</h2><hr>
+                    <div >
+                        <table id="tbl_accounts_receivable" class="table table-striped" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
                                 <th></th>
@@ -263,14 +250,12 @@
 
 <div class="row">
 <div class="col-sm-12">
-    <div class="panel panel-default" style="border: 3px solid #2196f3; margin: 20px;border-radius: 6px;">
+    <div class="panel panel-default" >
 
 
             <div class="panel-body" style="min-height: 400px;">
-
-
-                <b><i class="fa fa-bars"></i> Cash Receipt Journal</b><hr />
-                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 5%;">
+            <h2 class="h2-panel-heading">Cash Receipt Journal</h2><hr />
+                <div>
 
 
                     <form id="frm_journal" role="form" class="form-horizontal">
@@ -386,7 +371,7 @@
                         <span><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
                         <hr />
                         <div style="width: 100%;">
-                            <table id="tbl_entries" class="">
+                            <table id="tbl_entries" class="table table-striped">
                                 <thead class="">
                                 <tr>
                                     <th style="width: 30%;">Account</th>

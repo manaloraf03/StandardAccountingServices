@@ -15,15 +15,10 @@
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
     <style>
-        html{
-            zoom: 0.82;
-            zoom: 82%;
-        }
         #span_invoice_no{
             min-width: 50px;
         }
@@ -44,11 +39,6 @@
             color: #E9EDEF;
             background-color: #f9bdbb;
             border-color: #e84e40;
-        }
-        #tbl_items td,#tbl_items tr,#tbl_items th{
-            table-layout: fixed;
-           border: 1px solid gray;
-            border-collapse: collapse;
         }
         .toolbar{
             float: left;
@@ -98,33 +88,11 @@
         }
         .panel-body {
             padding: 0 !important;
-        }*/
-        #btn_new {
-            margin-top: 10px;
-            margin-bottom: 10px;
-            text-transform: uppercase!important;
-        }
-        @media screen and (max-width: 480px) {
-            table{
-                min-width: 800px;
-            }
-            .dataTables_filter{
-                min-width: 800px;
-            }
-            .dataTables_info{
-                min-width: 800px;
-            }
-            .dataTables_paginate{
-                float: left;
-                width: 100%;
-            }
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
+
+
     </style>
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
 </head>
+
 <body class="animated-content"  style="font-family: tahoma;">
 <?php echo $_top_navigation; ?>
 <div id="wrapper">
@@ -144,12 +112,14 @@
 <div class="col-md-12">
 <div id="div_service_invoice_list">
     <div class="panel panel-default">
-        <div class="panel-heading">
+<!--         <div class="panel-heading">
             <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Service Invoice</b>
         </div>
-
+ -->
         <div class="panel-body table-responsive">
-            <table id="tbl_service_invoice" cellspacing="0" width="100%" style="">
+            <div class="row panel-row">
+             <h2 class="h2-panel-heading">Service Invoice</h2><hr>           
+                <table id="tbl_service_invoice" class="table table-striped"  cellspacing="0" width="100%" style="">
                 <thead class="">
                 <tr>
                     <th></th>
@@ -165,26 +135,28 @@
                 <tbody>
                 </tbody>
             </table>
+            </div>
         </div>
         <!-- <div class="panel-footer"></div> -->
     </div>
 </div>
 <div id="div_service_invoice_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;">
+    <div class="panel panel-default" style="">
         <div class="pull-right">
             <h4 class="service_invoice_title" style="margin-top: 0%;"></h4>
             <div class="btn btn-green" style="margin-left: 10px;">
                 <strong><a id="btn_receive_so" href="#" style="text-decoration: none; color: white;">Create </a></strong>
             </div>
         </div>
-        <div class="panel-body" style="padding-bottom: 0%;padding-top: 0%;">
-        <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
+        <div class="panel-body">
+        <div class="row panel-row" >
             <form id="frm_service_invoice" role="form" class="form-horizontal">
-                <h4 style="margin-bottom: 6px;"><b>Invoice # : <span id="span_invoice_no">INV-XXXX</span></b></h4>
-                <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+                <h2 class="h2-panel-heading">Invoice # : <span id="span_invoice_no">INV-XXXX</span></h2>
+                <div>
+                <hr>
                     <div class="row">
                         <div class="col-sm-4">
-                            <b>*</b> Department : <br />
+                            <b class="required">* </b><label>Department : </label><br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -192,8 +164,8 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="col-sm-2 col-sm-offset-4">
-                            <b>*</b> Invoice Date : <br />
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <b class="required">* </b><label>Invoice Date :</label> <br />
                             <div class="input-group">
                                 <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -204,7 +176,7 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-4">
-                            <b>*</b> Customer : <br />
+                            <b class="required">*</b> <label>Customer :</label> <br />
                             <select name="customer" id="cbo_customers" data-error-msg="Customer is required." required>
                                 <option value="0">[ Create New Customer ]</option>
                                 <?php foreach($customers as $customer){ ?>
@@ -213,7 +185,7 @@
                             </select>
                         </div>
                         <div class="col-sm-4">
-                            Sales person :<br/>
+                            <label>Sales person :</label><br/>
                             <select name="salesperson_id" id="cbo_salesperson">
                                 <option value="0">[ Create New Salesperson ]</option>
                                 <?php foreach($salespersons as $salesperson){ ?>
@@ -221,8 +193,8 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="col-sm-2">
-                            <b>*</b> Due Date : <br />
+                        <div class="col-sm-4 ">
+                            <b class="required">* </b><label> Due Date : </label><br />
                             <div class="input-group">
                                 <input type="text" name="date_due" id="due_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Due" data-error-msg="Please set the date this items are issued!" required>
                                  <span class="input-group-addon">
@@ -233,21 +205,21 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-8">
-                            Address :<br>
+                            <label>Address :</label><br>
                             <input class="form-control" id="txt_address" type="text" name="address" placeholder="Customer Address">
                         </div>
                     </div>
                 </div>
             </form>
         </div>
-        <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+        <div><hr>
             <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
             <div id="custom-templates">
                 <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
             </div><br />
             <form id="frm_items">
                 <div class="table-responsive">
-                    <table id="tbl_items" cellspacing="0" width="100%" style="font-font:tahoma;">
+                    <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                         <thead class="">    
                         <tr>
                             <th width="10%">Qty</th>
@@ -299,11 +271,13 @@
                 </div>
             </form>
         </div>
+
         <form id="frm_remarks">
         <div class="row">
             <div class="container-fluid">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><br />
                 <div class="row">
+                <hr>
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <label control-label><strong>Remarks :</strong></label>
                         <div class="col-lg-12" style="padding: 0%;">
@@ -331,7 +305,7 @@
         </form>
         <br />
     </div>
-    <div class="panel-footer" style="border-top: 3px solid #2980b9">
+    <div class="panel-footer" >
         <div class="row">
             <div class="col-sm-12">
                 <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>Save Changes</button>
@@ -761,9 +735,9 @@ $(document).ready(function(){
         source: services,  // edit this , this must be the same as the var services declared in the new BLoodhound
         templates: {
             header: [
-                '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+                '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
             ].join('\n'),
-            suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%;">{{service_code}}</td><td width="20%" align="left">{{service_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{service_amount}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%;">{{service_code}}</td><td width="20%" align="left">{{service_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{service_amount}}</td></tr></table>')
         }
         }).on('keyup', this, function (event) {
             if (_objTypeHead.typeahead('val') == '') {

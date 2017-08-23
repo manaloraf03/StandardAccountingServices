@@ -40,7 +40,7 @@
           
        /*     border: none!important;*/
         }
-
+/*
         tr:hover {
             transition: .4s;
             background: #414141 !important;
@@ -53,12 +53,14 @@
             -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
             -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-        }
-
+        }*/
+            table{
+        border:none!important;
+    }
     </style>
 </head>
 <body>
-    <table width="100%">
+    <table width="100%" border="0">
         <tr>
             <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
             <td width="90%" class="align-center">
@@ -71,7 +73,7 @@
     <div class="">
         <h3 class="report-header"><strong>CASH DISBURSEMENT</strong></h3>
     </div>
-    <table width="100%" border="1" cellspacing="-1">
+    <table width="100%" border="0" cellspacing="-1">
         <tr>
             <td style="padding: 4px;" width="50%"><strong>DATE :</strong> <?php echo date_format(new DateTime($journal_info->date_txn),"m/d/Y"); ?></td>
             <td style="padding: 4px;" width="50%"><strong>REF # :</strong> <?php echo $journal_info->ref_no; ?></td>

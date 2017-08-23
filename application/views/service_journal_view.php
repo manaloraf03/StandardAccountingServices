@@ -18,7 +18,7 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
+
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
@@ -34,10 +34,7 @@
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
+
 
         .alert {
             border-width: 0;
@@ -161,7 +158,7 @@
         #img_user {
             padding-bottom: 15px;
         }
-
+/*
         table#tbl_service_journal tbody tr.no-padding:nth-child(even) {
             background-color: transparent !important;
             color: white !important;
@@ -178,11 +175,7 @@
             color: white !important;
          
         }
-        tr:hover {
-            transition: .4s;
-            background: #414141 !important;
-            color: white;
-        }
+*/
             
     </style>
 
@@ -204,7 +197,7 @@
 
 <ol class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="dashboard">Dashboard</a></li>
-    <li><a href="Service_journal">Accounts Receivable</a></li>
+    <li><a href="Service_journal">Accounts Receivable - Service Journal</a></li>
 </ol>
 
 <div class="container-fluid">
@@ -217,42 +210,45 @@
     <div class="panel-group panel-default" id="accordionA">
 
         <div class="panel panel-default">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo">
+<!--             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo">
                 <div class="panel-heading">
                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Review Service Journal (Pending)</b>
                 </div>
-            </a>
+            </a> -->
             <div id="" class="">
                 <div class="panel-body">
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                    <table id="tbl_service_review" class="" cellspacing="0" width="100%">
-                        <thead class="">
-                        <tr>
-                            <th>&nbsp;</th>
-                            <th>Invoice #</th>
-                            <th>Customer</th>
-                            <th>Invoice Date</th>
-                            <th>Remarks</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <h2 class="h2-panel-heading">Review Service Journal</h2><hr>
+                    <div class="row-panel">
+                        <table id="tbl_service_review" class="table table-striped" cellspacing="0" width="100%">
+                            <thead >
+                            <tr>
+                                <th>&nbsp;</th>
+                                <th>Invoice #</th>
+                                <th>Customer</th>
+                                <th>Invoice Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="panel panel-default" style="border-radius:6px;">
-            <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
+        <div class="panel panel-default" >
+<!--             <a data-toggle="collapse" data-parent="#accordionA" href="#collapseOne">
                 <div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;">
                     <b style="font-size: 11pt;color:white;"><i class="fa fa-bars"></i> Services / AR Journal</b>
                 </div>
-            </a>
+            </a> -->
+
                 <div class="panel-body" style="min-height: 400px;">
-                    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                    <table id="tbl_service_journal" class="" cellspacing="0" width="100%">
+                <h2 class="h2-panel-heading">Services / AR Journal</h2> <hr>
+                    <div class="row-panel">
+                    <table id="tbl_service_journal" class="table table-striped table-striped-padding" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
                             <th></th>
@@ -295,11 +291,11 @@
 
 
                 <div class="panel-body">
-                <b><i class="fa fa-bars"></i> Services Journal</b><hr />
+                <h2 class="h2-panel-heading"> Services Journal</h2><hr />
 
                     <div class="tab-container tab-top tab-primary">
                         <ul class="nav nav-tabs">
-                            <li class="active"><a href="#supplier_info" data-toggle="tab" style="background: #414141 !important;color: white !important;border-top: 1px solid white;"><i class="fa fa-bars"></i> Transaction</a></li>
+                            <li class="active"><a href="#supplier_info" data-toggle="tab" style="border-top: 1px solid #e0e0e0;"><i class="fa fa-bars"></i> Transaction</a></li>
 
                         </ul>
                         <div class="tab-content">
@@ -311,7 +307,7 @@
                                     <span><strong><i class="fa fa-bars"></i>  Info</strong></span>
                                     <hr />
 
-                                    <label class="col-lg-2"><b>*</b>  Txn # :</label>
+                                    <label class="col-lg-2"><b class="required">*</b>  Txn # :</label>
                                     <div class="col-lg-4">
 
                                         <div class="input-group">
@@ -325,7 +321,7 @@
 
                                     </div>
 
-                                    <label class="col-lg-2"> <b>*</b> Date :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Date :</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
                                     <span class="input-group-addon">
@@ -342,7 +338,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"> <b>*</b> Customer :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Customer :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_customers" name="customer_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
                                             <option value="0">[ Create New Customer ]</option>
@@ -355,7 +351,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"><b>*</b> Department :</label>
+                                    <label class="col-lg-2"><b class="required">*</b> Department :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                             <option value="0">[ Create New Department ]</option>
@@ -371,7 +367,7 @@
                                     <hr />
 
                                     <div style="width: 100%;">
-                                        <table id="tbl_entries" class="">
+                                        <table id="tbl_entries" class="table table-striped">
                                             <thead class="">
                                             <tr>
                                                 <th style="width: 30%;">Account</th>
@@ -441,10 +437,10 @@
 
                                 <br /><br /><hr />
 
-                                <div class="row">
+                                <div class="row" style="padding-top: 25px;">
                                     <div class="col-sm-12">
                                         <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
-                                        <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
+                                        <button id="btn_cancel" class="btn-danger btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
                                     </div>
                                 </div>
                             </div>

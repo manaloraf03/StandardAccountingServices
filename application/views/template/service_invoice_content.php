@@ -7,7 +7,7 @@
                     size: auto;   /* auto is the initial value */
                     margin: .5in .5in 1in .5in; 
     }
-    tr:hover {
+/*    tr:hover {
         transition: .4s;
         background: #414141 !important;
         color: white;
@@ -19,8 +19,14 @@
         -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+    }*/
+
+    table{
+        border:none!important;
     }
         </style>
+    
+    
 
 
 

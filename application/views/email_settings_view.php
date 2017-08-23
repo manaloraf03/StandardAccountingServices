@@ -16,21 +16,14 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
 
 
     <style>
-        html {
-          zoom: 0.8;
-          zoom: 80%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -130,10 +123,11 @@
                                                 <h2>Company Information</h2>
                                                 <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
                                             </div>
- -->                                        <div class="panel-heading">
+ -->                                        <!-- <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Email Settings</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body">
+                                            <h2 class="h2-panel-heading">Email Settings</h2><hr>
                                                <form id="frm_company" role="form" class="form-horizontal row-border">
                                                    <div class="form-group hidden">
                                                        <label class="col-md-2 col-md-offset-1 control-label">

@@ -19,18 +19,12 @@
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="assets/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .select2-container{
             min-width: 100%;
         }
@@ -63,7 +57,7 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
-        th { border: 1px solid #525252!important; }
+/*        th { border: 1px solid #525252!important; }
 
         tr:nth-child(even) {
             background: transparent!important;
@@ -78,7 +72,7 @@
             background: transparent!important;
             color: white!important;
         }
-
+*/
     </style>
 
 </head>
@@ -103,24 +97,25 @@
                         <div data-widget-group="group1">
 
                             <div class="panel panel-default">
-                                <div class="panel-heading">
+                                <!-- <div class="panel-heading">
                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Comparative Income Statement</b>
-                                </div>
+                                </div> -->
                                 <div class="panel-body">
+                                <h2 class="h2-panel-heading">Comparative Income Statement</h2><hr>
                                     <div class="row">
                                         <div class="container-fluid">
                                             <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
                                                 <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
                                             </div>
-                                            <table width="100%" border="1">
+                                            <table width="100%" border="1" class="table table-striped">
                                                 <thead>
-                                                    <th style="background: #0960a5!important; text-align: center;" width="20%">Account Description</th>
-                                                    <th style="background: #074d85!important;"><center>PREVIOUS MONTH <br>(<?php echo date("F Y", strtotime("first day of previous month"));  ?>)</center></th>
-                                                    <th style="background: #074d85!important;"><center>CURRENT MONTH <br>(<?php echo date("F Y");  ?>)</center></th>
+                                                    <th style=" text-align: center;" width="20%">Account Description</th>
+                                                    <th style=""><center>PREVIOUS MONTH <br>(<?php echo date("F Y", strtotime("first day of previous month"));  ?>)</center></th>
+                                                    <th style=""><center>CURRENT MONTH <br>(<?php echo date("F Y");  ?>)</center></th>
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td colspan="3" style="background: #36474f; text-align: center;"><strong>- INCOME - </strong></td>
+                                                        <td colspan="3" style="text-align: center;"><strong>- INCOME - </strong></td>
                                                     </tr>
                                                     <?php $sum_inc_prev=0; ?>
                                                     <?php $sum_inc_cur=0; ?>
@@ -139,7 +134,7 @@
                                                         <td align="right"><?php echo number_format($sum_inc_cur,2); ?></td>
                                                     </tr><br>
                                                     <tr>
-                                                        <td colspan="3" style="background: #36474f; text-align: center;"><strong>- EXPENSES -</strong></td>
+                                                        <td colspan="3" style="text-align: center;"><strong>- EXPENSES -</strong></td>
                                                     </tr>
                                                     
                                                     <?php $sum_exp_prev=0; ?>

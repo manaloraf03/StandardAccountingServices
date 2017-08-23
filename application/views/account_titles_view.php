@@ -17,18 +17,12 @@
 
 
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
 
     <link type="text/css" href="assets/plugins/zTree/zTreeStyle.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.82;
-            zoom: 82%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -102,9 +96,11 @@
                     <div class="col-md-12">
                         <div id="div_chart_list">
                             <div class="panel panel-default">
-                                <div class="panel-heading">
+                                <div class="panel-body table-responsive">
+                            <h2 class="h2-panel-heading">Chart of Accounts</h2><hr>
+                             <!--    <div class="panel-heading">
                                     <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Chart of Accounts</b>
-                                </div>
+                                </div> -->
                                 <div class="row" id="treeListWrapper">
                                     <div class="col-xs-12 col-lg-4">
                                         <div id="zTreeDemoBackground" style="margin:3% 0% 3% 3%;">
@@ -112,8 +108,8 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-lg-8">
-                                        <div class="panel-body table-responsive" style="padding-left: 1px!important;">
-                                            <table id="tbl_accounts" class="" cellspacing="0" width="100%">
+                                        <div class="panel-body table-responsive" style="padding-left: 1px!important;border-top-color:transparent!important;">
+                                            <table id="tbl_accounts" class="table table-striped" cellspacing="0" width="100%">
                                                 <thead class="">
                                                 <tr>
                                                     <th>&nbsp;&nbsp;</th>
@@ -130,6 +126,8 @@
                                         </div>
                                     </div>
                                 </div>
+                                </div>
+
                                 <!-- <div class="panel-footer"></div> -->
                             </div>
                         </div>
@@ -142,7 +140,8 @@
                                     <div class="panel-ctrls" data-actions-container="" data-action-collapse='{"target": ".panel-body"}'></div>
                                 </div> -->
                                 <div class="panel-body">
-                                    <h2 id="account_add_title"></h2><br>
+                                    <h2 class="h2-panel-heading" id="account_add_title">Chart of Accounts</h2><hr>
+                                    <!-- <h2 id="account_add_title"></h2><br> -->
                                     <form id="frm_accounts" role="form" class="form-horizontal row-border">
                                         <div class="form-group">
                                             <label class="col-md-2 control-label"><strong>* Account # :</strong></label>

@@ -18,27 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -71,7 +59,7 @@
 
                     <ol class="breadcrumb" style="margin-bottom: 0px;">
                         <li><a href="dashboard">Dashboard</a></li>
-                        <li><a href="Account_receivable_schedule">Accounts Receivable Schedule</a></li>
+                        <li><a href="Customer_Subsidiary">Customer Subsidiary</a></li>
                     </ol>
 
                     <div class="container-fluid">
@@ -85,9 +73,10 @@
 
 
                                             <div class="panel panel-default">
-                                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Customer Subsidiary</b></div></a>
+                                                <!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Customer Subsidiary</b></div></a> -->
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">
+                                                    <h2 class="h2-panel-heading">Customer Subsidiary</h2><hr>
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
                                                             <div class="row">
                                                                 <div class="col-lg-4">
@@ -134,7 +123,7 @@
                                                         <br />
 
                                                         <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;padding-bottom: 2%;">
-                                                            <table id="tbl_customer_subsidiary" class="" cellspacing="0" width="100%">
+                                                            <table id="tbl_customer_subsidiary" class="table table-striped" cellspacing="0" width="100%">
                                                                 <thead class="">
                                                                 <tr>
                                                                     <th>Date</th>

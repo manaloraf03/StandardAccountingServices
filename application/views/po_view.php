@@ -18,22 +18,13 @@
 
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
-    <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
+   <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-
     <!--/twitter typehead-->
     <link href="assets/plugins/twittertypehead/twitter.typehead.css" rel="stylesheet">
 
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
-
         #tbl_items td,#tbl_items tr,#tbl_items th{
             table-layout: fixed;
             border: 1px solid gray;
@@ -178,17 +169,17 @@
 <div class="col-md-12">
 <div id="div_user_list">
     <div class="panel panel-default">
-
-        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Purchase Order</b></div></a>
+<!-- 
+        <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;"><b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i> Purchase Order</b></div></a> -->
 
 
         <div class="panel-body table-responsive">
-
-            <table id="tbl_purchases" class="" cellspacing="0" width="100%">
+        <h2 class="h2-panel-heading">Purchase Order</h2><hr>
+            <table id="tbl_purchases" class="table table-striped" cellspacing="0" width="100%">
                 <thead class="">
                 <tr>
                     <th></th>
-                    <th>Email</th>
+                    <th style="text-align: center;">Email</th>
                     <th>PO#</th>
                     <th>Vendor</th>
                     <th>Terms</th>
@@ -207,14 +198,14 @@
 </div>
 
 <div id="div_user_fields" style="display: none;">
-    <div class="panel panel-default" style="border: 4px solid #2980b9;border-radius: 8px;background: #303030 !important;">
+    <div class="panel panel-default" >
 
-    <div class="panel-body"  style="padding-bottom: 0%;padding-top: 0%;">
+    <div class="panel-body" >
 
         <div class="row" style="padding: 1%;margin-top: 0%;font-family: "Source Sans Pro", "Segoe UI", "Droid Sans", Tahoma, Arial, sans-serif">
         <form id="frm_purchases" role="form" class="form-horizontal">
-            <h4 style="margin-bottom: 6px;"><b>PO # : <span id="span_po_no">PO-XXXX</span></b></h4>
-            <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;">
+            <h2 class="h2-panel-heading">PO # : <span id="span_po_no">PO-XXXX</span></h2><hr>
+            <div >
                 <div class="row">
                     <div class="col-sm-5" >
                         Department * : <br />
@@ -293,8 +284,8 @@
 
 
 
-    <div style="border: 1px solid #a0a4a5;padding: 1%;border-radius: 5px;"><br />
-
+    <div><br />
+    <hr>
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
         <div id="custom-templates">
             <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
@@ -302,7 +293,7 @@
 
         <form id="frm_items">
             <div class="table-responsive">
-                <table id="tbl_items" class="" cellspacing="0" width="100%" style="font-font:tahoma;">
+                <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                     <thead class="">
                     <tr>
                         <th width="10%">Qty</th>
@@ -350,7 +341,7 @@
 
     </div>
 
-
+<hr>
 
     <br />
     <div class="row ">
@@ -795,7 +786,7 @@ $(document).ready(function(){
                 {
                     targets:[1],
                     render: function (data, type, full, meta){
-                        var btn_email='<button id="btn_email" class="btn-primary btn" style="margin-left:-15px;" data-toggle="tooltip" data-placement="top"><i class="fa fa-envelope-o"></i> <span class="display" style="display:none;"></span></button> ';
+                        var btn_email='<button id="btn_email" class="btn-primary btn btn-sm" style="margin-left:-15px;" data-toggle="tooltip" data-placement="top"><i class="fa fa-share"></i> <span class="display" style="display:none;"></span></button> ';
 
                         return '<center>'+btn_email+'</center>';
                     }
@@ -927,10 +918,10 @@ $(document).ready(function(){
             source: products,
             templates: {
                 header: [
-                    '<table width="100%"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                    '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On hand</b><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
 
-                suggestion: Handlebars.compile('<table width="100%"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
 
             }
         }).on('keyup', this, function (event) {

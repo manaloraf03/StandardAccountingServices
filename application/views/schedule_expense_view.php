@@ -18,27 +18,15 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
-         <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
-
     <!--<link href="assets/dropdown-enhance/dist/css/bootstrap-select.min.css" rel="stylesheet" type="text/css">-->
-
     <link href="assets/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/blue.css" rel="stylesheet">              <!-- iCheck -->
     <link type="text/css" href="assets/plugins/iCheck/skins/minimal/_all.css" rel="stylesheet">                   <!-- Custom Checkboxes / iCheck -->
 
     <style>
-        html{
-            zoom: 0.75;
-            zoom: 75%;
-        }
-
         .toolbar{
             float: left;
         }
@@ -46,14 +34,14 @@
         #tbl_expenses td:nth-child(n+2){
             text-align: right;
         }
-        tr:nth-child(odd) {
+/*        tr:nth-child(odd) {
             background-color: transparent!important;
             color:white!important;
         }
         tr:nth-child(even) {
             background-color: transparent!important;
              color:white!important;
-        }
+        }*/
 
     </style>
 
@@ -73,24 +61,20 @@
 
                 <div class="page-content"><!-- #page-content -->
 
-
+<br>
                     <div class="container-fluid" style="padding: 5px;!important;">
                         <div data-widget-group="group1">
                             <div class="row">
                                 <div class="col-md-12">
-
-                                    <div id="div_payable_list">
-
-                                        <div class="panel-group panel-default" id="accordionA">
-
-
-                                            <div class="panel panel-default" style="border-radius: 0px;border: 1px solid lightgrey;min-height: 800px;background-color: transparent!important;">
-                                                <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Schedule of Expense</b></div></a>
-
+                                    <div id="div_payable_list">                                     
+                                            <div class="panel panel-default" >
+                                                <!-- <a data-toggle="collapse" data-parent="#accordionA" href="#collapseTwo"><div class="panel-heading" style="background: #2ecc71;border-bottom: 1px solid lightgrey;;"><b style="color:white;font-size: 12pt;"><i class="fa fa-bars"></i> Schedule of Expense</b></div></a>
+ -->
 
                                                 <div id="collapseTwo" class="collapse in">
                                                     <div class="panel-body">
-                                                        <div style="border: 1px solid #a0a4a5;padding: 8px;border-radius: 0px;padding-bottom: 10px;margin-bottom: 5px;">
+                                                        <h2 class="h2-panel-heading">Schedule of Expense</h2><hr>
+                                                        <div style="padding: 8px;border-radius: 0px;padding-bottom: 10px;margin-bottom: 5px;">
                                                             <div class="row">
 
                                                                 <div class="col-lg-6">
@@ -120,7 +104,7 @@
 
 
 
-                                                        <table id="tbl_expenses" class="custom-design table-striped">
+                                                        <table id="tbl_expenses" class="table table-striped" >
                                                             <thead>
                                                             <tr>
                                                                 <th width="55%">Operating Expenses</th>
@@ -148,7 +132,6 @@
                                             </div>
 
 
-                                        </div>
 
                                     </div>
 
