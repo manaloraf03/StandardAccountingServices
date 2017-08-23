@@ -314,16 +314,16 @@
                                     <div class="col-md-12">
                                         <div class="panel panel-default" style="overflow-x: hidden!important;"> 
                                             <div class="panel-body table-responsive" style="border-top-color: white!important;">
-                                                <h1 ><b class="ti ti-bar-chart-alt"  style="color: #03a9f4;"></b> <strong style="color: #03a9f4;">JCORE</strong> Standard Accounting</h1>
+                                                <h1 ><b class="ti ti-bar-chart-alt"  style="color:#067cb2;"></b> <strong style="color:#067cb2;">JCORE</strong> Standard Accounting</h1>
                                                 <div id="intro">
                                                     <h4 class="welcome-msg">Hi
-                                                        <b style="color: #03a9f4;">
+                                                        <b style="color:#067cb2;">
                                                             <?php echo $this->session->user_fullname; ?>
                                                         </b> here is a rundown of your business' performance<br>and how your collections are doing individually. 
                                                     </h4>
-                                                    <hr style="border-color:#03a9f4!important;border-top:5px solid #03a9f4;">
+                                                    <hr style="border-color:#067cb2;!important;border-top:5px solid #03a9f4;">
                                                 </div>
-                                                <h3><b   style="color: #03a9f4;" class="fa fa-dashboard"></b> DASHBOARD</h3>
+                                                <h3><b   style="color: #067cb2;" class="fa fa-dashboard"></b> DASHBOARD</h3>
                                                 <div class="row">
                                                     <div class="col-xs-12 col-sm-3">
                                                         <div class="data-container text-center text-container">
@@ -368,7 +368,7 @@
                                                     <div class="col-xs-12 col-sm-8 <?php echo (in_array('7-1',$this->session->user_rights)?'':'hidden'); ?>">
                                                       <div class="data-container table-responsive" style="padding: 20px 15px 20px 15px; min-height: 700px; max-height: 700px;">
                                                             <h6 class="visible-xs hidden-sm hidden-md hidden-lg po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"></i> <span >PURCHASE ORDER</span></h6>
-                                                            <h3 class="hidden-xs po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"  style="color: #03a9f4;"></i> <span >PURCHASE ORDER FOR APPROVAL</span></h2>
+                                                            <h3 class="hidden-xs po_title" style="position: absolute; top: 5px"><i class="fa fa-file-text-o"  style="color: #067cb2;"></i> <span >PURCHASE ORDER FOR APPROVAL</span></h2>
                                                             <table id="tbl_po_list" class="table table-striped" cellspacing="0" width="100%">
                                                                 <thead>
                                                                     <th></th>
@@ -386,7 +386,7 @@
                                                     </div>
                                                     <div class="col-xs-12 <?php echo ($this->session->user_group_id == 1 ? 'col-sm-4' : 'col-sm-12' ); ?>">
                                                       <div id="style-1" class="data-container" style="min-height: 700px; max-height: 700px; overflow-y: scroll;">
-                                                        <h3><i class="fa fa-rss" style="color: #03a9f4"></i> ACTIVITY FEED</h3>
+                                                        <h3><i class="fa fa-rss" style="color: #067cb2;;"></i> ACTIVITY FEED</h3>
                                                         <div class="v-timeline vertical-container">
                                                             <?php echo ($this->session->user_group_id != 1 ? '' : $news_feed); ?>
                                                         </div>

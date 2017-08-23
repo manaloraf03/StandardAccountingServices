@@ -107,6 +107,9 @@
         border-color: #03a9f4!important;
     }
 
+    table a:not(.btn), .table a:not(.btn) {
+    text-decoration: none!important;
+}
 </style>
 
 <link rel="stylesheet" type="text/css" href="assets/css/light-theme.css">

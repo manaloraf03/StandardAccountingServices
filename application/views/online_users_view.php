@@ -18,11 +18,8 @@
     <?php echo $_def_css_files; ?>
 
     <link rel="stylesheet" href="assets/plugins/spinner/dist/ladda-themeless.min.css">
-    <link href="assets/css/dark-theme.css" rel="stylesheet">
-
     <link type="text/css" href="assets/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
     <link type="text/css" href="assets/plugins/datatables/dataTables.themify.css" rel="stylesheet">
-    <link type="text/css" href="assets/css/dark-theme.css" rel="stylesheet">
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
     <style>
@@ -105,13 +102,13 @@
                                 <div class="col-md-12">
 
                                     <div id="div_user_list">
-                                        <div class="panel panel-default" style="width:70%!important;">
+                                       <!--  <div class="panel panel-default" style="width:70%!important;">
                                             <div class="panel-heading">
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Users Online</b>
-                                            </div>
+                                            </div> -->
                                             <div class="panel-body table-responsive">
-
-                                                <table id="tbl_user" cellspacing="0" width="100%">
+                                            <h2 class="h2-panel-heading">Online Users</h2> <hr>
+                                                <table id="tbl_user" cellspacing="0"  class="table table-striped" width="100%">
 
                                                     <thead class="">
                                                     <tr>

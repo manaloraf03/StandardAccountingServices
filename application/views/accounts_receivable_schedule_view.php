@@ -332,6 +332,7 @@
                         "class":          "details-control",
                         "orderable":      false,
                         "data":           null,
+                        "visible" : false,
                         "defaultContent": ""
                     },
                     { targets:[1],data: "customer_name" },

@@ -3,8 +3,6 @@
         <tbody>
         <tr>
             <td style="border: 0px !important;" class="supplier_tab">
-                <br />
-
                 <div class="tab-container tab-top tab-default" style="height: auto;border-left: 0px!important;">
                     <ul class="nav nav-tabs">
                         <li class="active"><a href="#customer_info<?php echo $customer_info->customer_id; ?>" data-toggle="tab" class="tab-label"><i class="fa fa-users"></i> Information</a></li>
