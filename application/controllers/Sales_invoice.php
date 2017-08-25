@@ -285,7 +285,7 @@ class Sales_invoice extends CORE_Controller
                 }
 
                 //update invoice number base on formatted last insert id
-                $m_invoice->sales_inv_no='INV-'.date('Ymd').'-'.$sales_invoice_id;
+                $m_invoice->sales_inv_no='SAL-INV-'.date('Ymd').'-'.$sales_invoice_id;
                 $m_invoice->modify($sales_invoice_id);
 
 

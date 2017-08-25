@@ -55,6 +55,8 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
+
+
     </style>
     <?php echo $_def_css_files; ?>
 
@@ -111,7 +113,17 @@
                                                 <th align="right">Balance Amount</th>
                                                 <th align="right">Total</th>
                                             </tr>
+                                            <tr>
+                                            <th colspan="5" class="group-heading">SALES</th>
+                                            </tr>
                                             <tbody id="previous_balances">
+                                            
+                                            </tbody>
+                                            <tr>
+                                            <th colspan="5" class="group-heading">SERVICES</th>
+                                            </tr>
+                                            <tbody id="previous_balances_service">
+
                                             </tbody>
                                             <tr>
                                                 <td colspan="4" align="right"><b>SUB-TOTAL:</b></td>
@@ -126,7 +138,17 @@
                                                 <th align="right">Balance Amount</th>
                                                 <th align="right">Total</th>
                                             </tr>
+                                                <th colspan="5" class="group-heading">SALES</th>
+                                            </tr>
                                             <tbody id="current_balances">
+
+                                            
+                                            </tbody>
+                                            <tr>
+                                                <th colspan="5" class="group-heading">SERVICES</th>
+                                            </tr>
+                                            
+                                            <tbody id="current_balances_service">
                                             </tbody>
                                             <tr>
                                                 <td colspan="4" align="right"><b>SUB-TOTAL:</b></td>
@@ -140,7 +162,16 @@
                                                 <th align="right">Payment Amount</th>
                                                 <th align="right" colspan="2"></th>
                                             </tr>
+                                            <tr>
+                                                <th colspan="5" class="group-heading">SALES</th>
+                                            </tr>
                                             <tbody id="payment">
+
+                                            </tbody>
+                                            <tr>
+                                                <th colspan="5" class="group-heading">SERVICES</th>
+                                            </tr>
+                                            <tbody id="payment_services">
                                             </tbody>
                                             <tr>
                                                 <td colspan="4" align="right"><b>TOTAL:</b></td>
@@ -213,8 +244,11 @@ $(document).ready(function(){
     function reinitializeBalances() {
         var sumPrev = 0; var sumCur = 0; var sumPayment = 0; var totalBalance = 0; total = 0;
         $('#tbl_balances #previous_balances').html('');
+        $('#tbl_balances #previous_balances_service').html('');
         $('#tbl_balances #current_balances').html('');
+        $('#tbl_balances #current_balances_service').html('');
         $('#tbl_balances #payment').html('');
+        $('#tbl_balances #payment_services').html('');
 
 
         $.ajax({
@@ -226,23 +260,47 @@ $(document).ready(function(){
             contentType : false,
             success : function(response){
                 $.each(response.previous_balances, function(index,value){
+                    if(value.group_status == 1 ){
                     $('#tbl_balances #previous_balances').append(
                         '<tr>'+
-                            '<td>'+value.sales_inv_no+'</td>'+
+                            '<td>'+value.invoice_no+'</td>'+
                             '<td>'+value.date_invoice+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
                             '<td></td>'+
                         '</tr>'
                     );
+                   } else{
+                    $('#tbl_balances #previous_balances_service').append(
+                        '<tr>'+
+                            '<td>'+value.invoice_no+'</td>'+
+                            '<td>'+value.date_invoice+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
+                            '<td></td>'+
+                        '</tr>'
+                    );
+
+                    }
 
                     sumPrev += parseFloat(value.receivable_amount);
                 });
-
                 $.each(response.current_balances, function(index,value){
+                if(value.group_status == 1 ){
+
                     $('#tbl_balances #current_balances').append(
                         '<tr>'+
-                            '<td>'+value.sales_inv_no+'</td>'+
+                            '<td>'+value.invoice_no+'</td>'+
+                            '<td>'+value.date_invoice+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
+                            '<td></td>'+
+                        '</tr>'
+                    );
+                } else {
+                    $('#tbl_balances #current_balances_service').append(
+                        '<tr>'+
+                            '<td>'+value.invoice_no+'</td>'+
                             '<td>'+value.date_invoice+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
@@ -250,10 +308,14 @@ $(document).ready(function(){
                         '</tr>'
                     );
 
+                }
+
                     sumCur += parseFloat(value.receivable_amount);
+
                 });
 
                 $.each(response.payments, function(index,value){
+                    if (value.group_status == 1){
                     $('#tbl_balances #payment').append(
                         '<tr>'+
                             '<td>'+(value.receipt_no == null ? '' : value.receipt_no_desc) +'</td>'+
@@ -262,6 +324,17 @@ $(document).ready(function(){
                             '<td colspan="2"></td>'+
                         '</tr>'
                     );
+                } else {
+                    $('#tbl_balances #payment_services').append(
+                        '<tr>'+
+                            '<td>'+(value.receipt_no == null ? '' : value.receipt_no_desc) +'</td>'+
+                            '<td>'+(value.date_paid == null ? '' : value.date_paid) +'</td>'+
+                            '<td align="right" colspan="2">'+(value.date_paid == null ? '' : accounting.formatNumber(value.payment_amount,2))+'</td>'+
+                            '<td colspan="2"></td>'+
+                        '</tr>'
+                    );
+
+                }
 
                     sumPayment += parseFloat(value.payment_amount);
                 });

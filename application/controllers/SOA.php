@@ -41,9 +41,10 @@
 
 					$customer_id = $this->input->get('cusid',TRUE);
 
-					$response['previous_balances'] = $m_sales->get_customer_soa('< MONTH(NOW())',$customer_id,null,null);
-					$response['current_balances'] = $m_sales->get_customer_soa('= MONTH(NOW())',$customer_id,null,null);
-					$response['payments'] = $m_sales->get_customer_payments($customer_id);
+					$response['previous_balances'] = $m_sales->get_customer_soa_complete('< MONTH(NOW())',$customer_id,null,null);
+					// $response['current_balances'] = $m_sales->get_customer_soa('= MONTH(NOW())',$customer_id,null,null);
+					$response['current_balances'] = $m_sales->get_customer_soa_complete('= MONTH(NOW())',$customer_id,null,null);
+					$response['payments'] = $m_sales->get_customer_soa_payment($customer_id);
 
 					echo json_encode($response);
 					break;

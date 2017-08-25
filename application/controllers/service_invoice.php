@@ -61,9 +61,6 @@ class Service_invoice extends CORE_Controller
                 )   
             );
 
-
-
-
         $data['title'] = 'Service Invoice';
         $this->load->view('service_invoice_view', $data);
     }
@@ -148,7 +145,7 @@ class Service_invoice extends CORE_Controller
 
                 $m_invoice_items->save();
                 }
-                $m_invoice->service_invoice_no='INV-'.date('Ymd').'-'.$service_invoice_id;
+                $m_invoice->service_invoice_no='SER-INV-'.date('Ymd').'-'.$service_invoice_id;
                 $m_invoice->modify($service_invoice_id);
 
                 if($m_invoice->status()===TRUE){

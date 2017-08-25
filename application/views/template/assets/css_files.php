@@ -110,6 +110,10 @@
     table a:not(.btn), .table a:not(.btn) {
     text-decoration: none!important;
 }
+
+     th.group-heading {
+        background-color:#e6f7ff;
+     }
 </style>
 
 <link rel="stylesheet" type="text/css" href="assets/css/light-theme.css">
