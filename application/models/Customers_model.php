@@ -81,7 +81,58 @@ class Customers_model extends CORE_Model{
     //     return $this->db->query($sql)->result();
     // }
 
-    function get_customer_receivable_list($customer_id) {
+    function get_customer_receivable_list($customer_id)
+    {
+        $sql = "SELECT
+                unpaid.*,
+                IFNULL(paid.receivable_amount,0) receivable_amount,
+                IFNULL(paid.payment_amount,0) payment_amount,
+                (IFNULL(unpaid.journal_receivable_amount,0) - IFNULL(paid.payment_amount,0)) amount_due
+                FROM
+                (SELECT
+                ji.txn_no,
+                ji.journal_id,
+                c.customer_name,
+                IF(ISNULL(si.date_due),serv_inv.date_due,si.date_due) date_due,
+                IF(ISNULL(si.remarks),serv_inv.remarks,si.remarks) remarks,
+                IF(ISNULL(ref_no), txn_no, ref_no) inv_no,
+                IF(ji.is_sales = 1, si.total_after_tax, serv_inv.total_amount) journal_receivable_amount,
+                ji.is_sales
+                FROM
+                (journal_info ji
+                INNER JOIN journal_accounts ja ON ja.journal_id = ji.journal_id)
+                LEFT JOIN customers c ON c.customer_id = ji.customer_id
+                LEFT JOIN sales_invoice si ON si.sales_inv_no = ji.ref_no AND ji.is_sales=1
+                LEFT JOIN service_invoice serv_inv ON serv_inv.service_invoice_no = ji.ref_no AND ji.is_sales=0
+                WHERE
+                ji.is_deleted=FALSE
+                AND ji.is_active=TRUE
+                AND ji.book_type = 'SJE'
+                AND ji.customer_id = $customer_id
+                GROUP BY ji.journal_id) unpaid
+
+                LEFT JOIN 
+
+                (SELECT
+                rpl.journal_id,
+                SUM(IFNULL(rpl.receivable_amount,0)) receivable_amount,
+                SUM(IFNULL(rpl.payment_amount,0)) payment_amount
+                FROM
+                receivable_payments rp
+                INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
+                WHERE
+                rp.is_active=TRUE
+                AND rp.is_deleted=FALSE
+                AND rp.customer_id = $customer_id
+                GROUP BY rpl.journal_id) paid
+
+                ON unpaid.journal_id = paid.journal_id
+                HAVING amount_due > 0";
+
+                return $this->db->query($sql)->result();
+    }
+
+    function get_customer_receivable_list2($customer_id) {
         $sql = "SELECT
                 *
                 FROM

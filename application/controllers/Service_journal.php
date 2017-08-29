@@ -76,12 +76,12 @@ class Service_journal extends CORE_Controller
                     die(json_encode($response));
                 }
                 $m_journal->ref_no=$this->input->post('ref_no',TRUE);
-                $m_journal->is_sales=3;
+                $m_journal->is_sales=0;
                 $m_journal->customer_id=$this->input->post('customer_id',TRUE);
                 $m_journal->department_id=$this->input->post('department_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
                 $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
-                $m_journal->book_type='SIJE';
+                $m_journal->book_type='SJE';
 
                 //for audit details
                 $m_journal->set('date_created','NOW()');
@@ -153,7 +153,7 @@ class Service_journal extends CORE_Controller
                 $m_journal->department_id=$this->input->post('department_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
                 $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
-                $m_journal->book_type='SIJE';
+                $m_journal->book_type='SJE';
 
                 //for audit details
                 $m_journal->set('date_modified','NOW()');
@@ -224,7 +224,7 @@ class Service_journal extends CORE_Controller
         $m_journal=$this->Journal_info_model;
         return $m_journal->get_list(
 
-            "journal_info.is_deleted=FALSE AND journal_info.book_type='SIJE'".($criteria==null?'':' AND journal_info.journal_id='.$criteria),
+            "journal_info.is_deleted=FALSE AND journal_info.book_type='SJE' AND journal_info.is_sales=0 ".($criteria==null?'':' AND journal_info.journal_id='.$criteria),
 
             array(
                 'journal_info.journal_id',

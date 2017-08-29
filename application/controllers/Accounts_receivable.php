@@ -227,7 +227,7 @@ class Accounts_receivable extends CORE_Controller
         $m_journal=$this->Journal_info_model;
         return $m_journal->get_list(
 
-            "journal_info.is_deleted=FALSE AND journal_info.book_type='SJE'".($criteria==null?'':' AND journal_info.journal_id='.$criteria),
+            "journal_info.is_deleted=FALSE AND journal_info.book_type='SJE' AND journal_info.is_sales=1 ".($criteria==null?'':' AND journal_info.journal_id='.$criteria),
 
             array(
                 'journal_info.journal_id',
