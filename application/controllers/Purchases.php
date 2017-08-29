@@ -55,7 +55,6 @@ class Purchases extends CORE_Controller
             )
         );
 
-
         $data['tax_types']=$this->Tax_types_model->get_list('is_deleted=0');
 
         $data['products']=$this->Products_model->get_list(
@@ -104,6 +103,23 @@ class Purchases extends CORE_Controller
                         )
                     );
                     echo json_encode($response);
+                    break;
+
+                case 'get-po-details':
+                    $m_purchases=$this->Purchases_model;
+
+                    $purchase_order_id = $this->input->get('s',TRUE);
+
+                    $response['data']=$this->row_response(
+                        array(
+                            'purchase_order.is_deleted'=>FALSE,
+                            'purchase_order.is_active'=>TRUE,
+                            'purchase_order.purchase_order_id'=>$purchase_order_id
+                        )
+                    );
+
+                    echo json_encode($response);
+
                     break;
 
                 case 'product-lookup':
@@ -209,7 +225,7 @@ class Purchases extends CORE_Controller
 
                 case 'item-balance':
                     $m_items=$this->Purchase_items_model;
-                    $response['data']=$m_items->get_products_with_balance_qty($id_filter);
+                    $response['data']=$m_items->get_products_with_balance_qty2($id_filter);
                     echo json_encode($response);
 
                     break;
@@ -245,6 +261,8 @@ class Purchases extends CORE_Controller
                     $m_purchases->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                     $m_purchases->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                     $m_purchases->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                    $m_purchases->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                    $m_purchases->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
 
                     $m_purchases->save();
 
@@ -320,6 +338,8 @@ class Purchases extends CORE_Controller
                     $m_purchases->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                     $m_purchases->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                     $m_purchases->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                    $m_purchases->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                    $m_purchases->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
                     $m_purchases->modify($po_id);
 
 

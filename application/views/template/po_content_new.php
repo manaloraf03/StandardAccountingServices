@@ -105,6 +105,7 @@
 			<td style="padding: 6px;border-bottom: 1px solid gray;"><strong>UM</strong></td>
 			<td style="padding: 6px;border-bottom: 1px solid gray;"><strong>Qty</strong></td>
 			<td style="padding: 6px;border-bottom: 1px solid gray;"><strong>Unit Price</strong></td>
+            <td style="padding: 6px;border-bottom: 1px solid gray;"><strong>Discount (%)</strong></td>
 			<td style="padding: 6px;border-bottom: 1px solid gray;"><strong>Amount</strong></td>
 		</tr>
 		<?php foreach($po_items as $item){ ?>
@@ -113,22 +114,33 @@
                 <td width="10%" style="border-bottom: 1px solid gray;text-align: center;height: 10px;padding: 6px;"><?php echo $item->unit_name; ?></td>
                 <td width="15%" style="border-bottom: 1px solid gray;text-align: right;height: 10px;padding: 6px;"><?php echo number_format($item->po_qty,0); ?></td>
                 <td width="15%" style="border-bottom: 1px solid gray;text-align: right;height: 10px;padding: 6px;"><?php echo number_format($item->po_price,2); ?></td>
+                <td width="15%" style="border-bottom: 1px solid gray;text-align: right;height: 10px;padding: 6px;"><?php echo number_format($item->po_discount,2); ?></td>
                 <td width="10%" style="border-bottom: 1px solid gray;text-align: right;height: 10px;padding: 6px;"><?php echo number_format($item->po_line_total,2); ?></td>
             </tr>
         <?php } ?>
         <tr>
         	<td align="left" colspan="2"></td>
-        	<td colspan="2" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Total Before Tax</td>
+        	<td colspan="3" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Discount (%)</td>
+        	<td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($purchase_info->total_overall_discount,2); ?></strong></td>
+        </tr>
+        <tr>
+            <td align="left" colspan="2"></td>
+            <td colspan="3" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Total After Discount</td>
+            <td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($purchase_info->total_after_discount,2); ?></strong></td>
+        </tr>
+        <tr>
+        	<td align="left" colspan="2"></td>
+        	<td colspan="3" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Total Before Tax</td>
         	<td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($purchase_info->total_before_tax,2); ?></strong></td>
         </tr>
         <tr>
         	<td align="left" colspan="2" ></td>
-        	<td colspan="2" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Tax</td>
+        	<td colspan="3" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Tax</td>
         	<td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($purchase_info->total_tax_amount,2); ?></strong></td>
         </tr>
         <tr>
        		<td align="left" colspan="2" ></td>
-        	<td  colspan="2"  style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left"><strong>Total After Tax</strong></td>
+        	<td  colspan="3"  style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left"><strong>Total After Tax</strong></td>
         	<td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($purchase_info->total_after_tax,2); ?></strong></td>
         </tr>
 	</table>

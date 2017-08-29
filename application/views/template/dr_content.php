@@ -131,6 +131,16 @@
             </tbody>
             <tfoot>
             <tr>
+                <td align="left" colspan="2"></td>
+                <td colspan="2" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Discount (%)</td>
+                <td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($delivery_info->total_overall_discount,2); ?></strong></td>
+            </tr>
+            <tr>
+                <td align="left" colspan="2"></td>
+                <td colspan="2" style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="left">Total After Discount</td>
+                <td style="padding: 6px;border-bottom: 1px solid gray;height: 30px;" align="right"><strong><?php echo number_format($delivery_info->total_after_discount,2); ?></strong></td>
+            </tr>
+            <tr>
                 <td colspan="2" style="text-align: right;height: 30px;padding: 6px;"></td>
                 <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;">Discount : </td>
                 <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($delivery_info->total_discount,2); ?></td>
