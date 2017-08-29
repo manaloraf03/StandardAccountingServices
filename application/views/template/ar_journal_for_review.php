@@ -144,9 +144,7 @@
 
     <form id="frm_journal_review" role="form" class="form-horizontal row-border">
 
-
-
-
+    <span class="hidden"><input type="text" name="ref_no" value="<?php echo $sales_info->sales_inv_no; ?>"></span>
 
         <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Sales Journal</strong></span></h4>
 
@@ -210,7 +208,7 @@
 
             <br /><br />
 
-            <label class="col-lg-2"> * Branch :</label>
+            <label class="col-lg-2"> * Department :</label>
 
             <div class="col-lg-10">
 
@@ -231,11 +229,6 @@
 
 
         </div>
-
-
-
-
-
 
 
         <br /><br /><br />

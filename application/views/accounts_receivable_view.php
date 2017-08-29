@@ -1556,14 +1556,13 @@ $(document).ready(function(){
             var _curBtn=$(this);
             if(isBalance('#tbl_entries_for_review_'+_dataParentID)){
                 finalizeJournalReview().done(function(response){
+
                     showNotification(response);
                     if(response.stat=="success"){
                         dt.row.add(response.row_added[0]).draw();
                         var _parentRow=_curBtn.parents('table.table_journal_entries_review').parents('tr').prev();
                         dtReview.row(_parentRow).remove().draw();
                     }
-
-
                 }).always(function(){
                     showSpinningProgress(_curBtn);
                 });
@@ -1576,7 +1575,6 @@ $(document).ready(function(){
 
         var finalizeJournalReview=function(){
             var _data_review=parent.find('form').serializeArray();
-
             return $.ajax({
                 "dataType":"json",
                 "type":"POST",
