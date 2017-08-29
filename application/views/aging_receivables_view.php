@@ -204,28 +204,29 @@
                         render:function(data,type,full,meta){
                             return (data == 0 ? '' : accounting.formatNumber(data,2));
                         }
-                    },
-                    {
-                        visible:false,
-                        targets:[6],data: "is_sales"
                     }
+                    // ,
+                    // {
+                    //     visible:false,
+                    //     targets:[6],data: "is_sales"
+                    // }
                 ],
-                "order": [[ 6, 'asc' ]],
-                "drawCallback": function ( settings ) {
-                    var api = this.api();
-                    var rows = api.rows( {page:'current'} ).nodes();
-                    var last=null;
+                // "order": [[ 6, 'asc' ]],
+                // "drawCallback": function ( settings ) {
+                //     var api = this.api();
+                //     var rows = api.rows( {page:'current'} ).nodes();
+                //     var last=null;
          
-                    api.column(6, {page:'current'} ).data().each( function ( group, i ) {
-                        if ( last !== group ) {
-                            $(rows).eq( i ).before(
-                                '<tr class="group"><td colspan="6" style="background:#eaeaea;"><strong>'+(group == 1 ? 'PER SALES' : 'PER SERVICES')+'</strong></td></tr>'
-                            );
+                //     api.column(6, {page:'current'} ).data().each( function ( group, i ) {
+                //         if ( last !== group ) {
+                //             $(rows).eq( i ).before(
+                //                 '<tr class="group"><td colspan="6" style="background:#eaeaea;"><strong>'+(group == 1 ? 'PER SALES' : 'PER SERVICES')+'</strong></td></tr>'
+                //             );
                             
-                            last = group;
-                        }
-                    } );
-                },
+                //             last = group;
+                //         }
+                //     } );
+                // },
                 "footerCallback": function(a,b,c){
                     var api = this.api(), data;
                     // Remove the formatting to get integer data for summation

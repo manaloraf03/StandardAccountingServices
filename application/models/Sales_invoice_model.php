@@ -360,118 +360,169 @@ return $this->db->query($sql)->result();
     //     return $this->db->query($sql)->result();
     // }
 
+    // function get_aging_receivables()
+    // {
+    //     $sql = "SELECT
+    //     *
+    //     FROM
+    //     (
+    //         (
+    //         SELECT
+    //         n.customer_id,
+    //         n.customer_name,
+    //         SUM(n.days) days,
+    //         SUM(n.current) current,
+    //         SUM(n.30days) thirty_days,
+    //         SUM(n.45days) fortyfive_days,
+    //         SUM(n.60days) sixty_days,
+    //         SUM(n.over_90days) over_ninetydays,
+    //         1 is_sales
+    //         FROM
+    //         (SELECT
+    //         m.customer_id,
+    //         m.customer_name,
+    //         m.days,
+    //         m.sales_inv_no,
+    //         IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
+    //         IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
+    //         IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
+    //         IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
+    //         IF(m.days >= 90, m.balance,'') AS over_90days
+    //         FROM
+    //         (SELECT
+    //             si.sales_inv_no,
+    //             si.customer_id,
+    //             c.customer_name,
+    //             IFNULL(rpp.payment_amount,0) AS payment_amount,
+    //             ABS(DATEDIFF(NOW(),si.date_invoice)) AS days,
+    //             (IFNULL(si.total_after_tax,0) - IFNULL(rpp.payment_amount,0)) AS balance,
+    //             (CASE WHEN (IFNULL(rpp.payment_amount,0) < si.total_after_tax AND IFNULL(rpp.payment_amount,0) > 0) OR (IFNULL(rpp.payment_amount,0) = 0) THEN 'unpaid' ELSE 'paid' END) AS payment_status
+    //         FROM
+    //             sales_invoice si
+    //             LEFT JOIN customers c ON c.customer_id = si.customer_id
+    //             LEFT JOIN
+    //             (
+    //                 SELECT rp.*, rpl.sales_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
+    //                 receivable_payments rp
+    //                 INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
+    //                 WHERE
+    //                 rp.is_deleted=FALSE AND rp.is_active=TRUE
+    //                 GROUP BY rpl.sales_invoice_id
+    //             ) AS rpp
+    //             ON rpp.sales_invoice_id = si.sales_invoice_id
+    //         WHERE
+    //             si.is_deleted = FALSE
+    //             AND si.is_active = TRUE) m
+    //         ) n
+
+    //         GROUP BY n.customer_id
+    //         )
+
+    //         UNION
+
+    //         (
+    //         SELECT
+    //         n.customer_id,
+    //         n.customer_name,
+    //         SUM(n.days) days,
+    //         SUM(n.current) current,
+    //         SUM(n.30days) thirty_days,
+    //         SUM(n.45days) fortyfive_days,
+    //         SUM(n.60days) sixty_days,
+    //         SUM(n.over_90days) over_ninetydays,
+    //         0 is_sales
+    //         FROM
+    //         (SELECT
+    //         m.customer_id,
+    //         m.customer_name,
+    //         m.days,
+    //         m.service_invoice_no,
+    //         IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
+    //         IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
+    //         IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
+    //         IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
+    //         IF(m.days >= 90, m.balance,'') AS over_90days
+    //         FROM
+    //         (SELECT
+    //             si.service_invoice_no,
+    //             si.customer_id,
+    //             c.customer_name,
+    //             IFNULL(rpp.payment_amount,0) AS payment_amount,
+    //             ABS(DATEDIFF(NOW(),si.date_invoice)) AS days,
+    //             (IFNULL(si.total_amount,0) - IFNULL(rpp.payment_amount,0)) AS balance,
+    //             (CASE WHEN (IFNULL(rpp.payment_amount,0) < si.total_amount AND IFNULL(rpp.payment_amount,0) > 0) OR (IFNULL(rpp.payment_amount,0) = 0) THEN 'unpaid' ELSE 'paid' END) AS payment_status
+    //         FROM
+    //             service_invoice si
+    //             LEFT JOIN customers c ON c.customer_id = si.customer_id
+    //             LEFT JOIN
+    //             (
+    //                 SELECT rp.*, rpl.service_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
+    //                 receivable_payments rp
+    //                 INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
+    //                 WHERE
+    //                 rp.is_deleted=FALSE AND rp.is_active=TRUE
+    //                 GROUP BY rpl.service_invoice_id
+    //             ) AS rpp
+    //             ON rpp.service_invoice_id = si.service_invoice_id
+    //         WHERE
+    //             si.is_deleted = FALSE
+    //             AND si.is_active = TRUE) m
+    //         ) n
+
+    //         GROUP BY n.customer_id
+    //         )
+    //     ) sales_services";
+
+    //     return $this->db->query($sql)->result();
+    // }
     function get_aging_receivables()
     {
         $sql = "SELECT
-        *
-        FROM
-        (
-            (
-            SELECT
-            n.customer_id,
-            n.customer_name,
-            SUM(n.days) days,
-            SUM(n.current) current,
-            SUM(n.30days) thirty_days,
-            SUM(n.45days) fortyfive_days,
-            SUM(n.60days) sixty_days,
-            SUM(n.over_90days) over_ninetydays,
-            1 is_sales
-            FROM
-            (SELECT
-            m.customer_id,
-            m.customer_name,
-            m.days,
-            m.sales_inv_no,
-            IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
-            IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
-            IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
-            IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
-            IF(m.days >= 90, m.balance,'') AS over_90days
-            FROM
-            (SELECT
-                si.sales_inv_no,
-                si.customer_id,
-                c.customer_name,
-                IFNULL(rpp.payment_amount,0) AS payment_amount,
-                ABS(DATEDIFF(NOW(),si.date_invoice)) AS days,
-                (IFNULL(si.total_after_tax,0) - IFNULL(rpp.payment_amount,0)) AS balance,
-                (CASE WHEN (IFNULL(rpp.payment_amount,0) < si.total_after_tax AND IFNULL(rpp.payment_amount,0) > 0) OR (IFNULL(rpp.payment_amount,0) = 0) THEN 'unpaid' ELSE 'paid' END) AS payment_status
-            FROM
-                sales_invoice si
-                LEFT JOIN customers c ON c.customer_id = si.customer_id
-                LEFT JOIN
-                (
-                    SELECT rp.*, rpl.sales_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
-                    receivable_payments rp
-                    INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
-                    WHERE
-                    rp.is_deleted=FALSE AND rp.is_active=TRUE
-                    GROUP BY rpl.sales_invoice_id
-                ) AS rpp
-                ON rpp.sales_invoice_id = si.sales_invoice_id
-            WHERE
-                si.is_deleted = FALSE
-                AND si.is_active = TRUE) m
-            ) n
+n.customer_name,
+SUM(n.days) days,
+SUM(n.current) current,
+SUM(n.30days) thirty_days,
+SUM(n.45days) fortyfive_days,
+SUM(n.60days) sixty_days,
+SUM(n.over_90days) over_ninetydays
+FROM
+    (SELECT
+    m.customer_id,
+    m.customer_name,
+    m.days,
+    IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
+    IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
+    IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
+    IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
+    IF(m.days >= 90, m.balance,'') AS over_90days
+    FROM
+        (SELECT 
+        SUM(ja.dr_amount) as dr_amount,
+        c.customer_name,
+        ABS(DATEDIFF(NOW(),ji.date_txn)) AS days,
+        (SUM(ja.dr_amount) - IFNULL(payment.payment_amount,0)) as balance,
+        ji.*
+        FROM journal_info ji
+        
+        LEFT JOIN customers c on c.customer_id = ji.customer_id
+        LEFT JOIN journal_accounts ja on ja.journal_id = ji.journal_id
+        LEFT JOIN 
+        (SELECT 
+        rpl.payment_amount,
+        rpl.journal_id FROM 
+        receivable_payments_list rpl 
+        GROUP BY rpl.journal_id) as payment
+        ON payment.journal_id = ji.journal_id
+        
+        WHERE book_type = 'SJE'
+        AND ja.account_id = 2
+        AND ji.is_active = TRUE
+        AND ji.is_deleted = FALSE
 
-            GROUP BY n.customer_id
-            )
-
-            UNION
-
-            (
-            SELECT
-            n.customer_id,
-            n.customer_name,
-            SUM(n.days) days,
-            SUM(n.current) current,
-            SUM(n.30days) thirty_days,
-            SUM(n.45days) fortyfive_days,
-            SUM(n.60days) sixty_days,
-            SUM(n.over_90days) over_ninetydays,
-            0 is_sales
-            FROM
-            (SELECT
-            m.customer_id,
-            m.customer_name,
-            m.days,
-            m.service_invoice_no,
-            IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
-            IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
-            IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
-            IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
-            IF(m.days >= 90, m.balance,'') AS over_90days
-            FROM
-            (SELECT
-                si.service_invoice_no,
-                si.customer_id,
-                c.customer_name,
-                IFNULL(rpp.payment_amount,0) AS payment_amount,
-                ABS(DATEDIFF(NOW(),si.date_invoice)) AS days,
-                (IFNULL(si.total_amount,0) - IFNULL(rpp.payment_amount,0)) AS balance,
-                (CASE WHEN (IFNULL(rpp.payment_amount,0) < si.total_amount AND IFNULL(rpp.payment_amount,0) > 0) OR (IFNULL(rpp.payment_amount,0) = 0) THEN 'unpaid' ELSE 'paid' END) AS payment_status
-            FROM
-                service_invoice si
-                LEFT JOIN customers c ON c.customer_id = si.customer_id
-                LEFT JOIN
-                (
-                    SELECT rp.*, rpl.service_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
-                    receivable_payments rp
-                    INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
-                    WHERE
-                    rp.is_deleted=FALSE AND rp.is_active=TRUE
-                    GROUP BY rpl.service_invoice_id
-                ) AS rpp
-                ON rpp.service_invoice_id = si.service_invoice_id
-            WHERE
-                si.is_deleted = FALSE
-                AND si.is_active = TRUE) m
-            ) n
-
-            GROUP BY n.customer_id
-            )
-        ) sales_services";
+        GROUP BY ja.journal_id
+        ) as m
+    )n
+GROUP BY n.customer_id";
 
         return $this->db->query($sql)->result();
     }
