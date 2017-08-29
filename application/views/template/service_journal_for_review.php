@@ -137,7 +137,7 @@
 
 
 
-
+    <input type="hidden" name="ref_no" value="<?php echo $service_invoice->service_invoice_no; ?>">
 
         <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Service Journal</strong></span></h4>
 
