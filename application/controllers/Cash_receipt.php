@@ -89,6 +89,7 @@ class Cash_receipt extends CORE_Controller
                 $m_journal->or_no=$this->input->post('or_no');
                 $m_journal->check_no=$this->input->post('check_no');
                 $m_journal->bank_id=$this->input->post('bank');
+                $m_journal->ref_no=$this->input->post('ref_no');
 
 
                 //for audit details

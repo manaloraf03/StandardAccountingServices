@@ -144,8 +144,8 @@
 
                             <form id="frm_journal_review" role="form" class="form-horizontal row-border">
 
-
-
+                            <input type="hidden" name="ref_no" value="<?php echo $purchase_info->dr_invoice_no; ?>">
+                                
 
 
                                 <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Account Payable Journal</strong></span></h4>

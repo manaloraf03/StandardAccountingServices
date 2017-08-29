@@ -79,7 +79,7 @@ class Account_payables extends CORE_Controller
                     $response['msg']='Please make sure transaction date is valid!<br />';
                     die(json_encode($response));
                 }
-
+                $m_journal->ref_no=$this->input->post('ref_no',TRUE);
                 $m_journal->supplier_id=$this->input->post('supplier_id',TRUE);
                 $m_journal->department_id=$this->input->post('department_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
