@@ -34,7 +34,7 @@
 
 		function transaction($txn)
 		{
-			switch ($txn) 
+			switch ($txn)
 			{
 				case 'balances':
 					$m_sales = $this->Sales_invoice_model;
@@ -62,9 +62,9 @@
 
 					$data['customer_info'] = $customer_info[0];
 
-					$data['previous_balances'] = $m_sales->get_customer_soa('< MONTH(NOW())',$customer_id,null,null);
-					$data['current_balances'] = $m_sales->get_customer_soa('= MONTH(NOW())',$customer_id,null,null);
-					$data['payments'] = $m_sales->get_customer_payments($customer_id);
+					$data['previous_balances'] = $m_sales->get_customer_soa_complete('< MONTH(NOW())',$customer_id,null,null);
+					$data['current_balances'] = $m_sales->get_customer_soa_complete('= MONTH(NOW())',$customer_id,null,null);
+					$data['payments'] = $m_sales->get_customer_soa_payment($customer_id);
 
 					$this->load->view('template/soa_print',$data);
 					break;

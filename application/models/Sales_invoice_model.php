@@ -64,7 +64,7 @@ class Sales_invoice_model extends CORE_Model
 
     function get_customer_soa_complete($date, $customer_id, $status, $payment_date){
 $sql="SELECT * FROM (
-        SELECT 
+        SELECT
         1 as group_status,
         m.sales_invoice_id as invoice_id,
         m.sales_inv_no as invoice_no,
@@ -122,12 +122,12 @@ $sql="SELECT * FROM (
 
         ) as sales
 
-        UNION 
+        UNION
         (
         SELECT
         n.*
         FROM (
-        SELECT 
+        SELECT
         0 as group_status,
         service_invoice.service_invoice_id as invoice_id,
         service_invoice.service_invoice_no as invoice_no,
@@ -139,20 +139,20 @@ $sql="SELECT * FROM (
         IF(IFNULL(service_payment.payment_amount,0) != IFNULL(service_invoice.total_amount,0),'unpaid','paid') status
 
 
-        FROM          
-                 
-        (SELECT 
-        service_invoice.*,c.customer_name FROM 
-        service_invoice 
-        LEFT JOIN 
+        FROM
+
+        (SELECT
+        service_invoice.*,c.customer_name FROM
+        service_invoice
+        LEFT JOIN
         customers c on c.customer_id =  service_invoice.customer_id
         WHERE service_invoice.is_deleted = FALSE
         AND service_invoice.is_active= TRUE
         AND service_invoice.customer_id= $customer_id
          ".($date = null ? "AND YEAR(date_invoice) = YEAR(NOW())" : "AND MONTH(date_invoice) $date AND YEAR(date_invoice) = YEAR(NOW())")." ) as service_invoice
 
-        LEFT JOIN 
-        (SELECT                 
+        LEFT JOIN
+        (SELECT
         IF(rpl.sales_invoice_id = 0, 1 , 0) status_group,
             rp.*,
             rpl.sales_invoice_id,
@@ -200,7 +200,7 @@ SELECT * FROM
         AND rp.customer_id = $customer_id
         AND MONTH(rp.date_paid) = MONTH(NOW()) AND YEAR(NOW())
         GROUP BY rpl.sales_invoice_id) m HAVING balance > 0) as m
-        
+
 UNION
 
 (SELECT * FROM
@@ -233,7 +233,7 @@ return $this->db->query($sql)->result();
 
     function get_customer_soa($date, $customer_id, $status, $payment_date)
     {
-        $sql = "SELECT 
+        $sql = "SELECT
                 *,
                 IF(m.balance = 0, m.payment_amount, m.balance) balance_amount
                 FROM (SELECT
@@ -283,7 +283,7 @@ return $this->db->query($sql)->result();
         return $this->db->query($sql)->result();
     }
 
-    function get_customer_payments($customer_id) 
+    function get_customer_payments($customer_id)
     {
         $sql = "SELECT * FROM
         (SELECT
@@ -329,7 +329,7 @@ return $this->db->query($sql)->result();
     //         IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
     //         IF(m.days >= 90, m.balance,'') AS over_90days
     //         FROM
-    //         (SELECT 
+    //         (SELECT
     //             si.sales_inv_no,
     //             si.customer_id,
     //             c.customer_name,
@@ -340,12 +340,12 @@ return $this->db->query($sql)->result();
     //         FROM
     //             sales_invoice si
     //             LEFT JOIN customers c ON c.customer_id = si.customer_id
-    //             LEFT JOIN 
+    //             LEFT JOIN
     //             (
     //                 SELECT rp.*, rpl.sales_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
     //                 receivable_payments rp
     //                 INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
-    //                 WHERE 
+    //                 WHERE
     //                 rp.is_deleted=FALSE AND rp.is_active=TRUE
     //                 GROUP BY rpl.sales_invoice_id
     //             ) AS rpp
@@ -389,7 +389,7 @@ return $this->db->query($sql)->result();
             IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
             IF(m.days >= 90, m.balance,'') AS over_90days
             FROM
-            (SELECT 
+            (SELECT
                 si.sales_inv_no,
                 si.customer_id,
                 c.customer_name,
@@ -400,12 +400,12 @@ return $this->db->query($sql)->result();
             FROM
                 sales_invoice si
                 LEFT JOIN customers c ON c.customer_id = si.customer_id
-                LEFT JOIN 
+                LEFT JOIN
                 (
                     SELECT rp.*, rpl.sales_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
                     receivable_payments rp
                     INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
-                    WHERE 
+                    WHERE
                     rp.is_deleted=FALSE AND rp.is_active=TRUE
                     GROUP BY rpl.sales_invoice_id
                 ) AS rpp
@@ -443,7 +443,7 @@ return $this->db->query($sql)->result();
             IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
             IF(m.days >= 90, m.balance,'') AS over_90days
             FROM
-            (SELECT 
+            (SELECT
                 si.service_invoice_no,
                 si.customer_id,
                 c.customer_name,
@@ -454,12 +454,12 @@ return $this->db->query($sql)->result();
             FROM
                 service_invoice si
                 LEFT JOIN customers c ON c.customer_id = si.customer_id
-                LEFT JOIN 
+                LEFT JOIN
                 (
                     SELECT rp.*, rpl.service_invoice_id, SUM(rpl.payment_amount) payment_amount FROM
                     receivable_payments rp
                     INNER JOIN receivable_payments_list rpl ON rpl.payment_id = rp.payment_id
-                    WHERE 
+                    WHERE
                     rp.is_deleted=FALSE AND rp.is_active=TRUE
                     GROUP BY rpl.service_invoice_id
                 ) AS rpp
@@ -483,7 +483,7 @@ return $this->db->query($sql)->result();
             si.date_invoice,
             si.total_after_tax,
             si.remarks
-            FROM 
+            FROM
             sales_invoice AS si
             LEFT JOIN customers AS c ON c.customer_id = si.customer_id
             WHERE date_invoice BETWEEN '$startDate' AND '$endDate' AND inv_type=1
@@ -575,53 +575,53 @@ return $this->db->query($sql)->result();
         return $this->db->query($sql)->result();
     }
 
-    function get_sales_detailed_list($start=null,$end=null){ 
-        $sql="SELECT  
-                si.sales_invoice_id, 
-                si.sales_inv_no, 
-                si.date_invoice, 
-                si.customer_id, 
-                c.customer_name, 
-                p.product_id, 
-                p.product_code, 
-                p.product_desc, 
-                p.sale_price, 
-                sii.inv_qty, 
+    function get_sales_detailed_list($start=null,$end=null){
+        $sql="SELECT
+                si.sales_invoice_id,
+                si.sales_inv_no,
+                si.date_invoice,
+                si.customer_id,
+                c.customer_name,
+                p.product_id,
+                p.product_code,
+                p.product_desc,
+                p.sale_price,
+                sii.inv_qty,
                 s.salesperson_id,
                 s.salesperson_code,
                 CONCAT(s.firstname,' ',s.lastname) AS salesperson_name,
-                ((p.sale_price) * (sii.inv_qty)) as total_amount 
-            FROM 
-                (sales_invoice AS si 
-                LEFT JOIN customers AS c ON c.customer_id = si.customer_id) 
-                INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
+                ((p.sale_price) * (sii.inv_qty)) as total_amount
+            FROM
+                (sales_invoice AS si
+                LEFT JOIN customers AS c ON c.customer_id = si.customer_id)
+                INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id
                 LEFT JOIN products AS p ON p.product_id=sii.product_id
                 LEFT JOIN salesperson AS s ON s.salesperson_id=si.salesperson_id
-            WHERE 
-                si.is_active = TRUE AND si.is_deleted = FALSE 
-                AND si.date_invoice BETWEEN '$start' AND '$end' 
-            ORDER BY si.sales_inv_no ASC"; 
+            WHERE
+                si.is_active = TRUE AND si.is_deleted = FALSE
+                AND si.date_invoice BETWEEN '$start' AND '$end'
+            ORDER BY si.sales_inv_no ASC";
         return $this->db->query($sql)->result();
     }
 
-    function get_sales_summary_list($start=null,$end=null){ 
+    function get_sales_summary_list($start=null,$end=null){
         $sql="SELECT
-                  si.customer_id, 
+                  si.customer_id,
                   c.customer_code,
                   c.customer_name,
                   s.salesperson_code,
                   CONCAT(s.firstname,' ',s.lastname) AS salesperson_name,
-                  SUM((p.sale_price) * (sii.inv_qty)) as total_amount 
-              FROM 
-                  (sales_invoice AS si 
-                  LEFT JOIN customers AS c ON c.customer_id = si.customer_id) 
-                  INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
-                  LEFT JOIN products AS p ON p.product_id=sii.product_id 
+                  SUM((p.sale_price) * (sii.inv_qty)) as total_amount
+              FROM
+                  (sales_invoice AS si
+                  LEFT JOIN customers AS c ON c.customer_id = si.customer_id)
+                  INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id
+                  LEFT JOIN products AS p ON p.product_id=sii.product_id
                   LEFT JOIN salesperson AS s ON s.salesperson_id=si.salesperson_id
-              WHERE 
-                  si.is_active = TRUE AND si.is_deleted = FALSE 
+              WHERE
+                  si.is_active = TRUE AND si.is_deleted = FALSE
                   AND si.date_invoice BETWEEN '$start' AND '$end'
-              GROUP BY si.customer_id"; 
+              GROUP BY si.customer_id";
         return $this->db->query($sql)->result();
     }
 
@@ -630,13 +630,13 @@ return $this->db->query($sql)->result();
                   si.customer_id,
                   p.product_code,
                   p.product_desc,
-                  SUM((p.sale_price) * (sii.inv_qty)) as total_amount 
-              FROM 
-                  (sales_invoice AS si) 
-                  INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id 
+                  SUM((p.sale_price) * (sii.inv_qty)) as total_amount
+              FROM
+                  (sales_invoice AS si)
+                  INNER JOIN sales_invoice_items AS sii ON si.sales_invoice_id = sii.sales_invoice_id
                   LEFT JOIN products AS p ON p.product_id=sii.product_id
-              WHERE 
-                  si.is_active = TRUE AND si.is_deleted = FALSE 
+              WHERE
+                  si.is_active = TRUE AND si.is_deleted = FALSE
                   AND si.date_invoice BETWEEN '$start' AND '$end'
               GROUP BY sii.product_id";
          return $this->db->query($sql)->result();
@@ -646,7 +646,7 @@ return $this->db->query($sql)->result();
     $sql="SELECT
         si.sales_invoice_id,
         si.sales_inv_no,
-        si.remarks, 
+        si.remarks,
         si.date_created,
         si.customer_id,
         si.inv_type,
@@ -686,7 +686,7 @@ return $this->db->query($sql)->result();
         WHERE si.is_active= TRUE AND si.is_deleted =  FALSE";
 
          return $this->db->query($sql)->result();
-    } 
+    }
 }
 
 

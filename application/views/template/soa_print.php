@@ -39,11 +39,11 @@
 	      body { margin: 1.0cm; }
 		}
     </style>
-    <script>
+    <!-- <script>
     	(function(){
     		window.print();
     	})();
-    </script>
+    </script> -->
 </head>
 <body>
 	<table width="100%">
@@ -73,7 +73,8 @@
     		<td width="40%"><?php echo $customer_info->contact_name; ?></td>
     	</tr>
     </table><br>
-    <?php $sumPrev = 0; $sumCur = 0; $sumPayment = 0; $totalBalance = 0; $total = 0; ?>
+    <?php $sumPrev = 0; $sumPrevSales=0; $sumPrevService=0; $sumCur = 0; $sumPayment = 0; $totalBalance = 0; $total = 0;  $sumCurSales=0;
+		$sumCurService=0; $sumPaymentSales=0 ; $sumPaymentService=0; ?>
     <table width="100%" border="1" cellspacing="0" cellpadding="4">
     	<tr>
     		<td colspan="5" align="center"><strong>PREVIOUS BALANCES</strong></td>
@@ -85,18 +86,44 @@
 	        <th width="20%" align="right">Balance Amount</th>
 	        <th width="20%" align="right">Total</th>
     	</tr>
+			<tr>
+				<td colspan="5" style="font-weight:bolder;">SALES INVOICE</td>
+			</tr>
     	<?php foreach($previous_balances as $previous_balance) { ?>
+				<?php if($previous_balance->group_status == 1) { ?>
     		<tr>
-    			<td><?php echo $previous_balance->sales_inv_no; ?></td>
+    			<td><?php echo $previous_balance->invoice_no; ?></td>
     			<td><?php echo $previous_balance->date_invoice; ?></td>
     			<td align="right"><?php echo number_format($previous_balance->receivable_amount,2); ?></td>
     			<td align="right"><?php echo number_format($previous_balance->balance_amount,2); ?></td>
     			<td></td>
     		</tr>
-    		<?php $sumPrev += $previous_balance->receivable_amount; ?>
+    		<?php $sumPrevSales += $previous_balance->receivable_amount; ?>
+			<?php } ?>
     	<?php } ?>
+			<tr>
+				<td colspan="5" style="font-weight:bolder;">SERVICE INVOICE</td>
+			</tr>
+			<?php foreach($previous_balances as $previous_balance) { ?>
+				<?php if($previous_balance->group_status == 0) { ?>
+    		<tr>
+    			<td><?php echo $previous_balance->invoice_no; ?></td>
+    			<td><?php echo $previous_balance->date_invoice; ?></td>
+    			<td align="right"><?php echo number_format($previous_balance->receivable_amount,2); ?></td>
+    			<td align="right"><?php echo number_format($previous_balance->balance_amount,2); ?></td>
+    			<td></td>
+    		</tr>
+				<?php $sumPrevService += $previous_balance->receivable_amount; ?>
+			<?php } ?>
+
+    	<?php } ?>
+
+
+
+
     	<tr>
             <td colspan="4" align="right"><b>SUB-TOTAL:</b></td>
+						<?php $sumPrev = $sumPrevSales + $sumPrevService; ?>
             <td id="total_prev" align="right"><?php echo number_format($sumPrev,2); ?></td>
         </tr>
     	<tr>
@@ -109,19 +136,43 @@
 	        <th width="20%" align="right">Balance Amount</th>
 	        <th width="20%" align="right">Total</th>
     	</tr>
+			<tr>
+				<td colspan="5" style="font-weight:bolder;">SALES INVOICE</td>
+			</tr>
     	<?php foreach($current_balances as $current_balance) { ?>
+
+				<?php if($current_balance->group_status == 1) { ?>
     		<tr>
-    			<td><?php echo $current_balance->sales_inv_no; ?></td>
+    			<td><?php echo $current_balance->invoice_no; ?><?php echo $current_balance->group_status; ?></td>
     			<td><?php echo $current_balance->date_invoice; ?></td>
     			<td align="right"><?php echo number_format($current_balance->receivable_amount,2); ?></td>
     			<td align="right"><?php echo number_format($current_balance->balance_amount,2); ?></td>
     			<td></td>
     		</tr>
-    		<?php $sumCur += $current_balance->receivable_amount; ?>
-    	<?php } ?>
+				<?php $sumCurSales += $current_balance->receivable_amount; ?>
+				 	<?php } ?>
+			<?php } ?>
+				 <tr>
+	 				<td colspan="5" style="font-weight:bolder;">SERVICE INVOICE</td>
+	 			</tr>
+	     	<?php foreach($current_balances as $current_balance) { ?>
+
+	 				<?php if($current_balance->group_status == 0) { ?>
+	     		<tr>
+	     			<td><?php echo $current_balance->invoice_no; ?><?php echo $current_balance->group_status; ?></td>
+	     			<td><?php echo $current_balance->date_invoice; ?></td>
+	     			<td align="right"><?php echo number_format($current_balance->receivable_amount,2); ?></td>
+	     			<td align="right"><?php echo number_format($current_balance->balance_amount,2); ?></td>
+	     			<td></td>
+	     		</tr>
+					<?php $sumCurService += $current_balance->receivable_amount; ?>
+	 				 <?php } ?>
+
+				 <?php } ?>
     	<tr>
     	<tr>
             <td colspan="4" align="right"><b>SUB-TOTAL:</b></td>
+						<?php $sumCur =$sumCurService + $sumCurSales; ?>
             <td id="total_current" align="right"><?php echo number_format($sumCur,2); ?></td>
         </tr>
 		<td colspan="5" align="center"><strong>PAYMENTS</strong></td>
@@ -132,15 +183,38 @@
 	        <th width="20%" align="right">Payment Amount</th>
 	        <th width="20%" align="right" colspan="2"></th>
     	</tr>
+			<tr>
+				<td colspan="5" style="font-weight:bolder;">SALES</td>
+			</tr>
     	<?php foreach($payments as $payment) { ?>
+				<?php if($payment->group_status == 1) { ?>
     		<tr>
     			<td><?php echo $payment->receipt_no_desc; ?></td>
     			<td><?php echo $payment->date_paid; ?></td>
     			<td align="right"><?php echo number_format($payment->payment_amount,2); ?></td>
     			<td colspan="2"></td>
+					<?php $sumPaymentSales += $payment->payment_amount; ?>
     		</tr>
-    		<?php $sumPayment += $payment->payment_amount; ?>
+    		<?php } ?>
     	<?php } ?>
+			<tr>
+				<td colspan="5" style="font-weight:bolder;">SERVICES</td>
+			</tr>
+			<?php foreach($payments as $payment) { ?>
+				<?php if($payment->group_status == 0) { ?>
+				<tr>
+					<td><?php echo $payment->receipt_no_desc; ?></td>
+					<td><?php echo $payment->date_paid; ?></td>
+					<td align="right"><?php echo number_format($payment->payment_amount,2); ?></td>
+					<td colspan="2"></td>
+				</tr>
+				<?php $sumPaymentService += $payment->payment_amount; ?>
+					<?php } ?>
+			<?php } ?>
+
+<?php $sumPayment = $sumPaymentService + $sumPaymentSales;  ?>
+
+
     	<?php $total = $sumPrev + $sumCur; ?>
     	<?php $totalBalance = $total - $sumPayment; ?>
     	<tr>
