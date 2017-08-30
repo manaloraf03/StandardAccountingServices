@@ -259,14 +259,14 @@ $(document).ready(function(){
             processData : false,
             contentType : false,
             success : function(response){
-                $.each(response.previous_balances, function(index,value){
-                    if(value.group_status == 1 ){
+                $.each(response.previous_balances_soa, function(index,value){
+                    if(value.is_sales == 1 ){
                     $('#tbl_balances #previous_balances').append(
                         '<tr>'+
                             '<td>'+value.invoice_no+'</td>'+
-                            '<td>'+value.date_invoice+'</td>'+
+                            '<td>'+value.date_txn+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
-                            '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.balance,2)+'</td>'+
                             '<td></td>'+
                         '</tr>'
                     );
@@ -274,9 +274,9 @@ $(document).ready(function(){
                     $('#tbl_balances #previous_balances_service').append(
                         '<tr>'+
                             '<td>'+value.invoice_no+'</td>'+
-                            '<td>'+value.date_invoice+'</td>'+
+                            '<td>'+value.date_txn+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
-                            '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.balance,2)+'</td>'+
                             '<td></td>'+
                         '</tr>'
                     );
@@ -285,15 +285,15 @@ $(document).ready(function(){
 
                     sumPrev += parseFloat(value.receivable_amount);
                 });
-                $.each(response.current_balances, function(index,value){
-                if(value.group_status == 1 ){
+                $.each(response.current_balances_soa, function(index,value){
+                if(value.is_sales == 1 ){
 
                     $('#tbl_balances #current_balances').append(
                         '<tr>'+
                             '<td>'+value.invoice_no+'</td>'+
-                            '<td>'+value.date_invoice+'</td>'+
+                            '<td>'+value.date_txn+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
-                            '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.balance,2)+'</td>'+
                             '<td></td>'+
                         '</tr>'
                     );
@@ -301,9 +301,9 @@ $(document).ready(function(){
                     $('#tbl_balances #current_balances_service').append(
                         '<tr>'+
                             '<td>'+value.invoice_no+'</td>'+
-                            '<td>'+value.date_invoice+'</td>'+
+                            '<td>'+value.date_txn+'</td>'+
                             '<td align="right">'+accounting.formatNumber(value.receivable_amount,2)+'</td>'+
-                            '<td align="right">'+accounting.formatNumber(value.balance_amount,2)+'</td>'+
+                            '<td align="right">'+accounting.formatNumber(value.balance,2)+'</td>'+
                             '<td></td>'+
                         '</tr>'
                     );
@@ -315,7 +315,7 @@ $(document).ready(function(){
                 });
 
                 $.each(response.payments, function(index,value){
-                    if (value.group_status == 1){
+                    if (value.is_sales == 1){
                     $('#tbl_balances #payment').append(
                         '<tr>'+
                             '<td>'+(value.receipt_no == null ? '' : value.receipt_no_desc) +'</td>'+

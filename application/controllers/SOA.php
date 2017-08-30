@@ -40,10 +40,16 @@
 					$m_sales = $this->Sales_invoice_model;
 
 					$customer_id = $this->input->get('cusid',TRUE);
-
-					$response['previous_balances'] = $m_sales->get_customer_soa_complete('< MONTH(NOW())',$customer_id,null,null);
+					$response['previous_balances_soa'] = $m_sales->get_customer_soa_final('< MONTH(NOW())',$customer_id,null,null);
+					$response['current_balances_soa'] = $m_sales->get_customer_soa_final('= MONTH(NOW())',$customer_id,null,null);
+					
 					// $response['current_balances'] = $m_sales->get_customer_soa('= MONTH(NOW())',$customer_id,null,null);
-					$response['current_balances'] = $m_sales->get_customer_soa_complete('= MONTH(NOW())',$customer_id,null,null);
+
+
+					// $response['previous_balances'] = $m_sales->get_customer_soa_complete('< MONTH(NOW())',$customer_id,null,null);
+					// $response['current_balances'] = $m_sales->get_customer_soa_complete('= MONTH(NOW())',$customer_id,null,null);
+
+					
 					$response['payments'] = $m_sales->get_customer_soa_payment($customer_id);
 
 					echo json_encode($response);
