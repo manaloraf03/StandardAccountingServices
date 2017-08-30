@@ -511,7 +511,13 @@ FROM
         rpl.payment_amount,
         rpl.journal_id FROM 
         receivable_payments_list rpl 
-        GROUP BY rpl.journal_id) as payment
+LEFT JOIN 
+    receivable_payments as rp
+    
+    ON rp.payment_id = rpl.payment_id
+ WHERE rp.is_active = TRUE
+ AND rp.is_deleted = FALSE
+GROUP BY rpl.journal_id) as payment
         ON payment.journal_id = ji.journal_id
         
         WHERE book_type = 'SJE'
