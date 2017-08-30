@@ -141,6 +141,7 @@
                                         <div class="modal-footer">
                                             <div class="col-xs-12">
                                                 <a id="btn_print" href="#" target="_blank" class="btn btn-green" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-print"></i> Print </a>
+                                                <button id="btn_export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
 <!--                                                 <a href="Templates/layout/income-statement?type=&type=pdf" class="btn btn-primary" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-file-pdf-o"></i> Download as PDF </a> -->
                                                 <button class="btn btn-red" data-dismiss="modal" style="text-transform: capitalize;">Close</button>
                                             </div>
@@ -157,7 +158,7 @@
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -199,6 +200,10 @@
             allowClear: true
         });
         // _cboDepartments.select2('val',1);
+
+        $('#btn_export').click(function(){
+            window.open('Income_statement/transaction/export-excel?start='+$('#dt_start_date').val()+'&end='+$('#dt_end_date').val());
+        });
 
         $('#btn_print').click(function(){
          $(this).attr('href',"Templates/layout/income-statement?type=&type=preview&start="+$('#dt_start_date').val()+"&end="+$('#dt_end_date').val()+"&depid="+_cboDepartments.select2('val'));

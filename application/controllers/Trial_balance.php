@@ -178,11 +178,7 @@ class Trial_balance extends CORE_Controller
                         }
 
                     }
-
-
-
                 }
-
 
                 $i++;
                 $excel->getActiveSheet()->setCellValue('B'.$i,number_format($dr_amount,2));
@@ -192,32 +188,12 @@ class Trial_balance extends CORE_Controller
                 $excel->getActiveSheet()->getStyle('B'.$i.':D'.$i)->getFont()->setBold(TRUE);
                 $excel->getActiveSheet()->getStyle('B'.$i.':D'.$i)->getNumberFormat()->setFormatCode('###,##0.00;(###,##0.00)');
 
-
-
-
                 $excel->getActiveSheet()->getColumnDimension('A')->setAutoSize(TRUE);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 //merge cell A1 until D1
                 //$excel->getActiveSheet()->mergeCells('A1:D1');
                 //set aligment to center for that merged cell (A1 to D1)
                 //$excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
-
-
-
 
                 // Redirect output to a client’s web browser (Excel2007)
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
