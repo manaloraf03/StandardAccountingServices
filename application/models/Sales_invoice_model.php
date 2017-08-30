@@ -484,7 +484,12 @@ SUM(n.current) current,
 SUM(n.30days) thirty_days,
 SUM(n.45days) fortyfive_days,
 SUM(n.60days) sixty_days,
-SUM(n.over_90days) over_ninetydays
+SUM(n.over_90days) over_ninetydays,
+(SUM(n.current)+
+SUM(n.30days)+
+SUM(n.45days)+
+SUM(n.60days)+
+SUM(n.over_90days)) as total_balance
 FROM
     (SELECT
     m.customer_id,
@@ -508,7 +513,7 @@ FROM
         LEFT JOIN journal_accounts ja on ja.journal_id = ji.journal_id
         LEFT JOIN 
         (SELECT 
-        rpl.payment_amount,
+        SUM(rpl.payment_amount) as payment_amount,
         rpl.journal_id FROM 
         receivable_payments_list rpl 
 LEFT JOIN 
@@ -528,7 +533,7 @@ GROUP BY rpl.journal_id) as payment
         GROUP BY ja.journal_id
         ) as m
     )n
-GROUP BY n.customer_id";
+GROUP BY n.customer_id HAVING total_balance > 0";
 
         return $this->db->query($sql)->result();
     }

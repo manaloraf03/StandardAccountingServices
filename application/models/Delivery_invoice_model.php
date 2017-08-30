@@ -68,7 +68,12 @@ SUM(n.current) current,
 SUM(n.30days) thirty_days,
 SUM(n.45days) fortyfive_days,
 SUM(n.60days) sixty_days,
-SUM(n.over_90days) over_ninetydays
+SUM(n.over_90days) over_ninetydays,
+(SUM(n.current)+
+SUM(n.30days)+
+SUM(n.45days)+
+SUM(n.60days)+
+SUM(n.over_90days)) as total_balance
 FROM
     (SELECT
     m.supplier_id,
@@ -87,16 +92,16 @@ FROM
         ji.ref_no,
         s.supplier_id,
         s.supplier_name,
-        SUM(ja.cr_amount)as cr_amount,
+        SUM(IFNULL(ja.cr_amount,0))as cr_amount,
         ABS(DATEDIFF(NOW(),ji.date_txn)) AS days,
-        (SUM(IFNULL(ja.cr_amount,0))-IFNULL(payment.payment_amount,0)) as balance
+        (SUM(ja.cr_amount) - IFNULL(payment.payment_amount,0)) as balance
 
         FROM
         journal_info ji
         LEFT JOIN  journal_accounts ja ON ja.journal_id = ji.journal_id
         LEFT JOIN suppliers s ON s.supplier_id = ji.supplier_id
         LEFT JOIN (
-        SELECT ppl.dr_invoice_id,ppl.payment_amount FROM payable_payments_list ppl
+        SELECT ppl.dr_invoice_id, SUM(ppl.payment_amount) as payment_amount FROM payable_payments_list ppl
         LEFT JOIN
         payable_payments pp
         ON pp.payment_id = ppl.payment_id
@@ -110,8 +115,9 @@ FROM
         GROUP BY ja.journal_id
         ) as M
     ) n
-GROUP BY n.supplier_id
+GROUP BY n.supplier_id HAVING total_balance > 0
 
+        
         ";
 
             return $this->db->query($sql)->result();
