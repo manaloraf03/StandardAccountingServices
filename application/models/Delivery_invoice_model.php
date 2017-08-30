@@ -8,58 +8,114 @@ class Delivery_invoice_model extends CORE_Model {
         parent::__construct();
     }
 
-    function get_aging_payables()
+    // function get_aging_payables()
+    // {
+    //     $sql = "SELECT
+    //             n.supplier_name,
+    //             SUM(n.days) days,
+    //             SUM(n.current) current,
+    //             SUM(n.30days) thirty_days,
+    //             SUM(n.45days) fortyfive_days,
+    //             SUM(n.60days) sixty_days,
+    //             SUM(n.over_90days) over_ninetydays
+    //             FROM
+    //             (SELECT
+    //             m.supplier_id,
+    //             m.supplier_name,
+    //             m.days,
+    //             m.dr_invoice_no,
+    //             IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
+    //             IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
+    //             IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
+    //             IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
+    //             IF(m.days >= 90, m.balance,'') AS over_90days
+    //             FROM
+    //             (SELECT 
+    //                 di.dr_invoice_no,
+    //                 s.supplier_id,
+    //                 s.supplier_name,
+    //                 di.total_after_tax,
+    //                 IFNULL(ppp.payment_amount,0) AS payment_amount,
+    //                 ABS(DATEDIFF(NOW(),di.date_delivered)) AS days,
+    //                 (IFNULL(di.total_after_tax,0) - IFNULL(ppp.payment_amount,0)) AS balance,
+    //                 (CASE WHEN (IFNULL(ppp.payment_amount,0) < di.total_after_tax AND IFNULL(ppp.payment_amount,0) > 0) OR (IFNULL(ppp.payment_amount,0) = 0) THEN 'unpaid' ELSE 'paid' END) AS payment_status
+    //             FROM
+    //                 delivery_invoice di
+    //                 LEFT JOIN suppliers s ON s.supplier_id = di.supplier_id
+    //                 LEFT JOIN 
+    //                 (SELECT pp.*, ppl.dr_invoice_id, SUM(ppl.payment_amount) payment_amount FROM
+    //                 payable_payments pp
+    //                 INNER JOIN payable_payments_list ppl ON ppl.payment_id = pp.payment_id
+    //                 WHERE 
+    //                 pp.is_deleted=FALSE AND pp.is_active=TRUE
+    //                 GROUP BY ppl.dr_invoice_id) AS ppp
+    //                 ON ppp.dr_invoice_id = di.dr_invoice_id
+    //             WHERE
+    //                 di.is_deleted = FALSE
+    //                 AND di.is_active = TRUE) m
+    //             ) n
+
+    //             GROUP BY n.supplier_id";
+
+    //         return $this->db->query($sql)->result();
+    // }
+ function get_aging_payables()
     {
         $sql = "SELECT
-                n.supplier_name,
-                SUM(n.days) days,
-                SUM(n.current) current,
-                SUM(n.30days) thirty_days,
-                SUM(n.45days) fortyfive_days,
-                SUM(n.60days) sixty_days,
-                SUM(n.over_90days) over_ninetydays
-                FROM
-                (SELECT
-                m.supplier_id,
-                m.supplier_name,
-                m.days,
-                m.dr_invoice_no,
-                IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
-                IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
-                IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
-                IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
-                IF(m.days >= 90, m.balance,'') AS over_90days
-                FROM
-                (SELECT 
-                    di.dr_invoice_no,
-                    s.supplier_id,
-                    s.supplier_name,
-                    di.total_after_tax,
-                    IFNULL(ppp.payment_amount,0) AS payment_amount,
-                    ABS(DATEDIFF(NOW(),di.date_delivered)) AS days,
-                    (IFNULL(di.total_after_tax,0) - IFNULL(ppp.payment_amount,0)) AS balance,
-                    (CASE WHEN (IFNULL(ppp.payment_amount,0) < di.total_after_tax AND IFNULL(ppp.payment_amount,0) > 0) OR (IFNULL(ppp.payment_amount,0) = 0) THEN 'unpaid' ELSE 'paid' END) AS payment_status
-                FROM
-                    delivery_invoice di
-                    LEFT JOIN suppliers s ON s.supplier_id = di.supplier_id
-                    LEFT JOIN 
-                    (SELECT pp.*, ppl.dr_invoice_id, SUM(ppl.payment_amount) payment_amount FROM
-                    payable_payments pp
-                    INNER JOIN payable_payments_list ppl ON ppl.payment_id = pp.payment_id
-                    WHERE 
-                    pp.is_deleted=FALSE AND pp.is_active=TRUE
-                    GROUP BY ppl.dr_invoice_id) AS ppp
-                    ON ppp.dr_invoice_id = di.dr_invoice_id
-                WHERE
-                    di.is_deleted = FALSE
-                    AND di.is_active = TRUE) m
-                ) n
+n.supplier_name,
+SUM(n.days) days,
+SUM(n.current) current,
+SUM(n.30days) thirty_days,
+SUM(n.45days) fortyfive_days,
+SUM(n.60days) sixty_days,
+SUM(n.over_90days) over_ninetydays
+FROM
+    (SELECT
+    m.supplier_id,
+    m.supplier_name,
+    m.days,
+    IF(m.days >= 0 AND m.days < 30, m.balance,'') AS current,
+    IF(m.days >= 30 AND m.days <= 44, m.balance,'') AS 30days,
+    IF(m.days >= 45 AND m.days <= 59, m.balance,'') AS 45days,
+    IF(m.days >= 60 AND m.days <= 89, m.balance,'') AS 60days,
+    IF(m.days >= 90, m.balance,'') AS over_90days
+    FROM
+        (SELECT 
+        ji.journal_id,
+        ji.txn_no,
+        ji.date_txn,
+        ji.ref_no,
+        s.supplier_id,
+        s.supplier_name,
+        SUM(ja.cr_amount)as cr_amount,
+        ABS(DATEDIFF(NOW(),ji.date_txn)) AS days,
+        (SUM(IFNULL(ja.cr_amount,0))-IFNULL(payment.payment_amount,0)) as balance
 
-                GROUP BY n.supplier_id";
+        FROM
+        journal_info ji
+        LEFT JOIN  journal_accounts ja ON ja.journal_id = ji.journal_id
+        LEFT JOIN suppliers s ON s.supplier_id = ji.supplier_id
+        LEFT JOIN (
+        SELECT ppl.dr_invoice_id,ppl.payment_amount FROM payable_payments_list ppl
+        LEFT JOIN
+        payable_payments pp
+        ON pp.payment_id = ppl.payment_id
+        WHERE pp.is_active=TRUE AND pp.is_deleted = FALSE
+        GROUP BY ppl.dr_invoice_id
+        ) as payment 
+        ON payment.dr_invoice_id = ji.journal_id
+
+        WHERE ja.account_id = 4
+        AND ji.is_active=TRUE AND ji.is_deleted = FALSE
+        GROUP BY ja.journal_id
+        ) as M
+    ) n
+GROUP BY n.supplier_id
+
+        ";
 
             return $this->db->query($sql)->result();
     }
-
     function get_report_summary($startDate,$endDate){
         $sql="SELECT
             di.dr_invoice_no,
