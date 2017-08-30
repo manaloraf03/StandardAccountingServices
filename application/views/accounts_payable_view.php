@@ -223,18 +223,10 @@
                                             </tbody>
                                         </table>
                                     </div>
-
                                 </div>
                         </div>
-
                     </div>
-
-
                 </div>
-
-
-
-
                        <div id="div_payable_fields" style="display: none;">
                             <div class="row">
                             <div class="col-lg-12">
@@ -242,141 +234,139 @@
                                 <div class="panel panel-default">
                                 <div class="panel-body panel-responsive">
                                     <h2 class="h2-panel-heading">Purchase Journal</h2><hr />
+                                        <form id="frm_journal" role="form" class="form-horizontal">
+                                            <div>
+                                            <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
+
+                                            <label class="col-lg-2"> <b>*</b> Txn # :</label>
+                                            <div class="col-lg-4">
+
+                                                <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="fa fa-code"></i>
+                                                </span>
+                                                    <input type="text" name="txn_no" class="form-control" placeholder="TXN-YYYYMMDD-XXX" readonly>
+
+                                                </div>
 
 
-                                                        <form id="frm_journal" role="form" class="form-horizontal">
-                                                            <div>
-                                                            <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
+                                            </div>
 
-                                                            <label class="col-lg-2"> <b>*</b> Txn # :</label>
-                                                            <div class="col-lg-4">
+                                            <label class="col-lg-2"><b>*</b> Date :</label>
+                                            <div class="col-lg-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                    <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
+                                                </div>
+                                            </div>                                                    <label class="col-lg-2"><b>*</b> Supplier :</label>
+                                            <div class="col-lg-10">
+                                                <select id="cbo_suppliers" name="supplier_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Supplier name is required." required>
+                                                    <option value="0">[ Create New Supplier ]</option>
+                                                    <?php foreach($suppliers as $supplier){ ?>
+                                                        <option value='<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
 
-                                                                <div class="input-group">
-                                                                <span class="input-group-addon">
-                                                                    <i class="fa fa-code"></i>
-                                                                </span>
-                                                                    <input type="text" name="txn_no" class="form-control" placeholder="TXN-YYYYMMDD-XXX" readonly>
+                                            <br /><br />
+                                            <label class="col-lg-2"><b>*</b> Department :</label>
+                                            <div class="col-lg-10">
+                                                <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
+                                                    <option value="0">[ Create New Department ]</option>
+                                                    <?php foreach($departments as $department){ ?>
+                                                        <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
 
-                                                                </div>
+                                            
+                                            </div>
+                                            <div >
+                                            <hr>
+                                            <span ><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
+                                            <hr>
 
+                                            <div style="width: 100%;">
+                                                <table id="tbl_entries" class="table-striped table">
+                                                    <thead class="">
+                                                    <tr>
+                                                        <th style="width: 30%;">Account</th>
+                                                        <th style="width: 30%;">Memo</th>
+                                                        <th style="width: 15%;text-align: right;">Dr</th>
+                                                        <th style="width: 15%;text-align: right;">Cr</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                    </thead>
 
-                                                            </div>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
+                                                                <?php foreach($accounts as $account){ ?>
+                                                                    <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="memo[]" class="form-control"></td>
+                                                        <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
+                                                        <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
+                                                            <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
+                                                        </td>
+                                                    </tr>
 
-                                                            <label class="col-lg-2"><b>*</b> Date :</label>
-                                                            <div class="col-lg-4">
-                                                                <div class="input-group">
-                                                                    <span class="input-group-addon">
-                                                                        <i class="fa fa-calendar"></i>
-                                                                    </span>
-                                                                    <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
-                                                                </div>
-                                                            </div>                                                    <label class="col-lg-2"><b>*</b> Supplier :</label>
-                                                            <div class="col-lg-10">
-                                                                <select id="cbo_suppliers" name="supplier_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Supplier name is required." required>
-                                                                    <option value="0">[ Create New Supplier ]</option>
-                                                                    <?php foreach($suppliers as $supplier){ ?>
-                                                                        <option value='<?php echo $supplier->supplier_id; ?>'><?php echo $supplier->supplier_name; ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
+                                                    <tr>
+                                                        <td>
+                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
+                                                                <?php foreach($accounts as $account){ ?>
+                                                                    <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
+                                                                <?php } ?>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="memo[]" class="form-control"></td>
+                                                        <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
+                                                        <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
+                                                            <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
+                                                        </td>
+                                                    </tr>
 
-                                                            <br /><br />
-                                                            <label class="col-lg-2"><b>*</b> Department :</label>
-                                                            <div class="col-lg-10">
-                                                                <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
-                                                                    <option value="0">[ Create New Department ]</option>
-                                                                    <?php foreach($departments as $department){ ?>
-                                                                        <option value='<?php echo $department->department_id; ?>'><?php echo $department->department_name; ?></option>
-                                                                    <?php } ?>
-                                                                </select>
-                                                            </div>
+                                                    </tbody>
 
-                                                            
-                                                            </div>
-                                                            <div >
-                                                            <hr>
-                                                            <span ><strong><i class="fa fa-bars"></i> Journal Entries</strong></span>
-                                                            <hr>
-
-                                                            <div style="width: 100%;">
-                                                                <table id="tbl_entries" class="table-striped table">
-                                                                    <thead class="">
-                                                                    <tr>
-                                                                        <th style="width: 30%;">Account</th>
-                                                                        <th style="width: 30%;">Memo</th>
-                                                                        <th style="width: 15%;text-align: right;">Dr</th>
-                                                                        <th style="width: 15%;text-align: right;">Cr</th>
-                                                                        <th>Action</th>
-                                                                    </tr>
-                                                                    </thead>
-
-                                                                    <tbody>
-                                                                    <tr>
-                                                                        <td>
-                                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
-                                                                                <?php foreach($accounts as $account){ ?>
-                                                                                    <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </td>
-                                                                        <td><input type="text" name="memo[]" class="form-control"></td>
-                                                                        <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
-                                                                        <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
-                                                                        <td>
-                                                                            <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
-                                                                            <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    <tr>
-                                                                        <td>
-                                                                            <select name="accounts[]" class="selectpicker show-tick form-control selectpicker_accounts" data-live-search="true" >
-                                                                                <?php foreach($accounts as $account){ ?>
-                                                                                    <option value='<?php echo $account->account_id; ?>'><?php echo $account->account_title; ?></option>
-                                                                                <?php } ?>
-                                                                            </select>
-                                                                        </td>
-                                                                        <td><input type="text" name="memo[]" class="form-control"></td>
-                                                                        <td><input type="text" name="dr_amount[]" class="form-control numeric"></td>
-                                                                        <td><input type="text" name="cr_amount[]" class="form-control numeric"></td>
-                                                                        <td>
-                                                                            <button type="button" class="btn btn-default add_account"><i class="fa fa-plus-circle" style="color: green;"></i></button>
-                                                                            <button type="button" class="btn btn-default remove_account"><i class="fa fa-times-circle" style="color: red;"></i></button>
-                                                                        </td>
-                                                                    </tr>
-
-                                                                    </tbody>
-
-                                                                    <tfoot>
-                                                                    <tr>
-                                                                        <td colspan="2" align="right"><strong>Total</strong></td>
-                                                                        <td align="right"><strong>0.00</strong></td>
-                                                                        <td align="right"><strong>0.00</strong></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    </tfoot>
+                                                    <tfoot>
+                                                    <tr>
+                                                        <td colspan="2" align="right"><strong>Total</strong></td>
+                                                        <td align="right"><strong>0.00</strong></td>
+                                                        <td align="right"><strong>0.00</strong></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    </tfoot>
 
 
-                                                                </table>
+                                                </table>
 
-                                                            </div>
-                                                            </div>
+                                            </div>
+                                            </div>
 
-                                                            <hr />
-                                                            <br>
-                                                            <label>Remarks :</label><br />
-                                                            <textarea name="remarks" class="form-control col-lg-12"></textarea>
+                                            <hr />
+                                            <br>
+                                            <label>Remarks :</label><br />
+                                            <textarea name="remarks" class="form-control col-lg-12"></textarea>
 
-                                                        </form>
+                                        </form>
 
-                                                        <br /><br /><hr />
+                                        <br /><br /><hr />
 
-                                                        <div class="row" style="padding-top: 20px;">
-                                                            <div class="col-sm-12">
-                                                                <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
-                                                                <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
-                                                            </div>
-                                                        </div>
+                                        <div class="row" style="padding-top: 20px;">
+                                            <div class="col-sm-12">
+                                                <button id="btn_save" class="btn-primary btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Save Changes</button>
+                                                <button id="btn_cancel" class="btn-default btn" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"">Cancel</button>
+                                            </div>
+                                        </div>
 
 
 

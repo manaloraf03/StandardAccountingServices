@@ -55,8 +55,59 @@ class Suppliers_model extends CORE_Model {
         return $this->db->query($sql)->result();
     }
 
+    function get_supplier_payable_list($supplier_id) 
+    {
+      $sql = "SELECT
+        unpaid.*,
+        IFNULL(paid.payable_amount,0) payable_amount,
+        IFNULL(paid.payment_amount,0) payment_amount,
+        (IFNULL(unpaid.journal_payable_amount,0) - IFNULL(paid.payment_amount,0)) amount_due
+        FROM
+        (SELECT
+        ji.txn_no,
+        ji.journal_id,
+        s.supplier_name,
+        IFNULL(di.terms,ji.remarks) terms,
+        di.date_due,
+        IFNULL(di.remarks,ji.remarks) remarks,
+        IFNULL(ref_no, txn_no) inv_no,
+        IFNULL(di.total_after_tax, ja.dr_amount) journal_payable_amount
+        FROM
+        (journal_info ji
+        INNER JOIN journal_accounts ja ON ja.journal_id = ji.journal_id)
+        LEFT JOIN suppliers s ON s.supplier_id = ji.supplier_id
+        LEFT JOIN delivery_invoice di ON di.dr_invoice_no = ji.ref_no
+        WHERE
+        ji.is_deleted=FALSE
+        AND ji.is_active=TRUE
+        AND ji.book_type = 'PJE'
+        AND ji.supplier_id = $supplier_id
+        GROUP BY ji.journal_id) unpaid
+
+        LEFT JOIN 
+
+        (SELECT
+        ppl.dr_invoice_id,
+        SUM(IFNULL(ppl.payable_amount,0)) payable_amount,
+        SUM(IFNULL(ppl.payment_amount,0)) payment_amount
+        FROM
+        payable_payments pp
+        INNER JOIN payable_payments_list ppl ON ppl.payment_id = pp.payment_id
+        WHERE
+        pp.is_active=TRUE
+        AND pp.is_deleted=FALSE
+        AND pp.supplier_id = $supplier_id
+        GROUP BY ppl.dr_invoice_id) paid
+
+        ON unpaid.journal_id = paid.dr_invoice_id
+
+        HAVING amount_due > 0";
+
+          return $this->db->query($sql)->result();
+    }
+
     //returns list of purchase invoice of supplier that are unpaid
-    function get_supplier_payable_list($supplier_id) {
+    function get_supplier_payable_list2($supplier_id) {
         $sql="SELECT unp.*,IFNULL(pay.dr_payment_amount,0) as dr_payment_amount,
                 (IFNULL(unp.total_dr_amount,0)-IFNULL(pay.dr_payment_amount,0))as net_payable
                 FROM
