@@ -118,20 +118,16 @@
                                                 </div>
                                             </div><br />
 
-
-
-
-
                                         </div>
                                         <div class="modal-footer">
                                             <div class="row">
                                                 <div class="col-xs-12">
 
-                                                    <button id="btn_print" class="btn btn-green" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
+                                                    <button id="btn_print" class="btn btn-primary" style="text-transform: none;"><i class="fa fa-print"></i> PRINT REPORT</button>
 
-<!--                                                     <button id="btn_export" class="btn btn-success disabled" style="text-transform: none;"><i class="fa fa-file-excel-o"></i> Export to Excel</button> -->
+                                                    <a href="Annual_income_statement/Export" id="btn_export" class="btn btn-success"><span class="fa fa-file-excel-o"></span>&nbsp;EXPORT TO EXCEL</a>
 
-                                                    <button class="btn btn-red" data-dismiss="modal" style="text-transform: none;">Close</button>
+                                                    <button class="btn btn-red" data-dismiss="modal" style="text-transform: none;">CLOSE</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +142,7 @@
             <footer role="contentinfo">
                 <div class="clearfix">
                     <ul class="list-unstyled list-inline pull-left">
-                        <li><h6 style="margin: 0;">&copy; 2016 - Paul Christian Rueda</h6></li>
+                        <li><h6 style="margin: 0;">&copy; 2017 - JDEV IT BUSINESS SOLUTION</h6></li>
                     </ul>
                     <button class="pull-right btn btn-link btn-xs hidden-print" id="back-to-top"><i class="ti ti-arrow-up"></i></button>
                 </div>
@@ -182,22 +178,19 @@
             autoclose: true
         });
 
-
         _cboDepartments=$('#cbo_departments').select2({
             placeholder: "Please select department.",
             allowClear: true
         });
+
         _cboDepartments.select2('val',1);
 
         $('#btn_print').click(function(){
             if (_cboDepartments.select2('val') == null){
-            showNotification({ title: 'Error', msg: 'Please select a department!', stat: 'error' });
+                showNotification({ title: 'Error', msg: 'Please select a department!', stat: 'error' });
             } else{
-        window.open("Balance_sheet/transaction/bs?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'));
-
+                window.open("Balance_sheet/transaction/bs?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'));
             }
-
-            
         });
 
         var showNotification=function(obj){
