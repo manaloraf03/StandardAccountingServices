@@ -15,6 +15,12 @@
         color: white !important;
     }
     */
+    select.user-group-right-permission {
+    padding: 3px 3px 3px 3px;
+    width: 145px;
+    height: 30px;
+    font-size: 16px;
+}
 </style>
 
 <center>
@@ -49,9 +55,9 @@
                                     <tbody>
                                         <?php foreach($rights as $right){ ?>
                                             <tr style="border: 1px solid lightgray;">
-                                                <td><?php echo $right->link_name; ?></td>
+                                                <td style="font-size:16px;"><?php echo $right->link_name; ?></td>
                                                 <td>
-                                                    <select name="link_code[]" class="cbo_links">
+                                                    <select name="link_code[]" class="user-group-right-permission">
                                                         <option value="<?php echo $right->link_code; ?>" <?php echo ($right->is_allowed?'selected':''); ?>>Enable</option>
                                                         <option value="0" <?php echo ($right->is_allowed?'':'selected'); ?>>Disable</option>
                                                     </select>
