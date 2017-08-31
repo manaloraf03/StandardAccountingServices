@@ -55,9 +55,14 @@ class Income_statement extends CORE_Controller
                 $excel=$this->excel;
 
                 $excel->setActiveSheetIndex(0);
-                $excel->getActiveSheet()->getColumnDimensionByColumn('B')->setWidth('500');
-                $excel->getActiveSheet()->getColumnDimensionByColumn('C')->setWidth('100');
-                $excel->getActiveSheet()->getColumnDimensionByColumn('D')->setWidth('100');
+
+                $excel->getActiveSheet()->getColumnDimension('A')
+                                        ->setAutoSize(false)
+                                        ->setWidth('50');
+
+                $excel->getActiveSheet()->getColumnDimension('B')
+                                        ->setAutoSize(false)
+                                        ->setWidth('25');
 
                 $excel->getActiveSheet()->setTitle('Income Statement');
 
@@ -65,6 +70,22 @@ class Income_statement extends CORE_Controller
                                         ->setCellValue('A2',$company_info[0]->company_address)
                                         ->setCellValue('A3',$company_info[0]->email_address)
                                         ->setCellValue('A4',$company_info[0]->mobile_no);
+
+                $excel->getActiveSheet()
+                        ->mergeCells('A9:B9')
+                        ->setCellValue('A9', 'INCOME')
+                        ->getStyle('A9:B9')->applyFromArray(
+                            array(
+                                'fill' => array(
+                                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                                    'color' => array('rgb' => '53C1F0')
+                                )
+                            )
+                        )->getFont()
+                        ->setItalic(TRUE)
+                        ->setBold(TRUE);
+
+                
 
                 $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
 
@@ -75,10 +96,6 @@ class Income_statement extends CORE_Controller
                 $excel->getActiveSheet()->getStyle('B9:D9')->getFont()->setBold(TRUE);
                 $excel->getActiveSheet()->getStyle('A7')->getFont()->setItalic(TRUE);
 
-                $excel->getActiveSheet()->setCellValue('A9', 'INCOME')
-                                        ->getStyle('A9')->getFont()
-                                        ->setItalic(TRUE)
-                                        ->setBold(TRUE);
                 $i = 9;
                 $income_total=0;
                 $total_net = 0;
@@ -87,49 +104,106 @@ class Income_statement extends CORE_Controller
                     $i++;
 
                     $excel->getActiveSheet()->setCellValue('A'.$i,$income_account->account_title);
-                    $excel->getActiveSheet()->setCellValue('B'.$i,number_format($income_account->account_balance,2));
+                    $excel->getActiveSheet()->setCellValue('B'.$i,number_format($income_account->account_balance,2))
+                            ->getStyle('B'.$i)
+                            ->getAlignment()
+                            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
                     $income_total+=$income_account->account_balance;
 
                 }
 
                 $i++;
-                $excel->getActiveSheet()->setCellValue('A'.$i,'Total Income:')->getStyle('A'.$i)->getFont()
-                                        ->setBold(TRUE);
-                $excel->getActiveSheet()->setCellValue('B'.$i,number_format($income_total,2))->getStyle('A'.$i)->getFont()
-                                        ->setBold(TRUE);
+                $excel->getActiveSheet()->setCellValue('A'.$i,'Total Income:')
+                                        ->getStyle('A'.$i)
+                                        ->getFont()
+                                        ->setBold(TRUE)
+                                        ->getActiveSheet()
+                                        ->getStyle('A'.$i)
+                                        ->getAlignment()
+                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+
+                $excel->getActiveSheet()->setCellValue('B'.$i,number_format($income_total,2))
+                                        ->getStyle('B'.$i)
+                                        ->getFont()
+                                        ->setBold(TRUE)
+                                        ->getActiveSheet()
+                                        ->getStyle('B'.$i)
+                                        ->getAlignment()
+                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
                 $i+=2;
 
-                $excel->getActiveSheet()->setCellValue('A'.$i, 'EXPENSES')
-                                        ->getStyle('A'.$i)->getFont()
-                                        ->setItalic(TRUE)
-                                        ->setBold(TRUE);
+                $excel->getActiveSheet()
+                        ->mergeCells('A'.$i.':'.'B'.$i)
+                        ->setCellValue('A'.$i, 'EXPENSE')
+                        ->getStyle('A'.$i.':'.'B'.$i)->applyFromArray(
+                            array(
+                                'fill' => array(
+                                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+                                    'color' => array('rgb' => '53C1F0')
+                                )
+                            )
+                        )->getFont()
+                        ->setItalic(TRUE)
+                        ->setBold(TRUE);
 
                 $expense_total = 0;
                 foreach($expense_accounts as $expense_account)
                 {
                     $i++;
 
-                    $excel->getActiveSheet()->setCellValue('A'.$i,$expense_account->account_title);
-                    $excel->getActiveSheet()->setCellValue('B'.$i,number_format($expense_account->account_balance,2));
+                    $excel->getActiveSheet()
+                            ->setCellValue('A'.$i,$expense_account->account_title);
+
+                    $excel->getActiveSheet()
+                            ->setCellValue('B'.$i,number_format($expense_account->account_balance,2))
+                            ->getStyle('B'.$i)
+                            ->getAlignment()
+                            ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
                     $expense_total+=$expense_account->account_balance;
                 }
 
                 $i++;
-                $excel->getActiveSheet()->setCellValue('A'.$i,'Total Expense:')->getStyle('A'.$i)->getFont()
-                                        ->setBold(TRUE);
-                $excel->getActiveSheet()->setCellValue('B'.$i,number_format($expense_total,2))->getStyle('B'.$i)->getFont()
-                                        ->setBold(TRUE);
+                $excel->getActiveSheet()->setCellValue('A'.$i,'Total Expense:')
+                                        ->getStyle('A'.$i)
+                                        ->getFont()
+                                        ->setBold(TRUE)
+                                        ->getActiveSheet()
+                                        ->getStyle('A'.$i)
+                                        ->getAlignment()
+                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+
+                $excel->getActiveSheet()->setCellValue('B'.$i,number_format($expense_total,2))
+                                        ->getStyle('B'.$i)
+                                        ->getFont()
+                                        ->setBold(TRUE)
+                                        ->getActiveSheet()
+                                        ->getStyle('B'.$i)
+                                        ->getAlignment()
+                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
                 $total_net = $income_total + $expense_total;
 
                 $i++;
-                $excel->getActiveSheet()->setCellValue('A'.$i, 'NET INCOME:')->getStyle('A'.$i)->getFont()
-                                        ->setBold(TRUE);
-                $excel->getActiveSheet()->setCellValue('B'.$i, number_format($total_net,2))->getStyle('B'.$i)->getFont()
-                                        ->setBold(TRUE);
+                $excel->getActiveSheet()->setCellValue('A'.$i, 'NET INCOME:')
+                                        ->getStyle('A'.$i)
+                                        ->getFont()
+                                        ->setBold(TRUE)
+                                        ->getActiveSheet()
+                                        ->getStyle('A'.$i)
+                                        ->getAlignment()
+                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+
+                $excel->getActiveSheet()->setCellValue('B'.$i, number_format($total_net,2))
+                                        ->getStyle('B'.$i)
+                                        ->getFont()
+                                        ->setBold(TRUE)
+                                        ->getActiveSheet()
+                                        ->getStyle('B'.$i)
+                                        ->getAlignment()
+                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
 
 
                 // Redirect output to a client’s web browser (Excel2007)
