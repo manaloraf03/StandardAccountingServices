@@ -106,6 +106,10 @@
                                         <div class="container-fluid">
                                             <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
                                                 <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
+                                            </div>  
+                                            <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;margin-left: 10px;">
+                                            <a href="Comparative_income/Export" style="text-decoration: none;">
+                                                <button id="btn_export" class="btn btn-success btn-block"><span class="fa fa-file-o"></span>&nbsp;Export Excel</button></a>
                                             </div>
                                             <table width="100%" border="1" class="table table-striped">
                                                 <thead>
@@ -196,6 +200,12 @@
         _btnPrint.on('click',function(){
             window.open('Comparative_income/Report');
         });
+
+        // var _btnExport = $('#btn_export');
+
+        // _btnExport.on('click',function(){
+        //     window.open('Comparative_income/Export');
+        // });
     })();
 </script>
 
