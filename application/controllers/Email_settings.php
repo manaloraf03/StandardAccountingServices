@@ -48,7 +48,7 @@ class Email_settings extends CORE_Controller
                 $m_email->delete(1);
 
                 $m_email->email_id=1;
-                $m_email->email_provider=$this->input->post('email_provider',TRUE);
+                // $m_email->email_provider=$this->input->post('email_provider',TRUE);
                 $m_email->email_address=$this->input->post('email_address',TRUE);
                 $m_email->password=$this->input->post('password',TRUE);
                 $m_email->name_from=$this->input->post('name_from',TRUE);
