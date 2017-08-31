@@ -57,7 +57,7 @@
             to { -webkit-transform: rotate(360deg); }
         }
 
-        th { border: 1px solid #525252!important; }
+        /*th { border: 1px solid #525252!important; }*/
 /*
         tr:nth-child(even) {
             background: transparent!important;
@@ -107,6 +107,9 @@
                                             <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
                                                 <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
                                             </div>
+                                            <div class="col-xs-12 col-sm-2 pull-right" style="margin-left: 10px;padding-left: 0; padding-right: 0; margin-bottom: 10px;">
+                                                <a href="Annual_income_statement/Export" id="btn_export" class="btn btn-success btn-block"><span class="fa fa-file-excel-o"></span>&nbsp;Export to Excel</a>
+                                            </div>
                                             <table width="100%" class="table table-striped">
                                                 <thead>
                                                     <th width="5%" >Account #</th>
@@ -125,7 +128,7 @@
                                                     <th width="5%" ">DECEMBER</th>
                                                 </thead>
                                                 <tbody>
-                                                    <td colspan="14" style=" text-align: center;"><strong>- INCOME -</strong></td>
+                                                    <td colspan="14" style="text-align: center;"><strong>- INCOME -</strong></td>
                                                     <?php 
                                                         $jan_inc_bal=0; 
                                                         $feb_inc_bal=0;
@@ -155,7 +158,7 @@
                                                             <td width="5%" align="right"><?php echo number_format($income_account->core_sep_balance,2); ?></td>
                                                             <td width="5%" align="right"><?php echo number_format($income_account->core_oct_balance,2); ?></td>
                                                             <td width="5%" align="right"><?php echo number_format($income_account->core_nov_balance,2); ?></td>
-                                                            <td width="5%" align="right"><?php echo number_format($income_account->core_nov_balance,2); ?></td>
+                                                            <td width="5%" align="right"><?php echo number_format($income_account->core_dec_balance,2); ?></td>
                                                         </tr>
                                                         <?php 
                                                             $jan_inc_bal+=$income_account->core_jan_balance; 
@@ -217,7 +220,7 @@
                                                             <td width="5%" align="right"><?php echo number_format($expense_account->core_sep_balance,2); ?></td>
                                                             <td width="5%" align="right"><?php echo number_format($expense_account->core_oct_balance,2); ?></td>
                                                             <td width="5%" align="right"><?php echo number_format($expense_account->core_nov_balance,2); ?></td>
-                                                            <td width="5%" align="right"><?php echo number_format($expense_account->core_nov_balance,2); ?></td>
+                                                            <td width="5%" align="right"><?php echo number_format($expense_account->core_dec_balance,2); ?></td>
                                                         </tr>
                                                         <?php 
                                                             $jan_exp_bal+=$expense_account->core_jan_balance; 
@@ -314,6 +317,10 @@
         _btnPrint.on('click',function(){
             window.open('Annual_income_statement/Report');
         });
+
+        // $('#btn_export').on('click',function(){
+        //     window.open('Annual_income_statement/Export');
+        // });
     })();
 </script>
 
