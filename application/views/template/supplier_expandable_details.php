@@ -44,7 +44,7 @@
                                     <i class="fa fa-calendar"></i> Reference : <?php echo (is_array($recent_payment)?$recent_payment[0]->receipt_no:'none'); ?><br />
                                     <i class="fa fa-money"></i> Amount : <?php echo (is_array($recent_payment)?number_format($recent_payment[0]->total_paid_amount,2):'none'); ?><br /><br /><br />
 
-                                    <i class="fa fa-star-o"></i> Total Unpaid : <b><?php echo number_format($supplier_info->total_payable_amount,2); ?></b>
+                                    <!-- <i class="fa fa-star-o"></i> Total Unpaid : <b><?php echo number_format($supplier_info->total_payable_amount,2); ?></b> -->
                                 </div>
 
                                 <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Purchase Order of <?php echo $supplier_info->supplier_name; ?></b> (Open and partially received)</span>
