@@ -25,7 +25,10 @@
     .modal-backdrop {
         display: none;
     }
+    textarea{
+        resize: none!important;
 
+    }
     b.required{
         color:#f44336;
 

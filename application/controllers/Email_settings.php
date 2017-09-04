@@ -23,7 +23,7 @@ class Email_settings extends CORE_Controller
 
         $company=$this->Email_settings_model->get_list();
         $data['company']=$company[0];
-        (in_array('6-6',$this->session->user_rights)? 
+        (in_array('6-10',$this->session->user_rights)? 
         $this->load->view('email_settings_view', $data)
         :redirect(base_url('dashboard')));
     }
