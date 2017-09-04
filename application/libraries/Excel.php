@@ -16,13 +16,6 @@ class Excel extends PHPExcel {
                                         ->getAlignment()
                                         ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
         }
-     public   function Align_right_trial($column,$i)
-        {
-         
-         return   $this->getActiveSheet()->getStyle(''.$column.''.$i.'')
-                                        ->getAlignment()
-                                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-        }
 
       public   function Align_center($column,$i)
         {
@@ -44,4 +37,8 @@ class Excel extends PHPExcel {
                          );
 
         }   
+
+      public   function Set_bold($column,$i){
+        return $this->getActiveSheet()->getStyle(''.$column.''.$i.'')->getFont()->setBold(TRUE);
+    }
 }

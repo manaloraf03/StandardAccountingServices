@@ -23,10 +23,6 @@
     <link href="assets/plugins/select2/select2.min.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.8;
-            zoom: 80%;
-        }
 
         .toolbar{
             float: left;

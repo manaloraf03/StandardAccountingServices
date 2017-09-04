@@ -124,8 +124,9 @@
                                                 <div class="col-xs-12">
 
                                                     <button id="btn_print" class="btn btn-primary" style="text-transform: none;"><i class="fa fa-print"></i> PRINT REPORT</button>
+                                                    <button id="btn_excel" class="btn btn-success" style="text-transform: none;"><i class="fa fa-excel"></i> EXPORT TO EXCEL</button>
 
-                                                    <a href="Annual_income_statement/Export" id="btn_export" class="btn btn-success"><span class="fa fa-file-excel-o"></span>&nbsp;EXPORT TO EXCEL</a>
+                                                
 
                                                     <button class="btn btn-red" data-dismiss="modal" style="text-transform: none;">CLOSE</button>
                                                 </div>
@@ -190,6 +191,14 @@
                 showNotification({ title: 'Error', msg: 'Please select a department!', stat: 'error' });
             } else{
                 window.open("Balance_sheet/transaction/bs?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'));
+            }
+        });
+
+        $('#btn_excel').click(function(){
+            if (_cboDepartments.select2('val') == null){
+                showNotification({ title: 'Error', msg: 'Please select a department!', stat: 'error' });
+            } else{
+                window.open("Balance_sheet/Export_excel?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'));
             }
         });
 

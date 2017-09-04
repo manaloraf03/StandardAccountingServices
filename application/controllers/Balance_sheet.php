@@ -19,6 +19,7 @@ class Balance_sheet extends CORE_Controller
         );
 
         $this->load->library('M_pdf');
+        $this->load->library('excel');
     }
 
     public function index() {
@@ -38,8 +39,6 @@ class Balance_sheet extends CORE_Controller
         :redirect(base_url('dashboard')));
         
     }
-
-
 
 
     function transaction($txn=null){
@@ -198,7 +197,280 @@ class Balance_sheet extends CORE_Controller
         );
     }
 
+    function format_display($balance){
+        $balance=(float)$balance;
+        if($balance<0){
+            $balance=str_replace("-","",$balance);
+            return "(".number_format($balance,2).")";
+        }else{
+            return number_format($balance,2);
+        }
 
+    }
+
+
+function export_excel() {
+
+                $double_underline = array(
+                      'font'  => array(
+                        'underline' => 'doubleAccounting'
+                      )
+                );
+                $single_underline = array(
+                      'font'  => array(
+                        'underline' => 'singleAccounting'
+                      )
+                );
+
+
+                $as_of_date=date("Y-m-d",strtotime($this->input->get('date',TRUE)));
+                $department_id=$this->input->get('depid',TRUE);
+                $type=$this->input->get('type',TRUE);
+
+                $net_income_period=$this->get_period_on_closed_txn($as_of_date);
+                if(count($net_income_period)>0){ //if specified date is between the closed period
+                    $net_income_start=date("Y-m-d",strtotime($net_income_period[0]->period_start));
+                    $net_income_end=date("Y-m-d",strtotime($as_of_date));
+                }else{
+                    //if date specified is not found on "closed accounting period"
+
+                    //get the last closed date
+                    $last_closed=$this->get_last_accounting_closed_date();
+                    if(count($last_closed)>0){
+
+                        $net_income_start=date("Y-m-d",strtotime("1 days",strtotime($last_closed[0]->last_closed_date)));
+                        $net_income_end=date("Y-m-d",strtotime($as_of_date));
+
+                        //make sure new start date base on the last closed date is not greater than to the specified date
+                        if($net_income_start>$net_income_end){ //if greater than
+                            $first_journal_txn=$this->get_journal_first_txn_date();
+                            if(count($first_journal_txn)>0){ //there is journal transaction
+
+
+                                $net_income_start=date("Y-m-d",strtotime($first_journal_txn[0]->first_txn_date));
+                                $net_income_end=date("Y-m-d",strtotime($as_of_date));
+
+                                //make sure journal first date is not greater than "as of date"
+                                if($net_income_start>$net_income_end){
+                                    $net_income_start=$net_income_end;
+                                }
+
+                            }else{ //if no transaction found
+
+                                $net_income_start=date("Y-m-d",strtotime(date('Y',strtotime($as_of_date)))."-01-01"); //set it to january 1, of specified date
+                                $net_income_end=date("Y-m-d",strtotime($as_of_date));
+                            }
+
+                        }
+
+                    }else{
+                        $first_journal_txn=$this->get_journal_first_txn_date();
+                        if(count($first_journal_txn)>0){ //there is journal transaction
+
+
+                            $net_income_start=date("Y-m-d",strtotime($first_journal_txn[0]->first_txn_date));
+                            $net_income_end=date("Y-m-d",strtotime($as_of_date));
+
+                            //make sure journal first date is not greater than "as of date"
+                            if($net_income_start>$net_income_end){
+                                $net_income_start=$net_income_end;
+                            }
+
+                        }else{ //if no transaction found
+
+                            $net_income_start=date("Y-m-d",strtotime(date('Y',strtotime($as_of_date)))."-01-01"); //set it to january 1, of specified date
+                            $net_income_end=date("Y-m-d",strtotime($as_of_date));
+                        }
+
+                    }
+                }
+
+
+
+                $m_journal_accounts=$this->Journal_account_model;
+
+                //if id is 1, Main-All branches is selected, set it to null to disable filtering
+                if($department_id==1){$department_id=null;}
+
+                //get list of account classifications
+                $acc_classes=$m_journal_accounts->get_bs_account_classes($as_of_date,$department_id);
+                //get list of parent account
+                $acc_titles=$m_journal_accounts->get_bs_parent_account_balances($as_of_date,$department_id);
+
+                $prev_net_income=$m_journal_accounts->get_net_income($net_income_start,$department_id);
+
+                $current_year_earnings=$m_journal_accounts->get_net_income(array(
+                    $net_income_start,
+                    $net_income_end
+                ),$department_id);
+
+                $date=date("M d, Y",strtotime($as_of_date));
+                $net_period=date("M d, Y",strtotime($net_income_start))." to ".date("M d, Y",strtotime($net_income_end));
+
+                $m_company=$this->Company_model;
+                $company_info=$m_company->get_list();
+
+                $dep_info=$this->Departments_model->get_list($department_id);
+                $data['dep_info']=$dep_info[0];
+
+
+
+
+
+
+
+
+
+
+
+
+                $excel=$this->excel;
+
+                $excel->setActiveSheetIndex(0);
+                $excel->getActiveSheet()->getStyle('D')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()->getColumnDimension('C')->setWidth(40);
+                $excel->getActiveSheet()->getColumnDimension('D')->setWidth(30);
+                $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15);
+
+                $excel->getActiveSheet()->setTitle('Balance Sheet');
+
+                $excel->getActiveSheet()->setCellValue('A1',$company_info[0]->company_name)
+                                        ->setCellValue('A2',$company_info[0]->company_address)
+                                        ->setCellValue('A3',$company_info[0]->email_address)
+                                        ->setCellValue('A4',$company_info[0]->mobile_no);
+
+                $excel->Align_center('A',5);
+                $excel->Align_center('A',6);
+                $excel->getActiveSheet()->setCellValue('A5','BALANCE SHEET')->mergeCells('A5:E5');
+                $excel->getActiveSheet()->getStyle('A6')->getFont()->setItalic(true);
+                $excel->getActiveSheet()->setCellValue('A6','As of date '.$date)->mergeCells('A6:E6');
+                $excel->Set_bold('A',7);
+                $excel->getActiveSheet()->setCellValue('A7','Total Assets');
+                $i = 8;
+
+
+                   $total_type=0; 
+                        foreach($acc_classes as $class){ 
+                            if($class->account_type_id==1){ 
+                            $excel->getActiveSheet()->getStyle('B'.$i)->getFont()->setItalic(true);
+                               $excel->getActiveSheet()->setCellValue('B'.$i,$class->account_class);                     
+
+                    $i++;
+                    $total_balance=0; 
+                        foreach($acc_titles as $account){
+                            if($class->account_class_id==$account->account_class_id){
+                                $excel->Align_right('E',$i);
+                                $excel->getActiveSheet()->setCellValue('C'.$i,$account->account_title);
+                                $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($account->balance));
+                                $total_balance+=$account->balance; $total_type+=$account->balance;
+                                $i++;
+                               }
+                           }
+                  $excel->getActiveSheet()->getRowDimension($i)->setRowHeight(5);
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($single_underline);
+                  $excel->getActiveSheet()->setCellValue('E'.$i,'   ');
+                  $i++;
+                  // TOTAL CURRENT ASSETS
+                  $excel->Set_bold('E',$i);
+                  $excel->Align_right('E',$i);
+                  $excel->getActiveSheet()->getStyle('D'.$i)->getFont()->setItalic(true);
+                  $excel->getActiveSheet()->setCellValue('D'.$i,'Total '.$class->account_class);
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($single_underline);
+                  $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($total_balance));
+                  $i+=2;
+
+                  // TOTAL ASSETS
+                  $excel->Set_bold('E',$i);
+                  $excel->Set_bold('D',$i);
+
+                  $excel->Align_right('E',$i);
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($double_underline);
+                  $excel->getActiveSheet()->setCellValue('D'.$i,'Total Assets');
+                  $excel->getActiveSheet()->setCellValue('E'.$i, $this->format_display($total_type));
+
+                    }
+                 } 
+
+                $i+=3;
+
+                $excel->Set_bold('A',$i);
+                $excel->getActiveSheet()->setCellValue('A'.$i,'Total Liabilities and Equities');
+                $i++;
+                $total_type=0; 
+                        foreach($acc_classes as $class){ 
+                            if($class->account_type_id==2||$class->account_type_id==3){
+                                $excel->getActiveSheet()->getStyle('B'.$i)->getFont()->setItalic(true);
+                                $excel->getActiveSheet()->setCellValue('B'.$i,$class->account_class);                        
+
+                    $i++;
+                    $total_balance=0; 
+                        foreach($acc_titles as $account){
+                            if($class->account_class_id==$account->account_class_id){
+                                $excel->Align_right('E',$i);
+                                $excel->getActiveSheet()->setCellValue('C'.$i,$account->account_title);
+                                $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($account->balance));
+                                $total_balance+=$account->balance; $total_type+=$account->balance;
+                                $i++;
+                               }
+                           }
+                  $excel->getActiveSheet()->getRowDimension($i)->setRowHeight(5);
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($single_underline);
+                  $excel->getActiveSheet()->setCellValue('E'.$i,'   ');
+                  $i++;
+                  // TOTAL CURRENT LIABILITIES
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($single_underline);
+                  $excel->Set_bold('E',$i);
+                  $excel->Align_right('E',$i);
+                  $excel->getActiveSheet()->getStyle('D'.$i)->getFont()->setItalic(true);
+                  
+                  $excel->getActiveSheet()->setCellValue('D'.$i,'Total '.$class->account_class);
+                  $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($total_balance));
+                  $i++;
+
+                  $excel->Set_bold('E',$i);
+                  $excel->Align_right('E',$i);
+                  $excel->getActiveSheet()->getStyle('D'.$i)->getFont()->setItalic(true);
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($single_underline);
+                  $excel->getActiveSheet()->setCellValue('D'.$i,'Retained Earnings (forwarded previous net income)');
+                  $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($prev_net_income));
+                  $i++;
+
+                  $excel->Set_bold('E',$i);
+                  $excel->Align_right('E',$i);
+                  $excel->getActiveSheet()->getStyle('D'.$i)->getFont()->setItalic(true);
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($single_underline);
+                  $excel->getActiveSheet()->setCellValue('D'.$i,'Current Period Earnings ('.$net_period.')');
+                  $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($current_year_earnings));
+
+
+                  $i+=2;
+                  $excel->Set_bold('E',$i);
+                  $excel->Align_right('E',$i);
+                  $excel->Set_bold('D',$i);
+                  $excel->getActiveSheet()->setCellValue('D'.$i,'Total Liabilites and Equities');
+                  $excel->getActiveSheet()->getStyle('E'.$i)->applyFromArray($double_underline);
+                  $excel->getActiveSheet()->setCellValue('E'.$i,$this->format_display($total_type+$current_year_earnings+$prev_net_income));
+                    }
+                 } 
+
+
+
+                // Redirect output to a client’s web browser (Excel2007)
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                header('Content-Disposition: attachment;filename="Income Statement.xlsx"');
+                header('Cache-Control: max-age=0');
+                // If you're serving to IE 9, then the following may be needed
+                header('Cache-Control: max-age=1');
+
+                // If you're serving to IE over SSL, then the following may be needed
+                header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+                header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+                header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+                header ('Pragma: public'); // HTTP/1.0
+
+                $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+                $objWriter->save('php://output');
+}
 
 
 }

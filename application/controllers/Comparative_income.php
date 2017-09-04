@@ -125,7 +125,6 @@
                 $i = 9;
                 $income_total_prev=0;
                 $income_total_cur=0;
-                
                 foreach($income_accounts as $income_account)
                 {
                     $i++;

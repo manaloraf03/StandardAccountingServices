@@ -17,6 +17,12 @@
 
 
 <style type="text/css">
+/* -------------- SWITCHER --------------   */
+.demo-options{
+    display: none!important;
+    }
+/* -------------- SWITCHER --------------   */
+
     html{
 
         zoom: 80%;
