@@ -277,7 +277,7 @@ class Products_model extends CORE_Model {
                 INNER JOIN
                 sales_invoice_items sii ON sii.sales_invoice_id = si.sales_invoice_id
 
-                WHERE si.is_active = TRUE AND si.is_deleted = FALSE  ".($depid==0?"":" AND di.department_id=".$depid)."
+                WHERE si.is_active = TRUE AND si.is_deleted = FALSE  ".($depid==0?"":" AND si.department_id=".$depid)."
                 AND sii.product_id = $product_id
 
 

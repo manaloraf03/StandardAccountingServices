@@ -461,7 +461,7 @@ $(document).ready(function(){
                 $.ajax({
                     "dataType":"html",
                     "type":"POST",
-                    "url":"Products/transaction/product-history?id="+ d.product_id,
+                    "url":"Products/transaction/history-product?id="+ d.product_id,
                     "beforeSend" : function(){
                         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
                     }
