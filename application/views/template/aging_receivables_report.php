@@ -29,7 +29,10 @@
         }
 
         hr {
-            border-top: 3px solid #404040;
+      
+        }
+        p{
+            padding: 0px 0px 0px 0px;
         }
     </style>
     <script type="text/javascript">
@@ -39,26 +42,27 @@
     </script>
 </head>
 <body>
-	<table width="100%">
+    <table width="100%" border="0">
         <tr>
-            <td width="10%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%">
+            <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" class="">
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>
                 <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+                <p><?php echo $company_info->email_address; ?></p>
             </td>
         </tr>
     </table><hr>
     <td><h2>AGING OF RECEIVABLES REPORT</h2></td>
     <table width="100%" border="1" cellspacing="0">
-    	<thead>
-    		<th width="30%">Customer Name</th>
-    		<th width="15%">Current</th>
-    		<th width="15%">30 Days</th>
-    		<th width="15%">45 Days</th>
-    		<th width="15%">60 Days</th>
-    		<th width="15%">Over 90 Days</th>
-    	</thead>
+    	<tr>
+    		<td width="30%"><b>Customer Name</b></td>
+    		<td width="15%"><b>Current</b></td>
+    		<td width="15%"><b>30 Days</b></td>
+    		<td width="15%"><b>45 Days</b></td>
+    		<td width="15%"><b>60 Days</b></td>
+    		<td width="15%"><b>Over 90 Days</b></td>
+    	</tr>
     	<tbody>
             <?php $sum_current = 0; $sum_thirty = 0; $sum_fortyfive = 0; $sum_sixty = 0; $sum_ninety = 0; ?>
             <tr>

@@ -51,14 +51,14 @@
     </table><hr>
     <td><h2>AGING OF PAYABLES REPORT</h2></td>
     <table width="100%" border="1" cellspacing="0">
-    	<thead>
+    	<tr>
     		<th width="30%">Supplier Name</th>
     		<th width="15%">Current</th>
     		<th width="15%">30 Days</th>
     		<th width="15%">45 Days</th>
     		<th width="15%">60 Days</th>
     		<th width="15%">Over 90 Days</th>
-    	</thead>
+    	</tr>
     	<tbody>
             <?php $sum_current = 0; $sum_thirty = 0; $sum_fortyfive = 0; $sum_sixty = 0; $sum_ninety = 0; ?>
     		<?php foreach($payables as $payable) { ?>

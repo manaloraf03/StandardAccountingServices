@@ -7,9 +7,7 @@
         }
 
         table{
-            border-collapse: collapse;
-            table-layout: fixed;
-            border: 1px solid black;
+
             font-size: 11;
             font-family: tahoma;
         }
@@ -29,15 +27,11 @@
         }
 
         td{
-            border:1px solid black;
+ 
             padding-left: 5px;
             padding-right: 3px;
             height: 20px;
         }
-        @media print {
-      @page { margin: 0; }
-      body { margin: 1.0cm; }
-}
 
 
     </style>
@@ -66,13 +60,14 @@
 <body>
 
 <div style="">
-    <table width="100%" style="border:none!important;">
-        <tr style="border:none!important;">
-            <td width="20%" style="border:none!important;"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;border:none!important;"></td>
-            <td width="80%" class="align-center" style="border:none!important;">
-                <span class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
+    <table width="100%" border="0">
+        <tr>
+            <td width="10%"><img src="<?php echo base_url().$company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" class="">
+                <span style="font-size: 20px;" class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
                 <span><?php echo $company_info->company_address; ?></span><br>
-                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span><br>
+                <span><?php echo $company_info->email_address; ?></span>
             </td>
         </tr>
     </table><hr>

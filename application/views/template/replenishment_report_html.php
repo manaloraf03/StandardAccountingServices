@@ -25,13 +25,14 @@
 	</script>
 </head>
 <body>
-	<table width="100%">
+       <table width="100%">
         <tr>
-            <td width="10%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%">
-                <span class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
+            <td width="10%"><img src="<?php echo base_url().$company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" class="">
+                <span style="font-size: 20px;" class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
                 <span><?php echo $company_info->company_address; ?></span><br>
-                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span><br>
+                <span><?php echo $company_info->email_address; ?></span>
             </td>
         </tr>
     </table><hr>

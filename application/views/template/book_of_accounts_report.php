@@ -27,13 +27,14 @@
 	</script>
 </head>
 <body>
-	<table width="100%">
+    <table width="100%">
         <tr>
-            <td width="10%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%">
-                <span class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
+            <td width="10%"><img src="<?php echo base_url().$company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" class="">
+                <span style="font-size: 20px;" class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
                 <span><?php echo $company_info->company_address; ?></span><br>
-                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span><br>
+                <span><?php echo $company_info->email_address; ?></span>
             </td>
         </tr>
     </table><hr>
@@ -42,7 +43,6 @@
     </div>
     <table width="100%" border="1" cellspacing="0">
 	    <thead>
-	    	<th width="2%"></th>
 		    <th align="left">Txn #</th>
 		    <th align="left">Date</th>
 		    <th align="left">Particular</th>
@@ -56,7 +56,6 @@
 	    <?php $sum_cr=0; ?>
 	    <?php foreach($journal_list as $journal) { ?>
 	    	<tr>
-	    		<td></td>
 	    		<td style="padding: 5px;"><?php echo $journal->txn_no; ?></td>
 	    		<td style="padding: 5px;"><?php echo $journal->date_txn; ?></td>
 	    		<td style="padding: 5px;"><?php echo $journal->description; ?></td>
@@ -69,7 +68,7 @@
 	    	</tr>
 		<?php } ?>
 			<tr>
-				<td colspan="6" align="right">Total:</td>
+				<td colspan="5" align="right">Total:</td>
 				<td style="padding: 5px;" align="right"><strong><?php echo number_format($sum_dr,2); ?></strong></td>
 				<td style="padding: 5px;" align="right"><strong><?php echo number_format($sum_cr,2); ?></strong></td>
 			</tr>

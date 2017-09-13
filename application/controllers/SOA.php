@@ -15,6 +15,7 @@
 					'Company_model'
 				)
 			);
+			$this->load->library('M_pdf');
 		}
 
 		public function index()
@@ -72,7 +73,26 @@
 					$data['current_balances'] = $m_sales->get_customer_soa_final('= MONTH(NOW())',$customer_id,null,null);
 					$data['payments'] = $m_sales->get_customer_soa_payment($customer_id);
 
-					$this->load->view('template/soa_print',$data);
+
+                    $file_name='Aging of Receivables';
+                    
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load("A4-L"); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/soa_print',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+
+
+
+
+
+
+
+
+
+				#	$this->load->view('template/soa_print',$data);
 					break;
 			}
 		}

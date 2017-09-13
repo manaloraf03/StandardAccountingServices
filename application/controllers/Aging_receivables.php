@@ -14,6 +14,7 @@
 					'Company_model'
 				)
 			);
+			$this->load->library('M_pdf');
 		}
 
 		public function index()
@@ -42,6 +43,9 @@
 					break;
 
 				case 'print':
+
+
+
 					$m_sales = $this->Sales_invoice_model;
 					$m_company = $this->Company_model;
 
@@ -50,7 +54,17 @@
 					$data['company_info'] = $company_info[0];
 					$data['receivables'] = $m_sales->get_aging_receivables();
 
-					$this->load->view('template/aging_receivables_report',$data);
+                    $file_name='Aging of Receivables';
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/aging_receivables_report',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+
+
+					// $this->load->view('template/aging_receivables_report',$data);
 					break;
 				
 				default:

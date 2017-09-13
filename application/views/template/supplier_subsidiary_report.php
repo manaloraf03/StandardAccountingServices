@@ -32,8 +32,8 @@
             border-top: 3px solid #404040;
         }
         @media print {
-      @page { margin: 0; }
-      body { margin: 1.0cm; }
+/*      @page { margin: 0; }
+      body { margin: 1.0cm; }*/
 }
     </style>
     <script type="text/javascript">
@@ -46,47 +46,49 @@
 	<table width="100%">
         <tr>
             <td width="5%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="95%" class="align-center">
-                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
-                <p><?php echo $company_info->company_address; ?></p>
-                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p><br>
-                <h3>PERIOD : <?php echo '<strong>'.$_GET['startDate'].'</strong> to <strong>'.$_GET['endDate'].'</strong>'; ?></h3>
+            <td width="95%">
+                <span class="report-header" style="font-size:20px;"><strong><?php echo $company_info->company_name; ?></strong></span><br>
+                <span><?php echo $company_info->company_address; ?></span><br>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span><br>
+                <span><?php echo $company_info->email_address; ?></span><br>
+
             </td>
         </tr>
     </table><hr>
     <div class="">
+        <h3>PERIOD : <?php echo '<strong>'.$_GET['startDate'].'</strong> to <strong>'.$_GET['endDate'].'</strong>'; ?></h3>
         <h3 class="report-header"><strong>SUPPLIER SUBSIDIARY REPORT</strong></h3>
     </div>
-     <table width="100%" border="1" cellspacing="0" cellspacing="-1">
+     <table width="100%" border="0" cellspacing="0" cellspacing="-1">
         <tr>
         	<td style="padding: 4px;" width="50%"><strong>Supplier: </strong><?php echo $subsidiary_info->supplier_name; ?></td>
         	<td style="padding: 4px;" width="50%"><strong>Account: </strong><?php echo $subsidiary_info->account_title; ?></td>
         </tr>
     </table><br>
-    <table width="100%" border="1" cellspacing="0">
+    <table width="100%" border="0" cellspacing="0">
     	<thead>
             <tr>
-                <th style="border: 1px solid black;text-align: center;height: 30px;padding: 6px;">Txn Date</th>
-                <th style="border: 1px solid black;text-align: center;height: 30px;padding: 6px;">Txn #</th>
-                <th style="border: 1px solid black;text-align: left;height: 30px;padding: 6px;">Memo</th>
-                <th style="border: 1px solid black;text-align: left;height: 30px;padding: 6px;">Remarks</th>
-                <th style="border: 1px solid black;text-align: left;height: 30px;padding: 6px;">Posted by</th>
-                <th style="border: 1px solid black;text-align: right;height: 30px;padding: 6px;">Debit</th>
-                <th style="border: 1px solid black;text-align: right;height: 30px;padding: 6px;">Credit</th>	
-                <th style="border: 1px solid black;text-align: right;height: 30px;padding: 6px;">Balance</th>
+                <th style="border: 1px solid gray;text-align: center;height: 30px;padding: 6px;">Txn Date</th>
+                <th style="border: 1px solid gray;text-align: center;height: 30px;padding: 6px;">Txn #</th>
+                <th style="border: 1px solid gray;text-align: left;height: 30px;padding: 6px;">Memo</th>
+                <th style="border: 1px solid gray;text-align: left;height: 30px;padding: 6px;">Remarks</th>
+                <th style="border: 1px solid gray;text-align: left;height: 30px;padding: 6px;">Posted by</th>
+                <th style="border: 1px solid gray;text-align: right;height: 30px;padding: 6px;">Debit</th>
+                <th style="border: 1px solid gray;text-align: right;height: 30px;padding: 6px;">Credit</th>	
+                <th style="border: 1px solid gray;text-align: right;height: 30px;padding: 6px;">Balance</th>
             </tr>
         </thead>
         <tbody>
         	<?php foreach($supplier_subsidiary as $items) { ?>
         	<tr>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->date_txn; ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->txn_no; ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->memo; ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->remarks; ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->posted_by; ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo number_format($items->debit,2); ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo number_format($items->credit,2); ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo number_format($items->balance,2); ?></td>
+        		<td style="border: 1px solid gray;text-align: left;height: 20px;padding: 6px;"><?php echo $items->date_txn; ?></td>
+        		<td style="border: 1px solid gray;text-align: left;height: 20px;padding: 6px;"><?php echo $items->txn_no; ?></td>
+        		<td style="border: 1px solid gray;text-align: left;height: 20px;padding: 6px;"><?php echo $items->memo; ?></td>
+        		<td style="border: 1px solid gray;text-align: left;height: 20px;padding: 6px;"><?php echo $items->remarks; ?></td>
+        		<td style="border: 1px solid gray;text-align: left;height: 20px;padding: 6px;"><?php echo $items->posted_by; ?></td>
+        		<td style="border: 1px solid gray;text-align: right;height: 20px;padding: 6px;"><?php echo number_format($items->debit,2); ?></td>
+        		<td style="border: 1px solid gray;text-align: right;height: 20px;padding: 6px;"><?php echo number_format($items->credit,2); ?></td>
+        		<td style="border: 1px solid gray;text-align: right;height: 20px;padding: 6px;"><?php echo number_format($items->balance,2); ?></td>
     		</tr>
     		<?php } ?>
         </tbody>

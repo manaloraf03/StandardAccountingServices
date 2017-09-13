@@ -35,10 +35,12 @@
     <table width="100%">
         <tr class="row_child_tbl_sales_order">
             <td class="bottom-only" width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px;  text-align: left;"></td>
-            <td  class="bottom-only" width="90%" class="align-center">
+            <td  class="bottom-only" width="90%" class="">
                 <h1 class="report-header" style="padding-left: 30px;"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p style="padding-left: 30px;"><?php echo $company_info->company_address; ?></p>
                 <p style="padding-left: 30px;"> <?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+                <span><?php echo $company_info->email_address; ?></span><br>
+
             </td>
         </tr>
 
@@ -57,7 +59,7 @@
                     </p>
             
 
-<table width="95%"  style="font-family: tahoma;font-size: 11;">
+<table width="95%"  style="font-family: tahoma;font-size: 11;" cellspacing="-1">
 
 
             <thead>
@@ -91,7 +93,20 @@
             </tfoot>
         </table><br /><br />
     </center>
-
+        <center>
+            <table style="text-align: center;">
+                <tr>
+                    <td width="30%" style="padding-right: 10px;">___________________________________</td>
+                    <td width="30%" style="padding-right: 10px;">___________________________________</td>
+                    <td width="30%" style="padding-right: 10px;">___________________________________</td>
+                </tr>
+                <tr>
+                    <td width="30%" style="padding-right: 10px;"><strong>Prepared by</strong></td>
+                    <td width="30%" style="padding-right: 10px;"><strong>Received by</strong></td>
+                    <td width="30%" style="padding-right: 10px;"><strong>Date</strong></td>
+                </tr>
+            </table>
+        </center>
 
 
 

@@ -46,10 +46,12 @@
     <table width="100%">
         <tr>
             <td width="10%"><img src="<?php echo base_url($company_info->logo_path); ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%" class="align-center">
+            <td width="90%" >
                 <h1 class="report-header" style="margin-bottom: 0"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <span><?php echo $company_info->company_address; ?></span><br>
-                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span><br>
+                <span><?php echo $company_info->email_address; ?></span><br>
+
             </td>
         </tr>
     </table><hr>

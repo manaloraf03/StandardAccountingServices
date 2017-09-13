@@ -10,6 +10,7 @@ class AR_Reports extends CORE_Controller {
 		$this->load->model('Customers_model');
         $this->load->library('M_pdf');
         $this->load->model('Users_model');
+        $this->load->model('Company_model');
     }
 
     public function index() {
@@ -20,6 +21,10 @@ class AR_Reports extends CORE_Controller {
     function layout($layout=null,$filter_value=null,$filter_from=null,$filter_to=null,$type=null){
         switch($layout){
             case 'ar_receivable_reports': //purchase order
+                            $m_company=$this->Company_model;
+                $company=$m_company->get_list();
+
+                $data['company_info']=$company[0];
 					$m_ar_receivable=$this->AR_Receivable_model;
 					$m_customers=$this->Customers_model;
 					$tempfrom = str_replace("-", "/", $filter_from);
@@ -73,7 +78,6 @@ class AR_Reports extends CORE_Controller {
                             $pdf->setFooter('{PAGENO}');
                             $pdf->WriteHTML($content);
                             //download it.
-							$pdf->SetJS('this.print();');
                             $pdf->Output();
                         }
 

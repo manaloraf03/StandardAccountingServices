@@ -37,18 +37,20 @@
 	<table width="100%">
         <tr>
             <td width="5%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="95%" class="align-center">
+            <td width="95%" class="">
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>
-                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p><br>
-                <h3>PERIOD : <?php echo '<strong>'.$_GET['startDate'].'</strong> to <strong>'.$_GET['endDate'].'</strong>'; ?></h3>
+                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+                <p><?php echo $company_info->email_address; ?></p><br>
+
             </td>
         </tr>
     </table><hr>
     <div class="">
+        <h3>PERIOD : <?php echo '<strong>'.$_GET['startDate'].'</strong> to <strong>'.$_GET['endDate'].'</strong>'; ?></h3>
         <h3 class="report-header"><strong>CUSTOMER SUBSIDIARY REPORT</strong></h3>
     </div>
-     <table width="100%" border="1" cellspacing="-1">
+     <table width="100%" border="0" cellspacing="-1">
         <tr>
         	<td style="padding: 4px;" width="50%"><strong>Customer: </strong><?php echo $subsidiary_info->customer_name; ?></td>
         	<td style="padding: 4px;" width="50%"><strong>Account: </strong><?php echo $subsidiary_info->account_title; ?></td>
@@ -75,9 +77,9 @@
         		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->memo; ?></td>
         		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->remarks; ?></td>
         		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo $items->posted_by; ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo number_format($items->debit,2); ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo number_format($items->credit,2); ?></td>
-        		<td style="border: 1px solid black;text-align: left;height: 20px;padding: 6px;"><?php echo number_format($items->balance,2); ?></td>
+        		<td style="border: 1px solid black;text-align: right;height: 20px;padding: 6px;"><?php echo number_format($items->debit,2); ?></td>
+        		<td style="border: 1px solid black;text-align: right;height: 20px;padding: 6px;"><?php echo number_format($items->credit,2); ?></td>
+        		<td style="border: 1px solid black;text-align: right;height: 20px;padding: 6px;"><?php echo number_format($items->balance,2); ?></td>
     		</tr>
     		<?php } ?>
         </tbody>

@@ -1658,10 +1658,7 @@ $(document).ready(function(){
                                                             <option value="<?php echo $account->account_id; ?>"><?php echo $account->account_title; ?></option>
                                                         <?php } ?>
                                                     </select>
-
                                         </div>
-
-
                                         <div class="form-group" style="margin-bottom:0px;">
                                                 <label class="">Tax Exempt ?</label><br>
                                                 <input type="checkbox" name="is_tax_exempt" class="form-control" id="is_tax_exempt">

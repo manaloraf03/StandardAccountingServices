@@ -1,3 +1,69 @@
+       <style type="text/css">
+        body {
+            font-family: 'Calibri',sans-serif;
+            font-size: 12px;
+        }
+
+        .align-right {
+            text-align: right;
+        }
+
+        .align-left {
+            text-align: left;
+        }
+
+        .data {
+            border-bottom: 1px solid #404040;
+        }
+
+        .align-center {
+            text-align: center;
+        }
+
+        .report-header {
+            font-weight: bolder;
+        }
+
+        hr {
+            border-top: 3px solid #404040;
+        }
+
+        tr {
+  /*          border: none!important;*/
+        }
+
+        tr:nth-child(even){
+          
+       /*     border: none!important;*/
+        }
+/*
+        tr:hover {
+            transition: .4s;
+            background: #414141 !important;
+            color: white;
+        }
+
+        tr:hover .btn {
+            border-color: #494949!important;
+            border-radius: 0!important;
+            -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+            box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
+        }*/
+            table{
+        border:none!important;
+    }
+    </style> <table width="100%" border="0">
+        <tr>
+            <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
+            <td width="90%" class="">
+                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
+                <p><?php echo $company_info->company_address; ?></p>
+                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+                <p><?php echo $company_info->email_address; ?></p>
+            </td>
+        </tr>
+    </table><hr>
 <table id="main" style="border:none!important;">
 	<tr>
 		<td style="border: 0px !important;background:transparent !important;"><h3>Customer Name : <?php echo $customers; ?></h3></td>

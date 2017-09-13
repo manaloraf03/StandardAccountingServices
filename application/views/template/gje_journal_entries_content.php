@@ -64,17 +64,18 @@
     <table width="100%">
         <tr>
             <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%" class="align-center">
+            <td width="90%" class="">
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>
                 <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+                <p><?php echo $company_info->email_address; ?></p>
             </td>
         </tr>
     </table><hr>
     <div class="">
         <h3 class="report-header"><strong>GENERAL JOURNAL ENTRY</strong></h3>
     </div>
-    <table width="100%" border="1" cellspacing="-1">
+    <table width="100%" border="0" cellspacing="-1">
         <tr>
             <td style="padding: 4px;" width="50%"><strong>DATE :</strong> <?php echo date_format(new DateTime($journal_info->date_txn),"m/d/Y"); ?></td>
             <td style="padding: 4px;" width="50%"><strong>REF # :</strong><?php echo $journal_info->ref_no; ?></td>

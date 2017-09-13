@@ -34,10 +34,10 @@
             border-top: 1px solid #404040;
         }
 
-	    @media print {
+/*	    @media print {
 	      @page { margin: 0; size: landscape; }
 	      body { margin: 1.0cm; }
-		}
+		}*/
     </style>
     <!-- <script>
     	(function(){
@@ -52,19 +52,20 @@
             <td width="90%">
                 <span class="report-header"><strong><?php echo $company_info->company_name; ?></strong></span><br>
                 <span><?php echo $company_info->company_address; ?></span><br>
-                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span>
+                <span><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></span><br>
+                <span><?php echo $company_info->email_address; ?></span>
             </td>
         </tr>
     </table><hr>
     <div>
-        <h3><strong><?php echo $customer_info->customer_name; ?>'s STATEMENT OF ACCOUNT</strong></h3>
+        <h3><strong><?php echo $customer_info->customer_name; ?>'S STATEMENT OF ACCOUNT</strong></h3>
     </div><br>
-    <table width="100%" border="1" cellspacing="0" cellpadding="4">
+    <table width="100%" border="0" cellspacing="0" cellpadding="4">
     	<tr>
-    		<td width="10%"><b>Customer Name : </b></td>
-    		<td width="40%"><?php echo $customer_info->customer_name; ?></td>
-    		<td width="10%"><b>Date : </b></td>
-    		<td width="40%"><?php echo date('Y-m-d'); ?></td>
+    		<td width="15%"><b>Customer Name : </b></td>
+    		<td width="35%"><?php echo $customer_info->customer_name; ?></td>
+    		<td width="15%"><b>Date : </b></td>
+    		<td width="35%"><?php echo date('Y-m-d'); ?></td>
     	</tr>
     	<tr>
     		<td width="10%"><b>Address : </b></td>
@@ -90,12 +91,12 @@
 				<td colspan="5" style="font-weight:bolder;">SALES INVOICE</td>
 			</tr>
     	<?php foreach($previous_balances as $previous_balance) { ?>
-				<?php if($previous_balance->group_status == 1) { ?>
+				<?php if($previous_balance->is_sales == 1) { ?>
     		<tr>
     			<td><?php echo $previous_balance->invoice_no; ?></td>
-    			<td><?php echo $previous_balance->date_invoice; ?></td>
+    			<td><?php echo $previous_balance->date_txn; ?></td>
     			<td align="right"><?php echo number_format($previous_balance->receivable_amount,2); ?></td>
-    			<td align="right"><?php echo number_format($previous_balance->balance_amount,2); ?></td>
+    			<td align="right"><?php echo number_format($previous_balance->balance,2); ?></td>
     			<td></td>
     		</tr>
     		<?php $sumPrevSales += $previous_balance->receivable_amount; ?>
@@ -105,12 +106,12 @@
 				<td colspan="5" style="font-weight:bolder;">SERVICE INVOICE</td>
 			</tr>
 			<?php foreach($previous_balances as $previous_balance) { ?>
-				<?php if($previous_balance->group_status == 0) { ?>
+				<?php if($previous_balance->is_sales == 0) { ?>
     		<tr>
     			<td><?php echo $previous_balance->invoice_no; ?></td>
-    			<td><?php echo $previous_balance->date_invoice; ?></td>
+    			<td><?php echo $previous_balance->date_txn; ?></td>
     			<td align="right"><?php echo number_format($previous_balance->receivable_amount,2); ?></td>
-    			<td align="right"><?php echo number_format($previous_balance->balance_amount,2); ?></td>
+    			<td align="right"><?php echo number_format($previous_balance->balance,2); ?></td>
     			<td></td>
     		</tr>
 				<?php $sumPrevService += $previous_balance->receivable_amount; ?>
@@ -141,12 +142,12 @@
 			</tr>
     	<?php foreach($current_balances as $current_balance) { ?>
 
-				<?php if($current_balance->group_status == 1) { ?>
+				<?php if($current_balance->is_sales == 1) { ?>
     		<tr>
-    			<td><?php echo $current_balance->invoice_no; ?><?php echo $current_balance->group_status; ?></td>
-    			<td><?php echo $current_balance->date_invoice; ?></td>
+    			<td><?php echo $current_balance->invoice_no; ?></td>
+    			<td><?php echo $current_balance->date_txn; ?></td>
     			<td align="right"><?php echo number_format($current_balance->receivable_amount,2); ?></td>
-    			<td align="right"><?php echo number_format($current_balance->balance_amount,2); ?></td>
+    			<td align="right"><?php echo number_format($current_balance->balance,2); ?></td>
     			<td></td>
     		</tr>
 				<?php $sumCurSales += $current_balance->receivable_amount; ?>
@@ -157,12 +158,12 @@
 	 			</tr>
 	     	<?php foreach($current_balances as $current_balance) { ?>
 
-	 				<?php if($current_balance->group_status == 0) { ?>
+	 				<?php if($current_balance->is_sales == 0) { ?>
 	     		<tr>
-	     			<td><?php echo $current_balance->invoice_no; ?><?php echo $current_balance->group_status; ?></td>
-	     			<td><?php echo $current_balance->date_invoice; ?></td>
+	     			<td><?php echo $current_balance->invoice_no; ?></td>
+	     			<td><?php echo $current_balance->date_txn; ?></td>
 	     			<td align="right"><?php echo number_format($current_balance->receivable_amount,2); ?></td>
-	     			<td align="right"><?php echo number_format($current_balance->balance_amount,2); ?></td>
+	     			<td align="right"><?php echo number_format($current_balance->balance,2); ?></td>
 	     			<td></td>
 	     		</tr>
 					<?php $sumCurService += $current_balance->receivable_amount; ?>
@@ -175,7 +176,8 @@
 						<?php $sumCur =$sumCurService + $sumCurSales; ?>
             <td id="total_current" align="right"><?php echo number_format($sumCur,2); ?></td>
         </tr>
-		<td colspan="5" align="center"><strong>PAYMENTS</strong></td>
+        <tr>
+		<td colspan="5" align="center"  style="font-weight:bolder;">PAYMENTS</strong></td>
     	</tr>
     	<tr>
     		<th width="20%">Receipt #</th>
@@ -187,7 +189,7 @@
 				<td colspan="5" style="font-weight:bolder;">SALES</td>
 			</tr>
     	<?php foreach($payments as $payment) { ?>
-				<?php if($payment->group_status == 1) { ?>
+				<?php if($payment->is_sales == 1) { ?>
     		<tr>
     			<td><?php echo $payment->receipt_no_desc; ?></td>
     			<td><?php echo $payment->date_paid; ?></td>
@@ -201,7 +203,7 @@
 				<td colspan="5" style="font-weight:bolder;">SERVICES</td>
 			</tr>
 			<?php foreach($payments as $payment) { ?>
-				<?php if($payment->group_status == 0) { ?>
+				<?php if($payment->is_sales == 0) { ?>
 				<tr>
 					<td><?php echo $payment->receipt_no_desc; ?></td>
 					<td><?php echo $payment->date_paid; ?></td>

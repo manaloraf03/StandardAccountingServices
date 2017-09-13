@@ -38,18 +38,18 @@
 <table width="100%">
     <tr>
         <td width="5%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-        <td width="95%" class="align-center">
+        <td width="95%" >
             <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
             <p><?php echo $company_info->company_address; ?></p>
-            <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p><br>
+            <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
+            <p><?php echo $company_info->email_address; ?></p>
             <p>As of Date <?php echo $date; ?></p><br>
-            <center></center><h3 class="report-header"><strong>Account Receivable Schedule</strong></h3></center>
         </td>
     </tr>
 </table>
-
+<hr>
 <br /><br />
-
+        <center><h3 class="report-header align-center"><strong>Account Receivable Schedule</strong></h3></center>
 <table width="100%" border="1" cellspacing="-1">
     <thead>
         <tr>

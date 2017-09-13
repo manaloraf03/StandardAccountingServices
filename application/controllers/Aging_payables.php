@@ -14,6 +14,7 @@
                     'Company_model'
                 )
             );
+                    $this->load->library('M_pdf');
         }
 
         public function index()
@@ -42,6 +43,8 @@
                     break;  
 
                 case 'print':
+
+
                     $m_delivery = $this->Delivery_invoice_model;
                     $m_company = $this->Company_model;
 
@@ -49,8 +52,16 @@
 
                     $data['company_info'] = $company_info[0];
                     $data['payables'] = $m_delivery->get_aging_payables();
-
-                    $this->load->view('template/aging_payables_report',$data);
+                    $file_name='Aging of Payables';
+                    
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load("A4-L"); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/aging_payables_report',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                    #$this->load->view('template/aging_payables_report',$data);
                     break;
                 
                 default:
