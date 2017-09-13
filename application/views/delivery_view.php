@@ -978,6 +978,11 @@ $(document).ready(function(){
         });
 
         _cboDepartments.select2('val',null); 
+        $('#custom-templates .typeahead').keypress(function(event){
+            if (event.keyCode == 13) {
+                $('.tt-suggestion:first').click();
+            }
+        });
 
         var raw_data = <?php echo json_encode($products); ?>;
 
@@ -1026,9 +1031,9 @@ $(document).ready(function(){
                     return false;
                 }
                 if (event.keyCode == 13) {
-                    $('.tt-suggestion:first').click();
-                    // _objTypeHead.typeahead('close'); -- changed due to barcode scan not working
-                    // _objTypeHead.typeahead('val',''); -- changed due to barcode scan not working
+                    // $('.tt-suggestion:first').click();
+               _objTypeHead.typeahead('close');     //  -- changed due to barcode scan not working
+              _objTypeHead.typeahead('val','');      //  -- changed due to barcode scan not working
                 }
             }).bind('typeahead:select', function(ev, suggestion) {
 

@@ -835,6 +835,12 @@ $(document).ready(function(){
             calendarWeeks: true,
             autoclose: true
         });
+
+        $('#custom-templates .typeahead').keypress(function(event){
+            if (event.keyCode == 13) {
+                $('.tt-suggestion:first').click();
+            }
+        });
         var raw_data = <?php echo json_encode($products); ?>;
         var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
@@ -858,9 +864,9 @@ $(document).ready(function(){
             }
             if (event.keyCode == 13) {
              
-                $('.tt-suggestion:first').click();
-                // _objTypeHead.typeahead('close');    -- changed due to barcode scan not working
-                // _objTypeHead.typeahead('val',''); -- changed due to barcode scan not working
+                // $('.tt-suggestion:first').click();
+    _objTypeHead.typeahead('close');        //     -- changed due to barcode scan not working
+    _objTypeHead.typeahead('val','');         //  -- changed due to barcode scan not working
             }
         }).bind('typeahead:select', function(ev, suggestion) {
             //console.log(suggestion);

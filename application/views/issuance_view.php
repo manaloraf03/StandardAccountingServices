@@ -774,6 +774,12 @@ dt_si = $('#tbl_si_list').DataTable({
             calendarWeeks: true,
             autoclose: true
         });
+        $('#custom-templates .typeahead').keypress(function(event){
+            if (event.keyCode == 13) {
+                $('.tt-suggestion:first').click();
+            }
+        });
+        
         var raw_data=<?php echo json_encode($products); ?>;
         var products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
@@ -793,9 +799,9 @@ dt_si = $('#tbl_si_list').DataTable({
             }
         }).on('keyup', this, function (event) {
             if (event.keyCode == 13) {
-                $('.tt-suggestion:first').click();
-                // _objTypeHead.typeahead('close');
-                // _objTypeHead.typeahead('val','');
+                // $('.tt-suggestion:first').click();
+                _objTypeHead.typeahead('close');
+                _objTypeHead.typeahead('val','');
             }
         }).bind('typeahead:select', function(ev, suggestion) {
             //console.log(suggestion);

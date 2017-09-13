@@ -720,7 +720,11 @@ $(document).ready(function(){
             calendarWeeks: true,
             autoclose: true
         });
-
+        $('#custom-templates .typeahead').keypress(function(event){
+            if (event.keyCode == 13) {
+                $('.tt-suggestion:first').click();
+            }
+        });
         // $services is from controller function index
         var raw_data = <?php echo json_encode($services); ?>;
         var services = new Bloodhound({
