@@ -93,7 +93,7 @@
 												<div class="col-md-4">
 													<div class="form-group">
 													    <label for="customer" style="font-weight:bold;">Customer:</label>
-													    <select id="customer_id_filter">
+													    <select id="customer_id_filter" class="form-control">
     														<option value="all">All</option>
     														<?php foreach($customers as $row){
     															echo "<option value=".$row->customer_id.">".$row->customer_name."</option>";

@@ -228,7 +228,7 @@
                                                                 <strong>ACCOUNT TO RECONCILE</strong>
                                                                 <div class="row">
                                                                     <div class="col-sm-8">
-                                                                        <select id="cbo_accounts" class="form-control" name="account_id" data-error-msg="Please Select Account to reconcile." required>
+                                                                        <select id="cbo_accounts" class="form-control" name="account_id" data-error-msg="Please Select Account to reconcile." required style="width: 100%!important;">
                                                                             <?php foreach($account_titles as $account_title) { ?>
                                                                                 <option value="<?php echo $account_title->account_id; ?>"><?php echo $account_title->account_title; ?></option>
                                                                             <?php } ?>
