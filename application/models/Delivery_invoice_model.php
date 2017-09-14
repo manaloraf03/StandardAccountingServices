@@ -110,7 +110,7 @@ FROM
         ) as payment 
         ON payment.dr_invoice_id = ji.journal_id
 
-        WHERE ja.account_id = 4
+        WHERE ja.account_id = (SELECT payable_account_id FROM account_integration)
         AND ji.is_active=TRUE AND ji.is_deleted = FALSE
         GROUP BY ja.journal_id
         ) as M

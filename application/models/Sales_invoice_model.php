@@ -78,7 +78,7 @@ IFNULL(payment.payment_amount,0) as payment_amount,
 LEFT JOIN customers c ON c.customer_id = ji.customer_id
 LEFT JOIN (
 SELECT ja.journal_id, SUM(dr_amount) as dr_amount FROM journal_accounts ja
-WHERE account_id = 2
+WHERE account_id = (SELECT receivable_account_id FROM account_integration)
 GROUP BY  ja.journal_id
 ) as receivables
 
@@ -245,7 +245,7 @@ $sql="SELECT * FROM
         LEFT JOIN customers c ON c.customer_id = rp.customer_id
         LEFT JOIN (
         SELECT ja.journal_id, SUM(dr_amount) as dr_amount FROM journal_accounts ja
-        WHERE account_id = 2
+        WHERE account_id = (SELECT receivable_account_id FROM account_integration)
         GROUP BY  ja.journal_id
         ) as receivables
 
