@@ -612,7 +612,7 @@ GROUP BY rpl.journal_id) as payment
         ON payment.journal_id = ji.journal_id
         
         WHERE book_type = 'SJE'
-        AND ja.account_id = 2
+        AND ja.account_id = (SELECT receivable_account_id FROM account_integration)
         AND ji.is_active = TRUE
         AND ji.is_deleted = FALSE
 
@@ -621,8 +621,8 @@ GROUP BY rpl.journal_id) as payment
     )n
 GROUP BY n.customer_id HAVING total_balance > 0";
 
-       return $this->db->query($sql)->result();    
-   }
+        return $this->db->query($sql)->result();
+    }
 
     function get_report_summary($startDate,$endDate){
         $sql="SELECT
