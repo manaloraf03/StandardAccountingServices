@@ -571,11 +571,11 @@ SUM(n.30days) thirty_days,
 SUM(n.45days) fortyfive_days,
 SUM(n.60days) sixty_days,
 SUM(n.over_90days) over_ninetydays,
-(SUM(n.current)+
-SUM(n.30days)+
-SUM(n.45days)+
-SUM(n.60days)+
-SUM(n.over_90days)) as total_balance
+(IFNULL(SUM(n.current),0)+
+IFNULL(SUM(n.30days),0)+
+IFNULL(SUM(n.45days),0)+
+IFNULL(SUM(n.60days),0)+
+IFNULL(SUM(n.over_90days),0)) as total_balance
 FROM
     (SELECT
     m.customer_id,
@@ -621,8 +621,8 @@ GROUP BY rpl.journal_id) as payment
     )n
 GROUP BY n.customer_id HAVING total_balance > 0";
 
-        return $this->db->query($sql)->result();
-    }
+       return $this->db->query($sql)->result();    
+   }
 
     function get_report_summary($startDate,$endDate){
         $sql="SELECT

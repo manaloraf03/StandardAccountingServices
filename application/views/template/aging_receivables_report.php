@@ -65,9 +65,6 @@
     	</tr>
     	<tbody>
             <?php $sum_current = 0; $sum_thirty = 0; $sum_fortyfive = 0; $sum_sixty = 0; $sum_ninety = 0; ?>
-            <tr>
-                <td colspan="6"><strong>PER SERVICES</strong></td>
-            </tr>
             <?php foreach($receivables as $receivable) { ?>
 
                 <tr>
