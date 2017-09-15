@@ -2134,7 +2134,6 @@ class Templates extends CORE_Controller {
                         'journal_info.*',
                         'suppliers.supplier_name'
                     )
-
                     ,
                     array(
                         array('suppliers','suppliers.supplier_id=journal_info.supplier_id','left')

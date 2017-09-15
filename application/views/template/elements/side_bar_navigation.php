@@ -92,6 +92,11 @@
                                 <li class="<?php echo (in_array('5-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Salesperson">Salesperson Management</a></li>
                             </ul>
                         </li>
+                        <li class="<?php echo (in_array('14',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-view-list-alt"></i><span>Treasury</span></a>
+                            <ul class="acc-menu">
+                                <li class="<?php echo (in_array('14-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Treasury">Treasury</a></li>
+                            </ul>
+                        </li>
                         <li class="<?php echo (in_array('11',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-credit-card"></i><span>Bank Reconciliation</span></a>
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('11-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Bank_reconciliation">Bank Reconciliation</a></li>
