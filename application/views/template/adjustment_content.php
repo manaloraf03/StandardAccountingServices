@@ -99,28 +99,33 @@
                     <td width="12%" style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($item->adjust_line_total_price,2); ?></td>
                 </tr>
             <?php } ?>
-
+            <tr>
+            <td colspan="5" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-left: 1px solid gray;border-right: 1px solid gray;">Remarks:</td>
+            </tr>
+            <tr>
+            <td colspan="5" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-left: 1px solid gray;border-bottom: 1px solid gray;border-right: 1px solid gray;"><?php echo $adjustment_info->remarks; ?></td>
+            </tr>
             </tbody>
             <tfoot style="background-color: transparent!important ;">
             <tr style="background-color: transparent!important ;">
                 <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;"><b>Prepared by:</b></td>
                 <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;">Discount : </td>
-                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($adjustment_info->total_discount,2); ?></td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><?php echo number_format($adjustment_info->total_discount,2); ?></td>
             </tr>
             <tr style="background-color: transparent!important ;">
                 <td colspan="2" style="text-align: right;height: 30px;padding: 6px;border-left: 1px solid gray;border-bottom: 1px solid gray;"></td>
                 <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;">Total before Tax : </td>
-                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($adjustment_info->total_before_tax,2); ?></td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><?php echo number_format($adjustment_info->total_before_tax,2); ?></td>
             </tr>
             <tr style="background-color: transparent!important ;">
                 <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;"><b>Received by:</b></td>
                 <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;">Tax Amount : </td>
-                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($adjustment_info->total_tax_amount,2); ?></td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><?php echo number_format($adjustment_info->total_tax_amount,2); ?></td>
             </tr>
             <tr style="background-color: transparent!important ;">
                 <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;border-bottom: 1px solid gray;">Date:</td>
                 <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray;"><strong>Total after Tax : </strong></td>
-                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><strong><?php echo number_format($adjustment_info->total_after_tax,2); ?></strong></td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><strong><?php echo number_format($adjustment_info->total_after_tax,2); ?></strong></td>
             </tr>
             </tfoot>
         </table><br /><br />

@@ -20,7 +20,7 @@
         }
 
         .data {
-            border-bottom: 1px solid #404040;
+      /*      border-bottom: 1px solid #404040;*/
         }
 
         .align-center {
@@ -32,7 +32,7 @@
         }
 
         hr {
-            border-top: 3px solid #404040;
+     /*       border-top: 3px solid #404040;*/
         }
 </style>
 

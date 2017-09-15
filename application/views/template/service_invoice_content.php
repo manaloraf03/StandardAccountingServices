@@ -82,8 +82,17 @@
                     <td width="12%" style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($item->service_line_total,2); ?></td>
                 </tr>
             <?php } ?>
+            <tr>
+            <td colspan="5" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-left: 1px solid gray!important;border-top: 1px solid gray!important;border-right: 1px solid gray!important;"><b>Remarks</b> </td>
+            </tr>
+            <tr>
+            <td colspan="5" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-left: 1px solid gray!important;border-bottom: 1px solid gray!important;border-right: 1px solid gray!important;"><?php echo $service->remarks; ?></td>
+            </tr>
 
             </tbody>
+
+
+
             <tfoot>
             <tr>
                 <td colspan="2" style="text-align: right;height: 30px;padding: 6px;"></td>
