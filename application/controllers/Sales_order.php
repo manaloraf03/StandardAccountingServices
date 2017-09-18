@@ -186,9 +186,13 @@ class Sales_order extends CORE_Controller
                 $m_sales_order->salesperson_id=$this->input->post('salesperson_id',TRUE);
                 $m_sales_order->date_order=date('Y-m-d',strtotime($this->input->post('date_order',TRUE)));
                 $m_sales_order->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
+                $m_sales_order->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
                 $m_sales_order->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_sales_order->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_sales_order->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                $m_sales_order->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
+                
+                
                 $m_sales_order->posted_by_user=$this->session->user_id;
                 $m_sales_order->save();
 
@@ -200,6 +204,7 @@ class Sales_order extends CORE_Controller
                 $so_qty=$this->input->post('so_qty',TRUE);
                 $so_price=$this->input->post('so_price',TRUE);
                 $so_discount=$this->input->post('so_discount',TRUE);
+                $so_gross=$this->input->post('so_gross',TRUE);
                 $so_line_total_discount=$this->input->post('so_line_total_discount',TRUE);
                 $so_tax_rate=$this->input->post('so_tax_rate',TRUE);
                 $so_line_total_price=$this->input->post('so_line_total_price',TRUE);
@@ -217,6 +222,7 @@ class Sales_order extends CORE_Controller
                     $m_sales_order_items->so_qty=$this->get_numeric_value($so_qty[$i]);
                     $m_sales_order_items->so_price=$this->get_numeric_value($so_price[$i]);
                     $m_sales_order_items->so_discount=$this->get_numeric_value($so_discount[$i]);
+                    $m_sales_order_items->so_gross=$this->get_numeric_value($so_gross[$i]);
                     $m_sales_order_items->so_line_total_discount=$this->get_numeric_value($so_line_total_discount[$i]);
                     $m_sales_order_items->so_tax_rate=$this->get_numeric_value($so_tax_rate[$i]);
                     $m_sales_order_items->so_line_total_price=$this->get_numeric_value($so_line_total_price[$i]);
@@ -276,11 +282,12 @@ class Sales_order extends CORE_Controller
                 $m_sales_order->customer_id=$this->input->post('customer',TRUE);
                 $m_sales_order->salesperson_id=$this->input->post('salesperson_id',TRUE);
                 $m_sales_order->date_order=date('Y-m-d',strtotime($this->input->post('date_order',TRUE)));
-
                 $m_sales_order->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
+                $m_sales_order->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
                 $m_sales_order->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_sales_order->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_sales_order->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                $m_sales_order->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
                 $m_sales_order->modified_by_user=$this->session->user_id;
                 $m_sales_order->modify($sales_order_id);
 
@@ -292,6 +299,7 @@ class Sales_order extends CORE_Controller
                 $prod_id=$this->input->post('product_id',TRUE);
                 $so_price=$this->input->post('so_price',TRUE);
                 $so_discount=$this->input->post('so_discount',TRUE);
+                $so_gross=$this->input->post('so_gross',TRUE);
                 $so_line_total_discount=$this->input->post('so_line_total_discount',TRUE);
                 $so_tax_rate=$this->input->post('so_tax_rate',TRUE);
                 $so_qty=$this->input->post('so_qty',TRUE);
@@ -308,6 +316,7 @@ class Sales_order extends CORE_Controller
                     $m_sales_order_items->product_id=$this->get_numeric_value($prod_id[$i]);
                     $m_sales_order_items->so_price=$this->get_numeric_value($so_price[$i]);
                     $m_sales_order_items->so_discount=$this->get_numeric_value($so_discount[$i]);
+                    $m_sales_order_items->so_gross=$this->get_numeric_value($so_gross[$i]);
                     $m_sales_order_items->so_line_total_discount=$this->get_numeric_value($so_line_total_discount[$i]);
                     $m_sales_order_items->so_tax_rate=$this->get_numeric_value($so_tax_rate[$i]);
                     $m_sales_order_items->so_qty=$this->get_numeric_value($so_qty[$i]);
@@ -375,12 +384,7 @@ class Sales_order extends CORE_Controller
             $filter_value,
 
             array(
-                'sales_order.sales_order_id',
-                'sales_order.so_no',
-                'sales_order.remarks',
-                'sales_order.date_created',
-                'sales_order.customer_id',
-                'sales_order.salesperson_id',
+                'sales_order.*',
                 'DATE_FORMAT(sales_order.date_order,"%m/%d/%Y") as date_order',
                 'departments.department_id',
                 'departments.department_name',

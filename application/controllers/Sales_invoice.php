@@ -178,7 +178,7 @@ class Sales_invoice extends CORE_Controller
                         array('products','products.product_id=sales_invoice_items.product_id','left'),
                         array('units','units.unit_id=sales_invoice_items.unit_id','left')
                     ),
-                    'sales_invoice_items.sales_item_id DESC'
+                    'sales_invoice_items.sales_item_id ASC'
                 );
 
 
@@ -228,10 +228,12 @@ class Sales_invoice extends CORE_Controller
                 $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                 $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
                 $m_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
+                $m_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
                 $m_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 //$m_invoice->inv_type=2;
                 $m_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                $m_invoice->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
                 $m_invoice->posted_by_user=$this->session->user_id;
                 $m_invoice->save();
 
@@ -242,6 +244,7 @@ class Sales_invoice extends CORE_Controller
                 $prod_id=$this->input->post('product_id',TRUE);
                 $inv_qty=$this->input->post('inv_qty',TRUE);
                 $inv_price=$this->input->post('inv_price',TRUE);
+                $inv_gross=$this->input->post('inv_gross',TRUE);
                 $inv_discount=$this->input->post('inv_discount',TRUE);
                 $inv_line_total_discount=$this->input->post('inv_line_total_discount',TRUE);
                 $inv_tax_rate=$this->input->post('inv_tax_rate',TRUE);
@@ -262,6 +265,7 @@ class Sales_invoice extends CORE_Controller
                     //+$m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
                     $m_invoice_items->inv_qty=$inv_qty[$i];
                     $m_invoice_items->inv_price=$this->get_numeric_value($inv_price[$i]);
+                    $m_invoice_items->inv_gross=$this->get_numeric_value($inv_gross[$i]);
                     $m_invoice_items->inv_discount=$this->get_numeric_value($inv_discount[$i]);
                     $m_invoice_items->inv_line_total_discount=$this->get_numeric_value($inv_line_total_discount[$i]);
                     $m_invoice_items->inv_tax_rate=$this->get_numeric_value($inv_tax_rate[$i]);
@@ -347,10 +351,12 @@ class Sales_invoice extends CORE_Controller
                     $m_invoice->sales_order_id=$sales_order_id;
                     $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                     $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
+                    $m_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
                     $m_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                     $m_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                     $m_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                     $m_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
+                    $m_invoice->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
                     $m_invoice->address=$this->input->post('address',TRUE);
                     $m_invoice->modified_by_user=$this->session->user_id;
                     $m_invoice->modify($sales_invoice_id);
@@ -366,6 +372,7 @@ class Sales_invoice extends CORE_Controller
                     $inv_line_total_discount=$this->input->post('inv_line_total_discount',TRUE);
                     $inv_tax_rate=$this->input->post('inv_tax_rate',TRUE);
                     $inv_qty=$this->input->post('inv_qty',TRUE);
+                    $inv_gross=$this->input->post('inv_gross',TRUE);
                     $inv_line_total_price=$this->input->post('inv_line_total_price',TRUE);
                     $inv_tax_amount=$this->input->post('inv_tax_amount',TRUE);
                     $inv_non_tax_amount=$this->input->post('inv_non_tax_amount',TRUE);
@@ -385,6 +392,7 @@ class Sales_invoice extends CORE_Controller
                         $m_invoice_items->inv_line_total_discount=$this->get_numeric_value($inv_line_total_discount[$i]);
                         $m_invoice_items->inv_tax_rate=$this->get_numeric_value($inv_tax_rate[$i]);
                         $m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
+                        $m_invoice_items->inv_gross=$this->get_numeric_value($inv_gross[$i]);
                         $m_invoice_items->inv_line_total_price=$this->get_numeric_value($inv_line_total_price[$i]);
                         $m_invoice_items->inv_tax_amount=$this->get_numeric_value($inv_tax_amount[$i]);
                         $m_invoice_items->inv_non_tax_amount=$this->get_numeric_value($inv_non_tax_amount[$i]);

@@ -11,24 +11,26 @@ class Sales_order_item_model extends CORE_Model
         parent::__construct();
     }
 
-
-
-
-
-
-
-
-
     function get_products_with_balance_qty_so($sales_order_id){
-        $sql="SELECT o.*,(o.so_line_total-o.non_tax_amount)as tax_amount FROM
+/*    $sql="SELECT o.*,(o.so_line_total-o.non_tax_amount)as tax_amount FROM
 
                 (SELECT n.*,
 
                 ((n.so_price*n.so_qty)-(n.so_discount*n.so_qty))as so_line_total,
                 ((n.so_price*n.so_qty)/(1+tax_rate_decimal))as non_tax_amount,
                 (n.so_discount*n.so_qty) as so_line_total_discount
+ORIGINAL QUERY OF THE FUNCTION
+*/
+    $sql="SELECT o.*,(o.line_total-o.non_tax_amount)as tax_amount FROM
 
+                (SELECT n.*,               
+                (n.so_price*n.so_qty) as inv_gross,
+                (n.so_price*n.so_qty) as line_total,
+                ((n.so_price*n.so_qty)/(1+tax_rate_decimal))as non_tax_amount,
+                ((n.so_price*n.so_qty)-((n.so_price*n.so_qty)*(n.so_discount/100)))as so_line_total,
+                ((n.so_price*n.so_qty)*(n.so_discount/100)) as so_line_total_discount
 
+/* END OF EDIT FOR COMPUTATION FOR SALES ORDER AS BUTTON ACCEPT IS CLICKED */          
                 FROM
                 (SELECT main.*,p.purchase_cost, p.size, (main.so_tax_rate/100)as tax_rate_decimal,p.product_code,p.product_desc,p.unit_id,u.unit_name FROM
 

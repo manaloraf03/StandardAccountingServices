@@ -571,13 +571,7 @@ GROUP BY n.customer_id HAVING total_balance > 0";
 
     function list_with_count($filter_id){
     $sql="SELECT
-        si.sales_invoice_id,
-        si.sales_inv_no,
-        si.remarks,
-        si.date_created,
-        si.customer_id,
-        si.inv_type,
-        si.is_journal_posted,
+        si.*,
         DATE_FORMAT(si.date_invoice,'%m/%d/%Y') as date_invoice,
         DATE_FORMAT(si.date_due,'%m/%d/%Y') as date_due,
 
