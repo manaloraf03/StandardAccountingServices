@@ -1437,7 +1437,7 @@ $(document).ready(function(){
         '<td width="5%" style=""><input name="so_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_discount,2)+'" style="text-align:right;"></td>'+
         '<td style="display:none;" width="11%"><input name="so_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_line_total_discount,2)+'" readonly></td>'+
         '<td width="5%" style="display:none;"><input name="so_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_tax_rate,2)+'"></td>'+
-        '<td width="5%" style=""><input name="so_gross[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_gross,2)+'"></td>'+
+        '<td width="5%" style=""><input name="so_gross[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_gross,2)+'" readonly></td>'+
         '<td width="5%" align="right"><input name="so_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_line_total_price,2)+'" readonly></td>'+
         '<td style="display:none;"><input name="so_tax_amount[]" type="text" class="numeric form-control" value="'+ d.so_tax_amount+'" readonly></td>'+
         '<td style="display:none;"><input name="so_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.so_non_tax_amount+'" readonly></td>'+
