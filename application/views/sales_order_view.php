@@ -246,15 +246,19 @@
                         <table id="tbl_items" class="table table-striped"  cellspacing="0" width="100%" style="font-font:tahoma;">
                         <thead class="">
                         <tr>
+                            <!-- DISPLAY -->
                             <th width="10%">Qty </th>
                             <th width="10%">UM </th>
                             <th width="25%">Item </th>
                             <th width="15%" style="text-align: right;">Unit Price </th>
                             <th width="15%" style="text-align: right;">Discount % </th>
+                            <!-- display:none; -->
                             <th style="display:none;" width="10%">Total line Discount </th> <!-- total discount -->
                             <th style="display:none;" width="10%">Tax % </th>
+                            <!-- DISPLAY -->
                             <th width="15%" style="text-align: right">Gross</th>
                             <th width="15%" style="text-align: right">Total</th>
+                            <!-- display:none;  -->
                             <th style="display:none;"  width="10%">Vat Input(Total Line Tax) </th> <!-- vat input -->
                             <th style="display:none;"  width="10%">Net of Vat (Price w/out Tax) </th> <!-- net of vat -->
                             <td style="display:none;" width="10%">Item ID </td><!-- product id -->
@@ -269,7 +273,10 @@
                             </tr>
                             <tr>
                                 <td style="text-align: right;">Discount %</td>
-                                <td align="right" colspan="1" id="" color="red"><input id="txt_overall_discount" name="total_overall_discount" type="text" class="numeric form-control" value="0.00" /></td>
+                                <td align="right" colspan="1" id="" color="red">
+                                <input id="txt_overall_discount" name="total_overall_discount" type="text" class="numeric form-control" value="0.00" />
+                                <input id="txt_overall_discount_amount" name="total_overall_discount_amount" type="hidden" class="numeric form-control" value="0.00" />
+                                </td>
 
                                 <td>Total After Discount:</td>
                                 <td id="td_total_after_discount" style="text-align: right">0.00</td>
@@ -1156,7 +1163,7 @@ $(document).ready(function(){
         });
         //track every changes on numeric fields
 
-        $('#txt_overall_discount').on('change',function(){
+        $('#txt_overall_discount').on('keyup',function(){
             reComputeTotal();
         });
 
@@ -1430,15 +1437,19 @@ $(document).ready(function(){
     };
     var newRowItem=function(d){
         return '<tr>'+
+        // DISPLAY
         '<td width="5%"><input name="so_qty[]" type="text" class="number form-control" value="'+ d.so_qty+'"></td>'+
         '<td width="5%">'+ d.unit_name+'</td>'+
         '<td width="5%">'+d.product_desc+'</td>'+
         '<td width="5%"><input name="so_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.so_price,2)+'" style="text-align:right;"></td>'+
         '<td width="5%" style=""><input name="so_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_discount,2)+'" style="text-align:right;"></td>'+
+        // DISPLAY NONE display:none;
         '<td style="display:none;" width="11%"><input name="so_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_line_total_discount,2)+'" readonly></td>'+
         '<td width="5%" style="display:none;"><input name="so_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_tax_rate,2)+'"></td>'+
+        // DISPLAY AGAIN 
         '<td width="5%" style=""><input name="so_gross[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_gross,2)+'" readonly></td>'+
         '<td width="5%" align="right"><input name="so_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.so_line_total_price,2)+'" readonly></td>'+
+        //DISPLAY NONE display:none;
         '<td style="display:none;"><input name="so_tax_amount[]" type="text" class="numeric form-control" value="'+ d.so_tax_amount+'" readonly></td>'+
         '<td style="display:none;"><input name="so_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.so_non_tax_amount+'" readonly></td>'+
         '<td style="display:none;"><input name="product_id[]" type="text" class="form-control" value="'+ d.product_id+'" readonly></td>'+
@@ -1470,6 +1481,7 @@ $(document).ready(function(){
         $('#td_tax').html(accounting.formatNumber(so_tax_amount,2));*/
 
 
+        $('#txt_overall_discount_amount').val(accounting.formatNumber(after_tax * ($('#txt_overall_discount').val() / 100),2));
         $('#td_total_before_tax').html(accounting.formatNumber(before_tax,2)); // ok 
         $('#td_after_tax').html('<b>'+accounting.formatNumber(after_tax,2)+'</b>'); 
         $('#td_tax').html(accounting.formatNumber(so_tax_amount,2)); //ok 

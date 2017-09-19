@@ -103,7 +103,7 @@
             <tfoot>
             <tr>
                 <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;"><b>Prepared By:</b></td>
-                <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;">Discount : </td>
+                <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;">Discount 1: </td>
                 <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><?php echo number_format($sales_order->total_discount,2); ?></td>
             </tr>
             <tr>
@@ -118,8 +118,18 @@
             </tr>
             <tr>
                 <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-bottom: 1px solid gray!important;border-left: 1px solid gray!important;">Date:</td>
-                <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;"><strong>Total after Tax : </strong></td>
+                <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;">Total after Tax : </td>
                 <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><strong><?php echo number_format($sales_order->total_after_tax,2); ?></strong></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-bottom: 1px solid gray!important;border-left: 1px solid gray!important;"></td>
+                <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;">Discount 2 : </td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><?php echo number_format($sales_order->total_overall_discount_amount,2); ?></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: left;height: 30px;padding: 6px;border-bottom: 1px solid gray!important;border-left: 1px solid gray!important;"></td>
+                <td colspan="2" style="border-bottom:1px solid gray;text-align: left;height: 30px;padding: 6px;border-left: 1px solid gray!important;"><strong>Total : </strong></td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;border-right: 1px solid gray;"><?php echo number_format($sales_order->total_after_discount,2); ?></td>
             </tr>
             </tfoot>
         </table><br /><br />

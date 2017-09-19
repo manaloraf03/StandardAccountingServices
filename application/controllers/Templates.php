@@ -1557,6 +1557,12 @@ class Templates extends CORE_Controller {
                         'sales_invoice.customer_id',
                         'sales_invoice.department_id',
                         'sales_invoice.remarks',
+                        'sales_invoice.total_discount',
+                        'sales_invoice.total_before_tax',
+                        'sales_invoice.total_tax_amount',
+                        'sales_invoice.total_after_tax',
+                        'sales_invoice.total_overall_discount_amount',
+                        'sales_invoice.total_after_discount',
                         'DATE_FORMAT(sales_invoice.date_invoice,"%m/%d/%Y")as date_invoice',
                         'DATE_FORMAT(sales_invoice.date_created,"%m/%d/%Y %r")as date_created',
                         'customers.customer_name',
@@ -1589,7 +1595,7 @@ class Templates extends CORE_Controller {
                         'customers.customer_name'
                     )
                 );
-                $data['entries']=$m_sales_invoice->get_journal_entries($sales_invoice_id);
+                $data['entries']=$m_sales_invoice->get_journal_entries_2($sales_invoice_id);
                 $data['accounts']=$m_accounts->get_list(
                     array(
                         'account_titles.is_active'=>TRUE,

@@ -187,6 +187,7 @@ class Sales_order extends CORE_Controller
                 $m_sales_order->date_order=date('Y-m-d',strtotime($this->input->post('date_order',TRUE)));
                 $m_sales_order->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                 $m_sales_order->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                $m_sales_order->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                 $m_sales_order->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_sales_order->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_sales_order->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
@@ -284,6 +285,7 @@ class Sales_order extends CORE_Controller
                 $m_sales_order->date_order=date('Y-m-d',strtotime($this->input->post('date_order',TRUE)));
                 $m_sales_order->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                 $m_sales_order->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                $m_sales_order->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                 $m_sales_order->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_sales_order->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_sales_order->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));

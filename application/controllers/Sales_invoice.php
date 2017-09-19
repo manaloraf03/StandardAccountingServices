@@ -227,6 +227,7 @@ class Sales_invoice extends CORE_Controller
                 $m_invoice->remarks=$this->input->post('remarks',TRUE);
                 $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                 $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
+                $m_invoice->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                 $m_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                 $m_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
                 $m_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
@@ -352,6 +353,7 @@ class Sales_invoice extends CORE_Controller
                     $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                     $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
                     $m_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                    $m_invoice->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                     $m_invoice->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                     $m_invoice->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                     $m_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));

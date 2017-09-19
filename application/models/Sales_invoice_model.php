@@ -62,6 +62,67 @@ class Sales_invoice_model extends CORE_Model
         return $this->db->query($sql)->result();
     }
 
+
+function get_journal_entries_2($sales_invoice_id){
+
+$sql="SELECT main.* FROM(SELECT
+            p.income_account_id as account_id,
+            '' as memo,
+            SUM(sii.inv_non_tax_amount) cr_amount,
+            0 as dr_amount
+
+            FROM `sales_invoice_items` as sii
+            INNER JOIN products as p ON sii.product_id=p.product_id
+            WHERE sii.sales_invoice_id=$sales_invoice_id AND p.income_account_id>0
+            GROUP BY p.income_account_id
+
+            UNION ALL
+
+
+            SELECT output_tax.account_id,output_tax.memo,
+            SUM(output_tax.cr_amount)as cr_amount,0 as dr_amount
+             FROM
+            (SELECT sii.product_id,
+
+            (SELECT output_tax_account_id FROM account_integration) as account_id
+            ,
+            '' as memo,
+            SUM(sii.inv_tax_amount) as cr_amount,
+            0 as dr_amount
+            FROM `sales_invoice_items` as sii
+            INNER JOIN products as p ON sii.product_id=p.product_id
+            WHERE sii.sales_invoice_id=$sales_invoice_id AND p.income_account_id>0
+            )as output_tax GROUP BY output_tax.account_id
+
+            UNION ALL
+            SELECT acc_receivable.* FROM
+            (SELECT 
+            (SELECT receivable_account_id FROM account_integration) as account_id,
+            '' as memo,
+            0 cr_amount,
+            sii.total_after_discount as dr_amount
+            FROM `sales_invoice` as sii
+             WHERE sii.sales_invoice_id=$sales_invoice_id
+            ) as acc_receivable GROUP BY acc_receivable.account_id)as main WHERE main.dr_amount>0 OR main.cr_amount>0
+            
+            UNION ALL
+            
+            SELECT
+            (SELECT ai.receivable_discount_account_id FROM account_integration ai) account_id,
+            '' as memo,
+            0 as cr_amount,
+            (IFNULL(discount.total_overall_discount_amount,0) + discount.total_discount ) as dr_amount
+
+            FROM 
+            (SELECT 
+            si.total_overall_discount_amount,
+            si.total_discount
+            FROM sales_invoice si
+            WHERE si.sales_invoice_id=$sales_invoice_id) as discount
+            ";
+        return $this->db->query($sql)->result();
+}
+
     function get_customer_soa_final($date, $customer_id, $status, $payment_date){
 $sql="
 SELECT 
