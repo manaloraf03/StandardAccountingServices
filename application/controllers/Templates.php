@@ -1098,7 +1098,7 @@ class Templates extends CORE_Controller {
                 $type=$this->input->get('type',TRUE);
 
                 $journal_info=$m_journal_info->get_list(
-                    $journal_id,
+                    array('journal_id'=>$journal_id),
 
                     array(
                         'journal_info.*',
@@ -1356,7 +1356,7 @@ class Templates extends CORE_Controller {
                 $company_info=$m_company->get_list();
                 $journal_info=$m_journal_info->get_list(
 
-                    "journal_info.is_active=TRUE AND journal_info.is_deleted=FALSE AND journal_info.book_type='GJE' AND journal_info.journal_id=$journal_id",
+                    "journal_info.book_type='GJE' AND journal_info.journal_id=$journal_id",
 
                     array(
                         'journal_info.journal_id',

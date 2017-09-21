@@ -119,6 +119,13 @@ class Service_invoice extends CORE_Controller
                 $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                 $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
                 $m_invoice->total_amount=$this->get_numeric_value($this->input->post('summary_total_amount',TRUE));
+                $m_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                $m_invoice->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
+                $m_invoice->total_amount_after_discount=$this->get_numeric_value($this->input->post('summary_total_amount_after_discount',TRUE));
+
+                
+
+                
                 $m_invoice->posted_by_user=$this->session->user_id;
                 $m_invoice->save();
 
@@ -177,6 +184,9 @@ class Service_invoice extends CORE_Controller
                 $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
                 $m_invoice->date_invoice=date('Y-m-d',strtotime($this->input->post('date_invoice',TRUE)));
                 $m_invoice->total_amount=$this->get_numeric_value($this->input->post('summary_total_amount',TRUE));
+                $m_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                $m_invoice->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
+                $m_invoice->total_amount_after_discount=$this->get_numeric_value($this->input->post('summary_total_amount_after_discount',TRUE));
                 $m_invoice->modified_by_user=$this->session->user_id;
                 $m_invoice->modify($service_invoice_id);
 

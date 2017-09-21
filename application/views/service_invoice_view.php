@@ -223,47 +223,31 @@
                         <thead class="">    
                         <tr>
                             <th width="10%">Qty</th>
-                            <th width="10%">UM</th>
+                            <th width="15%">UM</th>
                             <th width="30%">Item</th>
                             <th width="20%" style="text-align: right;">Unit Price</th>
-                            <th width="12%" style="text-align: right;display: none;">Discount</th>
-                            <th style="display: none;">T.D</th> <!-- total discount -->
-                            <th style="display: none;">Tax %</th>
                             <th width="20%" style="text-align: right;">Total</th>
-                            <th style="display: none;">V.I</th> <!-- vat input -->
-                            <th style="display: none;">N.V</th> <!-- net of vat -->
-                            <td style="display: none;">Item ID</td><!-- product id -->
+                            <td style="display: none">Item ID</td>
+                            <td style="display: none">Unit Id</td>
                             <th><center>Action</center></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <!--<tr>
-                                    <td width="10%"><input type="text" class="numeric form-control" align="right"></td>
-                                    <td width="5%">pcs</td>
-                                    <td width="30%">Computer Case</td>
-                                    <td width="12%"><input type="text" class="numeric form-control"></td>
-                                    <td width="12%"><input type="text" class="numeric form-control"></td>
-                                    <td></td>
-                                    <td width="15%">
-                                        <select class="form-control">
-                                            <?php foreach($tax_types as $tax_type){ ?>
-                                                <option value="<?php echo $tax_type->tax_type_id; ?>"><?php echo $tax_type->tax_type; ?></option>
-                                            <?php } ?>
-                                        </select>
-                                    </td>
-                                    <td width="12%" align="right"><input type="text" class="numeric form-control"></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button type="button" class="btn btn-default"><i class="fa fa-trash"></i></button></td>
-                                </tr>-->
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="6" style="height: 50px;">&nbsp;</td>
+                                <td colspan="2" style="text-align: right;">Discount %:</td>
+                                <td>
+                                    <input type="text" class="form-control numeric" name="total_overall_discount" id="txt_total_overall_discount">
+                                    <input type="hidden" class="form-control numeric" name="total_overall_discount_amount" id="txt_total_overall_discount_amount" readonly>
+                                </td>
+                                <td colspan="1" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Amount :</strong></td>
+                                <td align="right" colspan="1" id="total_amount" color="red">0.00</td>
+                                <td></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Amount :</strong></td>
-                                <td align="right" colspan="1" id="total_amount" color="red">0.00</td>
+                            <td colspan="4" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total After Discount :</strong></td>
+                                <td align="right" colspan="1" id="total_amount_before_discount" color="red">0.00</td>
                                 <td></td>
                             </tr>
                         </tfoot>
@@ -290,6 +274,10 @@
                         <div class="table-responsive">
                             <table id="tbl_service_invoice_summary" class="table invoice-total" style="font-family: tahoma;">
                                 <tbody>
+                                <tr>
+                                    <td><strong>Total After Tax :</strong></td>
+                                    <td align="right"><b>0.00</b></td>
+                                </tr>
                                 <tr>
                                     <td><strong>Total After Tax :</strong></td>
                                     <td align="right"><b>0.00</b></td>
@@ -651,7 +639,8 @@ $(document).ready(function(){
 
     };
     var oTableDetails={
-        total : 'tr:eq(0) > td:eq(1)'
+        total_after_discount : 'tr:eq(0) > td:eq(1)',
+        total : 'tr:eq(1) > td:eq(1)'
     };
     var initializeControls=function(){
         dt=$('#tbl_service_invoice').DataTable({
@@ -990,7 +979,8 @@ $(document).ready(function(){
             $('#img_user').attr('src','assets/img/anonymous-icon.png');
 
             $('#total_amount').html('0.00');
-
+            $('#txt_total_overall_discount').val('0.00');
+            $('#txt_total_overall_discount_amount').val('0.00');
             $('#invoice_default').datepicker('setDate', 'today');
             $('#due_default').datepicker('setDate', 'today');
             reComputeTotal(); //this is to make sure, display summary are recomputed as 0
@@ -1083,6 +1073,10 @@ $(document).ready(function(){
 
             reComputeTotal();
         });
+        $('#tbl_items tfoot').on('keyup','input.numeric,input.number',function(){
+            reComputeTotal();
+        });        
+
         $('#btn_yes').click(function(){
             removeIssuanceRecord().done(function(response){
                 showNotification(response);
@@ -1191,6 +1185,7 @@ $(document).ready(function(){
         var _data=$('#frm_service_invoice,#frm_items,#frm_remarks').serializeArray();
         var tbl_summary=$('#tbl_service_invoice_summary');
         _data.push({name : "summary_total_amount", value : tbl_summary.find(oTableDetails.total).text()});
+        _data.push({name : "summary_total_amount_after_discount", value : tbl_summary.find(oTableDetails.total_after_discount).text()});
         return $.ajax({
             "dataType":"json",
             "type":"POST",
@@ -1203,6 +1198,7 @@ $(document).ready(function(){
         var _data=$('#frm_service_invoice,#frm_items,#frm_remarks ').serializeArray();
         var tbl_summary=$('#tbl_service_invoice_summary');
         _data.push({name : "summary_total_amount", value : tbl_summary.find(oTableDetails.total).text()});
+        _data.push({name : "summary_total_amount_after_discount", value : tbl_summary.find(oTableDetails.total_after_discount).text()});
         _data.push({name : "service_invoice_id" ,value : _selectedID});
         return $.ajax({
             "dataType":"json",
@@ -1271,8 +1267,9 @@ $(document).ready(function(){
         '<td width="30%">'+d.service_desc+'</td>'+
         '<td width="11%"><input name="service_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.service_price,2)+'" style="text-align:right;"></td>'+
         '<td width="11%" align="right"><input name="line_total[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.line_total,2)+'" readonly></td>'+
-        '<td style="display: none;"><input name="service_id[]" type="text" class=" form-control" value="'+ d.service_id+'" readonly></td>'+
-        '<td style="display: none;"><input name="service_unit[]" type="text" class=" form-control" value="'+ d.service_unit_id+'" readonly></td>'+
+        // display:none;
+        '<td style="display:none;"><input name="service_id[]" type="text" class=" form-control" value="'+ d.service_id+'" readonly></td>'+
+        '<td style="display:none;"><input name="service_unit[]" type="text" class=" form-control" value="'+ d.service_unit_id+'" readonly></td>'+
         '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
         '</tr>';
     };
@@ -1281,14 +1278,23 @@ $(document).ready(function(){
         var total_amount=0;
         $.each(rows,function(){
 
-
         total_amount+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         });
+
+
+        var discount_percentage = $('#txt_total_overall_discount').val();
+        var discount_amount = total_amount*(discount_percentage/100);
+        var total_after_discount = total_amount - discount_amount;
+
+
+        $('#txt_total_overall_discount_amount').val(accounting.formatNumber(discount_amount,2)); // amount of discount
+        $('#total_amount').html('<b>'+accounting.formatNumber(total_amount,2)+'</b>'); //amount after discount
+        $('#total_amount_before_discount').html('<b>'+accounting.formatNumber(total_after_discount,2)+'</b>'); 
+
+
         var tbl_summary=$('#tbl_service_invoice_summary');
         tbl_summary.find(oTableDetails.total).html('<b>'+accounting.formatNumber(total_amount,2)+'</b>');
-
-        $('#total_amount').html('<b>'+accounting.formatNumber(total_amount,2)+'</b>');
-  
+        tbl_summary.find(oTableDetails.total_after_discount).html('<b>'+accounting.formatNumber(total_after_discount,2)+'</b>');
     };
     var resetSummary=function(){
         var tbl_summary=$('#tbl_service_invoice_summary');

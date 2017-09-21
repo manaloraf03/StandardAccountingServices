@@ -68,7 +68,7 @@
                 <th width="50%" style="border-bottom: 2px solid gray;text-align: left;height: 30px;padding: 6px;">Item</th>
                 <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Qty</th>
                 <th width="12%" style="border-bottom: 2px solid gray;text-align: center;height: 30px;padding: 6px;">UM</th>
-                <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Price</th>
+                <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Unit Price</th>
                 <th width="12%" style="border-bottom: 2px solid gray;text-align: right;height: 30px;padding: 6px;">Total</th>
             </tr>
             </thead>
@@ -88,16 +88,22 @@
             <tr>
             <td colspan="5" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-left: 1px solid gray!important;border-bottom: 1px solid gray!important;border-right: 1px solid gray!important;"><?php echo $service->remarks; ?></td>
             </tr>
-
             </tbody>
-
-
-
             <tfoot>
             <tr>
-                <td colspan="2" style="text-align: right;height: 30px;padding: 6px;"></td>
-                <td colspan="2" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;"><strong>Total : </strong></td>
-                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><strong><?php echo number_format($service->total_amount,2); ?></strong></td>
+                <td colspan="3" style="text-align: right;height: 30px;padding: 6px;"></td>
+                <td colspan="1" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;">Total : </td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($service->total_amount,2); ?></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: right;height: 30px;padding: 6px;"></td>
+                <td colspan="1" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;">Discount: </td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><?php echo number_format($service->total_overall_discount_amount,2); ?></td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: right;height: 30px;padding: 6px;"></td>
+                <td colspan="1" style="border-bottom: 1px solid gray;text-align: left;height: 30px;padding: 6px;"><strong>Total after Discount: </strong></td>
+                <td style="border-bottom: 1px solid gray;text-align: right;height: 30px;padding: 6px;"><strong><?php echo number_format($service->total_amount_after_discount,2); ?></strong></td>
             </tr>
             </tfoot>
         </table><br /><br />

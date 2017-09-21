@@ -322,7 +322,7 @@
                         <td colspan="" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Discount (%) :</strong></td>
                         <td align="right" colspan="1" id="" color="red">
                             <input id="txt_overall_discount" name="total_overall_discount" type="text" class="numeric form-control" value="0.00" />
-                            <input id="txt_overall_discount_amount" name="total_overall_discount_amount" type="text" class="numeric form-control" value="0.00" />
+                            <input id="txt_overall_discount_amount" name="total_overall_discount_amount" type="hidden" class="numeric form-control" value="0.00" />
                         </td>
                         <td style="text-align: right;"><strong><i class="glyph-icon icon-star"></i>Total After Discount :</strong></td>
                         <td id="td_total_after_discount" style="text-align: right;"><strong>0.00</strong></td>
