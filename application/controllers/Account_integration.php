@@ -32,7 +32,7 @@ class Account_integration extends CORE_Controller
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
         $data['title'] = 'Account Integration';
 
-        $data['accounts'] = $this->Account_title_model->get_list();
+        $data['accounts'] = $this->Account_title_model->get_list(array('is_deleted'=>FALSE));
         $current_accounts= $this->Account_integration_model->get_list();
         $data['current_accounts'] =$current_accounts[0];
         $data['users_counter']=$this->Users_model->get_user_invoice_counter();
