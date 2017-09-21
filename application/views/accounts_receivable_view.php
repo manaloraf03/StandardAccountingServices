@@ -282,7 +282,7 @@
                                     <span><strong><i class="fa fa-bars"></i>  Info</strong></span>
                                     <hr />
 
-                                    <label class="col-lg-2"> * Txn # :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Txn # :</label>
                                     <div class="col-lg-4">
 
                                         <div class="input-group">
@@ -296,7 +296,7 @@
 
                                     </div>
 
-                                    <label class="col-lg-2"> * Date :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Date :</label>
                                     <div class="col-lg-4">
                                         <div class="input-group">
                                     <span class="input-group-addon">
@@ -313,7 +313,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"> * Customer :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Customer :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_customers" name="customer_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
                                             <option value="0">[ Create New Customer ]</option>
@@ -326,7 +326,7 @@
 
                                     <br /><br />
 
-                                    <label class="col-lg-2"> * Department :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Department :</label>
                                     <div class="col-lg-10">
                                         <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                             <option value="0">[ Create New Department ]</option>
@@ -530,7 +530,7 @@
                         <div class="col-md-8">
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Customer Name :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b class="required">*</b></font> Customer Name :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -544,7 +544,7 @@
 
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Contact Person :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b class="required">*</b></font> Contact Person :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -558,7 +558,7 @@
                         
                             <div class="col-md-12">
                                 <div class="col-md-4" id="label">
-                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b>*</b></font> Address :</label>
+                                     <label class="control-label boldlabel" style="text-align:right;"><font color="red"><b class="required">*</b></font> Address :</label>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -619,7 +619,7 @@
                                     <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Customer's Photo</label>
                                     <hr style="margin-top:0px !important;height:1px;background-color:black;">
                                 </div>
-                                <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                <div style="width:100%;height:350px;border:2px solid #34495e;border-radius:5px;">
                                     <center>
                                         <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
                                     </center>
@@ -663,7 +663,7 @@
 
                         <div class="col-md-12" style="padding-left: 30px;">
                             <div class="form-group">
-                                <label>* Department :</label>
+                                <label><b class="required">*</b> Department :</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-users"></i>

@@ -87,11 +87,7 @@ class Templates extends CORE_Controller {
                     array(
                         'service_invoice.is_deleted'=>FALSE,
                         'service_invoice.is_active'=>TRUE,
-                        'service_invoice.service_invoice_id'=>$service_invoice_id
-
-
-                        ),
-
+                        'service_invoice.service_invoice_id'=>$service_invoice_id),
                     array(
                         'service_invoice.service_invoice_id',
                         'service_invoice.service_invoice_no',
@@ -110,8 +106,6 @@ class Templates extends CORE_Controller {
                         'CONCAT_WS(" ",user_accounts.user_fname,user_accounts.user_lname)as posted_by'
 
                         ),
-
-
                         array(
                             array('customers', 'customers.customer_id=service_invoice.customer_id','left'),
                             array('user_accounts','user_accounts.user_id=service_invoice.posted_by_user','left')

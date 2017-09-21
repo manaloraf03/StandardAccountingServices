@@ -162,7 +162,7 @@
 
 
 
-                                    <label class="col-lg-2"> <b>*</b> Txn # :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Txn # :</label>
 
                                     <div class="col-lg-10">
 
@@ -176,7 +176,7 @@
 
 
 
-                                    <label class="col-lg-2"> <b>*</b> Date :</label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Date :</label>
 
                                     <div class="col-lg-10">
 
@@ -190,7 +190,7 @@
 
 
 
-                                    <label class="col-lg-2"> <b>*</b> Supplier : </label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Supplier : </label>
 
                                     <div class="col-lg-10">
 
@@ -216,7 +216,7 @@
 
 
 
-                                    <label class="col-lg-2"> <b>*</b> Branch : </label>
+                                    <label class="col-lg-2"> <b class="required">*</b> Branch : </label>
 
                                     <div class="col-lg-10">
 

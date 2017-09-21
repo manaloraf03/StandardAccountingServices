@@ -196,7 +196,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                           <b>* </b> Department : <br />
+                           <b class="required">*</b>  Department : <br />
                             <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                                 <option value="0">[ Create New Department ]</option>
                                 <?php foreach($departments as $department){ ?>
@@ -222,7 +222,7 @@
 
                     <div class="row">
                         <div class="col-sm-4">
-                           <b>* </b> Adjustment type : <br />
+                           <b class="required">*</b>  Adjustment type : <br />
                             <select name="adjustment_type" id="cbo_adjustments" data-error-msg="Adjustment Type is required" required>
                                 <option value="IN" selected>Adjustment IN</option>
                                 <option value="OUT">Adjustment OUT</option>
@@ -421,7 +421,7 @@
                 <form id="frm_department_new">
 
                     <div class="form-group">
-                        <label><b>* </b> Department :</label>
+                        <label><b class="required">*</b>  Department :</label>
                         <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-users"></i>

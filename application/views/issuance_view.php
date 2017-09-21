@@ -150,7 +150,7 @@ echo $_side_bar_navigation;
                     </div>
                     <div class="col-lg-4"></div>
                     <div class="col-xs-12 col-lg-4">
-                        <b>* </b> Department : <br />
+                        <b class="required">*</b>  Department : <br />
                         <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
                             <option value="0">[ Create New Department ]</option>
                             <?php foreach($departments as $department){ ?>
@@ -170,7 +170,7 @@ echo $_side_bar_navigation;
                         </select>
                     </div> -->
                     <div class="col-xs-12 col-lg-4">
-                        <b>* </b> Terms :<br />
+                        <b class="required">*</b>  Terms :<br />
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fa fa-code"></i>

@@ -148,7 +148,7 @@
                         <div class="modal-body">
                             <form id="frm_unit" role="form" class="form-horizontal row-border">
                                 <div class="form-group">
-                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><b>*</b> Service Unit Name :</strong></label>
+                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><b class="required">*</b> Service Unit Name :</strong></label>
                                     <div class="col-md-7">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -160,7 +160,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><b>*</b> Service Unit Description :</strong></label>
+                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><b class="required">*</b> Service Unit Description :</strong></label>
                                     <div class="col-md-7">
                                         <textarea name="service_unit_desc" class="form-control" data-error-msg="Unit Description is required!" placeholder="Description" required></textarea>
                                     </div>

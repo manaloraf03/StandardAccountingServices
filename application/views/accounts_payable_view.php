@@ -238,7 +238,7 @@
                                             <div>
                                             <span style="color: white;"><strong><i class="fa fa-bars"></i> Info</strong></span>
 
-                                            <label class="col-lg-2"> <b>*</b> Txn # :</label>
+                                            <label class="col-lg-2"> <b class="required">*</b> Txn # :</label>
                                             <div class="col-lg-4">
 
                                                 <div class="input-group">
@@ -252,7 +252,7 @@
 
                                             </div>
 
-                                            <label class="col-lg-2"><b>*</b> Date :</label>
+                                            <label class="col-lg-2"><b class="required">*</b> Date :</label>
                                             <div class="col-lg-4">
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
@@ -260,7 +260,7 @@
                                                     </span>
                                                     <input type="text" name="date_txn" id="date_txn" class="date-picker form-control" data-error-msg="Date is required." required>
                                                 </div>
-                                            </div>                                                    <label class="col-lg-2"><b>*</b> Supplier :</label>
+                                            </div>                                                    <label class="col-lg-2"><b class="required">*</b> Supplier :</label>
                                             <div class="col-lg-10">
                                                 <select id="cbo_suppliers" name="supplier_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Supplier name is required." required>
                                                     <option value="0">[ Create New Supplier ]</option>
@@ -271,7 +271,7 @@
                                             </div>
 
                                             <br /><br />
-                                            <label class="col-lg-2"><b>*</b> Department :</label>
+                                            <label class="col-lg-2"><b class="required">*</b> Department :</label>
                                             <div class="col-lg-10">
                                                 <select id="cbo_departments" name="department_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Department is required." required>
                                                     <option value="0">[ Create New Department ]</option>
@@ -591,7 +591,7 @@
                                         <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Supplier's Photo</label>
                                         <hr style="margin-top:0px !important;height:1px;background-color:black;">
                                     </div>
-                                    <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                    <div style="width:100%;height:350px;border:2px solid #34495e;border-radius:5px;">
                                         <center>
                                             <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
                                         </center>

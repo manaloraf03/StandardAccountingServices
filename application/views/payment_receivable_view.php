@@ -171,7 +171,7 @@
                                                     <div class="col-lg-6">
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                               <b>* </b>  <label>Receipt type :</label> <br />
+                                                               <b class="required">*</b>  <label>Receipt type :</label> <br />
                                                                 <select id="cbo_receipt_type" name="receipt_type">
                                                                     <option value="1" selected>Official Receipt</option>
                                                                     <option value="2">Acknowledgement Receipt</option>
@@ -180,7 +180,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-12">
-                                                                <label>Department * :</label> <br />
+                                                                <label><b class="required">*</b>Department :</label> <br />
                                                                 <select id="cbo_branch" name="department">
                                                                     <?php foreach($departments as $department){ ?>
                                                                         <option value="<?php echo $department->department_id; ?>" selected><?php echo $department->department_name; ?></option>
@@ -190,7 +190,7 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="col-lg-6">
-                                                                <b>* </b> <label>Receipt # :</label> <br />
+                                                               <b class="required">*</b> <label>Receipt # :</label> <br />
                                                                 <div class="input-group">
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-code"></i>
@@ -199,7 +199,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-lg-6">
-                                                               <b>* </b>  <label>Payment Date * :</label> <br />
+                                                               <b class="required">*</b>  <label>Payment Date:</label> <br />
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                          <i class="fa fa-calendar"></i>
@@ -215,7 +215,7 @@
 
                                                         <div class="row" style="">
                                                             <div class="col-lg-12">
-                                                                <b>* </b>  <label>Payment Method  :</label> <br />
+                                                               <b class="required">*</b> <label>Payment Method  :</label> <br />
                                                                 <select id="cbo_payment_method" name="payment_method" class="form-control">
                                                                     <?php foreach($methods as $method){ ?>
                                                                         <option value="<?php echo $method->payment_method_id; ?>"><?php echo $method->payment_method; ?></option>
@@ -234,7 +234,7 @@
                                                             </div>
 
                                                             <div class="col-lg-12">
-                                                                <b>* </b>  <label>Check #   :</label> <br />
+                                                                <b class="required">*</b>  <label>Check #   :</label> <br />
                                                                 <div class="input-group">
                                                                     <input type="text" name="check_no" class="form-control">
                                                                      <span class="input-group-addon">
@@ -244,7 +244,7 @@
                                                             </div>
 
                                                             <div class="col-lg-12">
-                                                                <b>* </b>  <label>Check Date :</label> <br />
+                                                                <b class="required">*</b>  <label>Check Date :</label> <br />
                                                                 <div class="input-group">
                                                                     <span class="input-group-addon">
                                                                          <i class="fa fa-calendar"></i>
@@ -263,7 +263,7 @@
                                             <div class="row-panel">
                                                 <div class="row">
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                        <label class="control-label"><strong>Please select Customer first * :</strong></label>
+                                                        <label class="control-label"><strong>Please select Customer first <b class="required">*</b> :</strong></label>
                                                         <select name="customer_id" id="cbo_Customers" data-error-msg="Customer is required." required>
                                                             <?php foreach($customers as $customer){ ?>
                                                                 <option value="<?php echo $customer->customer_id; ?>"><?php echo $customer->customer_name; ?></option>

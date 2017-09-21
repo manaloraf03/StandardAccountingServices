@@ -637,7 +637,7 @@
                                     <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Supplier's Photo</label>
                                     <hr style="margin-top:0px !important;height:1px;background-color:black;">
                                 </div>
-                                <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                <div style="width:100%;height:350px;border:2px solid #34495e;border-radius:5px;">
                                     <center>
                                         <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
                                     </center>

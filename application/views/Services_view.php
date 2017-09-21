@@ -235,7 +235,7 @@
                         <div class="modal-body">
                             <form id="frm_unit" role="form" class="form-horizontal row-border">
                                 <div class="form-group">
-                                    <label class="col-md-3 col-md-offset-1 control-label"><strong>* Service Unit Name :</strong></label>
+                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><b class="required">*</b> Service Unit Name :</strong></label>
                                     <div class="col-md-7">
                                         <div class="input-group">
                                             <span class="input-group-addon">
@@ -247,7 +247,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="col-md-3 col-md-offset-1 control-label"><strong>* Service Unit Description :</strong></label>
+                                    <label class="col-md-3 col-md-offset-1 control-label"><strong><b class="required">*</b> Service Unit Description :</strong></label>
                                     <div class="col-md-7">
                                         <textarea name="service_unit_desc" class="form-control" data-error-msg="Unit Description is required!" placeholder="Description" required></textarea>
                                     </div>
@@ -278,7 +278,7 @@
                                     <div class="col-lg-4">
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b>PLU / Service Code :</label>
+                                            <label class=""><b class="required">*</b>PLU / Service Code :</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-file-code-o"></i>
@@ -288,12 +288,12 @@
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                <label class=""><b>*</b> Service Description :</label>
+                                                <label class=""><b class="required">*</b> Service Description :</label>
                                                 <textarea name="service_desc" id="service_desc" class="form-control" data-error-msg="Service Description is required." required></textarea>
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> Unit of Measurement  :</label>
+                                            <label class=""><b class="required">*</b>Unit of Measurement  :</label>
                                             <select name="service_unit" id="service_unit" class="indexing" data-error-msg="Unit is required." required>
                                              
                                                 <option value="0">[ Create Unit ]</option>

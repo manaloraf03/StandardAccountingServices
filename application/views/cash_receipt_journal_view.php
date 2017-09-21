@@ -262,7 +262,7 @@
 
                         <div class="row">
                             <div class="col-lg-3">
-                                Txn # * :<br />
+                                <b class="required">*</b> Txn #  :<br />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-code"></i>
@@ -271,7 +271,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-3">
-                                Date * :<br />
+                                <b class="required">*</b> Date  :<br />
                                 <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="fa fa-calendar"></i>
@@ -280,7 +280,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-lg-offset-2">
-                                Method of Payment * :<br />
+                                <b class="required">*</b> Method of Payment  :<br />
                                 <select id="cbo_payment_method" name="payment_method" class="form-control" data-error-msg="Payment method is required." required>
                                     <?php foreach($methods as $payment_method){ ?>
                                         <option value='<?php echo $payment_method->payment_method_id; ?>'><?php echo $payment_method->payment_method; ?></option>
@@ -291,7 +291,7 @@
 
                         <div class="row">
                             <div class="col-lg-6">
-                                Customer :<br />
+                                <b class="required">*</b> Customer :<br />
                                 <select id="cbo_customers" name="customer_id" class="selectpicker show-tick form-control" data-live-search="true" data-error-msg="Customer is required." required>
                                     <option value="0">[ Create New Customer ]</option>
                                     <?php foreach($customers as $customer){ ?>
@@ -343,18 +343,18 @@
                             </div>
 
                             <div class="col-lg-2">
-                                Amount :<br />
+                                <b class="required">*</b> Amount :<br />
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-code"></i>
                                     </span>
-                                    <input type="text" name="amount" class="form-control numeric">
+                                    <input type="text" name="amount" class="form-control numeric" required data-error-msg="Amount is required">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-4">
-                                Bank *: <br />
+                                <b class="required">*</b> Bank : <br />
                                     <select name="bank"  id="cbo_banks"  data-error-msg="Bank is required.">
                                         <option value="0">[ Create New Bank ]</option>
                                         <?php  foreach ($banks as $bank ) { ?>
@@ -635,7 +635,7 @@
                                     <label class="control-label boldlabel" style="text-align:left;padding-top:10px;"><i class="fa fa-user" aria-hidden="true" style="padding-right:10px;"></i>Customer's Photo</label>
                                     <hr style="margin-top:0px !important;height:1px;background-color:black;">
                                 </div>
-                                <div style="width:100%;height:300px;border:2px solid #34495e;border-radius:5px;">
+                                <div style="width:100%;height:350px;border:2px solid #34495e;border-radius:5px;">
                                     <center>
                                         <img name="img_user" id="img_user" src="assets/img/anonymous-icon.png" height="140px;" width="140px;"></img>
                                     </center>
