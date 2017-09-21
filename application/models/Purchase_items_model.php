@@ -19,7 +19,8 @@ class Purchase_items_model extends CORE_Model {
                     ((n.po_price * n.po_qty) - (n.po_discount * n.po_qty)) AS po_line_total2,
                     ((n.po_price * n.po_qty) - ((n.po_price * n.po_qty) * (n.po_discount / 100))) AS po_line_total,
                     ((n.po_price * n.po_qty) / (1 + tax_rate_decimal)) AS non_tax_amount,
-                    (n.po_discount * n.po_qty) AS po_line_total_discount
+                   /* (n.po_discount * n.po_qty) AS po_line_total_discount   ------ this query is for computation for amount of discount ,not percentage */
+                    ((n.po_price * n.po_qty)*(n.po_discount/100)) AS po_line_total_discount
                 FROM
                     (SELECT 
                     main.*,

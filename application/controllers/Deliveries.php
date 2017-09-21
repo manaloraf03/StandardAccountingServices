@@ -174,6 +174,7 @@ class Deliveries extends CORE_Controller
                 $m_delivery_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_delivery_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
                 $m_delivery_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                $m_delivery_invoice->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                 $m_delivery_invoice->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
 
                 $m_delivery_invoice->save();
@@ -296,6 +297,7 @@ class Deliveries extends CORE_Controller
                 $m_delivery_invoice->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_delivery_invoice->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
                 $m_delivery_invoice->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                $m_delivery_invoice->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                 $m_delivery_invoice->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
                 $m_delivery_invoice->modify($dr_invoice_id);
 

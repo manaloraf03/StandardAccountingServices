@@ -1492,7 +1492,7 @@ class Templates extends CORE_Controller {
                         'suppliers.supplier_name'
                     )
                 );
-                $data['entries']=$m_purchases_info->get_journal_entries($purchase_invoice_id);
+                $data['entries']=$m_purchases_info->get_journal_entries_2($purchase_invoice_id);
                 $data['accounts']=$m_accounts->get_list(
                     array(
                         'account_titles.is_active'=>TRUE,

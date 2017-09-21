@@ -262,6 +262,7 @@ class Purchases extends CORE_Controller
                     $m_purchases->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                     $m_purchases->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
                     $m_purchases->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                    $m_purchases->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                     $m_purchases->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
 
                     $m_purchases->save();
@@ -339,6 +340,7 @@ class Purchases extends CORE_Controller
                     $m_purchases->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                     $m_purchases->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
                     $m_purchases->total_overall_discount=$this->get_numeric_value($this->input->post('total_overall_discount',TRUE));
+                    $m_purchases->total_overall_discount_amount=$this->get_numeric_value($this->input->post('total_overall_discount_amount',TRUE));
                     $m_purchases->total_after_discount=$this->get_numeric_value($this->input->post('total_after_discount',TRUE));
                     $m_purchases->modify($po_id);
 

@@ -103,8 +103,8 @@ $sql="SELECT main.* FROM(SELECT
             sii.total_after_discount as dr_amount
             FROM `sales_invoice` as sii
              WHERE sii.sales_invoice_id=$sales_invoice_id
-            ) as acc_receivable GROUP BY acc_receivable.account_id)as main WHERE main.dr_amount>0 OR main.cr_amount>0
-            
+            ) as acc_receivable GROUP BY acc_receivable.account_id
+
             UNION ALL
             
             SELECT
@@ -118,7 +118,11 @@ $sql="SELECT main.* FROM(SELECT
             si.total_overall_discount_amount,
             si.total_discount
             FROM sales_invoice si
-            WHERE si.sales_invoice_id=$sales_invoice_id) as discount
+            WHERE si.sales_invoice_id=$sales_invoice_id) as discount 
+
+            )as main WHERE main.dr_amount>0 OR main.cr_amount>0
+            
+
             ";
         return $this->db->query($sql)->result();
 }

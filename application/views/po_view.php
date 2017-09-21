@@ -320,7 +320,10 @@
                     </tr>
                     <tr>
                         <td colspan="" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Discount (%) :</strong></td>
-                        <td align="right" colspan="1" id="" color="red"><input id="txt_overall_discount" name="total_overall_discount" type="text" class="numeric form-control" value="0.00" /></td>
+                        <td align="right" colspan="1" id="" color="red">
+                            <input id="txt_overall_discount" name="total_overall_discount" type="text" class="numeric form-control" value="0.00" />
+                            <input id="txt_overall_discount_amount" name="total_overall_discount_amount" type="text" class="numeric form-control" value="0.00" />
+                        </td>
                         <td style="text-align: right;"><strong><i class="glyph-icon icon-star"></i>Total After Discount :</strong></td>
                         <td id="td_total_after_discount" style="text-align: right;"><strong>0.00</strong></td>
                         <td style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Before Tax :</strong></td>
@@ -1269,7 +1272,7 @@ $(document).ready(function(){
             var vat_input=line_total-net_vat;
 
             $(oTableItems.total,row).find('input.numeric').val(accounting.formatNumber(new_line_total,2)); // line total amount
-            $(oTableItems.total_line_discount,row).find('input.numeric').val(line_total_discount); //line total discount
+            $(oTableItems.total_line_discount,row).find('input.numeric').val(new_discount_price); //line total discount
             $(oTableItems.net_vat,row).find('input.numeric').val(net_vat); //net of vat
             $(oTableItems.vat_input,row).find('input.numeric').val(vat_input); //vat input
 
@@ -1464,6 +1467,7 @@ $(document).ready(function(){
         var _data=$('#frm_purchases,#frm_items').serializeArray();
 
         var tbl_summary=$('#tbl_purchase_summary');
+        _data.push({name : "total_after_discount", value: $('#td_total_after_discount').text() });
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
         _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
@@ -1574,7 +1578,7 @@ $(document).ready(function(){
         '</tr>';
     };
 
-    $('#txt_overall_discount').on('change',function(){
+    $('#txt_overall_discount').on('keyup',function(){
         reComputeTotal();
     });
 
@@ -1602,6 +1606,7 @@ $(document).ready(function(){
         $('#td_discount').html(accounting.formatNumber(discounts,2));
         $('#td_tax').html(accounting.formatNumber(tax_amount,2));
         $('#td_total_after_discount').html(accounting.formatNumber(after_tax - (after_tax * ($('#txt_overall_discount').val() / 100)),2));
+        $('#txt_overall_discount_amount').val(accounting.formatNumber(after_tax * ($('#txt_overall_discount').val() / 100),2));
     };
 
     _cboDepartments.on("select2:select", function (e) {

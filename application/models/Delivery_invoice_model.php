@@ -158,10 +158,71 @@ GROUP BY n.supplier_id HAVING total_balance > 0
             ) as acc_payable GROUP BY acc_payable.account_id)as main WHERE main.dr_amount>0 OR main.cr_amount>0";
 
         return $this->db->query($sql)->result();
+    }
+
+    function get_journal_entries_2($purchase_invoice_id){
+        $sql="SELECT main.* FROM(SELECT
+            p.expense_account_id as account_id,
+            '' as memo,
+            SUM(dii.dr_non_tax_amount) dr_amount,
+            0 as cr_amount
+
+            FROM `delivery_invoice_items` as dii
+            INNER JOIN products as p ON dii.product_id=p.product_id
+            WHERE dii.dr_invoice_id=$purchase_invoice_id AND p.expense_account_id>0
+            GROUP BY p.expense_account_id
+
+            UNION ALL
+
+
+            SELECT input_tax.account_id,input_tax.memo,
+            SUM(input_tax.dr_amount)as dr_amount,0 as cr_amount
+
+             FROM
+            (SELECT dii.product_id,
+
+            (SELECT input_tax_account_id FROM account_integration) as account_id
+            ,
+            '' as memo,
+            SUM(dii.dr_tax_amount) as dr_amount,
+            0 as cr_amount
+
+            FROM `delivery_invoice_items` as dii
+            INNER JOIN products as p ON dii.product_id=p.product_id
+            WHERE dii.dr_invoice_id=$purchase_invoice_id AND p.expense_account_id>0
+            )as input_tax GROUP BY input_tax.account_id
+
+            UNION ALL
+
+            SELECT acc_payable.* FROM
+            (SELECT(SELECT payable_account_id FROM account_integration) as account_id,
+            '' as memo,
+            0 as dr_amount,
+            di.total_after_discount as cr_amount
+            FROM delivery_invoice di 
+            WHERE di.dr_invoice_id = $purchase_invoice_id
+            ) as acc_payable GROUP BY acc_payable.account_id
+            
+            UNION ALL
+
+            SELECT discount.* FROM (SELECT 
+            (SELECT payable_discount_account_id FROM account_integration) as account_id,
+            '' as memo,
+            0 as dr_amount,
+            (IFNULL(di.total_discount,0) + IFNULL(di.total_overall_discount_amount,0)) as cr_amount
+            FROM delivery_invoice di 
+            WHERE di.dr_invoice_id = $purchase_invoice_id
+            ) discount GROUP BY discount.account_id
+            
+            
+            )as main WHERE main.dr_amount>0 OR main.cr_amount>0";
+
+        return $this->db->query($sql)->result();
 
 
 
     }
+
 
     function get_vat_relief($startDate,$endDate) {
         $sql="SELECT

@@ -171,7 +171,7 @@
 
 <ol class="breadcrumb" style="margin-bottom: 0px;">
     <li><a href="dashboard">Dashboard</a></li>
-    <li><a href="products">Accounts Receivable</a></li>
+    <li><a href="Accounts_receivable">Accounts Receivable</a></li>
 </ol>
 
 <div class="container-fluid">
