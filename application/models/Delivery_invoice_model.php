@@ -194,26 +194,37 @@ GROUP BY n.supplier_id HAVING total_balance > 0
 
             UNION ALL
 
-            SELECT acc_payable.* FROM
-            (SELECT(SELECT payable_account_id FROM account_integration) as account_id,
+            SELECT acc_payable.account_id,acc_payable.memo,
+            0 as dr_amount,SUM(acc_payable.cr_amount) as cr_amount
+             FROM
+            (SELECT dii.product_id,
+
+            (SELECT payable_account_id FROM account_integration) as account_id,
             '' as memo,
-            0 as dr_amount,
-            di.total_after_discount as cr_amount
-            FROM delivery_invoice di 
-            WHERE di.dr_invoice_id = $purchase_invoice_id
+            0 dr_amount,
+            SUM(dii.dr_line_total_after_global) as cr_amount
+
+            FROM `delivery_invoice_items` as dii
+            INNER JOIN products as p ON dii.product_id=p.product_id
+            WHERE dii.dr_invoice_id=$purchase_invoice_id AND p.expense_account_id>0
             ) as acc_payable GROUP BY acc_payable.account_id
             
             UNION ALL
 
-            SELECT discount.* FROM (SELECT 
+            SELECT acc_discount.account_id,acc_discount.memo,
+            0 as dr_amount,SUM(acc_discount.cr_amount) as cr_amount
+             FROM
+            (SELECT dii.product_id,
+
             (SELECT payable_discount_account_id FROM account_integration) as account_id,
             '' as memo,
-            0 as dr_amount,
-            (IFNULL(di.total_discount,0) + IFNULL(di.total_overall_discount_amount,0)) as cr_amount
-            FROM delivery_invoice di 
-            WHERE di.dr_invoice_id = $purchase_invoice_id
-            ) discount GROUP BY discount.account_id
-            
+            0 dr_amount,
+            SUM((dii.dr_line_total_price - dii.dr_line_total_after_global) + dii.dr_line_total_discount) as cr_amount
+
+            FROM `delivery_invoice_items` as dii
+            INNER JOIN products as p ON dii.product_id=p.product_id
+            WHERE dii.dr_invoice_id=$purchase_invoice_id AND p.expense_account_id>0
+            ) as acc_discount GROUP BY acc_discount.account_id  
             
             )as main WHERE main.dr_amount>0 OR main.cr_amount>0";
 

@@ -187,6 +187,7 @@ class Deliveries extends CORE_Controller
                 $dr_price=$this->input->post('dr_price',TRUE);
                 $dr_discount=$this->input->post('dr_discount',TRUE);
                 $dr_line_total_discount=$this->input->post('dr_line_total_discount',TRUE);
+                $dr_line_total_after_global=$this->input->post('dr_line_total_after_global',TRUE);
                 $dr_tax_rate=$this->input->post('dr_tax_rate',TRUE);
                 $dr_line_total_price=$this->input->post('dr_line_total_price',TRUE);
                 $dr_tax_amount=$this->input->post('dr_tax_amount',TRUE);
@@ -208,6 +209,7 @@ class Deliveries extends CORE_Controller
                     $m_dr_items->dr_line_total_price=$this->get_numeric_value($dr_line_total_price[$i]);
                     $m_dr_items->dr_tax_amount=$this->get_numeric_value($dr_tax_amount[$i]);
                     $m_dr_items->dr_non_tax_amount=$this->get_numeric_value($dr_non_tax_amount[$i]);
+                    $m_dr_items->dr_line_total_after_global=$this->get_numeric_value($dr_line_total_after_global[$i]);
                     $m_dr_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_dr_items->batch_no=$batch_code[$i];
 
@@ -318,6 +320,7 @@ class Deliveries extends CORE_Controller
                 $dr_tax_rate=$this->input->post('dr_tax_rate',TRUE);
                 $dr_qty=$this->input->post('dr_qty',TRUE);
                 $dr_line_total_price=$this->input->post('dr_line_total_price',TRUE);
+                $dr_line_total_after_global=$this->input->post('dr_line_total_after_global',TRUE);
                 $dr_tax_amount=$this->input->post('dr_tax_amount',TRUE);
                 $dr_non_tax_amount=$this->input->post('dr_non_tax_amount',TRUE);
                 $exp_date = $this->input->post('exp_date',TRUE);
@@ -337,6 +340,7 @@ class Deliveries extends CORE_Controller
                     $m_dr_items->dr_qty=$this->get_numeric_value($dr_qty[$i]);
                     $m_dr_items->dr_tax_amount=$this->get_numeric_value($dr_tax_amount[$i]);
                     $m_dr_items->dr_non_tax_amount=$this->get_numeric_value($dr_non_tax_amount[$i]);
+                    $m_dr_items->dr_line_total_after_global=$this->get_numeric_value($dr_line_total_after_global[$i]);
                     $m_dr_items->exp_date=date('Y-m-d', strtotime($exp_date[$i]));
                     $m_dr_items->batch_no=$batch_code[$i];
                     //$m_dr_items->set('unit_id','(SELECT unit_id FROM products WHERE product_id='.(int)$prod_id[$i].')');
