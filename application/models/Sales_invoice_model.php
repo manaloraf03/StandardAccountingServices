@@ -95,30 +95,39 @@ $sql="SELECT main.* FROM(SELECT
             )as output_tax GROUP BY output_tax.account_id
 
             UNION ALL
-            SELECT acc_receivable.* FROM
-            (SELECT 
-            (SELECT receivable_account_id FROM account_integration) as account_id,
+            SELECT acc_receivable.account_id,acc_receivable.memo,
+            0 as cr_amount,SUM(acc_receivable.dr_amount) as dr_amount
+             FROM
+            (SELECT sii.product_id,
+
+            (SELECT receivable_account_id FROM account_integration) as account_id
+            ,
             '' as memo,
             0 cr_amount,
-            sii.total_after_discount as dr_amount
-            FROM `sales_invoice` as sii
-             WHERE sii.sales_invoice_id=$sales_invoice_id
+            SUM(sii.inv_line_total_after_global) as dr_amount
+
+            FROM `sales_invoice_items` as sii
+            INNER JOIN products as p ON sii.product_id=p.product_id
+            WHERE sii.sales_invoice_id=$sales_invoice_id AND p.income_account_id>0
             ) as acc_receivable GROUP BY acc_receivable.account_id
 
             UNION ALL
             
-            SELECT
-            (SELECT ai.receivable_discount_account_id FROM account_integration ai) account_id,
-            '' as memo,
-            0 as cr_amount,
-            (IFNULL(discount.total_overall_discount_amount,0) + discount.total_discount ) as dr_amount
+            SELECT acc_discount.account_id,acc_discount.memo,
+            0 as cr_amount,SUM(acc_discount.dr_amount) as dr_amount
+             FROM
+            (SELECT sii.product_id,
 
-            FROM 
-            (SELECT 
-            si.total_overall_discount_amount,
-            si.total_discount
-            FROM sales_invoice si
-            WHERE si.sales_invoice_id=$sales_invoice_id) as discount 
+            (SELECT receivable_discount_account_id FROM account_integration) as account_id
+            ,
+            '' as memo,
+            0 cr_amount,
+            SUM((sii.inv_line_total_price - sii.inv_line_total_after_global) + sii.inv_line_total_discount) as dr_amount
+
+            FROM `sales_invoice_items` as sii
+            INNER JOIN products as p ON sii.product_id=p.product_id
+            WHERE sii.sales_invoice_id=$sales_invoice_id AND p.income_account_id>0
+            ) as acc_discount GROUP BY acc_discount.account_id
 
             )as main WHERE main.dr_amount>0 OR main.cr_amount>0
             

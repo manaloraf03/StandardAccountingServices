@@ -252,10 +252,12 @@ class Sales_invoice extends CORE_Controller
                 $inv_line_total_price=$this->input->post('inv_line_total_price',TRUE);
                 $inv_tax_amount=$this->input->post('inv_tax_amount',TRUE);
                 $inv_non_tax_amount=$this->input->post('inv_non_tax_amount',TRUE);
+                $inv_line_total_after_global=$this->input->post('inv_line_total_after_global',TRUE);
                 $dr_invoice_id=$this->input->post('dr_invoice_id',TRUE);
                 $exp_date=$this->input->post('exp_date',TRUE);
                 $batch_no=$this->input->post('batch_no',TRUE);
                 $cost_upon_invoice=$this->input->post('cost_upon_invoice',TRUE);
+                
 
                 $m_products=$this->Products_model;
 
@@ -263,6 +265,7 @@ class Sales_invoice extends CORE_Controller
 
                     $m_invoice_items->sales_invoice_id=$sales_invoice_id;
                     $m_invoice_items->product_id=$this->get_numeric_value($prod_id[$i]);
+                    $m_invoice_items->inv_line_total_after_global=$this->get_numeric_value($inv_line_total_after_global[$i]);
                     //+$m_invoice_items->inv_qty=$this->get_numeric_value($inv_qty[$i]);
                     $m_invoice_items->inv_qty=$inv_qty[$i];
                     $m_invoice_items->inv_price=$this->get_numeric_value($inv_price[$i]);
@@ -376,6 +379,7 @@ class Sales_invoice extends CORE_Controller
                     $inv_qty=$this->input->post('inv_qty',TRUE);
                     $inv_gross=$this->input->post('inv_gross',TRUE);
                     $inv_line_total_price=$this->input->post('inv_line_total_price',TRUE);
+                    $inv_line_total_after_global=$this->input->post('inv_line_total_after_global',TRUE);
                     $inv_tax_amount=$this->input->post('inv_tax_amount',TRUE);
                     $inv_non_tax_amount=$this->input->post('inv_non_tax_amount',TRUE);
                     $batch_no=$this->input->post('batch_no',TRUE);
@@ -389,6 +393,7 @@ class Sales_invoice extends CORE_Controller
 
                         $m_invoice_items->sales_invoice_id=$sales_invoice_id;
                         $m_invoice_items->product_id=$this->get_numeric_value($prod_id[$i]);
+                        $m_invoice_items->inv_line_total_after_global=$this->get_numeric_value($inv_line_total_after_global[$i]);
                         $m_invoice_items->inv_price=$this->get_numeric_value($inv_price[$i]);
                         $m_invoice_items->inv_discount=$this->get_numeric_value($inv_discount[$i]);
                         $m_invoice_items->inv_line_total_discount=$this->get_numeric_value($inv_line_total_discount[$i]);

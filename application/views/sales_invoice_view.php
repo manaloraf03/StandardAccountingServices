@@ -245,21 +245,22 @@
                     <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
                         <thead class="">    
                         <tr>
-                            <th width="10%">Qty</th>
-                            <th width="10%">UM</th>
-                            <th width="25%">Item</th>
-                            <th width="15%" style="text-align: right;">Unit Price</th>
+                            <th width="10%">Qty</th><!-- 10% -->
+                            <th width="10%">UM</th> <!-- 10% -->
+                            <th width="25%">Item</th> <!-- 25% -->
+                            <th width="15%" style="text-align: right;">Unit Price</th> <!-- 15% -->
                             <th width="15%" style="text-align: right;">Discount % </th>
                             <!-- DISPLAY NONE  -->
-                            <th style="display:none;" width="10%">Total Discount</th> <!-- total discount -->
-                            <th style="display:none;" width="10%">Tax %</th>
+                            <th style=display:none;"" width="10%">Total Discount</th> <!-- total discount -->
+                            <th style="display: none;" width="10%">Tax %</th>
                             <!-- DISPLAY -->
-                            <th width="15%" style="text-align: right;">Gross</th>
-                            <th width="15%" style="text-align: right;">Net Total</th>
+                            <th width="10%" style="text-align: right;">Gross</th>
+                            <th width="10%" style="text-align: right;">Net Total</th>
                             <!-- DISPLAY NONE  -->
                             <th style="display:none;" width="10%">Vat Input(Total Line Tax)</th> <!-- vat input -->
                             <th style="display:none;" width="10%">Net of Vat (Price w/out Tax)</th> <!-- net of vat -->
                             <td style="display:none;" width="10%">Item ID</td><!-- product id -->
+                            <th style="display:none;" width="10%">Total after Global</th> 
 
                             <th><center>Action</center></th>
                         </tr>
@@ -767,7 +768,8 @@ $(document).ready(function(){
         gross : 'td:eq(7)',
         total : 'td:eq(8)',
         vat_input : 'td:eq(9)',
-        net_vat : 'td:eq(10)'
+        net_vat : 'td:eq(10)',
+        total_after_global :' td:eq(12)'
     };
     var oTableDetails={
         discount : 'tr:eq(0) > td:eq(1)',
@@ -934,7 +936,8 @@ $(document).ready(function(){
                 tax_type_id : null,
                 inv_line_total_price : total,
                 inv_non_tax_amount: net_vat,
-                inv_tax_amount:vat_input
+                inv_tax_amount:vat_input,
+                inv_line_total_after_global:0.00
             }));
             reInitializeNumeric();
             reComputeTotal();
@@ -1253,6 +1256,7 @@ $(document).ready(function(){
                             /*batch_no : value.batch_no,
                             exp_date : value.exp_date,*/
                             orig_so_price : value.so_price,
+                            inv_line_total_after_global: 0.00,
                             cost_upon_invoice : value.purchase_cost
                         }));
                     });
@@ -1326,7 +1330,8 @@ $(document).ready(function(){
                             tax_type_id : null,
                             inv_line_total_price : value.inv_line_total_price,
                             inv_non_tax_amount: value.inv_non_tax_amount,
-                            inv_tax_amount:value.inv_tax_amount
+                            inv_tax_amount:value.inv_tax_amount,
+                            inv_line_total_after_global : 0.00
                         }));
                     });
                     reComputeTotal();
@@ -1646,13 +1651,14 @@ return '<tr>'+
 // DISPLAY NONE
 '<td style="display:none;" width="10%"><input name="inv_line_total_discount[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_discount,2)+'" readonly></td>'+
 '<td width="10%" style="display:none;"><input name="inv_tax_rate[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_tax_rate,2)+'"></td>'+
-// DISPLAY AGAIN
-'<td width="10%" style=""><input name="inv_gross[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_gross,2)+'" readonly></td>'+
-'<td width="10%" align="right"><input name="inv_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_price,2)+'" readonly></td>'+
+// DISPLAY AGAIN 10%
+'<td width="5%" style=""><input name="inv_gross[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_gross,2)+'" readonly></td>'+
+'<td width="5%" align="right"><input name="inv_line_total_price[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.inv_line_total_price,2)+'" readonly></td>'+
 // DISPLAY NONE AGAIN
 '<td style="display:none;" width="10%"><input name="inv_tax_amount[]" type="text" class="numeric form-control" value="'+ d.inv_tax_amount+'" readonly></td>'+
 '<td style="display:none;" width="10%"><input name="inv_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.inv_non_tax_amount+'" readonly></td>'+
 '<td style="display:none;" width="10%"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
+'<td style="display:none;" width="10%"><input name="inv_line_total_after_global[]" type="text" class="numeric form-control" value="'+ d.inv_line_total_after_global+'" readonly></td>'+
 
 
 '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
@@ -1661,8 +1667,12 @@ return '<tr>'+
     var reComputeTotal=function(){
         var rows=$('#tbl_items > tbody tr');
         var discounts=0; var before_tax=0; var after_tax=0; var inv_tax_amount=0;
+        var global_discount = $('#txt_overall_discount').val()/100;
         $.each(rows,function(){
             //console.log($(oTableItems.net_vat,$(this)));
+            total = $(oTableItems.total,$(this)).find('input.numeric').val();
+            total_after_global = (total - (total*global_discount));
+            $(oTableItems.total_after_global,$(this)).find('input.numeric').val(accounting.formatNumber(total_after_global,2));
             discounts+=parseFloat(accounting.unformat($(oTableItems.total_line_discount,$(this)).find('input.numeric').val()));
             before_tax+=parseFloat(accounting.unformat($(oTableItems.net_vat,$(this)).find('input.numeric').val()));
             inv_tax_amount+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
