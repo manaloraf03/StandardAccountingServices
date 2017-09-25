@@ -224,7 +224,7 @@
                         <tr>
                             <th width="10%">Qty</th>
                             <th width="15%">UM</th>
-                            <th width="30%">Item</th>
+                            <th width="25%">Item</th>
                             <th width="20%" style="text-align: right;">Unit Price</th>
                             <th width="20%" style="text-align: right;">Total</th>
                             <td style="display: none">Item ID</td>
@@ -238,8 +238,8 @@
                             <tr>
                                 <td colspan="2" style="text-align: right;">Discount %:</td>
                                 <td>
-                                    <input type="text" class="form-control numeric" name="total_overall_discount" id="txt_total_overall_discount">
-                                    <input type="hidden" class="form-control numeric" name="total_overall_discount_amount" id="txt_total_overall_discount_amount" readonly>
+                                    <input type="text" id="txt_total_overall_discount" class="numeric form-control" name="total_overall_discount" value="0.00">
+                                    <input type="hidden" class="numeric form-control " name="total_overall_discount_amount" id="txt_total_overall_discount_amount" readonly>
                                 </td>
                                 <td colspan="1" style="text-align: right;"><strong><i class="glyph-icon icon-star"></i> Total Amount :</strong></td>
                                 <td align="right" colspan="1" id="total_amount" color="red">0.00</td>
@@ -636,6 +636,7 @@ $(document).ready(function(){
         qty : 'td:eq(0)',
         unit_price : 'td:eq(3)',
         total : 'td:eq(4)',
+        line_total_after_global : 'td:eq(5)'
 
     };
     var oTableDetails={
@@ -1044,6 +1045,7 @@ $(document).ready(function(){
 
                         }));
                     });
+                   $('#txt_total_overall_discount').val(accounting.formatNumber($('#txt_total_overall_discount').val(),2));
                     reComputeTotal();
                 }
             });
@@ -1264,9 +1266,10 @@ $(document).ready(function(){
         return '<tr>'+
         '<td width="10%"><input name="qty[]" type="text" class="number form-control" value="'+ d.inv_qty+'"></td>'+
         '<td width="5%">'+ d.service_unit+'</td>'+
-        '<td width="30%">'+d.service_desc+'</td>'+
+        '<td width="10%">'+d.service_desc+'</td>'+
         '<td width="11%"><input name="service_price[]" type="text" class="numeric form-control" value="'+accounting.formatNumber(d.service_price,2)+'" style="text-align:right;"></td>'+
         '<td width="11%" align="right"><input name="line_total[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.line_total,2)+'" readonly></td>'+
+        '<td width="11%" style="display:none;" align="right"><input name="line_total_after_global[]" type="text" class="numeric form-control" value="'+ accounting.formatNumber(d.line_total,2)+'" readonly></td>'+
         // display:none;
         '<td style="display:none;"><input name="service_id[]" type="text" class=" form-control" value="'+ d.service_id+'" readonly></td>'+
         '<td style="display:none;"><input name="service_unit[]" type="text" class=" form-control" value="'+ d.service_unit_id+'" readonly></td>'+
@@ -1276,9 +1279,11 @@ $(document).ready(function(){
     var reComputeTotal=function(){
         var rows=$('#tbl_items > tbody tr');
         var total_amount=0;
+        var over_all_discount = parseFloat(accounting.unformat($('#txt_total_overall_discount').val()/100));
         $.each(rows,function(){
-
+        new_total = parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
         total_amount+=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
+        $(oTableItems.line_total_after_global,$(this)).find('input.numeric').val(accounting.formatNumber(new_total - (new_total*over_all_discount),2));   
         });
 
 

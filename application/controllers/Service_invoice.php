@@ -140,6 +140,7 @@ class Service_invoice extends CORE_Controller
                 $service_price = $this->input->post('service_price');
                 $service_line_total = $this->input->post('line_total');
                 $service_unit = $this->input->post('service_unit');
+                $line_total_after_global = $this->input->post('line_total_after_global');
                 
 
                 for($i=0;$i<count($service_id);$i++){
@@ -148,6 +149,7 @@ class Service_invoice extends CORE_Controller
                 $m_invoice_items->service_qty=$this->get_numeric_value($service_qty[$i]);
                 $m_invoice_items->service_price=$this->get_numeric_value($service_price[$i]);
                 $m_invoice_items->service_line_total=$this->get_numeric_value($service_line_total[$i]);
+                $m_invoice_items->service_line_total_after_global=$this->get_numeric_value($line_total_after_global[$i]);
                 $m_invoice_items->service_unit=$this->get_numeric_value($service_unit[$i]);
 
                 $m_invoice_items->save();
@@ -202,6 +204,7 @@ class Service_invoice extends CORE_Controller
                 $service_price = $this->input->post('service_price');
                 $service_line_total = $this->input->post('line_total');
                 $service_unit = $this->input->post('service_unit');
+                $line_total_after_global = $this->input->post('line_total_after_global');
                 
 
                 for($i=0;$i<count($service_id);$i++){
@@ -210,6 +213,7 @@ class Service_invoice extends CORE_Controller
                 $m_invoice_items->service_qty=$this->get_numeric_value($service_qty[$i]);
                 $m_invoice_items->service_price=$this->get_numeric_value($service_price[$i]);
                 $m_invoice_items->service_line_total=$this->get_numeric_value($service_line_total[$i]);
+                $m_invoice_items->service_line_total_after_global=$this->get_numeric_value($line_total_after_global[$i]);
                 $m_invoice_items->service_unit=$this->get_numeric_value($service_unit[$i]);
 
                 $m_invoice_items->save();
@@ -303,6 +307,7 @@ function response_rows_invoice($filter_value){
                     'service_invoice.service_invoice_no',
                     'service_invoice.address',
                     'service_invoice.remarks',
+                    'service_invoice.total_overall_discount',
                     'service_invoice.is_journal_posted',
                     'DATE_FORMAT(service_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
                    'DATE_FORMAT(service_invoice.date_due,"%m/%d/%Y") as date_due',
