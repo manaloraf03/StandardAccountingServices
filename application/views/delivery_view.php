@@ -1928,10 +1928,10 @@ $(document).ready(function(){
 
         var discounts=0; var before_tax=0; var after_tax=0; var tax_amount=0; var after_discount=0;
 
-        var over_all_discount = $('#txt_overall_discount').val()/100; // global variable 
+        var over_all_discount = parseFloat(accounting.unformat($('#txt_overall_discount').val()/100)); // global variable 
 
         $.each(rows,function(){
-            new_line_total = $(oTableItems.total,$(this)).find('input.numeric').val();
+            new_line_total = parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
             total_after_global = new_line_total - (new_line_total *over_all_discount);
             
             discounts+=parseFloat(accounting.unformat($(oTableItems.total_line_discount,$(this)).find('input.numeric').val()));

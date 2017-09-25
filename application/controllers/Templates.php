@@ -145,7 +145,7 @@ class Templates extends CORE_Controller {
                     )
                 );
 
-                $data['entries']=$m_service_invoice->get_journal_entries($service_invoice_id);
+                $data['entries']=$m_service_invoice->get_journal_entries_2($service_invoice_id);
 
                 $data['items']=$m_service_invoice_items->get_list(
                     array('service_invoice_items.service_invoice_id'=>$service_invoice_id),

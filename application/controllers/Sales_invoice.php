@@ -304,8 +304,8 @@ class Sales_invoice extends CORE_Controller
                 //******************************************************************************************
                 // IMPORTANT!!!
                 //update receivable amount field of customer table
-                //$m_customers=$this->Customers_model;
-                //$m_customers->recalculate_customer_receivable($this->input->post('customer',TRUE));
+                $m_customers=$this->Customers_model;
+                $m_customers->recalculate_customer_receivable($this->input->post('customer',TRUE));
                 //******************************************************************************************
 
 

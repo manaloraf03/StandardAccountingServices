@@ -247,7 +247,7 @@
                         <tr>
                             <th width="10%">Qty</th><!-- 10% -->
                             <th width="10%">UM</th> <!-- 10% -->
-                            <th width="25%">Item</th> <!-- 25% -->
+                            <th width="10%">Item</th> <!-- 25% -->
                             <th width="15%" style="text-align: right;">Unit Price</th> <!-- 15% -->
                             <th width="15%" style="text-align: right;">Discount % </th>
                             <!-- DISPLAY NONE  -->
@@ -1658,7 +1658,7 @@ return '<tr>'+
 '<td style="display:none;" width="10%"><input name="inv_tax_amount[]" type="text" class="numeric form-control" value="'+ d.inv_tax_amount+'" readonly></td>'+
 '<td style="display:none;" width="10%"><input name="inv_non_tax_amount[]" type="text" class="numeric form-control" value="'+ d.inv_non_tax_amount+'" readonly></td>'+
 '<td style="display:none;" width="10%"><input name="product_id[]" type="text" class="numeric form-control" value="'+ d.product_id+'" readonly></td>'+
-'<td style="display:none;" width="10%"><input name="inv_line_total_after_global[]" type="text" class="numeric form-control" value="'+ d.inv_line_total_after_global+'" readonly></td>'+
+'<td style="" width="10%"><input name="inv_line_total_after_global[]" type="text" class="numeric form-control" value="'+ d.inv_line_total_after_global+'" readonly></td>'+
 
 
 '<td align="center"><button type="button" name="remove_item" class="btn btn-red"><i class="fa fa-trash"></i></button></td>'+
@@ -1667,12 +1667,14 @@ return '<tr>'+
     var reComputeTotal=function(){
         var rows=$('#tbl_items > tbody tr');
         var discounts=0; var before_tax=0; var after_tax=0; var inv_tax_amount=0;
-        var global_discount = $('#txt_overall_discount').val()/100;
+        var global_discount = parseFloat(accounting.unformat($('#txt_overall_discount').val()/100));
         $.each(rows,function(){
             //console.log($(oTableItems.net_vat,$(this)));
-            total = $(oTableItems.total,$(this)).find('input.numeric').val();
+            total=parseFloat(accounting.unformat($(oTableItems.total,$(this)).find('input.numeric').val()));
             total_after_global = (total - (total*global_discount));
             $(oTableItems.total_after_global,$(this)).find('input.numeric').val(accounting.formatNumber(total_after_global,2));
+
+
             discounts+=parseFloat(accounting.unformat($(oTableItems.total_line_discount,$(this)).find('input.numeric').val()));
             before_tax+=parseFloat(accounting.unformat($(oTableItems.net_vat,$(this)).find('input.numeric').val()));
             inv_tax_amount+=parseFloat(accounting.unformat($(oTableItems.vat_input,$(this)).find('input.numeric').val()));
