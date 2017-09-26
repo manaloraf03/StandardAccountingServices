@@ -20,7 +20,8 @@ class General_journal extends CORE_Controller
                 'Departments_model',
                 'Accounting_period_model',
                 'Users_model',
-                'Tax_model'
+                'Tax_model',
+                'Depreciation_expense_model'
             )
         );
 
@@ -233,6 +234,90 @@ class General_journal extends CORE_Controller
 
                 break;
 
+
+                case 'create-expense-journal' :
+                    $m_journal=$this->Journal_info_model;
+                    $m_journal_accounts=$this->Journal_account_model;
+
+                    //validate if still in valid range
+                    $valid_range=$this->Accounting_period_model->get_list("'".date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)))."'<=period_end");
+                    if(count($valid_range)>0){
+                        $response['stat']='error';
+                        $response['title']='<b>Accounting Period is Closed!</b>';
+                        $response['msg']='Please make sure transaction date is valid!<br />';
+                        die(json_encode($response));
+                    }
+
+
+                    $particular=explode('-',$this->input->post('particular_id',TRUE));
+                    if($particular[0]=='C'){
+                        $m_journal->customer_id=$particular[1];
+                        $m_journal->supplier_id=0;
+                    }else{
+                        $m_journal->customer_id=0;
+                        $m_journal->supplier_id=$particular[1];
+                    }
+
+
+                    $m_journal->department_id=$this->input->post('department_id',TRUE);
+                    $m_journal->remarks=$this->input->post('remarks',TRUE);
+                    $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
+                    $m_journal->book_type='GJE';
+
+                    //for audit details
+                    $m_journal->set('date_created','NOW()');
+                    $m_journal->created_by_user=$this->session->user_id;
+                    $m_journal->save();
+
+                    $journal_id=$m_journal->last_insert_id();
+                    $accounts=$this->input->post('accounts',TRUE);
+                    $memos=$this->input->post('memo',TRUE);
+                    $dr_amounts=$this->input->post('dr_amount',TRUE);
+                    $cr_amounts=$this->input->post('cr_amount',TRUE);
+
+                    for($i=0;$i<=count($accounts)-1;$i++){
+                        $m_journal_accounts->journal_id=$journal_id;
+                        $m_journal_accounts->account_id=$accounts[$i];
+                        $m_journal_accounts->memo=$memos[$i];
+                        $m_journal_accounts->dr_amount=$this->get_numeric_value($dr_amounts[$i]);
+                        $m_journal_accounts->cr_amount=$this->get_numeric_value($cr_amounts[$i]);
+                        $m_journal_accounts->save();
+                    }
+
+
+                    //update transaction number base on formatted last insert id
+                    $m_journal->txn_no='TXN-'.date('Ymd').'-'.$journal_id;
+                    $m_journal->modify($journal_id);
+
+                    $txn_no=$m_journal->get_list($journal_id);
+
+                    $m_depreciation_expense=$this->Depreciation_expense_model;
+                    $de_id=$this->input->post('de_id');
+
+                    $m_depreciation_expense->de_remarks='Posted to GL';
+                    $m_depreciation_expense->set('date_posted','NOW()');
+                    $m_depreciation_expense->is_journal_posted=1;
+                    $m_depreciation_expense->de_ref_no=$txn_no[0]->txn_no;
+                    $m_depreciation_expense->modify($de_id);
+
+
+                    $response['stat']='success';
+                    $response['title']='Success!';
+                    $response['msg']='Journal successfully posted.';
+                    $response['row_added']=$this->get_response_rows($journal_id);
+                    $response['row_updated']=$m_depreciation_expense->get_list($de_id,
+                        array('depreciation_expense.de_id',
+                            'MONTHNAME(depreciation_expense.de_date) as de_month',
+                            'YEAR(depreciation_expense.de_date) as de_year',
+                            'depreciation_expense.de_expense_total',
+                            'depreciation_expense.de_remarks',
+                            'depreciation_expense.de_ref_no',
+                            'depreciation_expense.date_posted',
+                            'depreciation_expense.is_journal_posted'
+                            )
+                        );
+                    echo json_encode($response);
+                    break;
 
         };
     }

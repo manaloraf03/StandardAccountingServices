@@ -64,6 +64,8 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Service_invoice_item_model');
 
+        $this->load->model('Depreciation_expense_model');
+
         $this->load->library('M_pdf');
     }
 
@@ -110,10 +112,7 @@ class Templates extends CORE_Controller {
                             array('customers', 'customers.customer_id=service_invoice.customer_id','left'),
                             array('user_accounts','user_accounts.user_id=service_invoice.posted_by_user','left')
 
-                            )
-
-
-                        
+                            )    
                 );
 
                 $data['service_invoice']=$service_info[0];
@@ -417,45 +416,6 @@ class Templates extends CORE_Controller {
                 break;
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             //****************************************************
 
 
@@ -513,19 +473,43 @@ class Templates extends CORE_Controller {
 
                 break;
 
+            case 'depreciation_expense': //delivery invoice
+                $m_depreciation_expense=$this->Depreciation_expense_model;
+                $m_company=$this->Company_model;
+                $m_accounts=$this->Account_title_model;
+                $m_suppliers=$this->Suppliers_model;
+                $m_departments=$this->Departments_model;
 
+                $type=$this->input->get('type',TRUE);
+                $de_id = $this->input->get('id',TRUE);
 
-
-
-
-
-
-
-
-
-
-
-
+                $data['accounts']=$m_accounts->get_list(
+                    array(
+                        'account_titles.is_active'=>TRUE,
+                        'account_titles.is_deleted'=>FALSE
+                    )
+                );
+                $data['departments']=$m_departments->get_list('is_active=TRUE AND is_deleted=FALSE');
+                $data['suppliers']=$m_suppliers->get_list(
+                    array(
+                        'suppliers.is_active'=>TRUE,
+                        'suppliers.is_deleted'=>FALSE),
+                    array(
+                        'suppliers.supplier_id',
+                        'suppliers.supplier_name'
+                    )
+                );
+                
+                $data['entries']=$m_depreciation_expense->get_journal_entries($de_id);
+                $data['id']=$de_id[0];
+                $data['customers']=$this->Customers_model->get_list('is_active=TRUE AND is_deleted=FALSE');
+                $info=$m_depreciation_expense->get_list($de_id);
+                $data['info']=$info[0];
+                //show only inside grid with menu button
+                if($type=='fullview'||$type==null){
+                    echo $this->load->view('template/depreciation_expense_for_review',$data,TRUE);
+                }
+                break;
 
                 //***********************************************88
             case 'issuance': //delivery invoice
