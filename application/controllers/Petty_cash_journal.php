@@ -40,7 +40,7 @@
 	        $data['departments']=$this->Departments_model->get_list(
 	        	'is_deleted=FALSE AND is_active=TRUE'
 	        );
-
+	        $data['account_titles'] = $this->Account_title_model->get_list(array('is_deleted'=>FALSE));
 	        $data['accounts']=$this->Account_title_model->get_list(
 	        	'account_titles.is_deleted=FALSE AND account_titles.is_active=TRUE AND ac.account_type_id=5',
 	        	'account_titles.account_title,
@@ -309,12 +309,17 @@
 		                $m_accounts=$this->Journal_account_model;
 
 		                $m_accounts->journal_id=$journal_id;
-						$m_accounts->account_id=13;
+						$m_account_integration=$this->Account_integration_model;
+						$petty_cash_id=$m_account_integration->get_list(null,'petty_cash_account_id');
+						$m_accounts->account_id=$petty_cash_id[0]->petty_cash_account_id;
+
+
+						// $m_accounts->account_id=13;
 						$m_accounts->dr_amount=$this->get_numeric_value($unreplenished_value);
 						$m_accounts->save();
 
 						$m_accounts->journal_id=$journal_id;
-						$m_accounts->account_id=1;
+						$m_accounts->account_id=$this->input->post('account_id_credit');
 						$m_accounts->dr_amount=$this->get_numeric_value('0');
 						$m_accounts->cr_amount=$this->get_numeric_value($unreplenished_value);
 						$m_accounts->save();

@@ -12,8 +12,7 @@ class Depreciation_expense_model extends CORE_Model {
 function get_journal_entries($de_id){
 
 $sql="SELECT main.* FROM(SELECT 
-
-2 as account_id,
+(SELECT depreciation_expense_debit_id FROM account_integration) as account_id,
 '' as memo,
 de.de_expense_total as dr_amount,
 0 as cr_amount
@@ -24,7 +23,9 @@ WHERE de.de_id = 18
 UNION ALL
 
 SELECT 
-2 as account_id,
+
+
+(SELECT depreciation_expense_credit_id FROM account_integration) as account_id,
 '' as memo,
 0 as dr_amount,
 de.de_expense_total as cr_amount

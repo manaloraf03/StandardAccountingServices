@@ -223,8 +223,8 @@
                     </div>
                 </div><!---modal-->
 
-                <div id="modal_confirmation_replenishment" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
-                    <div class="modal-dialog modal-sm">
+                <div id="modal_confirmation_replenishment" class="modal fade"  role="dialog"><!--modal-->
+                    <div class="modal-dialog modal-md">
                         <div class="modal-content"><!---content-->
                             <div class="modal-header">
                                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
@@ -232,11 +232,19 @@
                             </div>
 
                             <div class="modal-body">
-                                <p id="modal-body-message">Are you sure ?</p>
+                                <p id="modal-body-message">Replenish Petty Cash</p> <br>
+                                    <div class="col-xs-12 col-md-12" style="margin-bottom: 10px;">
+                                        <strong>Choose an Account for Credit Entry :</strong>
+                                        <select id="cbo_account_title" class="form-control" style="width: 100%;" data-error-msg="Account for Credit Account is required" required>
+                                            <?php foreach($account_titles as $account_title) { ?>
+                                                <option value="<?php echo $account_title->account_id; ?>"><?php echo $account_title->account_title; ?></option>
+                                            <?php } ?>
+                                        </select>
+                                    </div>
                             </div>
-
+                            <br><br><br>
                             <div class="modal-footer">
-                                <button id="btn_yes_replenishment" type="button" class="btn btn-danger" data-dismiss="modal">Yes</button>
+                                <button id="btn_yes_replenishment" type="button" class="btn btn-danger">Yes</button>
                                 <button id="btn_close_replenishment" type="button" class="btn btn-default" data-dismiss="modal">No</button>
                             </div>
                         </div><!---content-->
@@ -564,6 +572,10 @@
                 placeholder: "Please select Account"
             });
 
+            $('#cbo_account_title').select2({
+                placeholder: "Please select Account"
+            });
+            $('#cbo_account_title').select2('val',null);
             _cboSupplier.select2('val',null);
             $('#cbo_department_filter').select2('val', $("#cbo_department_filter option:first").val());
             _cboDepartment.select2('val', null);
@@ -709,6 +721,7 @@
                 }
             });
 
+
             $('#btn_new').on('click', function() {
                 validateUnreplenishedExpense().done(function(response){
                     var message = JSON.parse(response);
@@ -788,6 +801,10 @@
             });
 
             $('#btn_yes_replenishment').click(function(){
+                var account_title_credit=$('#cbo_account_title').val();
+                if(account_title_credit==null){
+                    showNotification({title:"Error!",stat:"error",msg:'Account Title for Credit Entry is Required'});
+                }else{
                 replenishPettyCash().done(function(response){
                     var message = JSON.parse(response);
                     showNotification(message);
@@ -797,6 +814,10 @@
                     $('#modal_confirmation_replenishment').modal('hide');
                     recomputeTotals();
                 });
+
+                }
+
+
             });
 
             $('#btn_close_replenishment').click(function(){
@@ -911,6 +932,14 @@
                 }
             });
 
+            $('#btn_cancel_department').click(function(){
+                  $('#modal_new_department').modal('toggle');
+                  $('#modal_new_pcf').modal('toggle');
+                  _cboDepartment.select2('val',null);
+            });
+
+
+
             $('#txtAmount').keypress(validateNumber);
         }();
 
@@ -972,6 +1001,7 @@
             var _data=[];
             _data.push({name: "aod", value: _as_of_date.val() });
             _data.push({name: "depid", value: $('#cbo_department_filter').val() });
+            _data.push({name: "account_id_credit", value: $('#cbo_account_title').val() });
 
             return $.ajax({
                 "dateType":"json",

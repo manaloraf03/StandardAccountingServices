@@ -509,16 +509,22 @@ $(document).ready(function(){
         });
 
         $('#btn_yes').on('click',function(){
-
-                    createDepreciationExpense().done(function(response){
-                        showNotification(response);
-                        // dt.row.add(response.row_added[0]).draw();
-                        // clearFields($('#frm_sales_invoice'));
-                        // showList(true);
-                        dt.destroy();
-                        dtreview.destroy();
-                        initializeDataTable();
-                    });
+            var amount = $('#Sumofallmonthlydepreciation').val();
+            alert(amount);
+            if(amount==0.00){
+                showNotification({title:"Error!",stat:"error",msg:"Depreciation Expense must not be equal to 0"});
+            } else{
+                createDepreciationExpense().done(function(response){
+                    showNotification(response);
+                    // dt.row.add(response.row_added[0]).draw();
+                    // clearFields($('#frm_sales_invoice'));
+                    // showList(true);
+                    // dt.destroy();
+                    // dtreview.destroy();
+                    // initializeDataTable();
+                    dtreview.ajax.reload();
+                });
+            }
         });
 
         _cboMonth.on('select2:select', function(){
@@ -536,7 +542,7 @@ $(document).ready(function(){
     }();
 
     var createDepreciationExpense=function(){
-                var _data=$('#frm-prepare-for-review').serializeArray();
+        var _data=$('#frm-prepare-for-review').serializeArray();
 
             return $.ajax({
                 "dataType":"json",

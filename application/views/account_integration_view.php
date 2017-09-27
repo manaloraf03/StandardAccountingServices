@@ -340,8 +340,37 @@ background: #616161 !important;color: white !important;border-top: 0.5px solid w
                             </div>
                         </div>
 
-                        <hr />
+                        <br >
+                        <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Depreciation Expense Account</strong></span></h4>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> * Debit Account :</label>
+                            <div class="col-md-7">
+                                <select name="depreciation_expense_debit_id"  class="cbo_accounts" data-error-msg="Depreciation Debit account is required." required>
 
+                                    <?php foreach($accounts as $account){ ?>
+                                        <option value="<?php echo $account->account_id; ?>" <?php echo ($current_accounts->depreciation_expense_debit_id==$account->account_id?'selected':''); ?>><?php echo $account->account_title; ?></option>
+                                    <?php } ?>
+                                </select>
+
+                                <span class="help-block m-b-none">Account that represents the Debit Entry of the Depreciation Expense</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"> * Credit Account :</label>
+                            <div class="col-md-7">
+                                <select name="depreciation_expense_credit_id"  class="cbo_accounts" data-error-msg="Depreciation Debit account is required." required>
+
+                                    <?php foreach($accounts as $account){ ?>
+                                        <option value="<?php echo $account->account_id; ?>" <?php echo ($current_accounts->depreciation_expense_credit_id==$account->account_id?'selected':''); ?>><?php echo $account->account_title; ?></option>
+                                    <?php } ?>
+                                </select>
+
+                                <span class="help-block m-b-none">Account that represents the Credit Entry of the Depreciation Expense</span>
+                            </div>
+                        </div>
+
+
+                        <hr />
 
                         <div class=" col-lg-offset-3">
                             <button id="btn_save_supplier_accounts" type="button" class="btn btn-primary" style="font-family: tahoma;text-transform: none;"><span class=""></span> Save Changes</button>
