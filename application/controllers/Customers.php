@@ -149,7 +149,7 @@ class Customers extends CORE_Controller {
                 else {
                     $m_customers->set('date_deleted','NOW()');
                     $m_customers->deleted_by_user=$this->session->user_id;
-                    $m_customers->is_deleted=0;
+                    $m_customers->is_deleted=1;
                     
                     if($m_customers->modify($customer_id)){
                         $response['title']='Success!';
