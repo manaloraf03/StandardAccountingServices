@@ -12,19 +12,19 @@
 
         <a class="navbar-brand" href="#">JCORE</a>
 
-        <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
+<!--         <div class="toolbar-icon-bg hidden-xs" id="toolbar-search">
             <div class="input-group">
                 <span class="input-group-btn"><button class="btn" type="button"><i class="ti ti-search"></i></button></span>
                 <input type="text" class="form-control general-search" placeholder="Search..." style="border: none!important;">
                 <span class="input-group-btn"><button class="btn" type="button"><i class="ti ti-close"></i></button></span>
             </div>
-        </div>
+        </div> -->
 
     </div><!-- logo-area -->
 
     <ul class="nav navbar-nav toolbar pull-right">
 
-        <li class="toolbar-icon-bg visible-xs-block" id="trigger-toolbar-search">
+<!--         <li class="toolbar-icon-bg visible-xs-block" id="trigger-toolbar-search">
             <a href="#"><span class="icon-bg"><i class="ti ti-search"></i></span></a>
         </li>
 
@@ -38,7 +38,7 @@
 
         <li class="toolbar-icon-bg hidden-xs" id="trigger-fullscreen">
             <a href="#" class="toggle-fullscreen"><span class="icon-bg"><i class="ti ti-fullscreen"></i></span></i></a>
-        </li>
+        </li> -->
 
         <!--<li class="dropdown toolbar-icon-bg hidden-xs">
             <a href="#" class="hasnotifications dropdown-toggle" data-toggle='dropdown'><span class="icon-bg"><i class="ti ti-email"></i></span><span

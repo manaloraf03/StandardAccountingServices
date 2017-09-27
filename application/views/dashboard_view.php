@@ -450,7 +450,7 @@ Chart.defaults.global.defaultFontColor = "#000000";
               label: 'Income (Last Year)',
               data: <?php echo ($this->session->user_group_id != 1 ? 0 : json_encode($previous_year_income_monthly)); ?>,
               backgroundColor: [
-                  'rgba(255, 152, 0, .1)'
+                  'rgba(255, 255, 255, .1)'
               ],
               borderColor: [
                   '#0b77a8'
@@ -523,32 +523,33 @@ Chart.defaults.global.defaultFontColor = "#000000";
               label: 'Expense (Current Year)',
               data: <?php echo ($this->session->user_group_id != 1 ? 0 : json_encode($expense_monthly)); ?>,
               backgroundColor: [
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)',
-                  'rgba(255, 255, 255, .1)'
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)',
+              'rgb(168, 227, 255)'
+
               ],
               borderColor: [
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)',
-                  'rgb(255, 255, 255)'
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)',
+              'rgb(3, 169, 244)'
               ],
               borderWidth: 2
             }
