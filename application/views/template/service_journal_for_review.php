@@ -201,8 +201,19 @@
             </tbody>
             <tfoot>
             <tr>
-                <td colspan="4" align="right"><strong>Total</strong></td>
-                <td align="right"><strong><?php echo number_format($inv_total_price,2); ?></strong></td>
+                <td colspan="5"> </td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right">Total before Discount: </td>
+                <td align="right"><?php echo number_format($service_invoice->total_amount,2); ?></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right">Discount: </td>
+                <td align="right"><?php echo number_format($service_invoice->total_overall_discount_amount,2); ?></td>
+            </tr>
+            <tr>
+                <td colspan="4" align="right"><strong>Total after Discount: </strong></td>
+                <td align="right"><strong><?php echo number_format($service_invoice->total_amount_after_discount,2); ?></strong></td>
             </tr>
             </tfoot>
         </table>

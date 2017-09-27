@@ -63,11 +63,16 @@
     <table width="100%" border="0">
         <tr>
             <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%" class="">
+            <td width="60%" class="">
                 <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
                 <p><?php echo $company_info->company_address; ?></p>
                 <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
                 <p><?php echo $company_info->email_address; ?></p>
+            </td>
+            <td width="30%">
+            <?php if($journal_info->cancelled == 0){ ?>
+                <img src="assets/img/cancelled.png" style="height: 100px;">
+                <?php } ?>
             </td>
         </tr>
     </table><hr>
