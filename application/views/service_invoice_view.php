@@ -44,7 +44,7 @@
             float: left;
         }
         td.details-control {
-            background: url('assets/img/Folder_Closed.png') no-repeat center center;
+            background: url('assets/img/print.png') no-repeat center center;
             cursor: pointer;
         }
         tr.details td.details-control {
@@ -164,7 +164,11 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="col-sm-4 col-sm-offset-4">
+                        <div class="col-sm-4">
+                            <b class="required">* </b><label>Contact Person :</label><br/>
+                            <input type="text" name="contact_person" required placeholder="Contact Person" class="form-control" data-error-msg="Contact Person is required!">
+                        </div>
+                        <div class="col-sm-4">
                             <b class="required">* </b><label>Invoice Date :</label> <br />
                             <div class="input-group">
                                 <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>
@@ -780,37 +784,38 @@ $(document).ready(function(){
             var row = dt.row( tr );
             var idx = $.inArray( tr.attr('id'), detailRows );
 
-            if ( row.child.isShown() ) {
-                tr.removeClass( 'details' );
-                row.child.hide();
+            // if ( row.child.isShown() ) {
+            //     tr.removeClass( 'details' );
+            //     row.child.hide();
 
-                // Remove from the 'open' array
-                detailRows.splice( idx, 1 );
-            }
-            else {
-                tr.addClass( 'details' );
+            //     // Remove from the 'open' array
+            //     detailRows.splice( idx, 1 );
+            // }
+            // else {
+                // tr.addClass( 'details' );
                 //console.log(row.data());
+                
                 var d=row.data();
-
-                $.ajax({
-                    "dataType":"html",
-                    "type":"POST",
-                    "url":"Templates/layout/service-invoice-dropdown/"+ d.service_invoice_id,
-                    "beforeSend" : function(){
-                        row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
-                    }
-                }).done(function(response){
-                    row.child( response,'no-padding' ).show();
-                    // Add to the 'open' array
-                    if ( idx === -1 ) {
-                        detailRows.push( tr.attr('id') );
-                    }
-                });
-
-
+                window.open("Templates/layout/service-invoice-dropdown/"+ d.service_invoice_id+"?type=html");
+                // $.ajax({
+                //     "dataType":"html",
+                //     "type":"POST",
+                //     "url":,
+                //     "beforeSend" : function(){
+                //         row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
+                //     }
+                // }).done(function(response){
+                //     row.child( response,'no-padding' ).show();
+                //     // Add to the 'open' array
+                //     if ( idx === -1 ) {
+                //         detailRows.push( tr.attr('id') );
+                //     }
+                // });
 
 
-            }
+
+
+            // }
         } );
 
 

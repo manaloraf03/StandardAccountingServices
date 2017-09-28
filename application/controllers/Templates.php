@@ -440,13 +440,12 @@ class Templates extends CORE_Controller {
                     );
 
                 $data['item_info']=$m_items->get_list(array('service_invoice_items.service_invoice_id'=>$filter_value),
-                    'service_invoice_items.*,
-                     services.service_desc,
-                     service_unit.service_unit_name
-                    ',
+                    array('service_invoice_items.*',
+                     'services.service_desc',
+                     'service_unit.service_unit_name'),
                     array(
                         array('services','services.service_id=service_invoice_items.service_id','left'),
-                        array('service_unit','service_unit.service_unit_id=service_invoice_items.service_id','left')
+                        array('service_unit','service_unit.service_unit_id=service_invoice_items.service_unit','left')
                         )
                     );
                 $data['service']=$info[0];

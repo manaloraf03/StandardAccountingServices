@@ -177,7 +177,11 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="col-sm-2 col-sm-offset-6">
+                        <div class="col-sm-4">
+                            <label>Contact Person :</label><br/>
+                            <input type="text" name="contact_person" class="form-control" required data-error-msg="Contact Person is required!" placeholder="Contact Person">
+                        </div>
+                        <div class="col-sm-2 col-sm-offset-2">
                             <b class="required">*</b> <label>Invoice Date :</label> <br />
                             <div class="input-group">
                                 <input type="text" name="date_invoice" id="invoice_default" class="date-picker form-control" value="<?php echo date("m/d/Y"); ?>" placeholder="Date Invoice" data-error-msg="Please set the date this items are issued!" required>

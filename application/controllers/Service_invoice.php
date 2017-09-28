@@ -114,6 +114,7 @@ class Service_invoice extends CORE_Controller
                 $m_invoice->customer_id=$this->input->post('customer',TRUE);
                 $m_invoice->salesperson_id=$this->input->post('salesperson_id',TRUE);
                 $m_invoice->department_id=$this->input->post('department',TRUE);
+                $m_invoice->contact_person=$this->input->post('contact_person',TRUE);
                 $m_invoice->address=$this->input->post('address',TRUE);
                 $m_invoice->remarks=$this->input->post('remarks',TRUE);
                 $m_invoice->date_due=date('Y-m-d',strtotime($this->input->post('date_due',TRUE)));
@@ -180,6 +181,7 @@ class Service_invoice extends CORE_Controller
                 $m_invoice->set('date_created','NOW()');
                 $m_invoice->customer_id=$this->input->post('customer',TRUE);
                 $m_invoice->salesperson_id=$this->input->post('salesperson_id',TRUE);
+                $m_invoice->contact_person=$this->input->post('contact_person',TRUE);
                 $m_invoice->department_id=$this->input->post('department',TRUE);
                 $m_invoice->address=$this->input->post('address',TRUE);
                 $m_invoice->remarks=$this->input->post('remarks',TRUE);
@@ -304,6 +306,7 @@ function response_rows_invoice($filter_value){
                     'service_invoice.department_id',
                     'service_invoice.customer_id',
                     'service_invoice.salesperson_id',
+                    'service_invoice.contact_person',
                     'service_invoice.service_invoice_no',
                     'service_invoice.address',
                     'service_invoice.remarks',
