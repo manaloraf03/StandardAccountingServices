@@ -81,6 +81,9 @@
             .select2-container--default .select2-selection--single {
                 height: 34px;
             }
+            span.select2.select2-container.select2-container--default {
+                width: 100%!important;
+            }
 
         </style>
 

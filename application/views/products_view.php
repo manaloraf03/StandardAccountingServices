@@ -1134,7 +1134,7 @@ $(document).ready(function(){
                         <div class="modal-body">
                             <form id="frm_category_group">
                                 <div class="form-group">
-                                    <label class="boldlabel">* Category Name :</label>
+                                    <label class="boldlabel"><b class="required">*</b> Category Name :</label>
                                     <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-envelope-o"></i>
@@ -1174,7 +1174,7 @@ $(document).ready(function(){
                         <div class="modal-body">
                             <form id="frm_unit_group">
                                 <div class="form-group">
-                                    <label class="boldlabel">* Unit Name :</label>
+                                    <label class="boldlabel"><b class="required">*</b> Unit Name :</label>
                                     <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-envelope-o"></i>
@@ -1211,7 +1211,7 @@ $(document).ready(function(){
                         <div class="modal-body">
                             <form id="frm_product_type">
                                 <div class="form-group">
-                                    <label class="boldlabel">* Product Type :</label>
+                                    <label class="boldlabel"><b class="required">*</b> Product Type :</label>
                                     <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="fa fa-cube"></i>
@@ -1398,7 +1398,7 @@ $(document).ready(function(){
                                 <div class="row">
                                     <div class="col-lg-4">
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> PLU :</label>
+                                            <label class=""><b class="required">*</b>PLU :</label>
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-file-code-o"></i>
@@ -1408,7 +1408,7 @@ $(document).ready(function(){
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                <label class=""><b>*</b> Product Description :</label>
+                                                <label class=""><b class="required">*</b> Product Description :</label>
                                                 <textarea name="product_desc" id="product_desc"class="form-control" data-error-msg="Product Description is required." required></textarea>
                                         </div>
 
@@ -1435,7 +1435,7 @@ $(document).ready(function(){
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> Supplier :</label>
+                                            <label class=""><b class="required">*</b> Supplier :</label>
                                             <select name="supplier_id" id="new_supplier" data-error-msg="Supplier is required." required>
                                                 <option value="">Please select supplier</option>
                                                 <option value="sup">[ Create Supplier ]</option>
@@ -1449,7 +1449,7 @@ $(document).ready(function(){
                                         </div>
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> Category :</label>
+                                            <label class=""><b class="required">*</b> Category :</label>
                                             <select name="category_id" id="product_category" data-error-msg="Category is required." required>
                                                 <option value="">Please Select...</option>
                                                 <option value="cat">[ Create Category ]</option>
@@ -1464,7 +1464,7 @@ $(document).ready(function(){
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> Tax:</label>
+                                            <label class=""><b class="required">*</b> Tax:</label>
                                             <select name="tax_type_id" id="cbo_tax" data-error-msg="Tax Type is required." required>
                                                 <option value="">Please Select...</option>
                                                 <?php foreach($tax_types as $tax_type) { ?>
@@ -1485,7 +1485,7 @@ $(document).ready(function(){
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> Inventory type :</label>
+                                            <label class=""><b class="required">*</b> Inventory type :</label>
 
                                             <select name="item_type_id" id="cbo_item_type" data-error-msg="Inverntory type is required." required>
                                                 <option value="">None</option>
@@ -1499,7 +1499,7 @@ $(document).ready(function(){
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class=""><b>*</b> Unit of Measurement :</label>
+                                            <label class=""><b class="required">*</b> Unit of Measurement :</label>
                                             <select name="unit_id" id="product_unit" data-error-msg="Unit is required." required>
                                                 <option value="">Please select unit of measurement</option>
                                                 <option value="unt">[ Create Unit ]</option>

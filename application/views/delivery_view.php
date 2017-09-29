@@ -1813,7 +1813,7 @@ $(document).ready(function(){
 
     var updatePurchaseOrder=function(){
         var _data=$('#frm_deliveries,#frm_items').serializeArray();
-
+        
         var tbl_summary=$('#tbl_delivery_summary');
         _data.push({name : "total_after_discount", value: $('#td_total_after_discount').text() });
         _data.push({name : "remarks", value : $('textarea[name="remarks"]').val()});
@@ -1822,7 +1822,7 @@ $(document).ready(function(){
         _data.push({name : "summary_tax_amount", value : tbl_summary.find(oTableDetails.tax_amount).text()});
         _data.push({name : "summary_after_tax", value : tbl_summary.find(oTableDetails.after_tax).text()});
         _data.push({name : "dr_invoice_id" ,value : _selectedID});
-
+        console.log(_data);
         return $.ajax({
             "dataType":"json",
             "type":"POST",
