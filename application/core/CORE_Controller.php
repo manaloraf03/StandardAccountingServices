@@ -71,7 +71,8 @@ class CORE_Controller extends CI_Controller
 
 
     function convertDecimalToWords($num){
-        $num=$this->get_numeric_value($num); //clent it first
+        // $num=$this->get_numeric_value($num);  //returned an error ex. .70 returns as and seven centavos only
+        
 
         if(substr_count($num,".")>0){ //this a decimal number
             $arr=explode(".",$num);
