@@ -92,6 +92,19 @@ class TAccount extends CORE_Controller
                 $data['journal_list'] = $m_journal->get_t_account($book,$start,$end);
                 $this->load->view('template/book_of_accounts_report',$data);
                 break;
+
+            case 'journal_report_summary_cdj':
+                $m_journal=$this->Journal_account_model;
+                $m_company=$this->Company_model;
+
+                $start=date('Y-m-d', strtotime($this->input->get('s',TRUE)));
+                $end=date('Y-m-d', strtotime($this->input->get('e',TRUE)));
+                $company_info=$m_company->get_list();
+                $data['company_info']=$company_info[0];
+                $data['journal_list'] = $m_journal->get_t_account_summary_cdj($start,$end);
+                $this->load->view('template/book_of_accounts_report_summary_cdj',$data);
+
+
         }
     }
 

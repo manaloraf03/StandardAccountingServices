@@ -156,6 +156,7 @@
 
             <div id="cdj" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_cdj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
+                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_cdj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
                 <table id="tbl_cdj" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -409,7 +410,9 @@ $(document).ready(function(){
         $('#btn_print_cdj').click(function(){
             window.open('TAccount/transaction/journal-report?b=CDJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
         });
-
+        $('#btn_print_cdj_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary_cdj?s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
         $('#btn_print_gje').click(function(){
             window.open('TAccount/transaction/journal-report?b=GJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
         });

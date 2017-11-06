@@ -322,6 +322,45 @@ class Journal_account_model extends CORE_Model{
         return $this->db->query($sql)->result();
     }
 
+function get_t_account_summary_cdj($start,$end){
+$sql="SELECT 
+journal_data.account_id,
+SUM(journal_data.dr_amount) as dr_amount,
+SUM(journal_data.cr_amount) as cr_amount,
+journal_data.account_title,
+journal_data.account_no
+FROM 
+(SELECT 
+            DATE_FORMAT(ji.date_txn,'%m/%d/%Y')as date_txn,
+            ji.txn_no,
+            CONCAT(
+              IFNULL(s.supplier_name,''),
+              IFNULL(c.customer_name,'')
+            )as description,
+            ji.remarks,
+            at.account_title,
+            ja.dr_amount,
+            ja.cr_amount,
+            ja.account_id,
+            at.account_no
+
+            FROM ((`journal_info` as ji
+            LEFT JOIN customers as c ON c.customer_id=ji.customer_id)
+            LEFT JOIN suppliers as s ON s.supplier_id=ji.supplier_id)
+            INNER JOIN (`journal_accounts` as ja
+            INNER JOIN account_titles as at ON at.account_id=ja.account_id)
+            ON ja.journal_id=ji.journal_id WHERE ji.book_type='CDJ'
+            AND ji.is_active = TRUE AND ji.is_deleted = FALSE
+            AND ji.date_txn BETWEEN '$start' AND '$end'
+            ORDER BY ja.account_id ASC) as journal_data
+GROUP BY journal_data.account_id";
+        return $this->db->query($sql)->result();
+
+
+
+}
+
+
 }
 
 ?>
