@@ -80,7 +80,8 @@ class Rights_link_model extends CORE_Model{
                                           (70,'9','9-18','Aging of Payables'),
                                           (71,'9','9-19','Statement of Account'),
                                           (72,'6','6-10','Email Settings'),
-                                          (73,'14','14-1','Treasury')
+                                          (73,'14','14-1','Treasury'),
+                                          (74,'9','9-20','Replenishment Batch Report')
 
                                           ON DUPLICATE KEY UPDATE
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
