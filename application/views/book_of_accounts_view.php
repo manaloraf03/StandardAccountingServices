@@ -129,6 +129,7 @@
         <div class="tab-content">
             <div id="gje" class="tab-pane fade in active">
                     <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_gje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
+                     <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_gje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
                     <table id="tbl_gje" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
@@ -187,6 +188,7 @@
 
             <div id="pje" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
+                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
                 <table id="tbl_pje" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -217,6 +219,7 @@
 
             <div id="sje" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
+                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
                 <table id="tbl_sje" style="margin-top: 10px;"  class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -247,6 +250,7 @@
 
             <div id="pcf" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pcf" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
+                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pcf_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
                 <table id="tbl_pcf" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -277,6 +281,7 @@
 
             <div id="crj" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_crj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
+                <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_crj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
                 <table id="tbl_crj" style="margin-top: 10px;" class="table table-striped"  cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -410,12 +415,34 @@ $(document).ready(function(){
         $('#btn_print_cdj').click(function(){
             window.open('TAccount/transaction/journal-report?b=CDJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
         });
-        $('#btn_print_cdj_summary').click(function(){
-            window.open('TAccount/transaction/journal_report_summary_cdj?s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
-        });
+
         $('#btn_print_gje').click(function(){
             window.open('TAccount/transaction/journal-report?b=GJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
         });
+
+// SUMMARY PRINT
+        $('#btn_print_cdj_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary?b=CDJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+        $('#btn_print_gje_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary?b=GJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+        $('#btn_print_pje_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary?b=PJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_print_sje_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary?b=SJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+        $('#btn_print_pcf_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary?b=PCF&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_print_crj_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_summary?b=CRJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
 
         $('#txt_end').on('change',function(){
             dtGJE.destroy();

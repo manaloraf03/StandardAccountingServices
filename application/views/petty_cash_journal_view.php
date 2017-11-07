@@ -186,7 +186,7 @@
                                                         <table id="tbl_replenished" class="table table-striped" cellspacing="0" width="100%">
                                                             <thead class="thead-bg">
                                                                 <th>Petty Cash Code</th>
-                                                                <th>Period Covered</th>
+                                                                <th>Date Transaction</th>
                                                                 <th>Txn #</th>
                                                                 <th>Date Replenished</th>
                                                                 <th>Status</th>
@@ -609,7 +609,7 @@
                 },
         		"columns": [
                     { visible:false, targets:[0],data: "batch_no" },
-                    { targets:[1],data: "date_covered" },
+                    { targets:[1],data: "date_txn" },
                     { targets:[2],data: "txn_no" },
                     { targets:[3],data: "date_replenished" },
                     {

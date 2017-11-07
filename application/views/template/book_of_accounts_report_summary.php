@@ -39,7 +39,7 @@
         </tr>
     </table><hr>
     <div>
-        <h3><strong>T-ACCOUNT (Cash Disbursement Journal Summary)<br> Date: <u><?php echo $_GET['s']; ?></u> to <u><?php echo $_GET['e']; ?></u></strong></h3>
+        <h3><strong>T-ACCOUNT (<?php echo $title; ?>)<br> Date: <u><?php echo $_GET['s']; ?></u> to <u><?php echo $_GET['e']; ?></u></strong></h3>
     </div>
     <table width="100%" border="1" cellspacing="0">
 	    <thead>

@@ -93,7 +93,7 @@ class TAccount extends CORE_Controller
                 $this->load->view('template/book_of_accounts_report',$data);
                 break;
 
-            case 'journal_report_summary_cdj':
+            case 'journal_report_summary':
                 $m_journal=$this->Journal_account_model;
                 $m_company=$this->Company_model;
 
@@ -101,8 +101,42 @@ class TAccount extends CORE_Controller
                 $end=date('Y-m-d', strtotime($this->input->get('e',TRUE)));
                 $company_info=$m_company->get_list();
                 $data['company_info']=$company_info[0];
-                $data['journal_list'] = $m_journal->get_t_account_summary_cdj($start,$end);
-                $this->load->view('template/book_of_accounts_report_summary_cdj',$data);
+
+
+                $book=$this->input->get('b',TRUE);
+
+                switch ($book) {
+                    case 'GJE':
+                            $data['title']='GENERAL JOURNAL SUMMARY';
+                        break;
+
+                    case 'CDJ':
+                            $data['title']='CASH DISBURSEMENT SUMMARY';
+                        break;
+
+                    case 'PJE':
+                            $data['title']='PURCHASE JOURNAL SUMMARY';
+                        break;
+
+                    case 'SJE':
+                            $data['title']='SALES JOURNAL SUMMARY';
+                        break;
+
+                    case 'PCF':
+                            $data['title']='PETTY CASH VOUCHER SUMMARY';
+                        break;
+
+                    case 'CRJ':
+                            $data['title']='CASH RECEIPT SUMMARY';
+                        break;
+                    
+                    default:
+                            $data['title']='T-Accounts';
+                        break;
+                }
+
+                $data['journal_list'] = $m_journal->get_t_account_summary_cdj($book,$start,$end);
+                $this->load->view('template/book_of_accounts_report_summary',$data);
 
 
         }
