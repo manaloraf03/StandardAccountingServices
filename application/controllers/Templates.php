@@ -66,6 +66,10 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Depreciation_expense_model');
 
+        $this->load->model('Delivery_receipt_model');
+
+        $this->load->model('Delivery_receipt_item_model');
+
         $this->load->library('M_pdf');
     }
 
@@ -723,10 +727,10 @@ class Templates extends CORE_Controller {
                 );
 
                 //show only inside grid with menu button
-                if($type=='fullview'||$type==null){
-                    echo $this->load->view('template/sales_invoice_content',$data,TRUE);
-                    echo $this->load->view('template/sales_invoice_content_menus',$data,TRUE);
-                }
+                // if($type=='fullview'||$type==null){
+                //     echo $this->load->view('template/sales_invoice_content',$data,TRUE);
+                //     echo $this->load->view('template/sales_invoice_content_menus',$data,TRUE);
+                // }
 
                 //show only inside grid with menu button
                 if($type=='html'){
@@ -759,7 +763,10 @@ class Templates extends CORE_Controller {
                     $pdf->Output($pdfFilePath,"D");
 
                 }
+                if($type=='dropdown'){
+                      echo  $this->load->view('template/sales_invoice_content_standard',$data,TRUE); //load the template
 
+                }
                 //preview on browser
                 if($type=='contentview'){
                     $file_name=$info[0]->sales_inv_no;
@@ -774,6 +781,134 @@ class Templates extends CORE_Controller {
                 }
 
                 break;
+
+
+
+
+
+
+            case 'delivery-receipt': 
+                $m_dr_invoice=$this->Delivery_receipt_model;
+                $m_dr_invoice_items=$this->Delivery_receipt_item_model;
+                $m_company_info=$this->Company_model;
+                $type=$this->input->get('type',TRUE);
+
+
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
+
+                $info=$m_dr_invoice->get_list(
+                    $filter_value,
+                    array(
+                        'delivery_receipt.delivery_receipt_id',
+                        'delivery_receipt.delivery_inv_no',
+                        'delivery_receipt.remarks', 
+                        'delivery_receipt.date_created',
+                        'delivery_receipt.customer_id',
+                        'delivery_receipt.inv_type',
+                        'delivery_receipt.*',
+                        'DATE_FORMAT(delivery_receipt.date_invoice,"%m/%d/%Y") as date_invoice',
+                        'DATE_FORMAT(delivery_receipt.date_due,"%m/%d/%Y") as date_due',
+                        'departments.department_id',
+                        'departments.department_name',
+                        'customers.customer_name',
+                        'delivery_receipt.salesperson_id',
+                        'delivery_receipt.address',
+                        'sales_invoice.sales_inv_no',
+                        'CONCAT(salesperson.firstname," ",salesperson.lastname) AS salesperson_name'
+                    ),
+                    array(
+                        array('departments','departments.department_id=delivery_receipt.department_id','left'),
+                        array('salesperson','salesperson.salesperson_id=delivery_receipt.salesperson_id','left'),
+                        array('customers','customers.customer_id=delivery_receipt.customer_id','left'),
+                        array('sales_invoice','sales_invoice.sales_invoice_id=delivery_receipt.sales_invoice_id','left'),
+                    )
+                );
+
+                $data['delivery_receipt_info']=$info[0];
+                $data['delivery_receipt_items']=$m_dr_invoice_items->get_list(
+                    array('delivery_receipt_items.delivery_receipt_id'=>$filter_value),
+                    'delivery_receipt_items.*,products.product_desc,products.size,units.unit_name',
+                    array(
+                        array('products','products.product_id=delivery_receipt_items.product_id','left'),
+                        array('units','units.unit_id=delivery_receipt_items.unit_id','left')
+                    )
+                );
+
+                //show only inside grid with menu button
+                // if($type=='fullview'||$type==null){
+                //     echo $this->load->view('template/sales_invoice_content',$data,TRUE);
+                //     echo $this->load->view('template/sales_invoice_content_menus',$data,TRUE);
+                // }
+
+                //show only inside grid with menu button
+                if($type=='html'){
+                    echo $this->load->view('template/sales_invoice_content_standard',$data);
+                }
+
+                //show only inside grid without menu button
+                // if($type=='contentview'){
+                //     echo $this->load->view('template/sales_invoice_content_standard',$data,TRUE);
+                // }
+
+                if($type=='dr'){
+                    echo $this->load->view('template/sales_invoice_content_dr',$data,TRUE);
+                }
+
+                if($type=='drview'){
+                    echo $this->load->view('template/sales_invoice_content_dr_view',$data,TRUE);
+                    echo $this->load->view('template/delivery_receipt_menus',$data,TRUE);
+                }
+
+                //download pdf
+                if($type=='pdf'){
+                    $file_name=$info[0]->sales_inv_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/sales_invoice_content',$data,TRUE); //load the template
+                    //$pdf->setFooter('{PAGENO}');
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output($pdfFilePath,"D");
+
+                }
+                if($type=='dropdown'){
+                      echo  $this->load->view('template/sales_invoice_content_standard',$data,TRUE); //load the template
+
+                }
+                //preview on browser
+                if($type=='contentview'){
+                    $file_name=$info[0]->sales_inv_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/delivery_receipt_content_standard',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                }
+
+                break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             //****************************************************

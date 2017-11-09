@@ -36,7 +36,7 @@ class Cash_receipt extends CORE_Controller
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
 
         $data['customers']=$this->Customers_model->get_list('is_deleted=0');
-        $data['accounts']=$this->Account_title_model->get_list();
+        $data['accounts']=$this->Account_title_model->get_list('is_deleted=0');
         $data['methods']=$this->Payment_method_model->get_list('is_deleted=0');
         $data['departments']=$this->Departments_model->get_list('is_deleted=0');
         $data['banks']=$this->Bank_model->get_list('is_deleted=0');
@@ -60,7 +60,7 @@ class Cash_receipt extends CORE_Controller
                 $m_accounts=$this->Account_title_model;
                 $m_journal_accounts=$this->Journal_account_model;
 
-                $data['accounts']=$m_accounts->get_list();
+                $data['accounts']=$m_accounts->get_list('is_deleted=0');
                 $data['entries']=$m_journal_accounts->get_list('journal_accounts.journal_id='.$journal_id);
 
                 $this->load->view('template/journal_entries', $data);

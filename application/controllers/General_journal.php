@@ -65,7 +65,7 @@ class General_journal extends CORE_Controller
                 $m_accounts=$this->Account_title_model;
                 $m_journal_accounts=$this->Journal_account_model;
 
-                $data['accounts']=$m_accounts->get_list();
+                $data['accounts']=$m_accounts->get_list(array('is_deleted'=>FALSE));
                 $data['entries']=$m_journal_accounts->get_list('journal_accounts.journal_id='.$journal_id);
 
                 $this->load->view('template/journal_entries', $data);

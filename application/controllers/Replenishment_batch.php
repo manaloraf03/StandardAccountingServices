@@ -27,9 +27,9 @@
 	        $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', true);
 	        $data['title'] = 'Replenishment Batch Report';
 	        $data['batches'] = $this->Batch_info_model->get_list();
-        (in_array('9-20',$this->session->user_rights)? 
-        $this->load->view('replenishment_batch_view',$data)
-        :redirect(base_url('dashboard')));
+	        (in_array('9-20',$this->session->user_rights)? 
+	        $this->load->view('replenishment_batch_view',$data)
+	        :redirect(base_url('dashboard')));
 	        
 		}
 
