@@ -70,6 +70,16 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Delivery_receipt_item_model');
 
+        $this->load->model('Proforma_invoice_model');
+
+        $this->load->model('Proforma_invoice_items_model');
+
+        $this->load->model('Commercial_invoice_model');
+
+        $this->load->model('Commercial_invoice_items_model');
+
+
+
         $this->load->library('M_pdf');
     }
 
@@ -782,9 +792,104 @@ class Templates extends CORE_Controller {
 
                 break;
 
+            case 'proforma-invoice': //proforma invoice
+                $m_proforma_invoice=$this->Proforma_invoice_model;
+                $m_proforma_invoice_items=$this->Proforma_invoice_items_model;
+                $m_company_info=$this->Company_model;
+                $type=$this->input->get('type',TRUE);
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
+
+                $info=$m_proforma_invoice->get_list(
+                $filter_value,
+                array(
+                    'proforma_invoice.*',
+                    'DATE_FORMAT(proforma_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                    'DATE_FORMAT(proforma_invoice.date_due,"%m/%d/%Y") as date_due',
+                    'departments.department_id',
+                    'departments.department_name',
+                    'proforma_invoice.salesperson_id',
+                    'proforma_invoice.address',
+                    'sales_order.so_no'
+                ),
+                array(
+                    array('departments','departments.department_id=proforma_invoice.department_id','left'),
+                    array('customers','customers.customer_id=proforma_invoice.customer_id','left'),
+                    array('sales_order','sales_order.sales_order_id=proforma_invoice.sales_order_id','left'),
+                ),
+                'proforma_invoice.proforma_invoice_id DESC'
+            );
+
+                $data['proforma_info']=$info[0];
+                $data['items']=$m_proforma_invoice_items->get_list(
+                    array('proforma_invoice_items.proforma_invoice_id'=>$filter_value),
+                    'proforma_invoice_items.*,products.product_desc,products.size,units.unit_name,products.product_code',
+                    array(
+                        array('products','products.product_id=proforma_invoice_items.product_id','left'),
+                        array('units','units.unit_id=proforma_invoice_items.unit_id','left')
+                    )
+                );
+
+                //preview on browser
+                if($type=='contentview'){
+                    $file_name=$info[0]->sales_inv_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/proforma_invoice_standard',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                }
+
+                break;
 
 
+            case 'commercial-invoice': //Commercial Invoice
+                $m_commercial_invoice=$this->Commercial_invoice_model;
+                $m_commercial_invoice_items=$this->Commercial_invoice_items_model;
+                $m_company_info=$this->Company_model;
+                $type=$this->input->get('type',TRUE);
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
 
+                $info=$m_commercial_invoice->get_list(
+                $filter_value,
+                array(
+                    'commercial_invoice.*',
+                    'DATE_FORMAT(commercial_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                    'DATE_FORMAT(commercial_invoice.date_due,"%m/%d/%Y") as date_due'
+                ),
+                array(
+                ),
+                'commercial_invoice.commercial_invoice_id DESC'
+            );
+
+                $data['info']=$info[0];
+                $data['items']=$m_commercial_invoice_items->get_list(
+                    array('commercial_invoice_items.commercial_invoice_id'=>$filter_value),
+                    'commercial_invoice_items.*,products.product_desc,products.size,units.unit_name,products.product_code',
+                    array(
+                        array('products','products.product_id=commercial_invoice_items.product_id','left'),
+                        array('units','units.unit_id=commercial_invoice_items.unit_id','left')
+                    )
+                );
+
+                //preview on browser
+                if($type=='contentview'){
+                    $file_name=$info[0]->sales_inv_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/commercial_invoice_standard',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                }
+
+                break;
 
 
             case 'delivery-receipt': 
@@ -828,7 +933,7 @@ class Templates extends CORE_Controller {
                 $data['delivery_receipt_info']=$info[0];
                 $data['delivery_receipt_items']=$m_dr_invoice_items->get_list(
                     array('delivery_receipt_items.delivery_receipt_id'=>$filter_value),
-                    'delivery_receipt_items.*,products.product_desc,products.size,units.unit_name',
+                    'delivery_receipt_items.*,products.product_desc,products.product_code,products.size,units.unit_name',
                     array(
                         array('products','products.product_id=delivery_receipt_items.product_id','left'),
                         array('units','units.unit_id=delivery_receipt_items.unit_id','left')

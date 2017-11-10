@@ -19,7 +19,7 @@
 <style type="text/css">
 /* -------------- SWITCHER --------------   */
 .demo-options{
-    display: none!important;
+    /*display: none!important;*/
     }
 /* -------------- SWITCHER --------------   */
 

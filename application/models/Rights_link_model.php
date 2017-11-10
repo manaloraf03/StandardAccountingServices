@@ -82,7 +82,10 @@ class Rights_link_model extends CORE_Model{
                                           (72,'6','6-10','Email Settings'),
                                           (73,'14','14-1','Treasury'),
                                           (74,'9','9-20','Replenishment Batch Report'),
-                                          (75,'3','3-4','Delivery Receipt')
+                                          (75,'3','3-4','Delivery Receipt'),
+                                          (76,'15','15-1','Pro Forma Invoice'),
+                                          (77,'15','15-2','Commercial Invoice')
+
 
                                           ON DUPLICATE KEY UPDATE
                                           rights_links.parent_code=VALUES(rights_links.parent_code),
