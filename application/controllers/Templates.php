@@ -78,6 +78,10 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Commercial_invoice_items_model');
 
+        $this->load->model('Cash_invoice_model');
+
+        $this->load->model('Cash_invoice_items_model');
+
 
 
         $this->load->library('M_pdf');
@@ -845,6 +849,60 @@ class Templates extends CORE_Controller {
 
                 break;
 
+            case 'cash-invoice': //cash invoice
+                $m_cash_invoice=$this->Cash_invoice_model;
+                $m_cash_invoice_items=$this->Cash_invoice_items_model;
+                $m_company_info=$this->Company_model;
+                $type=$this->input->get('type',TRUE);
+                $company_info=$m_company_info->get_list();
+                $data['company_info']=$company_info[0];
+
+                $info=$m_cash_invoice->get_list(
+                $filter_value,
+                array(
+                    'cash_invoice.*',
+                    'DATE_FORMAT(cash_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                    'DATE_FORMAT(cash_invoice.date_due,"%m/%d/%Y") as date_due',
+                    'departments.department_id',
+                    'departments.department_name',
+                    'cash_invoice.salesperson_id',
+                    'cash_invoice.address',
+                    'sales_order.so_no',
+                    'customers.customer_name'
+
+                ),
+                array(
+                    array('departments','departments.department_id=cash_invoice.department_id','left'),
+                    array('customers','customers.customer_id=cash_invoice.customer_id','left'),
+                    array('sales_order','sales_order.sales_order_id=cash_invoice.sales_order_id','left'),
+                ),
+                'cash_invoice.cash_invoice_id DESC'
+            );
+
+                $data['info']=$info[0];
+                $data['items']=$m_cash_invoice_items->get_list(
+                    array('cash_invoice_items.cash_invoice_id'=>$filter_value),
+                    'cash_invoice_items.*,products.product_desc,products.size,units.unit_name,products.product_code',
+                    array(
+                        array('products','products.product_id=cash_invoice_items.product_id','left'),
+                        array('units','units.unit_id=cash_invoice_items.unit_id','left')
+                    )
+                );
+
+                //preview on browser
+                if($type=='contentview'){
+                    $file_name=$info[0]->cash_inv_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/cash_invoice_entries',$data,TRUE); //load the template
+                    $pdf->setFooter('{PAGENO}');
+                    
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                }
+
+                break;
 
             case 'commercial-invoice': //Commercial Invoice
                 $m_commercial_invoice=$this->Commercial_invoice_model;
@@ -2138,7 +2196,11 @@ class Templates extends CORE_Controller {
 
 
                 $data['methods']=$m_methods->get_list();
-                $data['departments']=$m_departments->get_list();
+                $data['departments']=$m_departments->get_list(
+                    array(
+                        'departments.is_active'=>TRUE,
+                        'departments.is_deleted'=>FALSE
+                    ));
 
                 $data['customers']=$m_customers->get_list(
                     array(
@@ -2167,13 +2229,11 @@ class Templates extends CORE_Controller {
 
                     array(
                         'receivable_payments_list.*',
-                        'sales_invoice.sales_inv_no',
-                        'sales_invoice.remarks',
-                        'DATE_FORMAT(sales_invoice.date_invoice,"%m/%d/%Y") as invoice_date',
-                        'DATE_FORMAT(sales_invoice.date_due,"%m/%d/%Y") as due_date'
+                        'journal_info.*'
+
                     ),
                     array(
-                        array('sales_invoice','sales_invoice.sales_invoice_id=receivable_payments_list.sales_invoice_id','left')
+                        array('journal_info','journal_info.journal_id=receivable_payments_list.journal_id','left'),
                     )
 
                 );
@@ -2193,6 +2253,99 @@ class Templates extends CORE_Controller {
 
 
                 break;
+
+            case 'cash-for-review':
+                $cash_invoice_id=$this->input->get('id',TRUE);
+
+                $m_cash_invoice =  $this->Cash_invoice_model;
+                $m_cash_invoice_items =  $this->Cash_invoice_items_model;
+
+
+
+                $m_customers=$this->Customers_model;
+                $m_accounts=$this->Account_title_model;
+                $m_payments=$this->Receivable_payment_model;
+                $m_methods=$this->Payment_method_model;
+                $m_departments=$this->Departments_model;
+                $m_pay_list=$this->Receivable_payment_list_model;
+
+                $info=$m_cash_invoice->get_list($cash_invoice_id,
+                array(
+                'cash_invoice.*',
+                'DATE_FORMAT(cash_invoice.date_invoice,"%m/%d/%Y") as date_invoice',
+                'DATE_FORMAT(cash_invoice.date_due,"%m/%d/%Y") as date_due',
+                'departments.department_id',
+                'departments.department_name',
+                'customers.customer_name',
+                'cash_invoice.salesperson_id',
+                'cash_invoice.address',
+                'sales_order.so_no'
+            ),
+            array(
+                array('departments','departments.department_id=cash_invoice.department_id','left'),
+                array('customers','customers.customer_id=cash_invoice.customer_id','left'),
+                array('sales_order','sales_order.sales_order_id=cash_invoice.sales_order_id','left'),
+            ),
+            'cash_invoice.cash_invoice_id DESC'
+        );
+                $data['info']=$info[0];
+
+
+
+                $data['methods']=$m_methods->get_list();
+                $data['departments']=$m_departments->get_list(array('is_active'=>TRUE,'is_deleted'=>FALSE));
+
+                $data['customers']=$m_customers->get_list(
+                    array(
+                        'customers.is_active'=>TRUE,
+                        'customers.is_deleted'=>FALSE
+                    ),
+
+                    array(
+                        'customers.customer_id',
+                        'customers.customer_name'
+                    )
+                );
+                $data['entries']=$m_cash_invoice->get_journal_entries($cash_invoice_id);
+
+                $data['accounts']=$m_accounts->get_list(
+                    array(
+                        'account_titles.is_active'=>TRUE,
+                        'account_titles.is_deleted'=>FALSE
+                    )
+                );
+
+                $data['items'] = $m_cash_invoice_items->get_list(
+                    array('cash_invoice_id'=>$cash_invoice_id),
+                    array(
+                        'cash_invoice_items.*',
+                        'products.product_code',
+                        'products.product_desc',
+                        'units.unit_id',
+                        'units.unit_name'
+                    ),
+                    array(
+                        array('products','products.product_id=cash_invoice_items.product_id','left'),
+                        array('units','units.unit_id=cash_invoice_items.unit_id','left')
+                    ),
+                    'cash_invoice_items.cash_item_id ASC'
+                );
+
+                //validate if customer is not deleted
+                $valid_customer=$m_customers->get_list(
+                    array(
+                        'customer_id'=>$info[0]->customer_id,
+                        'is_active'=>TRUE,
+                        'is_deleted'=>FALSE
+                    )
+                );
+                $data['valid_particular']=(count($valid_customer)>0);
+
+                echo $this->load->view('template/cash_journal_for_review',$data,TRUE); //details of the journal
+
+
+                break;
+
 
             case 'expense-for-review':
                 $payment_id=$this->input->get('id',TRUE);

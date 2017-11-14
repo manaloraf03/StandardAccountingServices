@@ -20,7 +20,8 @@ class Cash_receipt extends CORE_Controller
                 'Receivable_payment_model',
                 'Bank_model',
                 'Users_model',
-                'Accounting_period_model'
+                'Accounting_period_model',
+                'Cash_invoice_model'
             )
         );
 
@@ -125,6 +126,77 @@ class Cash_receipt extends CORE_Controller
                     $m_receivable_payment->journal_id=$journal_id;
                     $m_receivable_payment->is_journal_posted=TRUE;
                     $m_receivable_payment->modify($payment_id);
+                }
+
+
+                $response['stat']='success';
+                $response['title']='Success!';
+                $response['msg']='Journal successfully posted';
+                $response['row_added']=$this->get_response_rows($journal_id);
+                echo json_encode($response);
+                break;
+
+
+            case 'create-from-cash-invoice' :
+                $m_journal=$this->Journal_info_model;
+                $m_journal_accounts=$this->Journal_account_model;
+
+                //validate if still in valid range
+                $valid_range=$this->Accounting_period_model->get_list("'".date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)))."'<=period_end");
+                if(count($valid_range)>0){
+                    $response['stat']='error';
+                    $response['title']='<b>Accounting Period is Closed!</b>';
+                    $response['msg']='Please make sure transaction date is valid!<br />';
+                    die(json_encode($response));
+                }
+
+                $m_journal->customer_id=$this->input->post('customer_id',TRUE);
+                $m_journal->remarks=$this->input->post('remarks',TRUE);
+                $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
+                $m_journal->book_type='CRJ';
+                $m_journal->department_id=$this->input->post('department_id');
+                $m_journal->payment_method_id=$this->input->post('payment_method');
+                $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
+                $m_journal->amount=$this->get_numeric_value($this->input->post('amount'));
+                $m_journal->or_no=$this->input->post('or_no');
+                $m_journal->check_no=$this->input->post('check_no');
+                $m_journal->bank_id=$this->input->post('bank');
+                $m_journal->ref_no=$this->input->post('ref_no');
+
+
+                //for audit details
+                $m_journal->set('date_created','NOW()');
+                $m_journal->created_by_user=$this->session->user_id;
+                $m_journal->save();
+
+                $journal_id=$m_journal->last_insert_id();
+                $accounts=$this->input->post('accounts',TRUE);
+                $memos=$this->input->post('memo',TRUE);
+                $dr_amounts=$this->input->post('dr_amount',TRUE);
+                $cr_amounts=$this->input->post('cr_amount',TRUE);
+
+                for($i=0;$i<=count($accounts)-1;$i++){
+                    $m_journal_accounts->journal_id=$journal_id;
+                    $m_journal_accounts->account_id=$accounts[$i];
+                    $m_journal_accounts->memo=$memos[$i];
+                    $m_journal_accounts->dr_amount=$this->get_numeric_value($dr_amounts[$i]);
+                    $m_journal_accounts->cr_amount=$this->get_numeric_value($cr_amounts[$i]);
+                    $m_journal_accounts->save();
+                }
+
+
+                //update transaction number base on formatted last insert id
+                $m_journal->txn_no='TXN-'.date('Ymd').'-'.$journal_id;
+                $m_journal->modify($journal_id);
+
+
+
+                $cash_invoice_id=$this->input->post('cash_invoice_id',TRUE);
+                if($cash_invoice_id!=null){
+                    $m_cash_invoice=$this->Cash_invoice_model;
+                    $m_cash_invoice->journal_id=$journal_id;
+                    $m_cash_invoice->is_journal_posted=TRUE;
+                    $m_cash_invoice->modify($cash_invoice_id);
                 }
 
 

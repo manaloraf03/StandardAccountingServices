@@ -73,6 +73,7 @@
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('15-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Proforma_invoice">Pro Forma </a></li>
                                 <li class="<?php echo (in_array('15-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Commercial_invoice">Commercial Invoice</a></li>
+                                <li class="<?php echo (in_array('15-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cash_invoice">Cash Invoice</a></li>
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('4',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-view-list-alt"></i><span>References</span></a>

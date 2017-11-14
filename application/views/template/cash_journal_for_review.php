@@ -1,42 +1,14 @@
 <style>
-/*
-    .tab-container .nav.nav-tabs li a {
-        background: #414141 !important;
-        color: white !important;
-    }
-    .tab-container .nav.nav-tabs li a:hover {
-        background: #414141 !important;
-        color: white !important;
-    }
-    .tab-container .nav.nav-tabs li a:focus {
-        background: #414141 !important;
-        color: white !important;
-    }
-*/
+
     table.table_journal_entries_review td {
         border: 0px !important;
     }
     tr {
         border: none!important;
-    }
-/*
-    tr:nth-child(even){
-        background: #414141 !important;
-        border: none!important;
-    }
-    tr:hover {
-        transition: .4s;
-        background: transparent !important;
-        color: white;
-    }
-    tr:hover .btn {
-        border-color: #494949!important;
-        border-radius: 0!important;
-        -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-        -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-        box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-    }
-*/
+}
+.align-right{
+    text-align: right;
+}
 </style>
 <center>
     <table class="table_journal_entries_review"  width="97%" style="font-family: tahoma;">
@@ -46,24 +18,15 @@
                 <br />
                 <div class="tab-container tab-default" >
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#journal_review_<?php echo $payment_info->payment_id; ?>" data-toggle="tab"><i class="fa fa-gavel"></i> Review Journal</a></li>
-                        <li class=""><a href="#payment_review_<?php echo $payment_info->payment_id; ?>" data-toggle="tab"><i class="fa fa-folder-open-o"></i> Payment</a></li>
+                        <li class="active"><a href="#journal_review_<?php echo $info->cash_invoice_id; ?>" data-toggle="tab"><i class="fa fa-gavel"></i> Review Journal</a></li>
+                        <li class=""><a href="#payment_review_<?php echo $info->cash_invoice_id; ?>" data-toggle="tab"><i class="fa fa-folder-open-o"></i> Payment</a></li>
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="journal_review_<?php echo $payment_info->payment_id; ?>" data-parent-id="<?php echo $payment_info->payment_id; ?>" style="min-height: 300px;">
-                            <?php
-                                $is_check_not_due=$payment_info->payment_method_id==2 && $payment_info->rem_day_for_due>0;
-                                if($is_check_not_due){
-                            ?>
-                            <div class="alert alert-dismissable alert-danger">
-                                <i class="fa fa-exclamation-circle"></i>&nbsp; <strong>Ooopss!</strong> Looks like the check on this transaction is not yet <b>Due</b>. Please see details below. <br />
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            </div>
-                            <?php } ?>
+                        <div class="tab-pane active" id="journal_review_<?php echo $info->cash_invoice_id; ?>" data-parent-id="<?php echo $info->cash_invoice_id; ?>" style="min-height: 300px;">
                             <?php if(!$valid_particular){ ?>
                                 <div class="alert alert-dismissable alert-danger">
-                                    <i class="fa fa-exclamation-circle"></i>&nbsp; <strong>Sorry!</strong> We could not find the record of <b><?php echo $payment_info->customer_name; ?></b>.<br />
-                                    <i class="fa fa-exclamation-circle"></i>&nbsp; Please make sure that <b><?php echo $payment_info->customer_name; ?></b> is not deleted or cancelled to your masterfile record.
+                                    <i class="fa fa-exclamation-circle"></i>&nbsp; <strong>Sorry!</strong> We could not find the record of <b><?php echo $info->customer_name; ?></b>.<br />
+                                    <i class="fa fa-exclamation-circle"></i>&nbsp; Please make sure that <b><?php echo $info->customer_name; ?></b> is not deleted or cancelled to your masterfile record.
                                     <br /><br />
                                     <i class="fa fa-bars"></i>&nbsp; Please call the System Administrator or Developer for assistance.
                                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -71,8 +34,8 @@
                             <?php } ?>
                             <form id="frm_journal_review" role="form" class="form-horizontal row-border">
                                 <br />
-                                <input type="hidden" name="payment_id" value="<?php echo $payment_info->payment_id; ?>">
-                                <input type="hidden" name="ref_no" value="<?php echo $payment_info->receipt_no;?>">
+                                <input type="hidden" name="cash_invoice_id" value="<?php echo $info->cash_invoice_id; ?>">
+                                <input type="hidden" name="ref_no" value="<?php echo $info->cash_inv_no;?>">
                                 <div class="row">
                                     <div class="col-lg-8">
                                         <div style="border: 1px solid lightgrey;padding: 2%;border-radius: 5px;">
@@ -92,14 +55,14 @@
                                                     Customer * :<br />
                                                     <select name="customer_id" class="cbo_customer_list">
                                                         <?php foreach($customers as $customer){ ?>
-                                                            <option value="<?php echo $customer->customer_id; ?>" <?php echo ($payment_info->customer_id===$customer->customer_id?'selected':''); ?>><?php echo $customer->customer_name; ?></option>
+                                                            <option value="<?php echo $customer->customer_id; ?>" <?php echo ($info->customer_id===$customer->customer_id?'selected':''); ?>><?php echo $customer->customer_name; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
                                                 <div class="col-lg-4 col-lg-offset-1">
                                                     Date * :<br />
                                                     <div class="input-group">
-                                                        <input type="text" name="date_txn" class="date-picker  form-control" value="<?php echo $payment_info->payment_date; ?>">
+                                                        <input type="text" name="date_txn" class="date-picker  form-control" value="<?php echo $info->date_invoice; ?>">
                                                         <span class="input-group-addon">
                                                             <i class="fa fa-calendar"></i>
                                                         </span>
@@ -111,7 +74,7 @@
                                                     Branch * :<br />
                                                     <select name="department_id" class="cbo_department_list">
                                                         <?php foreach($departments as $department){ ?>
-                                                            <option value="<?php echo $department->department_id; ?>" <?php echo ($payment_info->department_id===$department->department_id?'selected':''); ?>><?php echo $department->department_name; ?></option>
+                                                            <option value="<?php echo $department->department_id; ?>"><?php echo $department->department_name; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
@@ -125,31 +88,19 @@
                                                     Method of Payment * :<br />
                                                     <select name="payment_method" class="cbo_payment_method">
                                                         <?php foreach($methods as $method){ ?>
-                                                            <option value="<?php echo $method->payment_method_id; ?>" <?php echo ($payment_info->payment_method_id==$method->payment_method_id?'selected':''); ?>><?php echo $method->payment_method; ?></option>
+                                                            <option value="<?php echo $method->payment_method_id; ?>" ><?php echo $method->payment_method; ?></option>
                                                         <?php } ?>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6">
-                                                    OR # * :<br />
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-code"></i>
-                                                        </span>
-                                                        <input type="text" name="or_no" class="form-control" value="<?php echo $payment_info->receipt_no; ?>">
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    Amount* :<br />
-                                                    <input type="text" name="amount" class="numeric form-control" value="<?php echo number_format($payment_info->total_paid_amount,2); ?>">
-                                                </div>
+
                                             </div>
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         Check Date :<br />
                                                         <div class="input-group">
-                                                            <input type="text" name="check_date" class="date-picker form-control" value="<?php echo ($payment_info->payment_method_id==2?$payment_info->date_check:''); ?>">
+                                                            <input type="text" name="check_date" class="date-picker form-control" value="">
                                                             <span class="input-group-addon">
                                                                 <i class="fa fa-calendar"></i>
                                                             </span>
@@ -157,7 +108,7 @@
                                                     </div>
                                                     <div class="col-lg-6">
                                                         Check # :<br />
-                                                        <input type="text" name="check_no" class="form-control" value="<?php echo ($payment_info->payment_method_id==2?$payment_info->check_no:''); ?>">
+                                                        <input type="text" name="check_no" class="form-control" value="">
                                                     </div>
                                                 </div>
                                         </div>
@@ -165,7 +116,7 @@
                                 </div>
                                 <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Journal Entries</strong></span></h4>
                                 <hr />
-                                <table id="tbl_entries_for_review_<?php echo $payment_info->payment_id; ?>" class="table table-striped" style="width: 100% !important;">
+                                <table id="tbl_entries_for_review_<?php echo $info->cash_invoice_id; ?>" class="table table-striped" style="width: 100% !important;">
                                     <thead>
                                     <tr style="border-bottom:solid gray;">
                                         <th style="width: 30%;">Account</th>
@@ -214,56 +165,85 @@
                                 <hr />
                                 <label class="col-lg-2"> Remarks :</label><br />
                                 <div class="col-lg-12">
-                                    <textarea name="remarks" class="form-control" style="width: 100%;"><?php echo $payment_info->remarks; ?></textarea>
+                                    <textarea name="remarks" class="form-control" style="width: 100%;"><?php echo $info->remarks; ?></textarea>
                                 </div>
                                 <br /><hr />
                             </form>
                             <br /><br /><hr />
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <button name="btn_finalize_journal_review" class="btn btn-primary <?php echo ($is_check_not_due?'disabled':''); ?> <?php if(!$valid_particular){ echo "disabled"; }?>"><i class="fa fa-check-circle"></i> <span class=""></span> Finalize this Journal</button>
+                                    <button name="btn_finalize_journal_review" class="btn btn-primary "><i class="fa fa-check-circle"></i> <span class=""></span> Finalize this Journal</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane" id="payment_review_<?php echo $payment_info->payment_id; ?>" >
-                            <h4><span style="margin-left: 1%"><strong><i class="fa fa-bars"></i> Payment Transaction</strong></span></h4>
+                        <div class="tab-pane" id="payment_review_<?php echo $info->cash_invoice_id; ?>" >
+                            <h4><span style="margin-left: 1%"><strong><i class="fa fa-bars"></i> Cash Invoice Transaction</strong></span></h4>
                             <hr />
                             <div style="margin-left: 2%">
                                 <div class="row">
                                     <div class="col-lg-6">
-                                        <i class="fa fa-code"></i> OR/AR # : <b><?php echo $payment_info->receipt_no; ?></b><br />
-                                        <i class="fa fa-calendar"></i> Payment Date : <?php echo $payment_info->payment_date; ?><br />
-                                        <i class="fa fa-caret-square-o-left"></i> Receipt type : <?php echo $payment_info->receipt_type; ?><br /><br />
-                                        <i class="fa fa-bookmark"></i> Department : <?php echo $payment_info->department_name; ?><br />
-                                        <i class="fa fa-users"></i> Customer : <?php echo $payment_info->customer_name; ?><br /><br />
+                                        <i class="fa fa-code"></i> Cash Invoice # : <b><?php echo $info->cash_inv_no; ?></b><br />
+                                        <i class="fa fa-calendar"></i> Date Invoice : <?php echo $info->date_invoice; ?><br />
+                                        <i class="fa fa-users"></i> Customer : <?php echo $info->customer_name; ?><br /><br />
                                     </div>
                                     <div class="col-lg-6">
-                                        <i class="fa fa-code"></i> Method of Payment : <?php echo $payment_info->payment_method; ?><br />
-                                        <i class="fa fa-calendar"></i> Check Date : <?php echo $payment_info->date_check; ?><br />
-                                        <i class="fa fa-caret-square-o-left"></i> Check # : <?php echo $payment_info->check_no; ?><br /><br />
-                                        <i class="fa fa-bookmark"></i> Total Payment : <b><?php echo number_format($payment_info->total_paid_amount,2); ?></b><br />
+                                    Contact Person : <?php echo $info->customer_name; ?><br />                                    
+                                    Email Address : <?php echo $info->email_address; ?><br />
+                                    Contact Number : <?php echo $info->contact_no; ?><br />
+
                                     </div>
                                 </div>
                                 <table class="table table-striped" style="width: 100% !important;">
                                     <thead>
                                     <tr style="border-bottom: solid gray;">
-                                        <td width="12%"><strong>Invoice #</strong></td>
-                                        <td width="12%"><strong>Invoice Date</strong></td>
-                                        <td width="50%"><strong>Remarks</strong></td>
-                                        <td width="14%" style="text-align: right;"><strong>Paid Amount</strong></td>
+                                        <td ><strong>Item </strong></td>
+                                        <td ><strong>UM</strong></td>
+                                        <td  class="align-right"><strong>Qty</strong></td>
+                                        <td  class="align-right"><strong>Unit Price</strong></td>
+                                        <td  class="align-right"><strong>Discount</strong></td>
+                                        <td  class="align-right"><strong>Gross</strong></td>
+                                        <td  class="align-right"><strong>Net Total</strong></td>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($payments_list as $pay){ ?>
-                                            <tr>
-                                                <td><?php echo $pay->txn_no; ?></td>
-                                                <td><?php echo $pay->date_txn; ?></td>
-                                                <td><?php echo $pay->remarks; ?></td>
-                                                <td align="right"><?php echo number_format($pay->payment_amount,2); ?></td>
-                                            </tr>
-                                        <?php } ?>
+
+                                    <?php foreach ($items as $item) { ?>
+                                        <tr>
+                                        <td><?php echo $item->product_desc; ?></td>
+                                        <td><?php echo $item->unit_name; ?></td>
+                                        <td class="align-right"><?php echo $item->inv_qty; ?></td>
+                                        <td class="align-right"><?php echo number_format($item->inv_price,2); ?></td>
+                                        <td class="align-right"><?php echo number_format($item->inv_discount,2); ?></td>
+                                        <td class="align-right"><?php echo number_format($item->inv_gross,2); ?></td>
+                                        <td class="align-right"><?php echo number_format($item->inv_line_total_price,2); ?></td>
+                                        </tr>
+                                    <?php } ?>
                                     </tbody>
                                     <tfoot>
+                                    <tr>
+                                        <td colspan="6"  class="align-right"><strong>Discount 1:</strong></td>
+                                        <td class="align-right"><?php echo number_format($info->total_discount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="align-right"><strong>Total Before Tax:</strong></td>
+                                        <td class="align-right"><?php echo number_format($info->total_before_tax,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="align-right"><strong>Tax Amount:</strong></td>
+                                        <td class="align-right"><?php echo number_format($info->total_tax_amount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="align-right"><strong>Total After Tax:</strong></td>
+                                        <td class="align-right"><?php echo number_format($info->total_after_tax,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="align-right"><strong>Discount 2:</strong></td>
+                                        <td class="align-right"><?php echo number_format($info->total_overall_discount_amount,2); ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" class="align-right"><strong>Total :</strong></td>
+                                        <td class="align-right"><?php echo number_format($info->total_after_discount,2); ?></td>
+                                    </tr>
                                     </tfoot>
                                 </table>
                                 <br /><br />

@@ -1,5 +1,5 @@
 <head>
-    <title>Proforma Invoice</title>
+    <title>Cash Invoice</title>
     </head>
     <body><style type="text/css" media="print">
   @page { size: portrait; }
@@ -57,23 +57,29 @@
             </td>
         </tr>
     </table>
-    <h1 class="text-center report-header">PROFORMA INVOICE</h1>
+    <h1 class="text-center report-header">CASH INVOICE</h1>
     <table cellspacing="0" cellpadding="5" width="100%">
     <tr>
         <td class="bottom left  fifteen top ">Invoice Number:</td>
-        <td class="bottom top"><?php echo $proforma_info->proforma_inv_no; ?></td>
-        <td class="bottom top"></td>
-        <td class="bottom right top"></td>
+        <td class="bottom top"><?php echo $info->cash_inv_no; ?></td>
+        <td class="bottom left top fifteen">Date:</td>
+        <td class="bottom right top"><?php echo  date_format(new DateTime($info->date_invoice),"m/d/Y"); ?></td>
     </tr>
     <tr>
         <td class="bottom left  fifteen">Customer:</td>
-        <td class="bottom"><?php echo $proforma_info->customer_name; ?></td>
-        <td class="bottom left  fifteen">Date:</td>
-        <td class="bottom right"><?php echo  date_format(new DateTime($proforma_info->date_invoice),"m/d/Y"); ?></td>
+        <td class="bottom"><?php echo $info->customer_name; ?></td>
+        <td class="bottom left  fifteen">Contact Person:</td>
+        <td class="bottom right"><?php echo $info->contact_person; ?></td>
+    </tr>
+    <tr>
+        <td class="bottom left  fifteen">Email Address:</td>
+        <td class="bottom"><?php echo $info->email_address; ?></td>
+        <td class="bottom left  fifteen">Contact No:</td>
+        <td class="bottom right"><?php echo $info->contact_no; ?></td>
     </tr>
     <tr>
         <td class="bottom left ">Deliver To:</td>
-        <td class="bottom"><?php echo $proforma_info->address; ?></td>
+        <td class="bottom"><?php echo $info->address; ?></td>
         <td class="bottom "></td>
         <td class="bottom right"></td>
     </tr>
@@ -107,7 +113,7 @@
             <td colspan="6" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-right: 1px solid gray!important;">Remarks:</td>
             </tr>
             <tr>
-            <td colspan="6" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-right: 1px solid gray!important;"><?php echo $proforma_info->remarks; ?></td>
+            <td colspan="6" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;border-right: 1px solid gray!important;"><?php echo $info->remarks; ?></td>
             </tr> -->
             </tbody>
             <tfoot>
@@ -115,32 +121,32 @@
             <tr>
                 <td colspan="4" class="left top" style="text-align: left;font-weight: bolder; ;height: 30px;padding: 6px;"><b>Remarks<b></td>
                 <td colspan="2" class="left top bottom" style="text-align: left;height: 30px;padding: 6px;">Discount 1 : </td>
-                <td class="top bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($proforma_info->total_discount,2); ?></td>
+                <td class="top bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($info->total_discount,2); ?></td>
             </tr>
             <tr>
-                <td colspan="4"  class="left bottom" style="text-align: left;height: 30px;padding: 6px;"><?php echo $proforma_info->remarks; ?></td>
+                <td colspan="4"  class="left bottom" style="text-align: left;height: 30px;padding: 6px;"><?php echo $info->remarks; ?></td>
                 <td colspan="2" class="left bottom" style="text-align: left;height: 30px;padding: 6px;">Total before Tax : </td>
-                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($proforma_info->total_before_tax,2); ?></td>
+                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($info->total_before_tax,2); ?></td>
             </tr>
             <tr>
                 <td colspan="4" class="left" style="height: 30px;padding: 6px;"><b>Prepared By:</b></td>
                 <td colspan="2" class="left bottom" style="text-align: left;height: 30px;padding: 6px;">Tax Amount : </td>
-                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($proforma_info->total_tax_amount,2); ?></td>
+                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($info->total_tax_amount,2); ?></td>
             </tr>
             <tr>
                 <td colspan="4" class="left bottom" style="height: 30px;padding: 6px;"></td>
                 <td colspan="2" class="left bottom" style="text-align: left;height: 30px;padding: 6px;">Total after Tax : </td>
-                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($proforma_info->total_after_tax,2); ?></td>
+                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($info->total_after_tax,2); ?></td>
             </tr>
             <tr>
                 <td colspan="4" class="left" style="height: 30px;padding: 6px;"><b>Received By:</b></td>
                 <td colspan="2" class="left bottom" style="text-align: left;height: 30px;padding: 6px;">Discount 2:</td>
-                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($proforma_info->total_overall_discount_amount,2); ?></td>
+                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><?php echo number_format($info->total_overall_discount_amount,2); ?></td>
             </tr>
             <tr>
                 <td colspan="4" class="left bottom bottom" style="height: 30px;padding: 6px;">Date:</td>
                 <td colspan="2" class="left bottom" style="text-align: left;height: 30px;padding: 6px;"><strong>Total:</strong></td>
-                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><strong><?php echo number_format($proforma_info->total_after_discount,2); ?></strong></td>
+                <td class="bottom right" style="text-align: right;height: 30px;padding: 6px;"><strong><?php echo number_format($info->total_after_discount,2); ?></strong></td>
             </tr>
             </tfoot>
         </table><br /><br />

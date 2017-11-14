@@ -210,6 +210,32 @@
         </div>
 <br>
         <div class="panel panel-default" style="border-radius:6px;">
+            <div id="collapseThree" class="collapse in">
+                <div class="panel-body">    
+                    <h2 class="h2-panel-heading">Review Cash Invoice (Pending)</h2><hr>
+                    <div >
+                        <table id="tbl_cash_invoice_for_review" class="table table-striped" cellspacing="0" width="100%">
+                            <thead class="">
+                            <tr>
+                                <th></th>
+                                <th>Cash Invoice #</th>
+                                <th>Customer</th>
+                                <th>Transaction Date</th>
+                                <th>Remarks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="panel panel-default" style="border-radius:6px;">
             <div id="collapseOne" class="collapse in">
                 <div class="panel-body" style="min-height: 400px;">
                 <h2 class="h2-panel-heading">Cash Receipt Journal (History)</h2><hr>
@@ -859,6 +885,23 @@ $(document).ready(function(){
             ]
         });
 
+        dtReviewCash=$('#tbl_cash_invoice_for_review').DataTable({
+            "bLengthChange":false,
+            "ajax" : "Cash_invoice/transaction/cash-for-review",
+            "columns": [
+                {
+                    "targets": [0],
+                    "class":          "details-control",
+                    "orderable":      false,
+                    "data":           null,
+                    "defaultContent": ""
+                },
+                { targets:[1],data: "cash_inv_no" },
+                { targets:[2],data: "customer_name" },
+                { targets:[4],data: "date_invoice" },
+                { targets:[3],data: "remarks" }
+            ]
+        });
 
         $('#mobile_no').keypress(validateNumber);
 
@@ -1026,13 +1069,60 @@ $(document).ready(function(){
 
                 });
 
-
-
-
             }
         } );
 
+        $('#tbl_cash_invoice_for_review tbody').on( 'click', 'tr td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = dtReviewCash.row( tr );
+            var idx = $.inArray( tr.attr('id'), detailRows );
 
+            if ( row.child.isShown() ) {
+                tr.removeClass( 'details' );
+                row.child.hide();
+
+                // Remove from the 'open' array
+                detailRows.splice( idx, 1 );
+            }
+            else {
+                tr.addClass( 'details' );
+                //console.log(row.data());
+                var d=row.data();
+
+                $.ajax({
+                    "dataType":"html",
+                    "type":"POST",
+                    "url":"Templates/layout/cash-for-review?id="+ d.cash_invoice_id,
+                    "beforeSend" : function(){
+                        row.child( '<center><br /><img src="assets/img/loader/ajax-loader-lg.gif" /><br /><br /></center>' ).show();
+                    }
+                }).done(function(response){
+                    row.child( response,'no-padding' ).show();
+
+                    reInitializeSpecificDropDown($('.cbo_customer_list'));
+                    reInitializeSpecificDropDown($('.cbo_department_list'));
+                    reInitializeSpecificDropDown($('.cbo_payment_method'));
+
+
+                    reInitializeNumeric();
+
+                    var tbl=$('#tbl_entries_for_review_'+ d.cash_invoice_id);
+                    var parent_tab_pane=$('#journal_review_'+ d.cash_invoice_id);
+
+                    reInitializeDropDownAccounts(tbl,false);
+                    reInitializeChildEntriesTable(tbl);
+                    reInitializeChildElementsCash(parent_tab_pane);
+
+                    // Add to the 'open' array
+                    if ( idx === -1 ) {
+                        detailRows.push( tr.attr('id') );
+                    }
+
+
+                });
+
+            }
+        } );
 
 
         $('#btn_new').click(function(){
@@ -1678,7 +1768,61 @@ $(document).ready(function(){
 
 
     };
+    var reInitializeChildElementsCash=function(parent){
+        var _dataParentID=parent.data('parent-id');
+        var btn=parent.find('button[name="btn_finalize_journal_review"]');
 
+        //initialize datepicker
+        parent.find('input.date-picker').datepicker({
+            todayBtn: "linked",
+            keyboardNavigation: false,
+            forceParse: true,
+            calendarWeeks: true,
+            autoclose: true
+
+        });
+
+
+        parent.on('click','button[name="btn_finalize_journal_review"]',function(){
+
+            var _curBtn=$(this);
+            if(isBalance('#tbl_entries_for_review_'+_dataParentID)){
+                finalizeJournalReview().done(function(response){
+                    showNotification(response);
+                    if(response.stat=="success"){
+                        dt.row.add(response.row_added[0]).draw();
+                        var _parentRow=_curBtn.parents('table.table_journal_entries_review').parents('tr').prev();
+                        dtReviewCash.row(_parentRow).remove().draw();
+                    }
+
+                }).always(function(){
+                    showSpinningProgress(_curBtn);
+                });
+            }else{
+                showNotification({title:"Not Balance!",stat:"error",msg:'Please make sure Debit and Credit amount are equal.'});
+                stat=false;
+            }
+
+
+
+        });
+
+        var finalizeJournalReview=function(){
+            var _data_review=parent.find('form').serializeArray();
+
+            return $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Cash_receipt/transaction/create-from-cash-invoice",
+                "data":_data_review,
+                "beforeSend": showSpinningProgress(btn)
+
+            });
+        };
+
+
+
+    };
 
 });
 
