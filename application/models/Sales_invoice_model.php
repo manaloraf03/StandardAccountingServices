@@ -576,6 +576,32 @@ GROUP BY n.customer_id HAVING total_balance > 0";
         return $this->db->query($sql)->result();
     }
 
+
+    function get_per_customer_sales_detailed($start=null,$end=null,$customer_id=null){
+      $from = date('Y-m-d',strtotime($start));
+      $to = date('Y-m-d',strtotime($end));
+      $this->db->select('c.customer_id, c.customer_name');
+      $this->db->from('sales_invoice as si');
+      $this->db->join('customers as c', 'c.customer_id = si.customer_id', 'left');
+      $this->db->where('si.date_invoice BETWEEN "'. date('Y-m-d', strtotime($from)). '" and "'. date('Y-m-d', strtotime($to)).'" and si.is_deleted=FALSE' );
+      $this->db->group_by('c.customer_id');
+      return $this->db->get()->result();
+
+    }
+
+    function get_per_salesperson_sales_detailed($start=null,$end=null){
+      $from = date('Y-m-d',strtotime($start));
+      $to = date('Y-m-d',strtotime($end));
+      $this->db->select('sp.salesperson_id, sp.salesperson_code, CONCAT(sp.firstname," ",sp.lastname)AS salesperson_name');
+      $this->db->from('sales_invoice as si');
+      $this->db->join('salesperson as sp', 'sp.salesperson_id = si.salesperson_id', 'left');
+      $this->db->where('si.date_invoice BETWEEN "'. date('Y-m-d', strtotime($from)). '" and "'. date('Y-m-d', strtotime($to)).'" and si.is_deleted=FALSE' );
+      $this->db->group_by('sp.salesperson_id');
+      return $this->db->get()->result();
+
+    }
+
+
     function get_sales_detailed_list($start=null,$end=null){
         $sql="SELECT
                 si.sales_invoice_id,
@@ -627,7 +653,7 @@ GROUP BY n.customer_id HAVING total_balance > 0";
     }
 
     function get_sales_product_summary_list($start=null,$end=null){
-        $sql="SELECT
+        $sql="SELECT 
                   si.customer_id,
                   p.product_code,
                   p.product_desc,
