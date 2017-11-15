@@ -104,6 +104,8 @@
 			                    		<div class="container-fluid group-box">
 			                    			<button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report
                                             </button>
+                                            <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" ><i class="fa fa-file-excel-o"></i> Export to Excel
+                                            </button>
 		                    				<table id="tbl_vat_relief" class="table table-striped" width="100%">
 		                    					<thead>
 		                    						<th>Supplier</th>
@@ -189,6 +191,11 @@
         	$('#btn_print').on('click', function() {
         		window.open('Vat_relief_report/transaction/report?start='+ $('#startDate').val() +'&end='+ $('#endDate').val());
         	});
+
+            $('#btn_export').on('click', function() {
+                window.open('Vat_relief_report/transaction/export-vat-relief?start='+ $('#startDate').val() +'&end='+ $('#endDate').val());
+            });
+
         }();
 
         function initializeDataTable(){

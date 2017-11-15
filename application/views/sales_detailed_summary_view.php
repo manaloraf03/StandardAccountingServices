@@ -132,6 +132,8 @@
                                                                         <div id="customer_detailed" class="tab-pane fade in active">
                                                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                     <i class="fa fa-print"></i> Print Report</button>
+                                                                    <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
+                                                                    <i class="fa fa-file-excel-o"></i> Export</button>
                                                                                 <table id="tbl_detailed_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -163,7 +165,9 @@
                                                                             </div>
                                                                             <div id="customer_summary" class="tab-pane fade in">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
-                                                                    <i class="fa fa-print"></i> Print Report</button>
+                                                                                <i class="fa fa-print"></i> Print Report</button>
+                                                                                <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
+                                                                                <i class="fa fa-file-excel-o"></i> Export</button>
                                                                                 <table id="tbl_summary_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -205,6 +209,8 @@
                                                                             <div id="salesman_detailed" class="tab-pane fade in active">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
+                                                                                <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
+                                                                                <i class="fa fa-file-excel-o"></i> Export</button>
                                                                                 <table id="tbl_detailed_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -237,6 +243,8 @@
                                                                             <div id="salesman_summary" class="tab-pane fade in">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
+                                                                                <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
+                                                                                <i class="fa fa-file-excel-o"></i> Export</button>                                                                                
                                                                                 <table id="tbl_summary_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -278,6 +286,8 @@
                                                                             <div id="product_detailed" class="tab-pane fade in active">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
+                                                                                <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
+                                                                                <i class="fa fa-file-excel-o"></i> Export</button>                                                                                     
                                                                                 <table id="tbl_detailed_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>    
@@ -309,6 +319,8 @@
                                                                             <div id="product_summary" class="tab-pane fade in">
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
+                                                                                <button class="btn btn-danger pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
+                                                                                <i class="fa fa-file-excel-o"></i> Export</button>                                                                                  
                                                                                 <table id="tbl_summary_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -441,25 +453,50 @@
             $(document).on('click','#btn_print_customer_detailed',function(){
                 window.open('Sales_detailed_summary/transaction/detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=c');
             });
+            $(document).on('click','#btn_export_customer_detailed',function(){
+                window.open('Sales_detailed_summary/transaction/export-detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=c');
+            });
 
             $(document).on('click','#btn_print_customer_summary',function(){
                 window.open('Sales_detailed_summary/transaction/summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=c');
+            });
+
+            $(document).on('click','#btn_export_customer_summary',function(){
+                window.open('Sales_detailed_summary/transaction/export-summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=c');
             });
 
             $(document).on('click','#btn_print_sm_detailed', function(){
                 window.open('Sales_detailed_summary/transaction/detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp');
             });
 
+            $(document).on('click','#btn_export_sm_detailed', function(){
+                window.open('Sales_detailed_summary/transaction/export-detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp');
+            });
+
             $(document).on('click','#btn_print_sm_summary', function(){
                 window.open('Sales_detailed_summary/transaction/summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp');
             });
+
+
+            $(document).on('click','#btn_export_sm_summary', function(){
+                window.open('Sales_detailed_summary/transaction/export-summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp');
+            });
+
 
             $(document).on('click','#btn_print_product_detailed', function(){
                 window.open('Sales_detailed_summary/transaction/detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
             });
 
+            $(document).on('click','#btn_export_product_detailed', function(){
+                window.open('Sales_detailed_summary/transaction/export-detailed-report-smcp?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
+            });
+
             $(document).on('click','#btn_print_product_summary', function(){
                 window.open('Sales_detailed_summary/transaction/summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
+            });
+
+            $(document).on('click','#btn_export_product_summary', function(){
+                window.open('Sales_detailed_summary/transaction/export-summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
             });
 
             $('#btn_customer').click(function(){
