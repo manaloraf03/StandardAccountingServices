@@ -868,7 +868,7 @@ $(document).ready(function(){
 
             _is_journal_posted=data.is_journal_posted;
             if(_is_journal_posted > 0){
-                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Edit: Invoice is already Posted in Sales Journal."});
+                showNotification({title:"<b style='color:white;'> Error!</b>",stat:"error",msg:"Cannot Edit: Invoice is already Posted in Cash Receipt Journal."});
             }
 
             else
@@ -939,7 +939,7 @@ $(document).ready(function(){
             _count=data.count;
             _is_journal_posted=data.is_journal_posted;
             if(_is_journal_posted > 0){
-                showNotification({title:"<b style='color:white;'> Error!</b> ",stat:"error",msg:"Cannot Delete: Invoice is already Posted in Sales Journal."});
+                showNotification({title:"<b style='color:white;'> Error!</b> ",stat:"error",msg:"Cannot Delete: Invoice is already Posted in Cash Receipt Journal."});
             }
             else if(_count > 0){
                 showNotification({title:"<b style='color:white;'> Error!</b> ",stat:"error",msg:"Cannot Edit: Invoice is already in use in Collection Entry."});

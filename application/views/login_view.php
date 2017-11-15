@@ -74,7 +74,7 @@
 							</div>
 							<div class="col-sm-offset-6"></div>								
 							<div class="col-xs-12 col-sm-12">
-								<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 50px;">
+								<button id="btn_login" class="btn btn-primary btn-block btn-custom-jk" data-style="expand-left" data-spinner-color="white" data-size="s" style="margin-bottom: 0px;">
 								<span class=""></span> Login
 								</button>
 							</div>
