@@ -7027,7 +7027,7 @@ h2.h2-panel-heading {
 }
 
 .btn {
-    padding: 5px 7px!important;
+    padding: 2px 7px!important;
     font-size: 14px!important;
 }
 
@@ -7036,7 +7036,7 @@ h2.h2-panel-heading {
   padding: 6px 10px 6px 10px!important;
 }
 .btn-red, .btn-sm{
-  font-size: 9px!important;
+  font-size: 14px!important;
 }
 
 #btn-new{

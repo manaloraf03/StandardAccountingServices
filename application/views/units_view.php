@@ -24,10 +24,7 @@
     <link type="text/css" href="assets/css/light-theme.css" rel="stylesheet">
 
     <style>
-        html{
-            zoom: 0.9;
-            zoom: 85%;
-        }
+
 
         .toolbar{
             float: left;

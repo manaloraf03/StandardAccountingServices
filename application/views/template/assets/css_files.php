@@ -101,7 +101,7 @@
     }
 
     .modal {
-        padding-top: 5%;
+        padding-top: 0%;
     }
 
     .modal-backdrop {
