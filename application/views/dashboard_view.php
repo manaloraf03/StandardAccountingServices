@@ -84,6 +84,7 @@
         #tbl_po_list {
 /*            color: white!important;
             border: none!important;*/
+            font-size: 12px;
         }
 
         th {
