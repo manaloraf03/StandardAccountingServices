@@ -25,7 +25,8 @@
 
     html{
 
-        zoom: 80%;
+        /*zoom: 80%; zoom creates a bug in the whole program (with the third party plugin select 2) */
+        overflow-x: hidden; 
     }
 
     .modal-backdrop {

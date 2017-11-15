@@ -18,7 +18,7 @@
                 <div class="widget-body">
                     <div class="userinfo">
                         <div class="avatar">
-                            <img style="min-width: 70px; min-height: 70px;" src="<?php echo $this->session->user_photo; ?>" class="img-responsive img-circle">
+                            <img style="min-width: 60px; min-height: 60px;" src="<?php echo $this->session->user_photo; ?>" class="img-responsive img-circle">
                         </div>
                         <div class="info">
                             <span class="username"><?php echo $this->session->user_fullname; ?></span>

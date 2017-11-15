@@ -51,7 +51,7 @@ class Products extends CORE_Controller
         $data['categories'] = $this->Categories_model->get_list(array('categories.is_deleted'=>FALSE));
         $data['units'] = $this->Units_model->get_list(array('units.is_deleted'=>FALSE));
         $data['item_types'] = $this->Item_type_model->get_list(array('item_types.is_deleted'=>FALSE));
-        $data['accounts'] = $this->Account_title_model->get_list(null,'account_id,account_title');
+        $data['accounts'] = $this->Account_title_model->get_list('is_active= TRUE AND is_deleted = FALSE','account_id,account_title');
         $data['tax_types']=$this->Tax_model->get_list(array('tax_types.is_deleted'=>FALSE));
         (in_array('5-1',$this->session->user_rights)? 
         $this->load->view('products_view', $data)
