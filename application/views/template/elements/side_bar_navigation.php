@@ -161,6 +161,7 @@
                                         <li class="<?php echo (in_array('9-8',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_Subsidiary">Account Subsidiary</a></li>
                                         <li class="<?php echo (in_array('9-13',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_report">Replenishment Report</a></li>
                                         <li class="<?php echo (in_array('9-20',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_batch">Replenishment Batch</a></li>
+                                        <li class="<?php echo (in_array('9-21',$this->session->user_rights)?'':'hidden'); ?>"><a href="General_Ledger">General Ledger</a></li>
                                     </ul>
                                 </li>
                                 <li class="hasChild secondChild">

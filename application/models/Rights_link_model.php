@@ -81,7 +81,8 @@ class Rights_link_model extends CORE_Model{
                                           (71,'9','9-19','Statement of Account'),
                                           (72,'6','6-10','Email Settings'),
                                           (73,'14','14-1','Treasury'),
-                                          (74,'9','9-20','Replenishment Batch Report')
+                                          (74,'9','9-20','Replenishment Batch Report'),
+                                          (75,'9','9-21','Replenishment Batch Report')
 
 
 

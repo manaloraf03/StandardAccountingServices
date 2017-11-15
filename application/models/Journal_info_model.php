@@ -948,8 +948,85 @@ class Journal_info_model extends CORE_Model{
 
             return $this->db->query($sql)->result();
     }
+function get_general_ledger($startDate,$endDate) {
+            $sql="SELECT 
+                    DATE_FORMAT(ji.date_txn,'%m/%d/%Y') AS date_txn,
+                    ji.journal_id,
+                    ji.txn_no,
+                    ji.book_type,
+                    at.account_no, 
+                    at.account_title,
+                    ja.dr_amount as debit,
+                    ja.cr_amount as credit,
+                    CONCAT('') as a,
+                    CONCAT(DATE_FORMAT(ji.date_txn,'%m/%d/%Y'),' | <b> Book: </b> ',ji.book_type) as group_by,
+                    CONCAT(ji.date_txn,' ',ji.book_type) as code
+                    FROM journal_info as ji
+                    INNER JOIN journal_accounts AS ja ON ja.`journal_id`=ji.`journal_id`
+                    LEFT JOIN account_titles AS at ON at.`account_id`=ja.`account_id`
+                    WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+                    AND 
+                        ji.date_txn BETWEEN '$startDate' AND '$endDate'";
+            return $this->db->query($sql)->result();
+        }
+ 
+function get_general_ledger_report($startDate,$endDate) {
+            $sql="SELECT 
+                    DATE_FORMAT(ji.date_txn,'%m/%d/%Y') AS date_txn,
 
+                    IF(ji.supplier_id = 0, 'Customer: ', 'Supplier: ') as title,
+                    IF(ji.supplier_id = 0, cu.customer_name, su.supplier_name) as name,
 
+                    CONCAT('<b>Date: </b>',DATE_FORMAT(ji.date_txn,'%m/%d/%Y'),' | <b> Book: </b> ',ji.book_type) as group_by,
+                    cu.customer_name,
+                    su.supplier_name,
+                    ji.journal_id,
+                    ji.txn_no,
+                    ji.book_type,
+                    ji.remarks
+                   
+                    FROM journal_info as ji
+
+                    LEFT JOIN customers as cu ON cu.customer_id = ji.customer_id
+                    LEFT JOIN suppliers as su ON su.supplier_id = ji.supplier_id
+
+                    WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+                    AND 
+                        ji.date_txn BETWEEN '$startDate' AND '$endDate'
+                    GROUP BY ji.date_txn,ji.book_type,ji.customer_id,ji.supplier_id";
+            return $this->db->query($sql)->result();
+        }
+
+    function get_general_ledger_items($startDate,$endDate){
+             $sql="SELECT 
+                    DATE_FORMAT(ji.date_txn,'%m/%d/%Y') AS date_txn,
+                    ji.journal_id,
+                    ji.txn_no,
+                    ji.book_type,
+                    at.account_no, 
+                    at.account_title,
+                    ja.dr_amount as debit,
+                    ja.cr_amount as credit,
+                    CONCAT('') as a,
+
+                    IF(ji.supplier_id = 0, 'Customer: ', 'Supplier: ') as title,
+                    IF(ji.supplier_id = 0, cu.customer_name, su.supplier_name) as name,
+
+                    CONCAT('<b>Date: </b>',DATE_FORMAT(ji.date_txn,'%m/%d/%Y'),' | <b> Book: </b> ',ji.book_type) as group_by
+
+                    FROM journal_accounts as ja
+
+                    LEFT JOIN journal_info as ji ON ji.`journal_id` = ja.`journal_id`
+                    LEFT JOIN account_titles AS at ON at.`account_id`=ja.`account_id`
+                    LEFT JOIN customers as cu ON cu.customer_id = ji.customer_id
+                    LEFT JOIN suppliers as su ON su.supplier_id = ji.supplier_id
+
+                    WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
+                    AND 
+                        ji.date_txn BETWEEN '$startDate' AND '$endDate'";
+            return $this->db->query($sql)->result();
+    }
+ 
 
 
 }
