@@ -133,7 +133,7 @@
                                                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                     <i class="fa fa-print"></i> Print Report</button>
                                                                     <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                    <i class="fa fa-file-excel-o"></i> Export</button>
+                                                                    <i class="fa fa-file-excel-o"></i> Export to Excel</button>
                                                                                 <table id="tbl_detailed_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -167,7 +167,7 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export</button>
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>
                                                                                 <table id="tbl_summary_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -210,7 +210,7 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export</button>
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>
                                                                                 <table id="tbl_detailed_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -244,7 +244,7 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export</button>                                                                                
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>                                                                                
                                                                                 <table id="tbl_summary_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -287,7 +287,7 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export</button>                                                                                     
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>                                                                                     
                                                                                 <table id="tbl_detailed_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>    
@@ -320,7 +320,7 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export</button>                                                                                  
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>                                                                                  
                                                                                 <table id="tbl_summary_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>

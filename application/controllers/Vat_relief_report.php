@@ -15,6 +15,7 @@
 				)
 			);
 			$this->load->library('excel');
+            $this->load->model('Email_settings_model');
 
 		}
 
@@ -33,7 +34,7 @@
 	        
 		}
 
-		function transaction($txn=null) {
+		function transaction($txn=null, $id_filter=null) {
 			switch($txn) {
 				case 'list':
 					$m_delivery_inv=$this->Delivery_invoice_model;
@@ -205,6 +206,215 @@
                 $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
                 $objWriter->save('php://output');
 				break;
+
+                case 'email-vat-relief':
+                $excel=$this->excel;
+                $m_email=$this->Email_settings_model;
+                $email=$m_email->get_list();
+                $m_delivery_inv=$this->Delivery_invoice_model;
+                $startDate=date("Y-m-d",strtotime($this->input->get('start',TRUE)));
+                $endDate=date("Y-m-d}",strtotime($this->input->get('end',TRUE)));
+
+                $data['suppliers']=$m_delivery_inv->get_vat_relief_supplier_list($startDate,$endDate);
+                $m_company=$this->Company_model;
+                $company_info=$m_company->get_list();
+                $data['company_info']=$company_info[0];
+                $filter_value = $id_filter;
+
+                $info=$m_delivery_inv->get_list(
+                        $filter_value,
+                        'delivery_invoice.*,suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.contact_no',
+                        array(
+                            array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left')
+                        )
+                    );
+
+                $startDate=date("Y-m-d",strtotime($this->input->get('start',TRUE)));
+                $endDate=date("Y-m-d}",strtotime($this->input->get('end',TRUE)));
+
+                $suppliers=$m_delivery_inv->get_vat_relief_supplier_list($startDate,$endDate);
+                $vat_reliefs=$m_delivery_inv->get_vat_relief($startDate,$endDate);
+
+                ob_start();
+
+                $excel->setActiveSheetIndex(0);
+                $excel->getActiveSheet()->getColumnDimensionByColumn('A1')->setWidth('50');
+                $excel->getActiveSheet()->getColumnDimensionByColumn('A2:B2')->setWidth('50');
+                $excel->getActiveSheet()->getColumnDimensionByColumn('A3')->setWidth('50');
+                $excel->getActiveSheet()->getColumnDimensionByColumn('A4')->setWidth('50');
+
+                //name the worksheet
+                $excel->getActiveSheet()->setTitle("Vat Relief Report");
+                $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+                $excel->getActiveSheet()->setCellValue('A1',$company_info[0]->company_name)
+                                        ->setCellValue('A2',$company_info[0]->company_address)
+                                        ->setCellValue('A3',$company_info[0]->email_address)
+                                        ->setCellValue('A4',$company_info[0]->mobile_no);
+
+
+                $i = 7;                     
+                
+                foreach ($suppliers as $supplier){
+                $excel->getActiveSheet()->setCellValue('A'.$i,'Supplier'.':'.$supplier->supplier_name);
+                $excel->getActiveSheet()->setCellValue('C'.$i,'TIN #'.':'.$supplier->tin_no);
+                $excel->getActiveSheet()->mergeCells('A'.$i.':B'.$i);
+                $excel->getActiveSheet()->mergeCells('C'.$i.':D'.$i);
+                $excel->getActiveSheet()->getColumnDimension('A')->setWidth('40');
+                $excel->getActiveSheet()->getColumnDimension('B')->setWidth('30');
+                $excel->getActiveSheet()->getColumnDimension('C')->setWidth('50');
+                $excel->getActiveSheet()->getColumnDimension('D')->setWidth('50');
+
+
+                $sum_invoice_amt=0; 
+                $sum_vat_input=0;
+                $sum_net_vat=0; 
+                $i++;
+                $excel->getActiveSheet()
+                        ->getStyle('B'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()
+                        ->getStyle('C'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()
+                        ->getStyle('D'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+
+
+                 $excel->getActiveSheet()->setCellValue('A'.$i,'Invoice / OR #');
+                 $excel->getActiveSheet()->getStyle('A'.$i)->getFont()->setBold(TRUE);
+                 $excel->getActiveSheet()->setCellValue('B'.$i,'Invoice Amount');
+                 $excel->getActiveSheet()->getStyle('B'.$i)->getFont()->setBold(TRUE);
+                 $excel->getActiveSheet()->setCellValue('C'.$i,'Vat Input');
+                 $excel->getActiveSheet()->getStyle('C'.$i)->getFont()->setBold(TRUE);
+                 $excel->getActiveSheet()->setCellValue('D'.$i,'Net of Vat');
+                 $excel->getActiveSheet()->getStyle('D'.$i)->getFont()->setBold(TRUE);
+
+
+                 $i++;
+                    foreach ($vat_reliefs as $vat_relief) {
+                        if ($supplier->supplier_id == $vat_relief->supplier_id) {
+                $excel->getActiveSheet()
+                        ->getStyle('B'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()
+                        ->getStyle('C'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()
+                        ->getStyle('D'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()->setCellValue('A'.$i,$vat_relief->dr_invoice_no);
+                $excel->getActiveSheet()->getStyle('A'.$i)->getFont()->setBold(FALSE);
+                $excel->getActiveSheet()->getStyle('B'.$i.':D'.$i)->getNumberFormat()->setFormatCode('###,##0.00;(###,##0.00)');
+                $excel->getActiveSheet()->setCellValue('B'.$i,number_format($vat_relief->total_after_tax,2));
+                $excel->getActiveSheet()->setCellValue('C'.$i,number_format($vat_relief->total_tax_amount,2));
+                $excel->getActiveSheet()->setCellValue('D'.$i,number_format($vat_relief->net_of_vat,2));
+
+                $i++;
+                    $sum_invoice_amt += $vat_relief->total_after_tax; 
+                    $sum_vat_input += $vat_relief->total_tax_amount;
+                    $sum_net_vat += $vat_relief->net_of_vat;
+                $excel->getActiveSheet()
+                        ->getStyle('B'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()
+                        ->getStyle('C'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()
+                        ->getStyle('D'.$i)
+                        ->getAlignment()
+                        ->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
+                $excel->getActiveSheet()->setCellValue('A'.$i,'TOTAL:');
+                $excel->getActiveSheet()->getStyle('A'.$i)->getFont()->setBold(TRUE);
+                $excel->getActiveSheet()->setCellValue('B'.$i,number_format($sum_invoice_amt,2));
+                $excel->getActiveSheet()->setCellValue('C'.$i,number_format($sum_vat_input,2));
+                $excel->getActiveSheet()->setCellValue('D'.$i,number_format($sum_net_vat,2));
+
+
+                    }
+                }
+                $i++;
+
+
+                }
+
+                header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+                // header('Content-Disposition: attachment;filename="Vat Relief '.date('Y-m-d',strtotime($end)).'.xlsx"');
+                header('Cache-Control: max-age=0');
+                // If you're serving to IE 9, then the following may be needed
+                header('Cache-Control: max-age=1');
+
+                // If you're serving to IE over SSL, then the following may be needed
+                header ('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); // Date in the past
+                header ('Last-Modified: '.gmdate('D, d M Y H:i:s').' GMT'); // always modified
+                header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
+                header ('Pragma: public'); // HTTP/1.0
+                $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+                $objWriter->save('php://output');
+                $data =  ob_get_clean();
+
+
+                            $file_name=$info[0]->dr_invoice_no;
+                            $excelFilePath = $file_name.".xlsx"; //generate filename base on id
+                            //download it.
+                            // Set SMTP Configuration
+                            $emailConfig = array(
+                                'protocol' => 'smtp', 
+                                'smtp_host' => 'ssl://smtp.googlemail.com', 
+                                'smtp_port' => 465, 
+                                'smtp_user' => $email[0]->email_address, 
+                                'smtp_pass' => $email[0]->password, 
+                                'mailtype' => 'html', 
+                                'charset' => 'iso-8859-1'
+                            );
+
+                            // Set your email information
+                            
+                            $from = array(
+                                'email' => $email[0]->email_from,
+                                'name' => $email[0]->name_from
+                            );
+
+                            $to = array($info[0]->email_address);
+                            $subject = 'Vat Relief Report';
+                          //  $message = 'Type your gmail message here';
+                            $message = $email[0]->default_message;
+
+                            // Load CodeIgniter Email library
+                            $this->load->library('email', $emailConfig);
+                            // Sometimes you have to set the new line character for better result
+                            $this->email->set_newline("\r\n");
+                            // Set email preferences
+                            $this->email->from($from['email'], $from['name']);
+                            $this->email->to($to);
+                            $this->email->subject($subject);
+                            $this->email->message($message);
+                            $this->email->attach($data, 'attachment', $excelFilePath , 'application/ms-excel');
+                            $this->email->set_mailtype("html");
+                            // Ready to send email and check whether the email was successfully sent
+                            if (!$this->email->send()) {
+                                // Raise error message
+                            $response['title']='Try Again!';
+                            $response['stat']='error';
+                            $response['msg']='Please check the Email Address of your Supplier or your Internet Connection.';
+
+                            echo json_encode($response);
+                            } else {
+                                // Show success notification or other things here
+                            $response['title']='Success!';
+                            $response['stat']='success';
+                            $response['msg']='Email Sent successfully.';
+
+                            echo json_encode($response);
+                            }
+                break;
 			}
 
 
@@ -212,4 +422,5 @@
 
 
 	}
+
 ?>
