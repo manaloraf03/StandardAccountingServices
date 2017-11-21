@@ -221,12 +221,9 @@
                 $data['company_info']=$company_info[0];
                 $filter_value = $id_filter;
 
-                $info=$m_delivery_inv->get_list(
+                $info=$m_email->get_list(
                         $filter_value,
-                        'delivery_invoice.*,suppliers.supplier_name,suppliers.address,suppliers.email_address,suppliers.contact_no',
-                        array(
-                            array('suppliers','suppliers.supplier_id=delivery_invoice.supplier_id','left')
-                        )
+                        'email_settings.email_to'
                     );
 
                 $startDate=date("Y-m-d",strtotime($this->input->get('start',TRUE)));
@@ -361,7 +358,7 @@
                 $data =  ob_get_clean();
 
 
-                            $file_name=$info[0]->dr_invoice_no;
+                            $file_name='Vat Relief Report'.date('Y-m-d h:i:A', now());
                             $excelFilePath = $file_name.".xlsx"; //generate filename base on id
                             //download it.
                             // Set SMTP Configuration
@@ -382,10 +379,10 @@
                                 'name' => $email[0]->name_from
                             );
 
-                            $to = array($info[0]->email_address);
+                            $to = array($info[0]->email_to);
                             $subject = 'Vat Relief Report';
                           //  $message = 'Type your gmail message here';
-                            $message = $email[0]->default_message;
+                            $message = '<p>To: ' .$email[0]->email_to. '</p></ br>' .$email[0]->default_message.'</ br><p>Sent By: '. '<b>'.$this->session->user_fullname.'</b>'. '</p></ br>' .date('Y-m-d h:i:A', now());
 
                             // Load CodeIgniter Email library
                             $this->load->library('email', $emailConfig);
