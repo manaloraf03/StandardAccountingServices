@@ -5913,8 +5913,8 @@ button.close {
 .modal-content {
   position: relative;
   background-color: #ffffff;
-  border: 1px solid #999999;
-  border: 1px solid transparent;
+/*  border: 1px solid #999999;
+  border: 1px solid transparent;*/
   border-radius: 0;
   -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
   box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
@@ -7157,11 +7157,12 @@ button[name="btn_finalize_journal_review"] {
     font-size: 15px!important;
 }
 
-button#btn_new , button#btn_cancel,button#btn_save   {
+button#btn_new , button#btn_cancel,button#btn_save, button#btn_replenish   {
     font-size: 15px!important;
     padding: 6px 10px!important;
 }
 
-button[id^="btn_create"] {
+button[id^="btn_create"], button[id^="btn_close"], button[id^="btn_yes"] {
     font-size: 15px!important;
+    padding: 5px 10px!important;
 }

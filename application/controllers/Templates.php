@@ -1458,6 +1458,76 @@ class Templates extends CORE_Controller {
                 break;
 
 
+
+            case 'journal-cdj-version-2':
+                $m_journal_info=$this->Journal_info_model;
+                $m_company=$this->Company_model;
+                $journal_id=$this->input->get('id',TRUE);
+                $type=$this->input->get('type',TRUE);
+
+                $journal_info=$m_journal_info->get_list(
+                    array('journal_id'=>$journal_id),
+
+                    array(
+                        'journal_info.*',
+                        'journal_info.is_active as cancelled',
+                        'suppliers.supplier_name',
+                        'suppliers.address',
+                        'suppliers.email_address',
+                        'suppliers.contact_no',
+                        'suppliers.contact_name',
+                        'departments.department_name',
+                        'payment_methods.*'
+                    ),
+
+                    array(
+                        array('suppliers','suppliers.supplier_id=journal_info.supplier_id','left'),
+                        array('departments','departments.department_id=journal_info.department_id','left'),
+                        array('payment_methods','payment_methods.payment_method_id=journal_info.payment_method_id','left')
+                    )
+
+                );
+
+                $company=$m_company->get_list();
+                $data['company_info']=$company[0];
+
+                $data['journal_info']=$journal_info[0];
+
+                $m_journal_accounts=$this->Journal_account_model;
+                $data['journal_accounts']=$m_journal_accounts->get_list(
+
+                    array(
+                        'journal_accounts.journal_id'=>$journal_id
+                    ),
+
+                    array(
+                        'journal_accounts.*',
+                        'account_titles.account_no',
+                        'account_titles.account_title'
+                    ),
+
+                    array(
+                        array('account_titles','account_titles.account_id=journal_accounts.account_id','left')
+                    )
+
+                );
+
+                $data['num_words']=$this->convertDecimalToWords($journal_info[0]->amount);
+
+                //preview on browser
+                if($type=='preview'){
+                    $file_name=$journal_info[0]->txn_no;
+                    $pdfFilePath = $file_name.".pdf"; //generate filename base on id
+                    $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
+                    $content=$this->load->view('template/cdj_journal_entries_content_version_2',$data,TRUE); //load the template
+
+                    $pdf->WriteHTML($content);
+                    //download it.
+                    $pdf->Output();
+                }
+
+                break;
+
             case 'journal-ar':
                 $m_journal_info=$this->Journal_info_model;
                 $m_company=$this->Company_model;
