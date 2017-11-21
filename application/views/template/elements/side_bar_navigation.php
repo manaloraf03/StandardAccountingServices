@@ -65,15 +65,6 @@
                                 <li class="<?php echo (in_array('3-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Sales_invoice">Sales Invoice</a></li>
                                 <!-- <li><a href="Sales_invoice_other">Other Sales Invoice</a></li> -->
                                 <li class="<?php echo (in_array('3-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Receivable_payments">Collection Entry</a></li>
-                                <li class="<?php echo (in_array('3-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Delivery_receipt">Delivery Receipt</a></li>
-                                <!-- <li><a href="AR_Receivable">Accounts Receivable Report</a></li> -->
-                            </ul>
-                        </li>
-                        <li class="<?php echo (in_array('15',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-shopping-cart"></i><span>Invoices</span></a>
-                            <ul class="acc-menu">
-                                <li class="<?php echo (in_array('15-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Proforma_invoice">Pro Forma </a></li>
-                                <li class="<?php echo (in_array('15-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Commercial_invoice">Commercial Invoice</a></li>
-                                <li class="<?php echo (in_array('15-3',$this->session->user_rights)?'':'hidden'); ?>"><a href="Cash_invoice">Cash Invoice</a></li>
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('4',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-view-list-alt"></i><span>References</span></a>
@@ -170,6 +161,7 @@
                                         <li class="<?php echo (in_array('9-8',$this->session->user_rights)?'':'hidden'); ?>"><a href="Account_Subsidiary">Account Subsidiary</a></li>
                                         <li class="<?php echo (in_array('9-13',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_report">Replenishment Report</a></li>
                                         <li class="<?php echo (in_array('9-20',$this->session->user_rights)?'':'hidden'); ?>"><a href="Replenishment_batch">Replenishment Batch</a></li>
+                                        <li class="<?php echo (in_array('9-21',$this->session->user_rights)?'':'hidden'); ?>"><a href="General_Ledger">General Ledger</a></li>
                                     </ul>
                                 </li>
                                 <li class="hasChild secondChild">

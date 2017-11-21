@@ -369,7 +369,7 @@ background: #616161 !important;color: white !important;border-top: 0.5px solid w
                             </div>
                         </div>
 
-                        <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Cash Invoice Account</strong></span></h4>
+<!--                         <h4><span style="margin-left: 1%"><strong><i class="fa fa-gear"></i> Cash Invoice Account</strong></span></h4>
                         <div class="form-group">
                             <label class="col-md-3 control-label"> * Debit Account :</label>
                             <div class="col-md-7">
@@ -395,7 +395,7 @@ background: #616161 !important;color: white !important;border-top: 0.5px solid w
 
                                 <span class="help-block m-b-none">Account that represents the Credit Entry of the Cash Invoice</span>
                             </div>
-                        </div>
+                        </div> -->
                         <hr />
 
                         <div class=" col-lg-offset-3">
