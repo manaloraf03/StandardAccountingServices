@@ -82,21 +82,21 @@
     </tr>
     <tr>
         <td class="align-right"  style="width: 15%"><strong style="font-size: 11px;">Voucher No.:</td>
-        <td class="padding-info" style="width: 35%"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info" style="width: 35%"><strong style="font-size: 12px;"><?php echo $journal_info->journal_id; ?></td>
         <td class="align-right" style="width: 30%;"><strong style="font-size: 11px;">Account No.:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php  ?></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Voucher Date:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo date('F d, Y', strtotime($journal_info->date_txn)); ?></td>
         <td class="align-right"><strong style="font-size: 11px;">Check No.:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo $journal_info->check_no; ?></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Amount:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo  number_format($journal_info->amount,2); ?></td>
         <td class="align-right"><strong style="font-size: 11px;">Check Date:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo $journal_info->check_date; ?></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Amount in Words:</td>
@@ -145,21 +145,21 @@
 <table style="width: 100%;padding-top: 10px;line-height: 100%;">
     <tr>
         <td class="align-right"  style="width: 15%"><strong style="font-size: 11px;">Voucher No.:</td>
-        <td class="padding-info" style="width: 30%"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info" style="width: 30%"><strong style="font-size: 12px;"><?php echo $journal_info->journal_id; ?></td>
         <td class="align-right" style="width: 15%;"><strong style="font-size: 11px;">Voucher Date.:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo date('F d, Y', strtotime($journal_info->date_txn)); ?></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Account No:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php  ?></td>
         <td class="align-right"><strong style="font-size: 11px;">Tax Code.:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php  ?></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Check No.:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo $journal_info->check_no; ?></td>
         <td class="align-right"><strong style="font-size: 11px;">Batch No.:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo now(); ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Amount:</td>
@@ -235,7 +235,7 @@
     </tr>
 
     <tr>
-        <td></td>
+        <td style="text-align: left;"><?php echo $journal_info->ref_type?> <?php echo $journal_info->ref_no ?></td>
         <td></td>
         <td><?php echo date('m/d/y', strtotime($journal_info->date_txn)); ?></td>
         <td></td>
