@@ -211,6 +211,7 @@
                 "beforeSend": showSpinningProgress(btn)
             }).done(function(response){
                 showNotification(response);
+                showSpinningProgress(btn);
 
             });
             });

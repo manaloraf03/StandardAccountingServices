@@ -219,7 +219,7 @@
                 $m_company=$this->Company_model;
                 $company_info=$m_company->get_list();
                 $data['company_info']=$company_info[0];
-                $filter_value = $id_filter;
+                $filter_value = 2;
 
                 $info=$m_email->get_list(
                         $filter_value,

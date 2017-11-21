@@ -127,7 +127,7 @@
                                                 <b style="color: white; font-size: 12pt;"><i class="fa fa-bars"></i>&nbsp; Email Settings</b>
                                             </div> -->
                                             <div class="panel-body">
-                                            <h2 class="h2-panel-heading">Email Settings</h2><hr>
+                                            <h2 class="h2-panel-heading">Email Report Settings</h2><hr>
                                                <form id="frm_company" role="form" class="form-horizontal row-border">
                                                    <div class="form-group hidden">
                                                        <label class="col-md-2 col-md-offset-1 control-label">

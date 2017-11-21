@@ -21,7 +21,7 @@ class Email_report_settings extends CORE_Controller
         $data['_top_navigation'] = $this->load->view('template/elements/top_navigation', '', TRUE);
         $data['title'] = 'Email Report Settings';
 
-        $company=$this->Email_settings_model->get_list();
+        $company=$this->Email_settings_model->get_list(2);
         $data['company']=$company[0];
 
         (in_array('6-11',$this->session->user_rights)? 
@@ -36,7 +36,7 @@ class Email_report_settings extends CORE_Controller
             case 'get-email':
                 $m_email=$this->Email_settings_model;
 
-                $email = $m_email->get_list();
+                $email = $m_email->get_list(2);
 
                 $response['data']=$email[0];
                 
@@ -47,9 +47,9 @@ class Email_report_settings extends CORE_Controller
             case 'create':
                 $m_email=$this->Email_settings_model;
 
-                $m_email->delete(1);
+                $m_email->delete(2);
 
-                $m_email->email_id=1;
+                $m_email->email_id=2;
                 // $m_email->email_provider=$this->input->post('email_provider',TRUE);
                 $m_email->email_address=$this->input->post('email_address',TRUE);
                 $m_email->email_to=$this->input->post('email_to',TRUE);
