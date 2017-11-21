@@ -71,7 +71,7 @@
 
 	                <ol class="breadcrumb" style="margin-bottom: 0px;">
 	                    <li><a href="dashboard">Dashboard</a></li>
-	                    <li><a href="vat_relief_report">VAT Relief Report</a></li>
+	                    <li><a href="vat_relief_report">VAT Relief Report </a></li>
 	                </ol>
 
 	                <div class="container-fluid">
@@ -211,9 +211,8 @@
                 "beforeSend": showSpinningProgress(btn)
             }).done(function(response){
                 showNotification(response);
-    
-            });
 
+            });
             });
 
         }();

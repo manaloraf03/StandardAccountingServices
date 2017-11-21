@@ -358,7 +358,7 @@
                 $data =  ob_get_clean();
 
 
-                            $file_name='Vat Relief Report'.date('Y-m-d h:i:A', now());
+                            $file_name='Vat Relief Report '.date('Y-m-d h:i:A', now());
                             $excelFilePath = $file_name.".xlsx"; //generate filename base on id
                             //download it.
                             // Set SMTP Configuration
