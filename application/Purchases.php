@@ -479,7 +479,7 @@ class Purchases extends CORE_Controller
                             // Set your email information
                             
                             $from = array('email' => $email[0]->email_from,
-                                'name' => $email[0]->name_from);
+                                'name' => $email[0]->email_address);
                                 
 
                             $to = array($info[0]->user_email);
@@ -567,7 +567,7 @@ class Purchases extends CORE_Controller
                             
                             $from = array(
                                 'email' => $email[0]->email_from,
-                                'name' => $email[0]->name_from
+                                'name' => $email[0]->email_address
                             );
 
                             $to = array($info[0]->email_address);

@@ -210,7 +210,7 @@
                 case 'email-vat-relief':
                 $excel=$this->excel;
                 $m_email=$this->Email_settings_model;
-                $email=$m_email->get_list();
+                $email=$m_email->get_list(2);
                 $m_delivery_inv=$this->Delivery_invoice_model;
                 $startDate=date("Y-m-d",strtotime($this->input->get('start',TRUE)));
                 $endDate=date("Y-m-d}",strtotime($this->input->get('end',TRUE)));
@@ -221,10 +221,6 @@
                 $data['company_info']=$company_info[0];
                 $filter_value = 2;
 
-                $info=$m_email->get_list(
-                        $filter_value,
-                        'email_settings.email_to'
-                    );
 
                 $startDate=date("Y-m-d",strtotime($this->input->get('start',TRUE)));
                 $endDate=date("Y-m-d}",strtotime($this->input->get('end',TRUE)));
@@ -375,11 +371,11 @@
                             // Set your email information
                             
                             $from = array(
-                                'email' => $email[0]->email_from,
+                                'email' => $email[0]->email_address,
                                 'name' => $email[0]->name_from
                             );
 
-                            $to = array($info[0]->email_to);
+                            $to = array($email[0]->email_to);
                             $subject = 'Vat Relief Report';
                           //  $message = 'Type your gmail message here';
                             $message = '<p>To: ' .$email[0]->email_to. '</p></ br>' .$email[0]->default_message.'</ br><p>Sent By: '. '<b>'.$this->session->user_fullname.'</b>'. '</p></ br>' .date('Y-m-d h:i:A', now());
