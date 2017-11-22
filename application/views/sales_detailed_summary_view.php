@@ -134,6 +134,8 @@
                                                                     <i class="fa fa-print"></i> Print Report</button>
                                                                     <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
                                                                     <i class="fa fa-file-excel-o"></i> Export to Excel</button>
+                                                                    <button class="btn btn-primary btn btn-sm pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_customer_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                                    <i class="fa fa-share"></i> Email </button>
                                                                                 <table id="tbl_detailed_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -168,6 +170,8 @@
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
                                                                                 <i class="fa fa-file-excel-o"></i> Export to Excel</button>
+                                                                                <button class="btn btn-primary btn btn-sm pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_customer_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                                                <i class="fa fa-share"></i> Email </button>
                                                                                 <table id="tbl_summary_customer" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -211,6 +215,8 @@
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
                                                                                 <i class="fa fa-file-excel-o"></i> Export to Excel</button>
+                                                                                <button class="btn btn-primary btn btn-sm pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_sm_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                                                <i class="fa fa-share"></i> Email </button>
                                                                                 <table id="tbl_detailed_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -244,7 +250,9 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>                                                                                
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button> 
+                                                                                <button class="btn btn-primary btn btn-sm pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_sm_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                                                <i class="fa fa-share"></i> Email </button>                                                                               
                                                                                 <table id="tbl_summary_salesman" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -287,7 +295,9 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>                                                                                     
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>   
+                                                                                <button class="btn btn-primary btn btn-sm pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_product_detailed" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                                                <i class="fa fa-share"></i> Email </button>                                                                                  
                                                                                 <table id="tbl_detailed_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>    
@@ -320,7 +330,9 @@
                                                                                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
                                                                                 <i class="fa fa-print"></i> Print Report</button>
                                                                                 <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_export_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export to Excel" >
-                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>                                                                                  
+                                                                                <i class="fa fa-file-excel-o"></i> Export to Excel</button>    
+                                                                                <button class="btn btn-primary btn btn-sm pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_product_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                                                <i class="fa fa-share"></i> Email </button>                                                                                  
                                                                                 <table id="tbl_summary_product" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                                                                                     <thead class="">
                                                                                     <tr>
@@ -499,6 +511,110 @@
                 window.open('Sales_detailed_summary/transaction/export-summary-report-smc?startDate='+_date_from.val()+'&endDate='+_date_to.val()+'&type=p');
             });
 
+            $('#btn_email_customer_detailed').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Sales_detailed_summary/transaction/email-detailed-report-smcp?startDate="+_date_from.val()+'&endDate='+_date_to.val()+'&type=c',
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+            $('#btn_email_sm_detailed').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Sales_detailed_summary/transaction/email-detailed-report-smcp?startDate="+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp',
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+            $('#btn_email_product_detailed').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Sales_detailed_summary/transaction/email-detailed-report-smcp?startDate="+_date_from.val()+'&endDate='+_date_to.val()+'&type=p',
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+
+
+            $('#btn_email_customer_summary').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Sales_detailed_summary/transaction/email-summary-report-smc?startDate="+_date_from.val()+'&endDate='+_date_to.val()+'&type=c',
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+            $('#btn_email_sm_summary').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Sales_detailed_summary/transaction/email-summary-report-smc?startDate="+_date_from.val()+'&endDate='+_date_to.val()+'&type=sp',
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+            $('#btn_email_product_summary').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Sales_detailed_summary/transaction/email-summary-report-smc?startDate="+_date_from.val()+'&endDate='+_date_to.val()+'&type=p',
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
             $('#btn_customer').click(function(){
                 type=1;
                 dtCustomerDetailed.destroy();
@@ -520,6 +636,22 @@
                 reloadProductList();
             });
         }();
+
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
 
         function reloadProductList() {  
             dtProductDetailed=$('#tbl_detailed_product').DataTable({
