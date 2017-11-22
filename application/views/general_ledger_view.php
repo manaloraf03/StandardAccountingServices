@@ -86,8 +86,15 @@
                                                             </div>
                                                         </div>
                                                         <br />
-
                                                         <div >
+                                                        <button class="btn btn-success" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                        <i class="fa fa-print"></i> Print Report</button>
+                                                        <button class="btn btn-primary" id="btn_excel" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >
+                                                        <i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to Excel</button>
+                                                        <button class="btn btn-primary" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                        <i class="fa fa-share"></i> Email </button>
+                                                        <button class="btn btn-success" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >
+                                                        <i class="fa fa-refresh"></i></button>
                                                             <table id="tbl_general_ledger" class="table table-striped" cellspacing="0" width="100%">
                                                                 <thead class="">
                                                                 <tr>
@@ -165,7 +172,7 @@
             });
 
             reloadList();
-            createToolBarButton();
+            // createToolBarButton();
 
         }();
 
@@ -174,7 +181,7 @@
             $('.date-picker').on('change',function(){
                 dt.destroy();
                 reloadList();
-                createToolBarButton();
+                // createToolBarButton();
                 // getParticular().done(function(response){
                 //     if (response.data.length > 0){
                 //         _particular = response.data[0].title+' '+data.response.data[0].name;
@@ -190,14 +197,49 @@
                 window.open('General_ledger/transaction/export-excel?start='+ _date_from.val() +'&end='+ _date_to.val());
             });
 
+            $('#btn_email').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"General_ledger/transaction/email-export?start="+ _date_from.val() +'&end='+ _date_to.val(),
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+
             $(document).on('click','#btn_refresh',function(){
                 dt.destroy();
                 reloadList();
-                createToolBarButton();
+                // createToolBarButton();
             });
 
 
         }();
+
+
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
 
         function getParticular(){
             var _data=$('#').serializeArray();
@@ -212,17 +254,18 @@
             });
         }
 
-        function createToolBarButton(){
+/*        function createToolBarButton(){
             var _btnPrint='<button class="btn btn-success" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >'+
                 '<i class="fa fa-print"></i> Print Report</button>';
- 
             var _btnExcel='<button class="btn btn-primary" id="btn_excel" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >'+
-                '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to Excel</button>';                                
+                '<i class="fa fa-file-excel-o" aria-hidden="true"></i> Export to Excel</button>';        
+            var _btnEmail='<button class="btn btn-primary" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >' +
+                '<i class="fa fa-share"></i> Email </button>';                      
             var _btnRefresh='<button class="btn btn-success" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >'+
                 '<i class="fa fa-refresh"></i></button>';
 
-            $("div.toolbar").html(_btnPrint+"&nbsp;"+_btnExcel+"&nbsp;"+_btnRefresh);
-        };
+            $("div.toolbar").html(_btnPrint+"&nbsp;"+_btnExcel+"&nbsp;"+_btnEmail+"&nbsp;"+_btnRefresh);
+        };*/
 
 
         function reloadList(){
