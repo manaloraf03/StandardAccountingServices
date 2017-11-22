@@ -55,8 +55,21 @@
     ?>
     <table width="100%" cellpadding="3" cellspacing="0" border="1">
     <tr>
-        <td colspan="4"><?php echo $report->group_by.' | <b>'.$report->title.'</b> '.$report->name;?></td>
+        <td colspan="4">
+            <?php 
+                $txn_no = ' | <b>Transaction #:</b> '.$report->txn_no ;
+                $href_no = ($report->ref_type != '' ? ' | <b>Reference #:</b> '.$report->reference : '');
+
+                $no = $txn_no.' '.$href_no;
+            ?>
+            <?php echo $report->group_by.' '.$no;?>
+        </td>
     </tr>
+    <?php if ($report->name != ""){?>
+    <tr>
+        <td colspan="4"><?php echo '<b>'.$report->title.'</b> '.$report->name;?></td>
+    </tr>
+    <?php }?>
         <tr>
             <th >Account Code</th>
             <th >Account Title</th>
@@ -65,7 +78,7 @@
         </tr>
     <tbody>
         <?php foreach ($report_item_info as $report_item) {
-             if (($report_item->date_txn == $report->date_txn) AND ($report_item->book_type == $report->book_type) AND ($report_item->name == $report->name)) { 
+             if (($report_item->date_txn == $report->date_txn) AND ($report_item->book_type == $report->book_type) AND ($report_item->name == $report->name) AND ($report_item->txn_no == $report->txn_no)) { 
 
                 $total_dr += $report_item->debit;
                 $total_cr += $report_item->credit;

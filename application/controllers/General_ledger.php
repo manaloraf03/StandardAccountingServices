@@ -108,11 +108,11 @@
 
 	                $excel->getActiveSheet()->getColumnDimension('C')
 	                                        ->setAutoSize(false)
-	                                        ->setWidth('10');
+	                                        ->setWidth('15');
 
 	                $excel->getActiveSheet()->getColumnDimension('D')
 	                                        ->setAutoSize(false)
-	                                        ->setWidth('10');
+	                                        ->setWidth('15');
 
 	                $excel->getActiveSheet()->setTitle('General Ledger');
 
@@ -138,6 +138,15 @@
 
             		$excel->getActiveSheet()->mergeCells('C6:D6')->setCellValue('C6',$run_date);
 
+				    $style = array(
+				        'alignment' => array(
+				            'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+				        )
+				    );
+
+				    $excel->getActiveSheet()->getStyle("C6:D6")->applyFromArray($style);
+
+
 	                $i = 8;
 	            	$total_dr = 0;
 	            	$total_cr = 0;
@@ -146,7 +155,12 @@
 	                {
 	                	$i++;
 
-						$html_title = "<b> Date: </b>".$report->date_txn." | <b>Book: </b>".$report->book_type." | <b>".$report->title.'</b> '.$report->name;
+						$html_txn_no = '<b>Transaction #:</b> '.$report->txn_no ;
+						$html_ref_no = ($report->ref_type != '' ? ' | <b>Reference #:</b> '.$report->reference : '');
+
+						$html_no = $html_txn_no.' '.$html_ref_no;
+
+						$html_title = "<b> Date: </b>".$report->date_txn." | <b>Book: </b>".$report->book_type.' | '.$html_no;
 						$group_title = $htmlHelper->toRichTextObject($html_title);
 
                 		$excel->getActiveSheet()
@@ -174,7 +188,50 @@
 									    )
 									);
 
+
+			              $i++;
+
+						$html_particular = '<b>'.$report->title.'</b> '.$report->name;
+						$group_particular = $htmlHelper->toRichTextObject($html_particular);
+
+							$excel->getActiveSheet()
+	                        ->mergeCells('A'.$i.':'.'D'.$i)
+	                        ->setCellValue('A'.$i,$group_particular)
+	                        ->getStyle('A'.$i.':'.'D'.$i)->applyFromArray(
+	                            array(
+	                                'fill' => array(
+	                                    'type' => PHPExcel_Style_Fill::FILL_SOLID,
+	                                    'color' => array('rgb' => 'CFD8DC')
+	                                )
+	                            )
+	                        )->getFont()
+	                        ->setBold(TRUE);
+
+			                $excel->getActiveSheet()
+			                		->getStyle('A'.$i.':'.'D'.$i)->applyFromArray(
+									    array(
+									        'borders' => array(
+									            'allborders' => array(
+									                'style' => PHPExcel_Style_Border::BORDER_THIN,
+									                'color' => array('rgb' => 'B0BEC5')
+									            )
+									        )
+									    )
+									);
+
+
 	                	$i++;
+			                $excel->getActiveSheet()
+			                		->getStyle('A'.$i.':'.'D'.$i)->applyFromArray(
+									    array(
+									        'borders' => array(
+									            'allborders' => array(
+									                'style' => PHPExcel_Style_Border::BORDER_THIN,
+									                'color' => array('rgb' => 'B0BEC5')
+									            )
+									        )
+									    )
+									);
 
                 		$excel->getActiveSheet()->setCellValue('A'.$i,'Account Code')
                 						->getStyle('A'.$i)->applyFromArray(
@@ -276,7 +333,7 @@
 
                         foreach ($report_item_info as $report_item){
                         	
-                        	if (($report_item->date_txn == $report->date_txn) AND ($report_item->book_type == $report->book_type) AND ($report_item->name == $report->name)) {
+                        	if (($report_item->date_txn == $report->date_txn) AND ($report_item->book_type == $report->book_type) AND ($report_item->name == $report->name) AND ($report_item->txn_no == $report->txn_no)) {
                         	$i++;
 
                         	$total_dr += $report_item->debit;

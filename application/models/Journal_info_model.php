@@ -948,7 +948,7 @@ class Journal_info_model extends CORE_Model{
 
             return $this->db->query($sql)->result();
     }
-function get_general_ledger($startDate,$endDate) {
+ function get_general_ledger($startDate,$endDate) {
             $sql="SELECT 
                     DATE_FORMAT(ji.date_txn,'%m/%d/%Y') AS date_txn,
                     ji.journal_id,
@@ -958,19 +958,32 @@ function get_general_ledger($startDate,$endDate) {
                     at.account_title,
                     ja.dr_amount as debit,
                     ja.cr_amount as credit,
+                    cu.customer_name,
+                    su.supplier_name,
                     CONCAT('') as a,
-                    CONCAT(DATE_FORMAT(ji.date_txn,'%m/%d/%Y'),' | <b> Book: </b> ',ji.book_type) as group_by,
+
+                    IF(ji.customer_id = 0, 'Customer: ', 'Supplier: ') as title,
+                    IF(ji.customer_id = 0, cu.customer_name, su.supplier_name) as name,
+
+                    CONCAT(DATE_FORMAT(ji.date_txn,'%m/%d/%Y'),' | <b> Book: </b> ',ji.book_type,' | <b>',IF(ji.supplier_id = 0, 'Customer: ', 'Supplier: '),'</b> ',IF(ji.supplier_id = 0, cu.customer_name, su.supplier_name),' | <b>Transaction #: </b> ',ji.txn_no,' ',IF(ji.ref_type != '', '<b>Reference #:</b> ',''),' ',IF(ji.ref_type != '', ji.ref_type, ''),'',IF(ji.ref_type != '','-',''),'',IF(ji.ref_type != '', ji.ref_no, '')) as group_by,
+
                     CONCAT(ji.date_txn,' ',ji.book_type) as code
                     FROM journal_info as ji
+
+                    LEFT JOIN customers AS cu ON cu.`customer_id`=ji.`customer_id`
+                    LEFT JOIN suppliers AS su ON su.`supplier_id`=ji.`supplier_id`
+
                     INNER JOIN journal_accounts AS ja ON ja.`journal_id`=ji.`journal_id`
                     LEFT JOIN account_titles AS at ON at.`account_id`=ja.`account_id`
+
                     WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
                     AND 
-                        ji.date_txn BETWEEN '$startDate' AND '$endDate'";
+                        ji.date_txn BETWEEN '$startDate' AND '$endDate'
+                    ORDER BY ji.date_txn DESC";
             return $this->db->query($sql)->result();
         }
- 
-function get_general_ledger_report($startDate,$endDate) {
+
+    function get_general_ledger_report($startDate,$endDate) {
             $sql="SELECT 
                     DATE_FORMAT(ji.date_txn,'%m/%d/%Y') AS date_txn,
 
@@ -978,12 +991,16 @@ function get_general_ledger_report($startDate,$endDate) {
                     IF(ji.supplier_id = 0, cu.customer_name, su.supplier_name) as name,
 
                     CONCAT('<b>Date: </b>',DATE_FORMAT(ji.date_txn,'%m/%d/%Y'),' | <b> Book: </b> ',ji.book_type) as group_by,
+                    CONCAT(ji.ref_type,'-',ji.ref_no) as reference,
                     cu.customer_name,
                     su.supplier_name,
                     ji.journal_id,
                     ji.txn_no,
                     ji.book_type,
-                    ji.remarks
+                    ji.remarks,
+                    ji.txn_no,
+                    ji.ref_type,
+                    ji.ref_no
                    
                     FROM journal_info as ji
 
@@ -993,7 +1010,8 @@ function get_general_ledger_report($startDate,$endDate) {
                     WHERE ji.is_active=TRUE AND ji.is_deleted=FALSE
                     AND 
                         ji.date_txn BETWEEN '$startDate' AND '$endDate'
-                    GROUP BY ji.date_txn,ji.book_type,ji.customer_id,ji.supplier_id";
+                    GROUP BY ji.txn_no
+                    ORDER BY ji.date_txn DESC";
             return $this->db->query($sql)->result();
         }
 
@@ -1002,11 +1020,15 @@ function get_general_ledger_report($startDate,$endDate) {
                     DATE_FORMAT(ji.date_txn,'%m/%d/%Y') AS date_txn,
                     ji.journal_id,
                     ji.txn_no,
+                    ji.ref_type,
+                    ji.ref_no,
                     ji.book_type,
                     at.account_no, 
                     at.account_title,
                     ja.dr_amount as debit,
                     ja.cr_amount as credit,
+
+                    CONCAT(ji.ref_type,'-',ji.ref_no) as reference,
                     CONCAT('') as a,
 
                     IF(ji.supplier_id = 0, 'Customer: ', 'Supplier: ') as title,
@@ -1026,7 +1048,6 @@ function get_general_ledger_report($startDate,$endDate) {
                         ji.date_txn BETWEEN '$startDate' AND '$endDate'";
             return $this->db->query($sql)->result();
     }
- 
 
 
 }
