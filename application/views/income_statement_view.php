@@ -143,6 +143,8 @@
                                                 <a id="btn_print" href="#" target="_blank" class="btn btn-green" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-print"></i> Print </a>
                                                 <button id="btn_export" class="btn btn-primary"><i class="fa fa-file-excel-o"></i> Export to Excel</button>
 <!--                                                 <a href="Templates/layout/income-statement?type=&type=pdf" class="btn btn-primary" style="text-transform:none;font-family: tahoma;" ><i class="fa fa-file-pdf-o"></i> Download as PDF </a> -->
+                                                <button class="btn btn-primary" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                <i class="fa fa-share"></i> Email </button>
                                                 <button class="btn btn-red" data-dismiss="modal" style="text-transform: capitalize;">Close</button>
                                             </div>
 
@@ -205,6 +207,38 @@
             window.open('Income_statement/transaction/export-excel?start='+$('#dt_start_date').val()+'&end='+$('#dt_end_date').val());
         });
 
+        $('#btn_email').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Income_statement/transaction/email-excel?start="+$('#dt_start_date').val()+'&end='+$('#dt_end_date').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
+    
         $('#btn_print').click(function(){
          $(this).attr('href',"Templates/layout/income-statement?type=&type=preview&start="+$('#dt_start_date').val()+"&end="+$('#dt_end_date').val()+"&depid="+_cboDepartments.select2('val'));
             //window.open($(this).attr('href')+"?start="+$('#dt_start_date').val()+"&end="+$('#dt_end_date').val()+"&depid="+_cboDepartments.select2('val'));

@@ -125,8 +125,9 @@
 
                                                     <button id="btn_print" class="btn btn-primary" style="text-transform: none;"><i class="fa fa-print"></i> PRINT REPORT</button>
                                                     <button id="btn_excel" class="btn btn-success" style="text-transform: none;"><i class="fa fa-excel"></i> EXPORT TO EXCEL</button>
-
-                                                
+                                                    <button class="btn btn-primary" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" >
+                                                    <i class="fa fa-share"></i> Email </button>
+                                                    
 
                                                     <button class="btn btn-red" data-dismiss="modal" style="text-transform: none;">CLOSE</button>
                                                 </div>
@@ -202,6 +203,23 @@
             }
         });
 
+        $('#btn_email').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"Balance_sheet/transaction/email-excel?date="+$('#dt_as_of_date').val()+"&depid="+_cboDepartments.select2('val'),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+        
         var showNotification=function(obj){
         PNotify.removeAll(); //remove all notifications
         new PNotify({
@@ -211,6 +229,11 @@
         });
     };
 
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
 
 
         _btnPrint.on('click', function(){
