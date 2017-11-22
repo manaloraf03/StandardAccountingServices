@@ -204,10 +204,12 @@
         });
 
         $('#btn_email').on('click', function() {
-        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
 
         var btn=$(this);
-    
+            if (_cboDepartments.select2('val') == null){
+            showNotification({ title: 'Error', msg: 'Please select a department!', stat: 'error' });
+        } else{
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
         $.ajax({
             "dataType":"json",
             "type":"POST",
@@ -218,6 +220,7 @@
             showSpinningProgress(btn);
 
         });
+        }
         });
         
         var showNotification=function(obj){
