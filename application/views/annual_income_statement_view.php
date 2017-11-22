@@ -104,12 +104,15 @@
                                 <h2 class="h2-panel-heading">Annual Income Statement <?php echo '('.date('Y').')'; ?></h2><hr>
                                     <div class="row">
                                         <div class="container-fluid">
-                                            <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
-                                                <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
-                                            </div>
-                                            <div class="col-xs-12 col-sm-2 pull-right" style="margin-left: 10px;padding-left: 0; padding-right: 0; margin-bottom: 10px;">
+                                            <div class="col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;">
+                                                <button id="btn_print" class="btn btn-primary "><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
+                                            </div >
+                                            <button class="btn btn-success btn btn-sm col-sm-2 " style="" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Send to Email" ><i class="fa fa-share"></i> Email
+                                            </button>
+                                            <div class=" col-sm-2" style="margin-left: 10px;padding-left: 0; padding-right: 0; margin-bottom: 10px;">
                                                 <a href="Annual_income_statement/Export" id="btn_export" class="btn btn-success btn-block"><span class="fa fa-file-excel-o"></span>&nbsp;Export to Excel</a>
                                             </div>
+
                                             <table width="100%" class="table table-striped">
                                                 <thead>
                                                     <th width="5%" >Account #</th>
@@ -318,10 +321,48 @@
             window.open('Annual_income_statement/Report');
         });
 
-        // $('#btn_export').on('click',function(){
-        //     window.open('Annual_income_statement/Export');
-        // });
-    })();
+
+            $('#btn_email').on('click', function() {
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Annual_income_statement/Email",
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
+            });
+
+
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
+
+
+
+
+
+
+
+    });
 </script>
 
 <script src="assets/plugins/spinner/dist/spin.min.js"></script>

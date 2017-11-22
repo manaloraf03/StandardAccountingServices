@@ -96,7 +96,7 @@
         <td class="align-right"><strong style="font-size: 11px;">Amount:</td>
         <td class="padding-info"><strong style="font-size: 12px;"><?php echo  number_format($journal_info->amount,2); ?></td>
         <td class="align-right"><strong style="font-size: 11px;">Check Date:</td>
-        <td class="padding-info"><strong style="font-size: 12px;"><?php echo $journal_info->check_date; ?></td>
+        <td class="padding-info"><strong style="font-size: 12px;"><?php echo date('m/d/y', strtotime($journal_info->check_date)); ?></td>
     </tr>
     <tr>
         <td class="align-right"><strong style="font-size: 11px;">Amount in Words:</td>
@@ -204,8 +204,8 @@
                 <tr >
                     <td width="15%"  style="text-align: left;"><?php echo $account->account_no; ?></td>
                     <td width="35%"  style="text-align: left;"><?php echo $account->account_title; ?></td>
-                    <td width="25%"  style="text-align: right;"><?php echo number_format($account->dr_amount,2); ?></td>
-                    <td width="25%"  style="text-align: right;"><?php echo number_format($account->cr_amount,2); ?></td>
+                    <td width="25%"  style="text-align: right;"><?php  if($account->dr_amount == 0){echo ''; } else{ echo number_format($account->dr_amount,2);} ?></td>
+                    <td width="25%"  style="text-align: right;"><?php if($account->cr_amount == 0){ echo ''; } else{ echo number_format($account->cr_amount,2);} ?></td>
                 </tr>
                 <?php
 

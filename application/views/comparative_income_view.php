@@ -108,6 +108,9 @@
                                                 <button id="btn_print" class="btn btn-primary btn-block"><span class="fa fa-file-o"></span>&nbsp;Print Report</button>
                                             </div>  
                                             <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;margin-left: 10px;">
+                                                <button id="btn_email" class="btn btn-success btn-block"><span class="fa fa-file-o"></span>&nbsp;Email</button>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-2" style="padding-left: 0; padding-right: 0; margin-bottom: 10px;margin-left: 10px;">
                                             <a href="Comparative_income/Export" style="text-decoration: none;">
                                                 <button id="btn_export" class="btn btn-success btn-block"><span class="fa fa-file-o"></span>&nbsp;Export Excel</button></a>
                                             </div>
@@ -200,12 +203,39 @@
         _btnPrint.on('click',function(){
             window.open('Comparative_income/Report');
         });
+       $('#btn_email').on('click', function() {
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
 
-        // var _btnExport = $('#btn_export');
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Comparative_income/Export?send=true",
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
 
-        // _btnExport.on('click',function(){
-        //     window.open('Comparative_income/Export');
-        // });
+                });
+                });
+
+
+
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
     })();
 </script>
 

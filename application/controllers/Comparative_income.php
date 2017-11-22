@@ -14,7 +14,8 @@
                 'Journal_account_model',
                 'Departments_model',
                 'Users_model',
-                'Company_model'
+                'Company_model',
+                'Email_settings_model'
             	)
            	);
            $this->load->library('excel');
@@ -47,6 +48,8 @@
 
         
 		function Report() {
+            date_default_timezone_set('Asia/Manila');
+
 			$cur_start_month = date('Y-m-1');
 	        $cur_end_month = date('Y-m-t');
 
@@ -82,9 +85,9 @@
 
 
 	            $excel=$this->excel;
-
+              
                 $excel->setActiveSheetIndex(0);
-
+                  ob_start();
                 // SET WIDTH
                 $excel->getActiveSheet()->getColumnDimension('A')->setWidth(30);
                 $excel->getActiveSheet()->getColumnDimension('B')->setWidth(30);
@@ -210,8 +213,6 @@
                                         ;
 
 
-
-                // Redirect output to a client’s web browser (Excel2007)
                 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
                 header('Content-Disposition: attachment;filename="Comparative Income Statement '.date('F Y').'.xlsx"');
                 header('Cache-Control: max-age=0');
@@ -227,11 +228,56 @@
                 $objWriter = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
                 $objWriter->save('php://output');
 
-		}
+                $send = $this->input->get('send');
+                    if($send == "true")    
+
+                {
+                $data = ob_get_contents();
+                ob_end_clean();
+                    $m_email=$this->Email_settings_model;
+                                $email=$m_email->get_list(2);
+                                $file_name='Comparative Income Statement';
+                                $excelFilePath = $file_name.".xlsx"; 
+                                $emailConfig = array(
+                                    'protocol' => 'smtp', 
+                                    'smtp_host' => 'ssl://smtp.googlemail.com', 
+                                    'smtp_port' => 465, 
+                                    'smtp_user' => $email[0]->email_address, 
+                                    'smtp_pass' => $email[0]->password, 
+                                    'mailtype' => 'html', 
+                                    'charset' => 'iso-8859-1'
+                                );
+                                $from = array(
+                                    'email' => $email[0]->email_address,
+                                    'name' => $email[0]->name_from
+                                );
+                                $to = array($email[0]->email_to);
+                                $subject = 'Comparative Income Statement';
+                                $message = '<p>To: ' .$email[0]->email_to. '</p></ br>' .$email[0]->default_message.'</ br><p>Sent By: '. '<b>'.$this->session->user_fullname.'</b>'. '</p></ br>';
+                                $this->load->library('email', $emailConfig);
+                                $this->email->set_newline("\r\n");
+                                $this->email->from($from['email'], $from['name']);
+                                $this->email->to($to);
+                                $this->email->subject($subject);
+                                $this->email->message($message);
+                                $this->email->attach($data, 'attachment', $excelFilePath , 'application/ms-excel');
+                                $this->email->set_mailtype("html");
+                                if (!$this->email->send()) {
+                                $response['title']='Try Again!';
+                                $response['stat']='error';
+                                $response['msg']='Please check the Email Address or your Internet Connection.';
+                                } else {
+                                $response['title']='Success!';
+                                $response['stat']='success';
+                                $response['msg']='Email Sent successfully.';
+                                }
+                                echo json_encode($response);};
+ 
 
 
 
 
+        }
 
 	}
 ?>

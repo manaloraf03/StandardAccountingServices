@@ -7166,3 +7166,7 @@ button[id^="btn_create"], button[id^="btn_close"], button[id^="btn_yes"] {
     font-size: 15px!important;
     padding: 5px 10px!important;
 }
+
+.modal-body p {
+    margin-left: 0px !important;
+}
