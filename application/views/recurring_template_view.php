@@ -134,7 +134,7 @@
                                                 <div id="show_gj">
                                                     <div class="col-xs-12 col-md-4">
                                                         <strong>* Particular :</strong><br>
-                                                        <select id="cbo_particulars" name="particular_id" class="show-tick form-control" data-live-search="true" data-error-msg="Particular is required!" placeholder="Enter Particular" required>
+                                                        <select id="cbo_particulars" name="particular_id" class="show-tick form-control" data-live-search="true" >
                                                             <optgroup label="Customers">
                                                                 <?php foreach($customers as $customer){ ?>
                                                                     <option value='C-<?php echo $customer->customer_id; ?>'><?php echo $customer->customer_name; ?></option>
