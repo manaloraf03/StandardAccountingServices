@@ -229,6 +229,43 @@
 
             });
 
+            $(document).on('click','#btn_export',function(){
+                window.open('Schedule_expense/transaction/export-schedule-expense');
+
+            });            
+
+            $(document).on('click','#btn_email',function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Schedule_expense/transaction/email-schedule-expense",
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                });
+            });     
+
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
+        
             $('#txt_date').change(function(){
                 dtExpense.destroy();
                 reloadList();
@@ -326,8 +363,10 @@
 
         function createToolBar(){
             var _print='<button id="btn_print" class="btn btn-primary" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>';
+            var _export='<button id="btn_export" class="btn btn-success" style="text-transform: none;"><i class="fa fa-file-excel-o"></i> Export</button>';
+            var _email='<button id="btn_email" class="btn btn-success" style="text-transform: none;"><i class="fa fa-share"></i> Email</button>';            
             var  _refresh='<button id="btn_refresh" class="btn btn-green" style="text-transform: none;margin-left: 5px;"><i class="fa fa-refresh"></i> Refresh</button>';
-            $('div.toolbar').html(_print+" "+_refresh);
+            $('div.toolbar').html(_print+" "+_export+" "+_email+" "+_refresh);
         };
 
 

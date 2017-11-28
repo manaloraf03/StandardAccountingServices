@@ -108,6 +108,12 @@
                                             <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
                                                 <i class="fa fa-print"></i> Print Report
                                             </button>
+                                            <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_export" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
+                                                <i class="fa fa-file-excel-o"></i> Export to Excel
+                                            </button>
+                                            <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 0; margin-bottom: 10px;" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; ">
+                                                <i class="fa fa-share"></i> Email
+                                            </button>
                                             <table id="tbl_replenishment" class="table table-striped" width="100%" cellspacing="0">
                                                 <thead class="">
                                                     <th></th>
@@ -185,6 +191,43 @@ $(document).ready(function(){
         $('#btn_print').click(function(){
             window.open('Replenishment_report/transaction/report?aod='+$('#txt_date').val());
         });
+
+        $('#btn_export').click(function(){
+            window.open('Replenishment_report/transaction/export?aod='+$('#txt_date').val());
+        });
+
+        $('#btn_email').click(function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Replenishment_report/transaction/email?aod="+$('#txt_date').val(),
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                });
+        });
+        
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
+    
     }();
 
     function InitializeDataTable() {

@@ -151,6 +151,8 @@
                                         </div><br>
                                         <div class="container-fluid group-box">
                                             <button class="btn btn-primary pull-left" id="btn_print"><i class="fa fa-print"></i>&nbsp; Print Report</button>
+                                            <button class="btn btn-success pull-left" id="btn_export" style="margin-left: 10px;"><i class="fa fa-file-excel-o"></i>&nbsp; Export</button>
+                                            <button class="btn btn-success pull-left" id="btn_email" style="margin-left: 10px;"><i class="fa fa-share"></i>&nbsp; Email</button>
                                             <button class="btn btn-success pull-left" id="btn_save" style="margin-left: 10px;"><i class="fa fa-print"></i>&nbsp; Save</button>
                                             <table id="tbl_depreciation" class="table table-striped" width="100%" class="">
                                                 <thead>
@@ -502,6 +504,27 @@ $(document).ready(function(){
         } );    
         $('#btn_print').on('click', function(){
             window.open('Depreciation_expense/transaction/gdr-print?m='+_cboMonth.val()+'&y='+_cboYear.val());
+        });
+
+        $('#btn_export').on('click', function(){
+            window.open('Depreciation_expense/transaction/gdr-export?m='+_cboMonth.val()+'&y='+_cboYear.val());
+        });
+
+        $('#btn_email').on('click', function(){
+            showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+            var btn=$(this);
+        
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Depreciation_expense/transaction/gdr-email?m="+_cboMonth.val()+'&y='+_cboYear.val(),
+                "beforeSend": showSpinningProgress(btn)
+            }).done(function(response){
+                showNotification(response);
+                showSpinningProgress(btn);
+
+            });
         });
 
         $('#btn_save').on('click', function(){

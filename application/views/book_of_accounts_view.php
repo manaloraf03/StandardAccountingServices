@@ -129,7 +129,11 @@
         <div class="tab-content">
             <div id="gje" class="tab-pane fade in active">
                     <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_gje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
-                     <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_gje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                    <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_gje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                    <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_gje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (DETAILED)</button>                    
+                    <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_gje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (DETAILED)</button>                                        
+                    <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_gje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (SUMMARY)</button>                    
+                    <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_gje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (SUMMARY)</button>     
                     <table id="tbl_gje" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                         <thead class="">
                         <tr>
@@ -158,6 +162,10 @@
             <div id="cdj" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_cdj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_cdj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_cdj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (DETAILED)</button>                                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_cdj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (DETAILED)</button>                                                        
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_cdj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (SUMMARY)</button>                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_cdj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (SUMMARY)</button>                    
                 <table id="tbl_cdj" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -189,6 +197,10 @@
             <div id="pje" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_pje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (DETAILED)</button>                                                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_pje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (DETAILED)</button>                                                        
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_pje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (SUMMARY)</button>                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_pje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (SUMMARY)</button>                    
                 <table id="tbl_pje" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -220,6 +232,10 @@
             <div id="sje" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_sje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_sje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (DETAILED)</button>                                                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_sje" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (DETAILED)</button>                                                        
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_sje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (SUMMARY)</button>                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_sje_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (SUMMARY)</button>                   
                 <table id="tbl_sje" style="margin-top: 10px;"  class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -251,6 +267,10 @@
             <div id="pcf" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pcf" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_pcf_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_pcf" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (DETAILED)</button>                                                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_pcf" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (DETAILED)</button>                                                        
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_pcf_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (SUMMARY)</button>                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_pcf_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (SUMMARY)</button>                  
                 <table id="tbl_pcf" style="margin-top: 10px;" class="table table-striped" cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -282,6 +302,10 @@
             <div id="crj" class="tab-pane fade in">
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_crj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Report</button>
                 <button class="btn btn-primary pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_print_crj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Print" ><i class="fa fa-print"></i> Print Summary</button>
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_crj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (DETAILED)</button>                                                                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_crj" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (DETAILED)</button>                                                       
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_excel_crj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Excel" ><i class="fa fa-file-excel-o"></i> Export (SUMMARY)</button>                    
+                <button class="btn btn-success pull-left" style="margin-right: 5px; margin-top: 10px; margin-bottom: 10px;" id="btn_email_crj_summary" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#" data-placement="left" title="Email" ><i class="fa fa-share"></i> Email (SUMMARY)</button>                   
                 <table id="tbl_crj" style="margin-top: 10px;" class="table table-striped"  cellspacing="0" width="100%">
                     <thead class="">
                     <tr>
@@ -443,6 +467,272 @@ $(document).ready(function(){
             window.open('TAccount/transaction/journal_report_summary?b=CRJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
         });
 
+// EXPORT TO EXCEL
+        $('#btn_excel_gje').click(function(){
+                window.open('TAccount/transaction/journal-report-export?b=GJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_cdj').click(function(){
+                window.open('TAccount/transaction/journal-report-export?b=CDJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_pje').click(function(){
+                window.open('TAccount/transaction/journal-report-export?b=PJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_sje').click(function(){
+                window.open('TAccount/transaction/journal-report-export?b=SJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_pcf').click(function(){
+                window.open('TAccount/transaction/journal-report-export?b=PCF&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_crj').click(function(){
+                window.open('TAccount/transaction/journal-report-export?b=CRJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+//EMAIL ATTACHMENT
+        $('#btn_email_gje').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email?b=GJE&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_cdj').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email?b=CDJ&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_pje').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email?b=PJE&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_sje').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email?b=SJE&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_pcf').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email?b=PCF&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_crj').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email?b=CRJ&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+//SUMMARY EXCEL
+
+        $('#btn_excel_cdj_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_export_summary?b=CDJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+        $('#btn_excel_gje_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_export_summary?b=GJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+        $('#btn_excel_pje_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_export_summary?b=PJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_sje_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_export_summary?b=SJE&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+        $('#btn_excel_pcf_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_export_summary?b=PCF&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+        $('#btn_excel_crj_summary').click(function(){
+            window.open('TAccount/transaction/journal_report_export_summary?b=CRJ&s='+$('#txt_start').val()+'&e='+$('#txt_end').val());
+        });
+
+//EMAIL SUMMARY
+
+        $('#btn_email_gje_summary').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email-summary?b=GJE&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_cdj_summary').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email-summary?b=CDJ&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_pje_summary').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email-summary?b=PJE&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_sje_summary').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email-summary?b=SJE&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_pcf_summary').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email-summary?b=PCF&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+        $('#btn_email_crj_summary').on('click', function() {
+        showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+        var btn=$(this);
+    
+        $.ajax({
+            "dataType":"json",
+            "type":"POST",
+            "url":"TAccount/transaction/journal-report-email-summary?b=CRJ&s="+$('#txt_start').val()+'&e='+$('#txt_end').val(),
+            "beforeSend": showSpinningProgress(btn)
+        }).done(function(response){
+            showNotification(response);
+            showSpinningProgress(btn);
+
+        });
+        });
+
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
 
         $('#txt_end').on('change',function(){
             dtGJE.destroy();
