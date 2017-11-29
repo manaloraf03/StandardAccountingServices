@@ -48,6 +48,7 @@
 				<td colspan="2"><strong> TIN # :</strong> <?php echo $supplier->tin_no; ?></strong></td>
 			</tr>
     		<th width="25%" align="left">Invoice / OR #</th>
+            <th width="25%" align="left">Reference #</th>
     		<th width="25%" align="right">Invoice Amount</th>
     		<th width="25%" align="right">VAT Input</th>
     		<th width="25%" align="right">Net of VAT</th>
@@ -62,6 +63,7 @@
     			<?php if ($supplier->supplier_id == $vat_relief->supplier_id) { ?>
     			<tr>
     				<td width="25%"><?php echo $vat_relief->dr_invoice_no; ?></td>
+                    <td width="25%"><?php echo $vat_relief->external_ref_no; ?></td>
     				<td width="25%" align="right"><?php echo number_format($vat_relief->total_after_tax,2); ?></td>
     				<td width="25%" align="right"><?php echo number_format($vat_relief->total_tax_amount,2); ?></td>
     				<td width="25%" align="right"><?php echo number_format($vat_relief->net_of_vat,2); ?></td>
@@ -74,7 +76,7 @@
     			<?php } ?>
     		<?php } ?>
 			<tr>
-				<td width="25%"><strong>TOTAL :</strong></td>
+				<td width="25%" colspan=2><strong>TOTAL :</strong></td>
 				<td width="25%" align="right"><?php echo number_format($sum_invoice_amt,2) ?></td>
 				<td width="25%" align="right"><?php echo number_format($sum_vat_input,2) ?></td>
 				<td width="25%" align="right"><?php echo number_format($sum_net_vat,2) ?></td>

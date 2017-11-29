@@ -112,6 +112,7 @@
 		                    					<thead>
 		                    						<th>Supplier</th>
 		                    						<th>Invoice / OR #</th>
+                                                    <th>Reference #</th>                                        
 		                    						<th>Invoice Amount</th>
 		                    						<th>VAT Input</th>
 		                    						<th>Net of VAT</th>
@@ -254,17 +255,19 @@
                 "columns": [
                     { "searchable": true,targets:[0],data: "supplier_name" }, 
                     { "searchable": false,targets:[1],data: "dr_invoice_no" },
-                    { className: "text-right", "searchable": false,targets:[2],data: "total_after_tax",
+                    { "searchable": false,targets:[2],data: "external_ref_no" },
+
+                    { className: "text-right", "searchable": false,targets:[3],data: "total_after_tax",
 	                    render: function(data){ 
                             return accounting.formatNumber(data,2); 
                         }  
                     }, 
-                    { className: "text-right", "searchable": false,targets:[3],data: "total_tax_amount",
+                    { className: "text-right", "searchable": false,targets:[4],data: "total_tax_amount",
                     	render: function(data){ 
                             return accounting.formatNumber(data,2); 
                         }   
                     }, 
-                    { className: "text-right", "searchable": false,targets:[4],data: "net_of_vat", 
+                    { className: "text-right", "searchable": false,targets:[5],data: "net_of_vat", 
                         render: function(data){ 
                             return accounting.formatNumber(data,2); 
                         }  
