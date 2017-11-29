@@ -99,7 +99,11 @@
                                         </div>
                                         <div class="col-xs-12 col-sm-3"><br>
                                             <button id="btn_print" class="btn btn-primary btn-block" style="margin-top: 5px;"><i class="fa fa-print"></i> Print Report</button>
+                                            <button id="btn_export" class="btn btn-success btn-block" style="margin-top: 5px;"><i class="fa fa-file-excel-o"></i> Export</button>
                                         </div>
+                                        <div class="col-xs-12 col-sm-3">
+                                            <button id="btn_email" class="btn btn-success btn-block" style="margin-top: 20px;"><i class="fa fa-share"></i> Email</button>                                      
+                                        </div>                                       
                                     </div><br>
                                 </div><hr><br>
                                 <div class="row">   
@@ -239,7 +243,45 @@ $(document).ready(function(){
         $('#btn_print').click(function(){
             window.open('SOA/transaction/print?cusid='+_cboCustomers.val());
         });
+
+        $('#btn_export').click(function(){
+            window.open('SOA/transaction/export?cusid='+_cboCustomers.val());
+
+        });
+
+        $('#btn_email').click(function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":'SOA/transaction/email?cusid='+_cboCustomers.val(),
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                });   
+        });
+        
     }();
+
+    var showSpinningProgress=function(e){
+        $(e).toggleClass('disabled');
+        $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+    };
+
+
+    var showNotification=function(obj){
+        PNotify.removeAll(); //remove all notifications
+        new PNotify({
+            title:  obj.title,
+            text:  obj.msg,
+            type:  obj.stat
+        });
+    };
 
     function reinitializeBalances() {
         var sumPrev = 0; var sumCur = 0; var sumPayment = 0; var totalBalance = 0; total = 0;

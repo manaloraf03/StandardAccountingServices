@@ -120,6 +120,8 @@
                                             </div>
                                             <div class="panel-footer">
 											<button type="button" id="print_ar" class="btn btn-success">Print</button>
+                                            <button type="button" id="export" class="btn btn-primary">Export</button>
+                                            <button type="button" id="email" class="btn btn-primary">Email</button>
 											<button type="button" id="download_ar" class="btn btn-success">Download PDF</button>
 											</div>
                                         </div>
@@ -255,7 +257,41 @@ $(document).ready(function(){
                 window.open('AR_Reports/layout/ar_receivable_reports/'+customer_id+'/'+fromdate+'/'+todate+'/preview', '_blank');
             //alert(_selectedID);
         });
-		
+
+        $("#export").click(function(){
+            customer_id=$('#customer_id_filter').val();
+            fromdate_filter=$('#fromdate_filter').val();
+            todate_filter=$('#todate_filter').val();
+            var fromdate = fromdate_filter.replace(/\//g, "-");
+            var todate = todate_filter.replace(/\//g, "-");
+                window.open('AR_Reports/layout/ar_receivable_reports_export/'+customer_id+'/'+fromdate+'/'+todate+'/');
+            //alert(_selectedID);
+        });
+
+        $("#email").click(function(){
+            customer_id=$('#customer_id_filter').val();
+            fromdate_filter=$('#fromdate_filter').val();
+            todate_filter=$('#todate_filter').val();
+            var fromdate = fromdate_filter.replace(/\//g, "-");
+            var todate = todate_filter.replace(/\//g, "-");
+              
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":'AR_Reports/layout/ar_receivable_reports_email/'+customer_id+'/'+fromdate+'/'+todate+'/',
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                });           
+             //alert(_selectedID);
+        });
+
 		$("#download_ar").click(function(){
             customer_id=$('#customer_id_filter').val();
     		fromdate_filter=$('#fromdate_filter').val();
@@ -265,7 +301,22 @@ $(document).ready(function(){
                 window.location = 'AR_Reports/layout/ar_receivable_reports/'+customer_id+'/'+fromdate+'/'+todate+'/pdf';
             //alert(_selectedID);
         });
-		
+
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
+
 		$('.date-picker').datepicker({
             todayBtn: "linked",
             keyboardNavigation: false,

@@ -261,7 +261,13 @@
             var createToolBarButton=function() {
                 var _btnPrint='<button class="btn btn-primary" id="btn_print" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Print Aging Payables" >'+
                     '<i class="fa fa-print"></i> Print Report</button>';
-                $("div.toolbar").html(_btnPrint);
+
+                var _btnExport='<button class="btn btn-success" id="btn_export" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Export Aging Payables" >'+
+                    '<i class="fa fa-file-excel-o"></i> Export</button>';
+
+                var _btnEmail='<button class="btn btn-success" id="btn_email" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Email Aging Payables" >'+
+                    '<i class="fa fa-share"></i> Email</button>';
+                $("div.toolbar").html(_btnPrint+"&nbsp"+_btnExport+"&nbsp"+_btnEmail);
             }();
 
         }();
@@ -271,7 +277,44 @@
             $('#btn_print').click(function(){
                 window.open('Aging_payables/transaction/print');   
             });
+
+            $('#btn_export').click(function(){
+                window.open('Aging_payables/transaction/export');   
+            });
+
+            $('#btn_email').click(function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":'Aging_payables/transaction/email',
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                });   
+            });            
         }();
+
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
+
     });
 
     </script>
