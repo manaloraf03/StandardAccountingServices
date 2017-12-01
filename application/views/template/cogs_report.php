@@ -24,7 +24,7 @@
     <div>
         <h2 style="display: table;margin: 0 auto;!important;">Schedule of Cost of Goods Sold</h2>
         <p style="display: table;margin: 0 auto;!important;"><?php echo $department[0]->department_name; ?></p>
-        <p style="display: table;margin: 0 auto;!important;">Period 01/01/2017 to 02/02/2017</p>
+        <p style="display: table;margin: 0 auto;!important;"><?php echo $start; ?> to <?php echo $end;?></p>
     </div>
 
 

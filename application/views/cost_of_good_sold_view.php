@@ -134,8 +134,9 @@ tr:nth-child(even) {
 
                                                         <div class="row" style="margin-bottom: 5px;margin-top: 5px;">
                                                             <div class="col-lg-5">
-                                                                <button id="btn_print" class="btn btn-primary col-lg-8" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
-
+                                                                <button id="btn_print" class="btn btn-primary col-md-4" style="text-transform: none;"><i class="fa fa-print"></i> Print Report</button>
+                                                                <button id="btn_export" class="btn btn-success" style="text-transform: none;margin-left: 5px;"><i class="fa fa-file-excel-o"></i> Export</button>
+                                                                <button id="btn_email" class="btn btn-success" style="text-transform: none;margin-left: 5px;"><i class="fa fa-share"></i> Email</button>
                                                                 <button id="btn_refresh" class="btn btn-green" style="text-transform: none;margin-left: 5px;"><i class="fa fa-refresh"></i> Refresh</button>
                                                             </div>
 
@@ -406,7 +407,7 @@ tr:nth-child(even) {
 
                 var form = document.createElement("form");
                 form.setAttribute("method", "post");
-                form.setAttribute("action", "Cogs/transaction/print");
+                form.setAttribute("action", "Cogs/transaction/print?start="+$('#txt_start').val()+'&end='+$('#txt_end').val());
 
                 form.setAttribute("target", "view");
 
@@ -448,6 +449,122 @@ tr:nth-child(even) {
 
             });
 
+            $('#btn_export').click(function(){
+
+                var totalInventoryBegin=getFloat($('.total_avg_cost_ending').first().text());
+                var totalPurchases=getFloat($('.total_purchases').first().text());
+                var totalGoodsForSale=totalInventoryBegin+totalPurchases;
+                var totalInventoryCostEnd=getFloat($('.total_avg_cost_ending').first().text());
+                var cog=totalGoodsForSale-totalInventoryCostEnd;
+
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                form.setAttribute("action", "Cogs/transaction/export?start="+$('#txt_start').val()+'&end='+$('#txt_end').val());
+
+                form.setAttribute("target", "view");
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "inv_begin")
+                    .attr('value', totalInventoryBegin)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "purchases")
+                    .attr('value', totalPurchases)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "goodsForSale")
+                    .attr('value', totalGoodsForSale)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "inv_end")
+                    .attr('value', totalInventoryCostEnd)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "cogs")
+                    .attr('value', cog)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "department")
+                    .attr('value', $('#cbo_departments').val())
+                    .appendTo(form);
+
+                console.log($('#cbo_departments').select2('data').text);
+                document.body.appendChild(form);
+
+
+                form.submit();
+
+            });
+
+
+            $('#btn_email').click(function(){
+
+                var form = document.createElement("form");
+                form.setAttribute("name", "frm_cogs");
+
+                var totalInventoryBegin=getFloat($('.total_avg_cost_ending').first().text());
+                var totalPurchases=getFloat($('.total_purchases').first().text());
+                var totalGoodsForSale=totalInventoryBegin+totalPurchases;
+                var totalInventoryCostEnd=getFloat($('.total_avg_cost_ending').first().text());
+                var cog=totalGoodsForSale-totalInventoryCostEnd;
+
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "inv_begin")
+                    .attr('value', totalInventoryBegin)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "purchases")
+                    .attr('value', totalPurchases)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "goodsForSale")
+                    .attr('value', totalGoodsForSale)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "inv_end")
+                    .attr('value', totalInventoryCostEnd)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "cogs")
+                    .attr('value', cog)
+                    .appendTo(form);
+
+                $('<input />').attr('type', 'hidden')
+                    .attr('name', "department")
+                    .attr('value', $('#cbo_departments').val())
+                    .appendTo(form);
+
+                console.log($('#cbo_departments').select2('data').text);
+                document.body.appendChild(form);
+
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+                var _data=$('form[name="frm_cogs"]').serializeArray();
+
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":"Cogs/transaction/email?start="+$('#txt_start').val()+'&end='+$('#txt_end').val(),
+                    "data":_data
+                }).done(function(response){
+                    showNotification(response);
+
+                });   
+            
+
+            });
+
             $('#btn_refresh').click(function(){
                 reloadList();
             });
@@ -461,6 +578,21 @@ tr:nth-child(even) {
 
         }();
 
+
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
 
         function reloadList(){
             dtInventoryCosting.clear().draw();
@@ -478,6 +610,7 @@ tr:nth-child(even) {
 
             //reComputeCostOfGoodsSold();
         }
+
 
         function reloadInventoryCostingEnding(){
             dtInventoryEndingCosting=$('#tbl_ending_inventory').DataTable({
