@@ -56,7 +56,7 @@
         }
 */
     table{
-        border:none!important;
+        border:none;
     }
     </style>
 </head>
