@@ -238,8 +238,9 @@
     <hr>
     <div class="row" style="padding: 1%;margin-top: 0px;padding-top:0px;">
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
+        <button id="refreshproducts" class="btn-primary btn pull-right" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Refresh</button>
         <div id="custom-templates">
-            <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
+            <input class="typeahead" id="typeaheadsearch" type="text" placeholder="Enter PLU or Search Item">
         </div><br />
             <form id="frm_items">
                 <div class="table-responsive">
@@ -664,7 +665,7 @@
 <script>
 $(document).ready(function(){
     var dt; var _txnMode; var _selectedID; var _selectRowObj;
-    var _cboDepartments; var _cboDepartment; var _cboSalesperson; var _cboCustomers; var _lookUpPrice;
+    var _cboDepartments; var _cboDepartment; var _cboSalesperson; var _cboCustomers; var _lookUpPrice; var products;
     /*var oTableItems={
         qty : 'td:eq(0)',
         unit_price : 'td:eq(3)',
@@ -806,6 +807,18 @@ $(document).ready(function(){
                 });
             }
         });
+
+
+         $('#refreshproducts').click(function(){
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+            }).always(function(){
+                $('#typeaheadsearch').val('');
+                });
+         });
         $('#custom-templates .typeahead').keypress(function(event){
             if (event.keyCode == 13) {
                 $('.tt-suggestion:first').click();
@@ -823,11 +836,10 @@ $(document).ready(function(){
                 }
             }
         });*/
-        var raw_data = <?php echo json_encode($products); ?>;
-        var products = new Bloodhound({
+        products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            local : products
         });
         var _objTypeHead=$('#custom-templates .typeahead');
         _objTypeHead.typeahead(null, {
@@ -838,11 +850,14 @@ $(document).ready(function(){
                     header: [
                         '<table class="tt-head">'+
                             '<tr>'+
-                                '<td width=5%" style="padding-left: 1%;">'+
+                                '<td width=10%" style="padding-left: 1%;">'+
                                     '<b>PLU</b>'+
                                 '</td>'+
-                                '<td width="5%" align="left">'+
+                                '<td width="25%" align="left">'+
                                     '<b>Description</b>'+
+                                '</td>'+
+                                '<td width="5%" align="left" style="padding-right: 2%;">'+
+                                    '<b>On Hand</b>'+
                                 '</td>'+
                                 '<td width="5%" align="right" style="padding-right: 2%;">'+
                                     '<b>SRP</b>'+
@@ -853,11 +868,14 @@ $(document).ready(function(){
                     suggestion: Handlebars.compile(
                         '<table class="tt-items">'+
                             '<tr>'+
-                                '<td width="5%" style="padding-left: 1%">'+
+                                '<td width="10%" style="padding-left: 1%">'+
                                     '{{product_code}}'+
                                 '</td>'+
-                                '<td width="5%" align="left">'+
+                                '<td width="25%" align="left">'+
                                     '{{product_desc}}'+
+                                '</td>'+
+                                '<td width="5%" align="left" style="padding-right: 2%;">'+
+                                    '{{on_hand}}'+
                                 '</td>'+
                                 '<td width="5%" align="right" style="padding-right: 2%;">'+
                                     '{{sale_price}}'+
@@ -1089,13 +1107,35 @@ $(document).ready(function(){
             $('#cbo_departments').select2('val', null);
             $('#cbo_department').select2('val', null);
             $('#cbo_customers').select2('val', null);
-            ///$('.sales_order_title').html('New Sales Order');
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+
+            }).always(function(){  });            
             showList(false);
         });
         $('#tbl_sales_order tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
             _txnMode="edit";
             //$('.sales_order_title').html('Edit Sales Order');
+                getproduct().done(function(data){
+                    products.clear();
+                    products.local = data.data;
+                    products.initialize(true);
+                    countproducts = data.data.length;
+                        if(countproducts > 100){
+                        showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                        }
+
+                }).always(function(){ });
+                $('#typeaheadsearch').val('');
+
+
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.sales_order_id;
@@ -1325,6 +1365,21 @@ $(document).ready(function(){
         });
         return stat;
     };
+    var getproduct=function(){
+       return $.ajax({
+           "dataType":"json",
+           "type":"POST",
+           "url":"products/transaction/list",
+           "beforeSend": function(){
+                countproducts = products.local.length;
+                if(countproducts > 100){
+                    showNotification({title:"Please Wait !",stat:"info",msg:"Refreshing your Products List."});
+                }
+           }
+      });
+    };
+
+
     var createCustomer=function(){
         var _data=$('#frm_customer').serializeArray();
         _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});

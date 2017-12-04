@@ -256,8 +256,9 @@
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
+                <button id="refreshproducts" class="btn-primary btn pull-right" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Refresh</button>
                 <div id="custom-templates">
-                    <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
+                    <input class="typeahead" id="typeaheadsearch" type="text" placeholder="Enter PLU or Search Item">
                 </div><br />
 
                 <form id="frm_items">
@@ -515,7 +516,7 @@
 
 
 $(document).ready(function(){
-    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboAdjustments;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboAdjustments; var products;
 
     var oTableItems={
         qty : 'td:eq(0)',
@@ -628,13 +629,12 @@ $(document).ready(function(){
             }
         });
 
-        var raw_data=<?php echo json_encode($products); ?>;
 
 
-        var products = new Bloodhound({
+        products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            local : products
         });
 
         var _objTypeHead=$('#custom-templates .typeahead');
@@ -645,10 +645,10 @@ $(document).ready(function(){
             source: products,
             templates: {
                 header: [
-                    '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                    '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On Hand</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
 
-                suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
 
             }
         }).on('keyup', this, function (event) {
@@ -774,6 +774,17 @@ $(document).ready(function(){
 
         });
 
+         $('#refreshproducts').click(function(){
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    $('#typeaheadsearch').val('');
+            }).always(function(){
+                });
+         });
+
         //create new department
         $('#btn_create_department').click(function(){
             var btn=$(this);
@@ -838,6 +849,18 @@ $(document).ready(function(){
             clearFields($('#frm_adjustments'));
             $('#tbl_items > tbody').html('');
             $('#cbo_departments').select2('val', null);
+            $('#typeaheadsearch').val('');
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+
+            }).always(function(){  });
+
             showList(false);
             reComputeTotal();
         });
@@ -865,7 +888,17 @@ $(document).ready(function(){
             _selectedID=data.adjustment_id;
             $('#span_invoice_no').html(data.adjustment_code);
 
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
 
+            }).always(function(){ });
+            $('#typeaheadsearch').val('');
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -1103,6 +1136,19 @@ $(document).ready(function(){
         return stat;
     };
 
+    var getproduct=function(){
+       return $.ajax({
+           "dataType":"json",
+           "type":"POST",
+           "url":"products/transaction/list",
+           "beforeSend": function(){
+                countproducts = products.local.length;
+                if(countproducts > 100){
+                    showNotification({title:"Please Wait !",stat:"info",msg:"Refreshing your Products List."});
+                }
+           }
+      });
+    };
 
     var createAdjustment=function(){
         var _data=$('#frm_adjustments,#frm_items').serializeArray();

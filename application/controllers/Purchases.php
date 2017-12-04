@@ -57,31 +57,31 @@ class Purchases extends CORE_Controller
 
         $data['tax_types']=$this->Tax_types_model->get_list('is_deleted=0');
 
-        $data['products']=$this->Products_model->get_list(
-                null, //no id filter
-                array(
-                           'products.product_id',
-                           'products.product_code',
-                           'products.product_desc',
-                           'products.product_desc1',
-                           'products.is_tax_exempt',
-                           'FORMAT(products.sale_price,2)as sale_price',
-                           'FORMAT(products.purchase_cost,2)as purchase_cost',
-                           'products.unit_id',
-                           'products.on_hand',
-                           'units.unit_name',
-                           'tax_types.tax_type_id',
-                           'tax_types.tax_rate'
-                ),
-                array(
-                    // parameter (table to join(left) , the reference field)
-                    array('units','units.unit_id=products.unit_id','left'),
-                    array('categories','categories.category_id=products.category_id','left'),
-                    array('tax_types','tax_types.tax_type_id=products.tax_type_id','left')
+        // $data['products']=$this->Products_model->get_list(
+        //         null, //no id filter
+        //         array(
+        //                    'products.product_id',
+        //                    'products.product_code',
+        //                    'products.product_desc',
+        //                    'products.product_desc1',
+        //                    'products.is_tax_exempt',
+        //                    'FORMAT(products.sale_price,2)as sale_price',
+        //                    'FORMAT(products.purchase_cost,2)as purchase_cost',
+        //                    'products.unit_id',
+        //                    'products.on_hand',
+        //                    'units.unit_name',
+        //                    'tax_types.tax_type_id',
+        //                    'tax_types.tax_rate'
+        //         ),
+        //         array(
+        //             // parameter (table to join(left) , the reference field)
+        //             array('units','units.unit_id=products.unit_id','left'),
+        //             array('categories','categories.category_id=products.category_id','left'),
+        //             array('tax_types','tax_types.tax_type_id=products.tax_type_id','left')
 
-                )
+        //         )
 
-            );
+        //     );
 
         $data['title'] = 'Purchase Order';
         (in_array('2-1',$this->session->user_rights)? 

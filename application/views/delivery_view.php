@@ -365,8 +365,9 @@
 <div class="row ">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
+        <button id="refreshproducts" class="btn-primary btn pull-right" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Refresh</button>
         <div id="custom-templates">
-            <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
+            <input class="typeahead" id="typeaheadsearch" type="text" placeholder="Enter PLU or Search Item">
         </div><br />
 
         <form id="frm_items">
@@ -851,7 +852,7 @@
 
 $(document).ready(function(){
     var dt; var dt_po; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType;
-    var _productType; var _cboDepartments; var _defCostType;
+    var _productType; var _cboDepartments; var _defCostType; var products;
 
     //_defCostType=0;
 
@@ -994,12 +995,12 @@ $(document).ready(function(){
             }
         });
 
-        var raw_data = <?php echo json_encode($products); ?>;
 
-        var products = new Bloodhound({
+
+        products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1','purchase_cost'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            local : products
         });
 
         /*var products = new Bloodhound({
@@ -1251,6 +1252,19 @@ $(document).ready(function(){
             $('#tbl_items tbody').html('');
             $('#order_default').datepicker('setDate', 'today');
             $('#due_default').datepicker('setDate', 'today');
+            $('#typeaheadsearch').val('');
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+
+            }).always(function(){  });
+
+
             showList(false);
         });
 
@@ -1435,7 +1449,8 @@ $(document).ready(function(){
 
 
         $('#tbl_delivery_invoice tbody').on('click','button[name="edit_info"]',function(){
-           
+
+
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.dr_invoice_id;
@@ -1450,6 +1465,18 @@ $(document).ready(function(){
             }
             else
             {
+                getproduct().done(function(data){
+                    products.clear();
+                    products.local = data.data;
+                    products.initialize(true);
+                    countproducts = data.data.length;
+                        if(countproducts > 100){
+                        showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                        }
+
+                }).always(function(){ });
+                $('#typeaheadsearch').val('');
+
                _txnMode="edit";
                 _selectRowObj=$(this).closest('tr');
                 var data=dt.row(_selectRowObj).data();
@@ -1690,6 +1717,16 @@ $(document).ready(function(){
 
         });
 
+
+         $('#refreshproducts').click(function(){
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+            }).always(function(){
+                });
+         });
         $('#link_browse_po').click(function(){
             $('#btn_receive_po').click();
         });
@@ -1778,6 +1815,21 @@ $(document).ready(function(){
             "beforeSend": showSpinningProgress($('#btn_create_new_department'))
         });
     };
+
+    var getproduct=function(){
+       return $.ajax({
+           "dataType":"json",
+           "type":"POST",
+           "url":"products/transaction/list",
+           "beforeSend": function(){
+                countproducts = products.local.length;
+                if(countproducts > 100){
+                    showNotification({title:"Please Wait !",stat:"info",msg:"Refreshing your Products List."});
+                }
+           }
+      });
+    };
+
 
     var createSupplier=function() {
         var _data=$('#frm_suppliers_new').serializeArray();

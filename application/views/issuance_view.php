@@ -206,8 +206,10 @@ echo $_side_bar_navigation;
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <br />
                     <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
+                    <button id="refreshproducts" class="btn-primary btn pull-right" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Refresh</button>
+        
                     <div id="custom-templates">
-                        <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
+                        <input class="typeahead" id="typeaheadsearch" type="text" placeholder="Enter PLU or Search Item">
                     </div><br />
                     <form id="frm_items">
                         <div class="table-responsive" style="min-height: 200px;padding: 1px;max-height: 400px;overflow: auto;">
@@ -624,6 +626,7 @@ echo $_side_bar_navigation;
 <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
+    var products;
     var dt; var _txnMode; 
     var _selectedID; 
     var _selectRowObj; 
@@ -780,11 +783,10 @@ dt_si = $('#tbl_si_list').DataTable({
             }
         });
         
-        var raw_data=<?php echo json_encode($products); ?>;
-        var products = new Bloodhound({
+         products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            local : products
         });
         var _objTypeHead=$('#custom-templates .typeahead');
         _objTypeHead.typeahead(null, {
@@ -793,9 +795,9 @@ dt_si = $('#tbl_si_list').DataTable({
             source: products,
             templates: {
                 header: [
-                    '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="20%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
+                    '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="30%" align="left"><b>Description 1</b></td><td width="20%" align="left"><b>Description 2</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>On Hand</b></td><td width="10%" align="right" style="padding-right: 2%;"><b>Cost</b></td></tr></table>'
                 ].join('\n'),
-                suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="20%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
+                suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%">{{product_code}}</td><td width="30%" align="left">{{product_desc}}</td><td width="20%" align="left">{{produdct_desc1}}</td><td width="10%" align="right" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{purchase_cost}}</td></tr></table>')
             }
         }).on('keyup', this, function (event) {
             if (event.keyCode == 13) {
@@ -982,6 +984,17 @@ dt_si = $('#tbl_si_list').DataTable({
             $('#item_issuance_title').html('Record Item to Issue');
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_issuances'));
+            $('#typeaheadsearch').val('');
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+
+            }).always(function(){  });
             showList(false);
             reComputeTotal();
         });
@@ -995,6 +1008,18 @@ dt_si = $('#tbl_si_list').DataTable({
         });
         $('#tbl_issuances tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
+                getproduct().done(function(data){
+                    products.clear();
+                    products.local = data.data;
+                    products.initialize(true);
+                    countproducts = data.data.length;
+                        if(countproducts > 100){
+                        showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                        }
+
+                }).always(function(){ });
+                $('#typeaheadsearch').val('');
+
             _txnMode="edit";
             $('#item_issuance_title').html('Edit Item to issue');
             _selectRowObj=$(this).closest('tr');
@@ -1121,6 +1146,15 @@ dt_si = $('#tbl_si_list').DataTable({
         $('#btn_cancel').click(function(){
             showList(true);
         });
+        $('#refreshproducts').click(function(){
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+            }).always(function(){
+                });
+         });
         $('#btn_save').click(function(){
             if(validateRequiredFields($('#frm_issuances'))){
                 if(_txnMode=="new"){
@@ -1285,6 +1319,21 @@ dt_si = $('#tbl_si_list').DataTable({
     var reInitializeNumeric=function(){
         $('.numeric').autoNumeric('init');
     };
+
+    var getproduct=function(){
+       return $.ajax({
+           "dataType":"json",
+           "type":"POST",
+           "url":"products/transaction/list",
+           "beforeSend": function(){
+                countproducts = products.local.length;
+                if(countproducts > 100){
+                    showNotification({title:"Please Wait !",stat:"info",msg:"Refreshing your Products List."});
+                }
+           }
+      });
+    };
+
 });
 </script>
 </body>
