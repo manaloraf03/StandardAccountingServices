@@ -267,6 +267,7 @@
     $(document).ready(function(){
         var dt;
 
+
         var initializeControls=function(){
 
             $('.date-picker').datepicker({
@@ -305,7 +306,29 @@
             });
 
             $(document).on('click','#btn_print',function(){
-                window.open('Inventory/transaction/preview-inventory?depid'+$('#cbo_department').val()+'&date='+$('#txt_date').val());
+                window.open('Inventory/transaction/preview-inventory?depid='+$('#cbo_department').val()+'&date='+$('#txt_date').val());
+            });
+
+
+            $(document).on('click','#btn_export',function(){
+                window.open('Inventory/transaction/export-inventory?depid='+$('#cbo_department').val()+'&date='+$('#txt_date').val());
+            });
+
+            $(document).on('click','#btn_email',function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":'Inventory/transaction/email-inventory?depid='+$('#cbo_department').val()+'&date='+$('#txt_date').val(),
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                });   
             });
 
             $(document).on('click','#btn_refresh',function(){
@@ -355,15 +378,35 @@
         }();
 
 
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
 
         function createToolBarButton(){
             var _btnPrint='<button class="btn btn-primary" id="btn_print" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Print" >'+
                 '<i class="fa fa-print"></i> Print Report</button>';
 
+            var _btnExport='<button class="btn btn-success" id="btn_export" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Export" >'+
+                '<i class="fa fa-file-excel-o"></i> Export</button>';
+
+            var _btnEmail='<button class="btn btn-success" id="btn_email" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Email" >'+
+                '<i class="fa fa-share"></i> Email</button>';
+
             var _btnRefresh='<button class="btn btn-green" id="btn_refresh" style="text-transform: none; font-family: Tahoma, Georgia, Serif; " data-toggle="modal" data-target="#salesInvoice" data-placement="left" title="Reload" >'+
                 '<i class="fa fa-refresh"></i></button>';
 
-            $("div.toolbar").html(_btnPrint+"&nbsp;"+_btnRefresh);
+            $("div.toolbar").html(_btnPrint+"&nbsp;"+_btnExport+"&nbsp;"+_btnEmail+"&nbsp;"+_btnRefresh);
         };
 
 

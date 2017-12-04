@@ -72,7 +72,8 @@
         </tr>
     </table><hr>
 
-    <h3 style="margin-bottom: 0px;">Inventory Report - <?php echo $department; ?></h3>
+    <h3 style="margin-bottom: 0px;">Inventory Report - <?php echo $department; ?>
+        </h3>
     <i>As of <?php echo $date; ?></i>
 
 
