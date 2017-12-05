@@ -115,7 +115,7 @@ class Products extends CORE_Controller
                 //$m_products->is_inventory = $this->input->post('inventory',TRUE);
 
                  //im not sure, why posted checkbox post value of 0 when checked
-                $m_products->is_tax_exempt =($this->input->post('is_tax_exempt',TRUE)==null?0:1);
+               $m_products->is_tax_exempt =$this->get_numeric_value($this->input->post('is_tax_exempt',TRUE));
 
                 $m_products->equivalent_points = $this->get_numeric_value($this->input->post('equivalent_points', TRUE));
                 $m_products->product_warn =$this->get_numeric_value( $this->input->post('product_warn', TRUE));
@@ -171,7 +171,7 @@ class Products extends CORE_Controller
                 //$m_products->is_inventory = $this->input->post('inventory',TRUE);
 
                 //im not sure, why posted checkbox post value of 0 when checked
-                $m_products->is_tax_exempt =($this->input->post('is_tax_exempt',TRUE)==null?0:1);
+                $m_products->is_tax_exempt =$this->get_numeric_value($this->input->post('is_tax_exempt',TRUE));
 
 
                 $m_products->equivalent_points = $this->get_numeric_value($this->input->post('equivalent_points', TRUE));
