@@ -119,7 +119,7 @@ $(function() {
                 // }
 
 			} else if (navColor == null) {
-				$('#topnav').removeClass(headerColors).addClass('navbar-black');
+				$('#topnav').removeClass(headerColors).addClass('navbar-graylight');
                 $('div.panel-heading').css('background-color',$('#topnav').css('background-color'));
                 $('div.modal-header').css('background-color',$('#topnav').css('background-color'));
 			}
@@ -130,8 +130,8 @@ $(function() {
 				$('#headernav').removeClass(sidebarColors).addClass('navbar-' + sideColor);
 
 			} else if (navColor == null) {
-				$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').removeClass(sidebarColors).addClass('sidebar-black');
-				$('#wrapper>nav.navbar').removeClass(sidebarColors).addClass('navbar-black');
+				$('.static-sidebar-wrapper, .fixed-sidebar-wrapper').removeClass(sidebarColors).addClass('sidebar-graylight');
+				$('#wrapper>nav.navbar').removeClass(sidebarColors).addClass('navbar-graylight');
 			}
 
 		});

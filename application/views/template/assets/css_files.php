@@ -126,7 +126,7 @@
      }
 
 .demo-options {
-    top: 60px!important;
+  /*  top: 60px!important;*/
     /*width: 151px!important;*/
 }
 </style>
