@@ -31,11 +31,11 @@
 
 
 
-<script>
+<!-- <script>    _______________   PACE Pace loader -> this query will only show loader on page load but not on ajax calls
     paceOptions = {
         elements: true
     };
-</script>
+</script> -->
 <script src="assets/plugins/pace/pace.js"></script>
 <script>
 

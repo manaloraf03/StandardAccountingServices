@@ -108,15 +108,15 @@ $(function() {
                 $('div.modal-header').css('background-color',$('#topnav').css('background-color'));
 
                 $('div.panel').css('background-color',$('#topnav').css('background-color'));
-                if(navColor=="navbar-default"||navColor=="navbar-graylight"||navColor=="navbar-bluegraylight"){
-                    $('#tbl_items > thead > tr > th').css('color','black');
-                    $('#tbl_entries > thead > tr > th').css('color','black');
-                    $('div.panel-heading b').css('color','black');
-                }else{
-                    $('#tbl_items > thead > tr > th').css('color','white');
-                    $('#tbl_entries > thead > tr > th').css('color','white');
-                    $('div.panel-heading b').css('color','white');
-                }
+                // if(navColor=="navbar-default"||navColor=="navbar-graylight"||navColor=="navbar-bluegraylight"){
+                //     $('#tbl_items > thead > tr > th').css('color','black');
+                //     $('#tbl_entries > thead > tr > th').css('color','black');
+                //     $('div.panel-heading b').css('color','black');
+                // }else{
+                //     $('#tbl_items > thead > tr > th').css('color','white');
+                //     $('#tbl_entries > thead > tr > th').css('color','white');
+                //     $('div.panel-heading b').css('color','white');
+                // }
 
 			} else if (navColor == null) {
 				$('#topnav').removeClass(headerColors).addClass('navbar-black');
@@ -275,15 +275,15 @@ $(function() {
                 $('div.modal-header').css('background-color',$('#topnav').css('background-color'));
 
                 $('div.panel').css('background-color',$('#topnav').css('background-color'));
-                if(navColor=="navbar-default"||navColor=="navbar-graylight"||navColor=="navbar-bluegraylight"){
-                    $('#tbl_items > thead > tr > th').css('color','black');
-                    $('#tbl_entries > thead > tr > th').css('color','black');
-                    $('div.panel-heading b').css('color','black');
-                }else{
-                    $('#tbl_items > thead > tr > th').css('color','white');
-                    $('#tbl_entries > thead > tr > th').css('color','white');
-                    $('div.panel-heading b').css('color','white');
-                }
+                // if(navColor=="navbar-default"||navColor=="navbar-graylight"||navColor=="navbar-bluegraylight"){
+                //     $('#tbl_items > thead > tr > th').css('color','black');
+                //     $('#tbl_entries > thead > tr > th').css('color','black');
+                //     $('div.panel-heading b').css('color','black');
+                // }else{
+                //     $('#tbl_items > thead > tr > th').css('color','white');
+                //     $('#tbl_entries > thead > tr > th').css('color','white');
+                //     $('div.panel-heading b').css('color','white');
+                // }
 
 			});
 
