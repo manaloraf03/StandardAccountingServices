@@ -1452,7 +1452,7 @@ class Templates extends CORE_Controller {
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
                     $content=$this->load->view('template/cdj_journal_entries_content',$data,TRUE); //load the template
-                    $pdf->setFooter('{PAGENO}');
+                    // $pdf->setFooter('{PAGENO}');
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output();
@@ -1767,7 +1767,7 @@ class Templates extends CORE_Controller {
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
                     $content=$this->load->view('template/gje_journal_entries_content',$data,TRUE); //load the template
-                    $pdf->setFooter('{PAGENO}');
+                    // $pdf->setFooter('{PAGENO}');
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output($pdfFilePath,"D");
@@ -1779,7 +1779,7 @@ class Templates extends CORE_Controller {
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
                     $pdf = $this->m_pdf->load(); //pass the instance of the mpdf class
                     $content=$this->load->view('template/gje_journal_entries_content',$data,TRUE); //load the template
-                    $pdf->setFooter('{PAGENO}');
+                    // $pdf->setFooter('{PAGENO}');
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output();

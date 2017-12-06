@@ -650,7 +650,7 @@ $(document).ready(function(){
     var createProduct=function(){
         var _data=$('#frm_product').serializeArray();
        // _data.push({name : "is_tax_exempt" ,value : _isTaxExempt});
-
+               $('#is_tax_exempt').prop("checked") ?  _data.push({name : "is_tax_exempt" , value : '1'   }) : _data.push({name : "is_tax_exempt" , value : '0'   });
         return $.ajax({
             "dataType":"json",
             "type":"POST",
@@ -663,6 +663,7 @@ $(document).ready(function(){
     var updateProduct=function(){
         var _data=$('#frm_product').serializeArray();
         //_data.push({name : "is_tax_exempt" ,value : _isTaxExempt});
+                $('#is_tax_exempt').prop("checked") ?  _data.push({name : "is_tax_exempt" , value : '1'   }) : _data.push({name : "is_tax_exempt" , value : '0'   });
         _data.push({name : "product_id" ,value : _selectedID});
 
         return $.ajax({ 

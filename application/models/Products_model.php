@@ -893,6 +893,7 @@ function product_list($account,$as_of_date=null,$product_id=null){
                 it.item_type,
                 account_titles.account_title,
                 core.*,
+                tax_types.*,
 
 
 
@@ -1025,9 +1026,13 @@ function product_list($account,$as_of_date=null,$product_id=null){
                 LEFT JOIN refproduct rp ON rp.refproduct_id = core.refproduct_id
                 LEFT JOIN item_types it ON it.item_type_id = core.item_type_id
                 LEFT JOIN account_titles ON account_titles.account_id=core.income_account_id
-                            
+                LEFT JOIN tax_types ON tax_types.tax_type_id=core.tax_type_id
+
                 ORDER BY core.product_desc
                 
+
+
+
 
     ";
 

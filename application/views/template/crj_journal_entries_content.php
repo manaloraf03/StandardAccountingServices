@@ -29,7 +29,7 @@
         }
 
         hr {
-            border-top: 3px solid #404040;
+            /*border-top: 3px solid #404040;*/
         }
 
 
@@ -53,13 +53,13 @@
             box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
         }
     */
-        table{
+        table.noborder{
         border:none!important;
     }
     </style>
 </head>
 <body>
-    <table width="100%">
+    <table width="100%" class="noborder">
         <tr>
             <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
             <td width="90%" class="">
@@ -73,7 +73,7 @@
     <div class="">
         <h3 class="report-header"><strong>CASH RECEIPT JOURNAL</strong></h3>
     </div>
-    <table width="100%" border="1" cellspacing="-1">
+    <table width="100%" border="1"  cellspacing="-1" >
         <tr>
             <td style="padding: 4px;" colspan="3"><strong>TXN # :</strong> <?php echo $journal_info->txn_no; ?></td>
         </tr>
@@ -95,7 +95,7 @@
             <td style="padding: 4px;"><?php echo number_format($journal_info->amount,2); ?></td>
         </tr>
     </table><br>
-    <table width="100%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;" >
+    <table width="100%" style="border-collapse: collapse;border-spacing: 0;font-family: tahoma;"  class="noborder">
             <thead>
             <tr>
                 <td style="border: 1px solid black;text-align: center;padding: 6px;" colspan="5"><strong>ENTRIES</strong></td>
@@ -150,7 +150,7 @@
                 </tfoot>    
         </table><br><br>
         <center>
-            <table style="text-align: center;">
+            <table style="text-align: center;" class="noborder">
                 <tr>
                     <td width="30%" style="padding-right: 10px;">___________________________________</td>
                     <td width="30%" style="padding-right: 10px;">___________________________________</td>

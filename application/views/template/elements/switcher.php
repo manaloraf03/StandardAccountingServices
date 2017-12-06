@@ -3,7 +3,7 @@
     <div class="demo-options-icon"><i class="ti ti-paint-bucket"></i></div>
     <div class="demo-heading">Interface Settings</div>
 
-    <div class="demo-body">
+<!--     <div class="demo-body">
         <div class="tabular">
             <div class="tabular-row">
                 <div class="tabular-cell">Fixed Header</div>
@@ -18,7 +18,7 @@
                 <div class="tabular-cell demo-switches"><input class="bootstrap-switch" type="checkbox" data-size="mini" data-on-color="success" data-off-color="default" name="demo-collapseleftbar" data-on-text="&nbsp;" data-off-text="&nbsp;"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="demo-body">
         <div class="option-title">Topnav</div>

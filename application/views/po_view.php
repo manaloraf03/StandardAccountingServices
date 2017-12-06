@@ -287,8 +287,9 @@
     <div><br />
     <hr>
         <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
+        <button id="refreshproducts" class="btn-primary btn pull-right" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Refresh</button>
         <div id="custom-templates">
-            <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
+            <input class="typeahead" id="typeaheadsearch" type="text" placeholder="Enter PLU or Search Item">
         </div><br />
 
         <form id="frm_items">
@@ -746,7 +747,7 @@
 
 $(document).ready(function(){
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboSuppliers; var _cboTaxType;
-    var _cboDepartments; var _defCostType;
+    var _cboDepartments; var _defCostType; var products;
 
 
     //_defCostType=1; //Luzon Area Purchase Cost is default, this will change when branch is specified
@@ -887,12 +888,11 @@ $(document).ready(function(){
             }
         });
 
-        var raw_data = <?php echo json_encode($products); ?>;
 
-        var products = new Bloodhound({
+        products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            local : products
         });
 
         /*var products = new Bloodhound({
@@ -1107,9 +1107,27 @@ $(document).ready(function(){
             $('#cbo_departments').select2('val',null);
             $('textarea[name="remarks"]').val('');
             //$('#cbo_prodType').select2('val',3);
+            $('#typeaheadsearch').val('');
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+            }).always(function(){  });
             showList(false);
         });
-
+         $('#refreshproducts').click(function(){
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+            }).always(function(){
+                });
+         });
         $('#btn_create_new_department').click(function(){
 
             var btn=$(this);
@@ -1171,6 +1189,17 @@ $(document).ready(function(){
                 showNotification({"title":"Error!","stat":"error","msg":"Sorry, you cannot edit purchase order that is already been received."});
                 return;
             }
+                getproduct().done(function(data){
+                    products.clear();
+                    products.local = data.data;
+                    products.initialize(true);
+                    countproducts = data.data.length;
+                        if(countproducts > 100){
+                        showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                        }
+
+                }).always(function(){ });
+                $('#typeaheadsearch').val('');
 
             $('input,textarea').each(function(){
                 var _elem=$(this);
@@ -1418,6 +1447,21 @@ $(document).ready(function(){
 
         return stat;
     };
+
+    var getproduct=function(){
+       return $.ajax({
+           "dataType":"json",
+           "type":"POST",
+           "url":"products/transaction/list",
+           "beforeSend": function(){
+                countproducts = products.local.length;
+                if(countproducts > 100){
+                    showNotification({title:"Please Wait !",stat:"info",msg:"Refreshing your Products List."});
+                }
+           }
+      });
+    };
+
 
     var createDepartment=function(){
         var _data=$('#frm_department').serializeArray();

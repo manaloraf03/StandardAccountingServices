@@ -241,9 +241,10 @@
         <div>
         <hr>
             <label class="control-label" style="font-family: Tahoma;"><strong>Enter PLU or Search Item :</strong></label>
-            <div id="custom-templates">
-                <input class="typeahead" type="text" placeholder="Enter PLU or Search Item">
-            </div><br />
+        <button id="refreshproducts" class="btn-primary btn pull-right" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;"><span class=""></span>  Refresh</button>
+        <div id="custom-templates">
+            <input class="typeahead" id="typeaheadsearch" type="text" placeholder="Enter PLU or Search Item">
+        </div><br />
             <form id="frm_items">
                 <div class="table-responsive">
                     <table id="tbl_items" class="table table-striped" cellspacing="0" width="100%" style="font-font:tahoma;">
@@ -762,7 +763,7 @@
 <script src="assets/plugins/formatter/accounting.js" type="text/javascript"></script>
 <script>
 $(document).ready(function(){
-    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboDepartments; var _cboCustomers; var dt_so;
+    var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboDepartments; var _cboDepartments; var _cboCustomers; var dt_so; var products;
     var oTableItems={
         qty : 'td:eq(0)',
         unit_price : 'td:eq(3)',
@@ -878,11 +879,11 @@ $(document).ready(function(){
                 $('.tt-suggestion:first').click();
             }
         });
-        var raw_data = <?php echo json_encode($products); ?>;
-        var products = new Bloodhound({
+
+        products = new Bloodhound({
             datumTokenizer: Bloodhound.tokenizers.obj.whitespace('product_code','product_desc','product_desc1'),
             queryTokenizer: Bloodhound.tokenizers.whitespace,
-            local : raw_data
+            local : products
         });
         var _objTypeHead=$('#custom-templates .typeahead');
         _objTypeHead.typeahead(null, {
@@ -891,9 +892,9 @@ $(document).ready(function(){
         source: products,
         templates: {
             header: [
-                '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
+                '<table class="tt-head"><tr><td width=20%" style="padding-left: 1%;"><b>PLU</b></td><td width="20%" align="left"><b>Description</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>On Hand</b></td><td width="10%" align="left" style="padding-right: 2%;"><b>SRP</b></td></tr></table>'
             ].join('\n'),
-            suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%;">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
+            suggestion: Handlebars.compile('<table class="tt-items"><tr><td width="20%" style="padding-left: 1%;">{{product_code}}</td><td width="20%" align="left">{{product_desc}}</td><td width="10%" align="left" style="padding-right: 2%;">{{on_hand}}</td><td width="10%" align="right" style="padding-right: 2%;">{{sale_price}}</td></tr></table>')
         }
         }).on('keyup', this, function (event) {
             if (_objTypeHead.typeahead('val') == '') {
@@ -1104,6 +1105,18 @@ $(document).ready(function(){
                 });
             }
         });
+
+         $('#refreshproducts').click(function(){
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+            }).always(function(){
+                $('#typeaheadsearch').val('');
+                });
+         });
+
         //create new department
         $('#btn_create_department').click(function(){
             var btn=$(this);
@@ -1202,6 +1215,18 @@ $(document).ready(function(){
             $('#txt_overall_discount_amount').val('0.00'); 
             $('#invoice_default').datepicker('setDate', 'today');
             $('#due_default').datepicker('setDate', 'today');
+            $('#typeaheadsearch').val('');
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+
+            }).always(function(){  });
+
             /*$('#cbo_prodType').select2('val', 3);
             $('#cboLookupPrice').select2('val', 1);*/
             reComputeTotal(); //this is to make sure, display summary are recomputed as 0
@@ -1285,6 +1310,18 @@ $(document).ready(function(){
             }
             else
             {
+
+            getproduct().done(function(data){
+                products.clear();
+                products.local = data.data;
+                products.initialize(true);
+                countproducts = data.data.length;
+                    if(countproducts > 100){
+                    showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                    }
+
+            }).always(function(){ });
+                $('#typeaheadsearch').val('');
 
             _txnMode="edit";
             $('.sales_invoice_title').html('Edit Sales Invoice');
@@ -1542,6 +1579,20 @@ $(document).ready(function(){
         });
         return stat;
     };
+    var getproduct=function(){
+       return $.ajax({
+           "dataType":"json",
+           "type":"POST",
+           "url":"products/transaction/list",
+           "beforeSend": function(){
+                countproducts = products.local.length;
+                if(countproducts > 100){
+                    showNotification({title:"Please Wait !",stat:"info",msg:"Refreshing your Products List."});
+                }
+           }
+      });
+    };
+
     var createCustomer=function(){
         var _data=$('#frm_customer').serializeArray();
         _data.push({name : "photo_path" ,value : $('img[name="img_user"]').attr('src')});
