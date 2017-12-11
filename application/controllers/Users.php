@@ -46,9 +46,9 @@ class Users extends CORE_Controller
 
                 $businesstype= $company[0]->business_type;
 
-                if ($businesstype == 1){ $limit = 6; }
-                if ($businesstype == 2){ $limit = 11; }
-                if ($businesstype == 3){ $limit = 16; }
+                if ($businesstype == 1){ $limit = 100; }
+                if ($businesstype == 2){ $limit = 100; }
+                if ($businesstype == 3){ $limit = 100; }
 
         
                 $m_users=$this->Users_model;

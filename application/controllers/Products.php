@@ -28,6 +28,8 @@ class Products extends CORE_Controller
         $this->load->model('Delivery_invoice_item_model');
         $this->load->model('Users_model');
         $this->load->model('Account_integration_model');
+        $this->load->model('Menu_model');
+
     }
 
     public function index() {
@@ -48,6 +50,8 @@ class Products extends CORE_Controller
             )
         );
         $data['refproduct'] = $this->Refproduct_model->get_list(array('refproduct.is_deleted'=>FALSE));
+        $data['refmenu'] = $this->Menu_model->get_list(array('refmenu.is_deleted'=>FALSE));
+
         $data['categories'] = $this->Categories_model->get_list(array('categories.is_deleted'=>FALSE));
         $data['units'] = $this->Units_model->get_list(array('units.is_deleted'=>FALSE));
         $data['item_types'] = $this->Item_type_model->get_list(array('item_types.is_deleted'=>FALSE));
@@ -129,6 +133,23 @@ class Products extends CORE_Controller
                 $m_products->distributor_price =$this->get_numeric_value($this->input->post('distributor_price', TRUE));
                 $m_products->public_price =$this->get_numeric_value($this->input->post('public_price', TRUE));
 
+                //POS INTEGRATIOM
+
+                $m_products->pos_item_cost =$this->get_numeric_value($this->input->post('pos_item_cost', TRUE));
+                $m_products->pos_item_rate =$this->get_numeric_value($this->input->post('pos_item_rate', TRUE));
+                $m_products->menu_id =$this->get_numeric_value($this->input->post('menu_id', TRUE));
+
+                if($this->input->post('section_id',TRUE) == 2){
+                    $section_id = 0;
+                }else{
+                    $section_id = 1;
+                }
+
+               $m_products->section_id =$this->get_numeric_value($section_id);
+               $m_products->pos_is_tax_exempt =$this->get_numeric_value($this->input->post('pos_is_tax_exempt',TRUE));
+               $m_products->pos_is_manual_pricing =$this->get_numeric_value($this->input->post('pos_is_manual_pricing',TRUE));
+               $m_products->pos_is_salable =$this->get_numeric_value($this->input->post('pos_is_salable',TRUE));
+
                 $m_products->save();
 
                 $product_id = $m_products->last_insert_id();
@@ -185,6 +206,21 @@ class Products extends CORE_Controller
                 $m_products->dealer_price =$this->get_numeric_value($this->input->post('dealer_price', TRUE));
                 $m_products->distributor_price =$this->get_numeric_value($this->input->post('distributor_price', TRUE));
                 $m_products->public_price =$this->get_numeric_value($this->input->post('public_price', TRUE));
+                //POS Integration
+                $m_products->pos_item_cost =$this->get_numeric_value($this->input->post('pos_item_cost', TRUE));
+                $m_products->pos_item_rate =$this->get_numeric_value($this->input->post('pos_item_rate', TRUE));
+                $m_products->menu_id =$this->get_numeric_value($this->input->post('menu_id', TRUE));
+
+                if($this->input->post('section_id',TRUE) == 2){
+                    $section_id = 0;
+                }else{
+                    $section_id = 1;
+                }
+
+               $m_products->section_id =$this->get_numeric_value($section_id);
+               $m_products->pos_is_tax_exempt =$this->get_numeric_value($this->input->post('pos_is_tax_exempt',TRUE));
+               $m_products->pos_is_manual_pricing =$this->get_numeric_value($this->input->post('pos_is_manual_pricing',TRUE));
+               $m_products->pos_is_salable =$this->get_numeric_value($this->input->post('pos_is_salable',TRUE));
 
 
                 $m_products->modify($product_id);

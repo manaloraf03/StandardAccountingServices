@@ -41,7 +41,7 @@
 
                                 <!--      <i class="fa fa-star-o"></i> Total Unpaid : <b><?php echo number_format($customer_info->total_receivable_amount,2); ?></b><br /><br /><br /><br /><br /> -->
                                 </div>
-                            </div>
+                            
 
 
                             <span style="margin-left: 1%"><b><i class="fa fa-list"></i> List of Sales Order of <?php echo $customer_info->customer_name; ?></b> (Open and partially received)</span>
@@ -71,7 +71,7 @@
                                     </tbody>
                                 </table>
                             </div>
-
+                            </div>
                         </div>
 
 

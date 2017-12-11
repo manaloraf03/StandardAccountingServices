@@ -167,8 +167,8 @@ class Login extends CORE_Controller {
         $m_account_class=$this->Account_class_model;
         $m_account_class->create_default_account_classes();
 
-        $m_account_title=$this->Account_title_model;
-        $m_account_title->create_default_account_title();
+        // $m_account_title=$this->Account_title_model;
+        // $m_account_title->create_default_account_title();
 
         $m_suppliers=$this->Suppliers_model;
         $m_suppliers->create_default_supplier();

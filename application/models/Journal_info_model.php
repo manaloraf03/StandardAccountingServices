@@ -31,7 +31,7 @@ class Journal_info_model extends CORE_Model{
                     AND ji.is_active = TRUE
                     AND ji.payment_method_id=2
                     AND ji.is_reconciled = 0
-                    AND ji.bank_id = $bank_id
+                    ".($bank_id!=null?" AND ji.bank_id=$bank_id":"")."
                     AND ji.date_txn BETWEEN '$sDate' AND '$eDate') AS t
                 WHERE
                 t.book_type = 'CDJ' OR t.book_type = 'CRJ'";

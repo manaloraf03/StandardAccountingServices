@@ -533,7 +533,6 @@ $(document).ready(function(){
 
         $('#btn_yes').on('click',function(){
             var amount = $('#Sumofallmonthlydepreciation').val();
-            alert(amount);
             if(amount==0.00){
                 showNotification({title:"Error!",stat:"error",msg:"Depreciation Expense must not be equal to 0"});
             } else{

@@ -82,6 +82,13 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Cash_invoice_items_model');
 
+        $this->load->model('Hotel_integration_items_model');
+
+        $this->load->model('Pos_integration_items_model');
+
+        $this->load->model('Pos_integration_model');
+
+
 
 
         $this->load->library('M_pdf');
@@ -1220,6 +1227,49 @@ class Templates extends CORE_Controller {
 
 
 
+            case 'hotel_control':
+                $item_id=$filter_value;
+                $m_hotel = $this->Hotel_integration_items_model;
+                $hotel_data = $m_hotel->get_list($item_id);
+                $data['item'] = $hotel_data[0];
+
+                //shows when Expand Icon is click on Customer Management
+                $data['item_id'] =$item_id;
+                if($hotel_data[0]->item_type == "COUT"){
+                    $data['entries'] = $m_hotel->get_hotel_entries_journal_cout($item_id);
+                }
+                $content=$this->load->view('template/hotel_control_content',$data,TRUE);
+
+                echo $content;
+
+                break;
+
+            case 'pos_control':
+                $item_id=$filter_value;
+                $m_pos = $this->Pos_integration_items_model;
+
+                $m_pos_int = $this->Pos_integration_model;
+                $int_data = $m_pos_int->get_list(null,
+                    'pos_integration.*,
+                    c.customer_name,
+                    d.department_name',
+                    array(
+                        array('customers c','c.customer_id = pos_integration.customer_id', 'left'),
+                        array('departments d','d.department_id = pos_integration.department_id','left'))
+                    );
+                $data['int'] = $int_data[0];
+
+                $pos_data = $m_pos->get_list($item_id);
+                $data['item'] = $pos_data[0];
+                $data['item_id'] =$item_id;
+                $data['entries'] = $m_pos->get_pos_entries_journal($item_id);
+                $content=$this->load->view('template/pos_control_content',$data,TRUE);
+
+                echo $content;
+
+                break;
+
+
             case 'customer':
                 $customer_id=$filter_value;
                 $m_customers=$this->Customers_model;
@@ -1287,7 +1337,6 @@ class Templates extends CORE_Controller {
                 echo $content;
 
                 break;
-
 
             case 'journal-ap':
                 $m_journal_info=$this->Journal_info_model;

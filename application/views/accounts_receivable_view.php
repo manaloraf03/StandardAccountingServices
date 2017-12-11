@@ -228,7 +228,7 @@
                             <th></th>
                             <th>Txn #</th>
                             <th>Particular</th>
-                            <th>Remarks</th>
+                            <th width="40%">Remarks</th>
                             <th>Txn Date</th>
                             <th>Posted</th>
                             <th>Status</th>
