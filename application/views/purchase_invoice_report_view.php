@@ -125,6 +125,8 @@
                                                                 <div class="tab-content">
                                                                     <div id="summary" class="tab-pane fade in active">
                                                                         <button class="btn btn-primary pull-left" id="btn_print_summary"><i class="fa fa-print"></i>&nbsp; Print Report</button>
+                                                                        <button class="btn btn-success pull-left" style="margin-left: 5px;" id="btn_export_summary"><i class="fa fa-file-excel-o"></i>&nbsp; Export</button>
+                                                                        <button class="btn btn-success pull-left" style="margin-left: 5px;" id="btn_email_summary"><i class="fa fa-share"></i>&nbsp; Email</button>
                                                                         <table id="tbl_pi_summary" class="table table-striped" cellspacing="0" width="100%">
                                                                             <thead class="">
                                                                             <tr>
@@ -150,6 +152,8 @@
                                                                     </div>
                                                                     <div id="detailed" class="tab-pane fade">
                                                                         <button class="btn btn-primary pull-left" id="btn_print_detailed"><i class="fa fa-print"></i>&nbsp; Print Report</button>
+                                                                        <button class="btn btn-success pull-left" style="margin-left: 5px;" id="btn_export_detailed"><i class="fa fa-file-excel-o"></i>&nbsp; Export</button>
+                                                                        <button class="btn btn-success pull-left" style="margin-left: 5px;" id="btn_email_detailed"><i class="fa fa-share"></i>&nbsp; Email</button>                                                                         
                                                                         <table id="tbl_pi_detailed" class="" cellspacing="0" width="100%">
                                                                             <thead class="">
                                                                             <tr>
@@ -251,8 +255,51 @@
                 window.open('Purchase_Invoice_Report/transaction/purchase-invoice?type=summary&startDate='+_date_from.val()+'&endDate='+_date_to.val());
             });
 
+            $('#btn_export_summary').on('click', function(){
+                window.open('Purchase_Invoice_Report/transaction/purchase-invoice-export?type=summary&startDate='+_date_from.val()+'&endDate='+_date_to.val());
+            });
+
+            $('#btn_email_summary').on('click', function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":'Purchase_Invoice_Report/transaction/purchase-invoice-email?type=summary&startDate='+_date_from.val()+'&endDate='+_date_to.val(),
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                }); 
+            });
+
+
             $('#btn_print_detailed').on('click', function(){
                 window.open('Purchase_Invoice_Report/transaction/purchase-invoice?type=detailed&startDate='+_date_from.val()+'&endDate='+_date_to.val());
+            });
+
+            $('#btn_export_detailed').on('click', function(){
+                window.open('Purchase_Invoice_Report/transaction/purchase-invoice-export?type=detailed&startDate='+_date_from.val()+'&endDate='+_date_to.val());
+            });
+
+            $('#btn_email_detailed').on('click', function(){
+                showNotification({title:"Sending!",stat:"info",msg:"Please wait for a few seconds."});
+
+                var btn=$(this);
+            
+                $.ajax({
+                    "dataType":"json",
+                    "type":"POST",
+                    "url":'Purchase_Invoice_Report/transaction/purchase-invoice-email?type=detailed&startDate='+_date_from.val()+'&endDate='+_date_to.val(),
+                    "beforeSend": showSpinningProgress(btn)
+                }).done(function(response){
+                    showNotification(response);
+                    showSpinningProgress(btn);
+
+                }); 
             });
 
             _date_from.on('change', function(){
@@ -268,7 +315,25 @@
                 dtDetailed.destroy();
                 initializeDataTable();
             });
+
+        var showSpinningProgress=function(e){
+            $(e).toggleClass('disabled');
+            $(e).find('span').toggleClass('glyphicon glyphicon-refresh spinning');
+        };
+
+
+        var showNotification=function(obj){
+            PNotify.removeAll(); //remove all notifications
+            new PNotify({
+                title:  obj.title,
+                text:  obj.msg,
+                type:  obj.stat
+            });
+        };
+        
         }();
+
+
 
         var initializeControls=function() {
             $('.date-picker').datepicker({
