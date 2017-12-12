@@ -49,21 +49,6 @@
 					$items=$m_items->get_hotel_list_front_end($aod);
 					$response['data']=$items;
 
-					$i = 0;
-					foreach ($items as $item) {
-						if($item->is_equal == 0){
-							$i++;
-						}
-
-					}
-					if($i > 0){
-
-                $response['stat']="error";
-                $response['title']="Unequal Transaction Detected!";
-                $response['msg']="There is an unequal distribution of amount.";
-					}
-
-
 					echo json_encode($response);
 				break;
 
@@ -98,11 +83,13 @@
 							}
 
 						$m_customers = $this->Customers_model;
-						$list = $m_customers->get_list(array('pos_customer_id' => $customer_id, 'customer_name' => $customer_name ));
+						$list = $m_customers->get_list(array('pos_customer_id' => $customer_id));
 						$count = count($list);
 
 						if($count > 0) { // if customer already existing 
 							$m_journal->customer_id = $list[0]->customer_id;
+							$m_customers->customer_name=$customer_name;
+							$m_customers->modify($list[0]->customer_id);
 
 						}else{
 							$m_customers->pos_customer_id=$customer_id;
