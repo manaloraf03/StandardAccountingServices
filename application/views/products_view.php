@@ -65,7 +65,7 @@ $(document).ready(function(){
     var dt; var _txnMode; var _selectedID; var _selectRowObj; var _cboItemTypes; var _selectedProductType; var _isTaxExempt=0;
     var _cboSupplier; var _cboCategory; var _cboSupplier; var _cboTax; var _cboInventory; var _cboMeasurement; var _cboCredit; var _cboDebit;
     var _cboTaxGroup;
-    var _section_id; var _menu_id;
+    
     /*$(document).ready(function(){
         $('#modal_filter').modal('show');
         showList(false);
@@ -134,16 +134,6 @@ $(document).ready(function(){
 
         _cboSupplier=$('#new_supplier').select2({
             placeholder: "Please select supplier.",
-            allowClear: false
-        });
-
-        _section_id=$('#section_id').select2({
-            placeholder: "Please select Section.",
-            allowClear: false
-        });
-
-        _menu_id=$('#menu_id').select2({
-            placeholder: "Please select Menu.",
             allowClear: false
         });
 
@@ -237,15 +227,6 @@ $(document).ready(function(){
             //clearFields($('#frm_product_type'));
 
         });
-
-        $('#btn_cancel_menu').click(function(){
-            $('#modal_menu').modal('toggle');
-            $('#modal_create_product').modal('show');
-            //clearFields($('#frm_product_type'));
-
-        });
-
-
         // END HERE
 
         // NEW SUPPLIER
@@ -259,17 +240,6 @@ $(document).ready(function(){
                 clearFieldsModal($('#frm_suppliers_new'));
             }
         });
-
-        $("#menu_id").on("change", function () {        
-            $modal = $('#modal_menu');
-            if($(this).val() === 'menu'){
-                _menu_id.select2('val',null);
-                $modal.modal('show');
-                $('#modal_create_product').modal('toggle');
-                clearFieldsModal($('#frm_menu'));
-            }
-        });
-
 
         $('#btn_close_new_supplier').click(function(){
             $('#modal_new_supplier').modal('toggle');
@@ -377,38 +347,6 @@ $(document).ready(function(){
             });
         }
     });
-
-    $('#btn_save_menu').click(function(){
-
-        var btn=$(this);
-
-        if(validateRequiredFields($('#frm_menu'))){
-            var data=$('#frm_menu').serializeArray();
-
-            $.ajax({
-                "dataType":"json",
-                "type":"POST",
-                "url":"Menu/transaction/create",
-                "data":data,
-                "beforeSend" : function(){
-                    showSpinningProgress(btn);
-                }
-            }).done(function(response){
-                showNotification(response);
-                $('#modal_menu').modal('hide');
-                $('#modal_create_product').modal('show');
-
-                var _group=response.row_added[0];
-                $('#menu_id').append('<option value="'+_group.menu_id+'" selected>'+_group.menu_name+'</option>');
-                $('#menu_id').select2('val',_group.menu_id);
-
-            }).always(function(){
-                showSpinningProgress(btn);
-            });
-        }
-    });
-
-
 
     $('#btn_create_unit_group').click(function(){
 
@@ -551,13 +489,7 @@ $(document).ready(function(){
             _cboMeasurement.select2('val',null);
             _cboCredit.select2('val',0);
             _cboDebit.select2('val',0);
-            _section_id.select2('val',null);
-            _menu_id.select2('val',0);
             $('#is_tax_exempt').attr('checked', false);
-            $('#pos_is_tax_exempt').attr('checked', false);
-            $('#pos_is_manual_pricing').attr('checked', false);
-            $('#pos_is_salable').attr('checked', false);
-
         });
 
         $('#tbl_products tbody').on('click','button[name="edit_info"]',function(){
@@ -594,26 +526,14 @@ $(document).ready(function(){
 
             _cboTaxGroup.select2('val',data.tax_type_id);
 
-            if(data.section_id == 0){
-            _section_id.select2('val', 2);
-
-            }else if(data.section_id == 1){
-            _section_id.select2('val', 1);
-            }
-            _menu_id.select2('val',data.menu_id);
-
             $('#is_tax_exempt').prop('checked', (data.is_tax_exempt==1?true:false));
-            $('#pos_is_tax_exempt').prop('checked', (data.pos_is_tax_exempt==1?true:false));
-            $('#pos_is_salable').prop('checked', (data.pos_is_salable==1?true:false));
-            $('#pos_is_manual_pricing').prop('checked', (data.pos_is_manual_pricing==1?true:false));
-
 
         });
 
 
-        // $('input[name="purchase_cost"],input[name="markup_percent"],input[name="sale_price"]').keyup(function(){
-        //     reComputeSRP();
-        // });
+        $('input[name="purchase_cost"],input[name="markup_percent"],input[name="sale_price"]').keyup(function(){
+            reComputeSRP();
+        });
 
         $('#tbl_products tbody').on('click','button[name="remove_info"]',function(){
             $('#modal_confirmation').modal('show');
@@ -730,10 +650,7 @@ $(document).ready(function(){
     var createProduct=function(){
         var _data=$('#frm_product').serializeArray();
        // _data.push({name : "is_tax_exempt" ,value : _isTaxExempt});
-$('#is_tax_exempt').prop("checked") ?  _data.push({name : "is_tax_exempt" , value : '1'   }) : _data.push({name : "is_tax_exempt" , value : '0'   });
-$('#pos_is_tax_exempt').prop("checked") ?  _data.push({name : "pos_is_tax_exempt" , value : '1'   }) : _data.push({name : "pos_is_tax_exempt" , value : '0'   });
-$('#pos_is_salable').prop("checked") ?  _data.push({name : "pos_is_salable" , value : '1'   }) : _data.push({name : "pos_is_salable" , value : '0'   });
-$('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual_pricing" , value : '1'   }) : _data.push({name : "pos_is_manual_pricing" , value : '0'   });
+               $('#is_tax_exempt').prop("checked") ?  _data.push({name : "is_tax_exempt" , value : '1'   }) : _data.push({name : "is_tax_exempt" , value : '0'   });
         return $.ajax({
             "dataType":"json",
             "type":"POST",
@@ -745,10 +662,8 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
 
     var updateProduct=function(){
         var _data=$('#frm_product').serializeArray();
-$('#is_tax_exempt').prop("checked") ?  _data.push({name : "is_tax_exempt" , value : '1'   }) : _data.push({name : "is_tax_exempt" , value : '0'   });
-$('#pos_is_tax_exempt').prop("checked") ?  _data.push({name : "pos_is_tax_exempt" , value : '1'   }) : _data.push({name : "pos_is_tax_exempt" , value : '0'   });
-$('#pos_is_salable').prop("checked") ?  _data.push({name : "pos_is_salable" , value : '1'   }) : _data.push({name : "pos_is_salable" , value : '0'   });
-$('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual_pricing" , value : '1'   }) : _data.push({name : "pos_is_manual_pricing" , value : '0'   });
+        //_data.push({name : "is_tax_exempt" ,value : _isTaxExempt});
+                $('#is_tax_exempt').prop("checked") ?  _data.push({name : "is_tax_exempt" , value : '1'   }) : _data.push({name : "is_tax_exempt" , value : '0'   });
         _data.push({name : "product_id" ,value : _selectedID});
 
         return $.ajax({ 
@@ -1092,11 +1007,11 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
         .numeric{
             text-align: right;
         }
-/*
+
         #is_tax_exempt {
             width:23px;
             height:23px;
-        }*/
+        }
 
         #modal_new_supplier {
             padding-left:0px !important;
@@ -1471,7 +1386,7 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
                 </div>
             </div><!---modal-->
 
-            <div id="modal_create_product" class="modal fade"  role="dialog"><!--modal-->
+            <div id="modal_create_product" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog" style="width: 75%;">
                     <div class="modal-content">
                         <div class="modal-header" style="background-color:#2ecc71;">
@@ -1696,7 +1611,7 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Warning Quantity (Minimum Stock):</label>
+                                            <label class="">Warning Quantity :</label>
                                             <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
@@ -1707,7 +1622,7 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                            <label class="">Ideal Quantity (Maximum Stock):</label>
+                                            <label class="">Ideal Quantity :</label>
                                             <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-toggle-off"></i>
@@ -1721,7 +1636,7 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                    <label class="">Link to Credit Account (Sales):</label>
+                                                    <label class="">Link to Credit Account :</label>
 
                                                     <select name="income_account_id" id="income_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
@@ -1735,7 +1650,7 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                    <label class="">Link to Debit Account (Purchases): </label>
+                                                    <label class="">Link to Debit Account :</label>
 
                                                     <select name="expense_account_id" id="expense_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
@@ -1745,8 +1660,9 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
                                                         <?php } ?>
                                                     </select>
                                         </div>
-                                        <div class="form-group" style="margin-bottom:0px; vertical-align: middle;text-align: left;">
-                                                <label  for="is_tax_exempt" style="text-align: left;vertical-align: middle;"><input type="checkbox" name="is_tax_exempt" class="" id="is_tax_exempt" style="transform: scale(2.0);">  &nbsp;&nbsp;Tax Exempt ?</label>
+                                        <div class="form-group" style="margin-bottom:0px;">
+                                                <label class="">Tax Exempt ?</label><br>
+                                                <input type="checkbox" name="is_tax_exempt" class="form-control" id="is_tax_exempt">
 
                                         </div>
 
@@ -1758,88 +1674,17 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
 
 
 
-                                </div>
-                                <div class="row">
-
-                                    <div class="col-sm-12">
-                                    <h2> POS</h2>
-                                        <div class="col-sm-4">
-                                            <div class="form-group" style="margin-bottom:0px;">
-                                                <label class=""><b class="required">*</b> Section :</label>
-                                                <select name="section_id" id="section_id" >
-                                                        <option value="2">Kitchen</option>
-                                                        <option value="1">Bar</option>
-                                                </select>
-
-                                            </div>
-
-                                            <div class="form-group" style="margin-bottom:0px;">
-                                                <label class=""><b class="required">*</b> Menu :</label>
-                                                <select name="menu_id" id="menu_id" data-error-msg="Menu is required." required>
-                                                <option value="menu">[ Create Menu ]</option>
-                                                    <?php
-                                                    foreach($refmenu as $menu)
-                                                    {
-                                                        echo '<option value="'.$menu->menu_id.'">'.$menu->menu_name.'</option>';
-                                                    }
-                                                    ?>
-                                                </select>
-
-                                            </div>
-
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group" style="margin-bottom:0px;">
-                                                <label class="">POS Cost Price :</label>
-                                                <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-toggle-off"></i>
-                                                        </span>
-                                                    <input type="text" name="pos_item_cost" id="pos_item_cost" class="form-control numeric">
-                                                </div>
-                                            </div>
-                                            <div class="form-group" style="margin-bottom:0px;">
-                                                <label class="">POS Item Rate (Retail Price) :</label>
-                                                <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="fa fa-toggle-off"></i>
-                                                        </span>
-                                                    <input type="text" name="pos_item_rate" id="pos_item_rate" class="form-control numeric">
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-                                        <div class="col-sm-4"><br>
-                                        <div class="form-group" style="margin-bottom:0px;text-align: left;">
-                                            <label class="" for="pos_is_manual_pricing" style="text-align: left;"><input type="checkbox" name="pos_is_manual_pricing"  id="pos_is_manual_pricing" style="transform: scale(2.0);">  &nbsp;&nbsp;is Manual Pricing ?</label>
-                                        </div>
-                                        
-                                        
-                                            <div class="form-group" style="margin-bottom:0px;text-align: left;">
-                                                    <label class="" for="pos_is_salable" style="text-align: left;"><input type="checkbox" name="pos_is_manual_pricing" id="pos_is_salable" style="transform: scale(2.0);">  &nbsp;&nbsp;Salable?</label>
-                                            </div>
-                                            <div class="form-group" style="margin-bottom:0px;text-align: left;">
-                                                    <label class="" for="pos_is_tax_exempt" style="text-align: left;"><input type="checkbox" name="pos_is_tax_exempt" id="pos_is_tax_exempt" style="transform: scale(2.0);">  &nbsp;&nbsp;is Vatable? (POS)</label>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </form>
                         </div>
-
-
-
-
 
                         <div class="modal-footer">
                             <button id="btn_save" type="button" class="btn btn-primary" style="background-color:#2ecc71;color:white;"><span></span> Save</button>
                             <button id="btn_cancel" type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                         </div>
-                    </div>
+                    </div><!---content---->
                 </div>
-            </div>
+            </div><!---modal-->
 
 
 
@@ -1889,60 +1734,7 @@ $('#pos_is_manual_pricing').prop("checked") ?  _data.push({name : "pos_is_manual
                 </div>
             </div>
 
-            <div id="modal_menu" class="modal fade" tabindex="-1" role="dialog">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 id="" class="" style="color: white;">New Menu</h4>
-                        </div>
-                        <div class="modal-body">
-                            <form id="frm_menu" role="form" class="form-horizontal row-border">
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong><B> * </B> Menu Code :</strong></label>
-                                    <div class="col-md-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="fa fa-code"></i>
-                                            </span>
-                                            <input type="text" name="menu_code" class="form-control" placeholder="" data-error-msg="Menu Code is required!" required>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong><B> * </B> Menu Name :</strong></label>
-                                    <div class="col-md-8">
-                                        <div class="input-group col-md-12">
-                                            <input type="text" name="menu_name" class="form-control" placeholder="" data-error-msg="Menu Name is required!" required>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong><B> * </B> Description :</strong></label>
-                                    <div class="col-md-8">
-                                        <div class="input-group col-md-12">
-                                            <input type="text" name="menu_desc" class="form-control" placeholder="" data-error-msg="Menu description is required!" required>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label"><strong><B> * </B> Sort Key :</strong></label>
-                                    <div class="col-md-8">
-                                        <div class="input-group col-md-12">
-                                            <input type="text" name="sort_key" class="form-control" placeholder="" data-error-msg="Sort Key is required!" required>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button id="btn_save_menu" class="btn btn-primary">Save</button>
-                            <button id="btn_cancel_menu" class="btn btn-default">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
                 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
                 <div class="modal-dialog modal-sm">

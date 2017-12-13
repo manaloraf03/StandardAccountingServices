@@ -83,12 +83,7 @@ class Rights_link_model extends CORE_Model{
                                           (73,'14','14-1','Treasury'),
                                           (74,'9','9-20','Replenishment Batch Report'),
                                           (75,'9','9-21','General Ledger'),
-                                          (76,'6','6-11','Email Report'),
-                                          (77,'15','15-1','Hotel Control Panel'),
-                                          (78,'15','15-2','Hotel Integration Settings'),
-                                          (79,'4','4-7','Menu Management'),
-                                          (80,'16','16-1','POS Integration Settings'),
-                                          (81,'16','16-2','Hotel Control Panel')
+                                          (76,'6','6-11','Email Report')
 
 
 

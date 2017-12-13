@@ -82,12 +82,6 @@ class Templates extends CORE_Controller {
 
         $this->load->model('Cash_invoice_items_model');
 
-        $this->load->model('Hotel_integration_items_model');
-
-        $this->load->model('Pos_integration_items_model');
-
-        $this->load->model('Pos_integration_model');
-
 
 
 

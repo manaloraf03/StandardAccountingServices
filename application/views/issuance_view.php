@@ -110,8 +110,6 @@ echo $_side_bar_navigation;
                     <th>Slip #</th>
                     <th>Department</th>
                     <th>Remarks</th>
-                    <th style="text-align: center;">for POS?</th>
-                    <th style="text-align: center;">is Received?</th>
                     <th><center>Action</center></th>
                 </tr>
                 </thead>
@@ -150,11 +148,7 @@ echo $_side_bar_navigation;
                             <input type="text" name="slip_no" class="form-control" placeholder="SLP-YYYYMMDD-XXX" readonly>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <br>
-                        <label  for="is_for_pos" style="text-align: left;vertical-align: middle;"><input type="checkbox" name="is_for_pos" class="" id="is_for_pos" style="transform: scale(2.0);">  &nbsp;&nbsp;For POS ?</label>
-
-                    </div>
+                    <div class="col-lg-4"></div>
                     <div class="col-xs-12 col-lg-4">
                         <b class="required">*</b>  Department : <br />
                         <select name="department" id="cbo_departments" data-error-msg="Department is required." required>
@@ -749,30 +743,8 @@ dt_si = $('#tbl_si_list').DataTable({
                 { targets:[1],data: "slip_no" },
                 { targets:[2],data: "department_name" },
                 { targets:[3],data: "remarks" },
-                { targets:[4],data: null,
-                    render: function (data, type, full, meta){
-                        var _attribute='';
-                        //console.log(data.is_email_sent);
-                        if(data.is_for_pos=="1"){
-                            _attribute=' class="fa fa-check-circle" style="color:green;" ';
-                        }else{
-                            _attribute=' class="fa fa-times-circle" style="color:red;" ';
-                        }
-                        return '<center><i '+_attribute+'></i></center>';
-                    }},
-                { targets:[4],data: null,
-                    render: function (data, type, full, meta){
-                        var _attribute='';
-                        //console.log(data.is_email_sent);
-                        if(data.is_received=="1"){
-                            _attribute=' class="fa fa-check-circle" style="color:green;" ';
-                        }else{
-                            _attribute=' class="fa fa-times-circle" style="color:red;" ';
-                        }
-                        return '<center><i '+_attribute+'></i></center>';
-                    }},
                 {
-                    targets:[5],
+                    targets:[4],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_trash='<button class="btn btn-red btn-sm" name="remove_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-trash-o"></i> </button>';
@@ -1013,7 +985,6 @@ dt_si = $('#tbl_si_list').DataTable({
             //$('.toggle-fullscreen').click();
             clearFields($('#frm_issuances'));
             $('#typeaheadsearch').val('');
-            $('#is_for_pos').attr('checked', true);
             getproduct().done(function(data){
                 products.clear();
                 products.local = data.data;
@@ -1024,7 +995,6 @@ dt_si = $('#tbl_si_list').DataTable({
                     }
 
             }).always(function(){  });
-            $( "#btn_save" ).prop( "disabled", false );
             showList(false);
             reComputeTotal();
         });
@@ -1038,19 +1008,23 @@ dt_si = $('#tbl_si_list').DataTable({
         });
         $('#tbl_issuances tbody').on('click','button[name="edit_info"]',function(){
             ///alert("ddd");
+                getproduct().done(function(data){
+                    products.clear();
+                    products.local = data.data;
+                    products.initialize(true);
+                    countproducts = data.data.length;
+                        if(countproducts > 100){
+                        showNotification({title:"Success !",stat:"success",msg:"Products List successfully updated."});
+                        }
+
+                }).always(function(){ });
+                $('#typeaheadsearch').val('');
 
             _txnMode="edit";
             $('#item_issuance_title').html('Edit Item to issue');
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.issuance_id;
-            if(data.is_received == 1){
-            showNotification({title:"Cannot Edit and Save!",stat:"error",msg:"Issuance already received by the POS."});
-            $( "#btn_save" ).prop( "disabled", true );
-            }else{
-                $( "#btn_save" ).prop( "disabled", false );
-            }
-
             $('input,textarea').each(function(){
                 var _elem=$(this);
                 $.each(data,function(name,value){
@@ -1059,7 +1033,6 @@ dt_si = $('#tbl_si_list').DataTable({
                     }
                 });
             });
-            $('#is_for_pos').prop('checked', (data.is_for_pos==1?true:false));
             $('#cbo_departments').select2('val',data.department_id);
             //$('#cbo_customers').select2('val',data.issued_to_person);
             $('textarea[name="remarks"]').val(data.remarks);
@@ -1237,7 +1210,6 @@ dt_si = $('#tbl_si_list').DataTable({
     var createIssuance=function(){
         var _data=$('#frm_issuances,#frm_items').serializeArray();
         var tbl_summary=$('#tbl_issuance_summary');
-        $('#is_for_pos').prop("checked") ?  _data.push({name : "is_for_pos" , value : '1'   }) : _data.push({name : "is_for_pos" , value : '0'   });
         _data.push({name : "remarks", value : $('textarea[name="remarks"]').val()});
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});
@@ -1254,7 +1226,6 @@ dt_si = $('#tbl_si_list').DataTable({
     var updateIssuances=function(){
         var _data=$('#frm_issuances,#frm_items').serializeArray();
         var tbl_summary=$('#tbl_issuance_summary');
-        $('#is_for_pos').prop("checked") ?  _data.push({name : "is_for_pos" , value : '1'   }) : _data.push({name : "is_for_pos" , value : '0'   });
         _data.push({name : "remarks", value : $('textarea[name="remarks"]').val()});
         _data.push({name : "summary_discount", value : tbl_summary.find(oTableDetails.discount).text()});
         _data.push({name : "summary_before_discount", value :tbl_summary.find(oTableDetails.before_tax).text()});

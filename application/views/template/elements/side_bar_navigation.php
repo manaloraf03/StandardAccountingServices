@@ -77,13 +77,6 @@
                                 <li  class="<?php echo (in_array('4-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="units">Unit Management</a></li>
                                 <li  class="<?php echo (in_array('4-5',$this->session->user_rights)?'':'hidden'); ?>"><a href="Locations">Locations Management</a></li>
                                 <li  class="<?php echo (in_array('4-6',$this->session->user_rights)?'':'hidden'); ?>"><a href="Bank">Bank Management</a></li>
-                                <li  class="<?php echo (in_array('4-7',$this->session->user_rights)?'':'hidden'); ?>"><a href="Menu">Menu Management</a></li>
-                                <!-- <li  class="<?php //echo (in_array('4-4',$this->session->user_rights)?'':'hidden'); ?>"><a href="Refproducts">Product Types</a></li> -->
-                                <!--<li><a href="brands">Brand Management</a></li>
-                                <li><a href="discounts">Discount Management</a></li>
-                                <li><a href="cards">Card Management</a></li>
-                                <li><a href="generics">Generic Management</a></li>
-                                <li><a href="giftcards">Gift Card Management</a></li>-->
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('5',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-harddrive"></i><span>Masterfiles</span></a>
@@ -108,18 +101,6 @@
                             <ul class="acc-menu">
                                 <li class="<?php echo (in_array('10-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Fixed_asset_management">Fixed Asset Management</a></li>
                                 <li class="<?php echo (in_array('10-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Depreciation_expense">Depreciation Expense Report</a></li>
-                            </ul>
-                        </li>
-                        <li class="<?php echo (in_array('15',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-layout-tab-v"></i><span>Hotel Integration</span></a>
-                            <ul class="acc-menu">
-                                <li class="<?php echo (in_array('15-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Hotel_control_panel">Control Panel</a></li>
-                                <li class="<?php echo (in_array('15-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Hotel_integration">Settings</a></li>
-                            </ul>
-                        </li>
-                        <li class="<?php echo (in_array('16',$this->session->parent_rights)?'':'hidden'); ?>"><a href="#/"><i class="ti ti-money"></i><span>POS Integration</span></a>
-                            <ul class="acc-menu">
-                                <li class="<?php echo (in_array('16-2',$this->session->user_rights)?'':'hidden'); ?>"><a href="Pos_control_panel">Control Panel</a></li>
-                                <li class="<?php echo (in_array('16-1',$this->session->user_rights)?'':'hidden'); ?>"><a href="Pos_integration_settings">Settings</a></li>
                             </ul>
                         </li>
                         <li class="<?php echo (in_array('6',$this->session->parent_rights)?'':'hidden'); ?>">

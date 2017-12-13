@@ -111,7 +111,6 @@ class Issuances extends CORE_Controller
                 //$m_issuance->customer_id=$this->input->post('customer_id',TRUE);
                 //$m_issuance->address=$this->input->post('address',TRUE);
                 $m_issuance->terms=$this->input->post('terms',TRUE);
-                $m_issuance->is_for_pos =$this->get_numeric_value($this->input->post('is_for_pos',TRUE));
                 $m_issuance->total_discount=$this->get_numeric_value($this->input->post('summary_discount',TRUE));
                 $m_issuance->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_issuance->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
@@ -190,8 +189,6 @@ class Issuances extends CORE_Controller
                 $m_issuance->total_before_tax=$this->get_numeric_value($this->input->post('summary_before_discount',TRUE));
                 $m_issuance->total_tax_amount=$this->get_numeric_value($this->input->post('summary_tax_amount',TRUE));
                 $m_issuance->total_after_tax=$this->get_numeric_value($this->input->post('summary_after_tax',TRUE));
-                $m_issuance->is_for_pos =$this->get_numeric_value($this->input->post('is_for_pos',TRUE));
-
                 $m_issuance->modified_by_user=$this->session->user_id;
                 $m_issuance->modify($issuance_id);
                 $m_issue_items=$this->Issuance_item_model;
@@ -292,8 +289,6 @@ class Issuances extends CORE_Controller
                 'issuance_info.issued_to_person',
                 //'customers.customer_name',
                 'issuance_info.date_created',
-                'issuance_info.is_for_pos',
-                'issuance_info.is_received',
                 'DATE_FORMAT(issuance_info.date_issued,"%m/%d/%Y") as date_issued',
                 'issuance_info.terms',
                 'departments.department_id',
