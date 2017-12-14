@@ -92,7 +92,7 @@ $(document).ready(function(){
                 { targets:[2],data: "product_desc" },
                 { targets:[3],data: "category_name" },
                 {
-                    targets:[4],data: "on_hand",
+                    targets:[4],data: "CurrentQty",
                     render: function (data, type, full, meta) {
                         if(data=="na"){
                             return parseFloat(data);
@@ -1636,7 +1636,7 @@ $(document).ready(function(){
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                    <label class="">Link to Credit Account :</label>
+                                                    <label class="">Link to Credit Account (Sales):</label>
 
                                                     <select name="income_account_id" id="income_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
@@ -1650,7 +1650,7 @@ $(document).ready(function(){
 
 
                                         <div class="form-group" style="margin-bottom:0px;">
-                                                    <label class="">Link to Debit Account :</label>
+                                                    <label class="">Link to Debit Account (Purchases):</label>
 
                                                     <select name="expense_account_id" id="expense_account_id" data-error-msg="Link to Account is required." required>
                                                         <optgroup label="Please select NONE if this will not be recorded on Journal."></optgroup>
