@@ -878,7 +878,7 @@
         function format ( d ) {
             // `d` is the original data object for the row
             //alert(d.photo_path);
-            return '<br /><table style="margin-left:10%;width: 80%;" style="border:none!important">' +
+            return '<br /><table style="margin-left:10%;width: 80%;border:none!important;">' +
                     '<thead>' +
                     '</thead>' +
                     '<tbody style="border:none!important">' +

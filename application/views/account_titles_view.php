@@ -150,7 +150,7 @@
                                                     <span class="input-group-addon">
                                                         <i class="fa fa-code"></i>
                                                     </span>
-                                                    <input type="text" name="account_no" class="form-control" placeholder="Account No" data-    error-msg="Account number is required!" required>
+                                                    <input type="text" name="account_no" id="account_no" class="form-control" placeholder="Account No" data-error-msg="Account number is required!" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,14 +161,14 @@
                                                                 <span class="input-group-addon">
                                                                     <i class="fa fa-calendar-o"></i>
                                                                 </span>
-                                                    <input type="text" name="account_title" class="form-control" placeholder="Account Title" data-error-msg="Account title is required!" required>
+                                                    <input type="text" name="account_title" id="account_title" class="form-control" placeholder="Account Title" data-error-msg="Account title is required!" required>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-md-2 control-label"><strong>Description :</strong></label>
                                             <div class="col-md-9">
-                                                <textarea name="description" class="form-control"></textarea>
+                                                <textarea name="description" class="form-control" id="account_description"></textarea>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -478,6 +478,12 @@ $(document).ready(function(){
         $('#btn_new').click(function(){
             _txnMode="new";
             $('#account_add_title').text('New Account Information');
+        _cboParentAccounts.select2('val',0);
+        _cboClasses.select2('val',null);
+        _cboTypes.select2('val',1);
+        $('#account_no').val('');
+        $('#account_title').val('');
+        $('#account_description').val('');
             showList(false);
         });
 
