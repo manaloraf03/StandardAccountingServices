@@ -863,6 +863,7 @@ $(document).ready(function(){
         dt=$('#tbl_accounts_receivable').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
+                "order": [[ 1, "desc" ]],
             "ajax" : "General_journal/transaction/list",
             "columns": [
                 {

@@ -704,6 +704,7 @@ $(document).ready(function(){
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
             "pageLength":15,
+            "order": [[ 1, "desc" ]],
             "ajax" : "Sales_order/transaction/list",
             "columns": [
                 {

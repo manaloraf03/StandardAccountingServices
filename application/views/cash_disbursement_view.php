@@ -1033,6 +1033,7 @@ $(document).ready(function(){
         dt=$('#tbl_cash_disbursement_list').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
+            "order": [[ 1, "desc" ]],
             "ajax" : "Cash_disbursement/transaction/list",
             "columns": [
                 {

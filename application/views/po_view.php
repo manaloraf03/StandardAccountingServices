@@ -779,6 +779,7 @@ $(document).ready(function(){
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
             "pageLength":15,
+            "order": [[ 2, "desc" ]],
             "ajax" : "Purchases/transaction/list",
             "columns": [
                 {

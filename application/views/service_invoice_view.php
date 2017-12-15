@@ -651,6 +651,7 @@ $(document).ready(function(){
         dt=$('#tbl_service_invoice').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
+            "order": [[ 1, "desc" ]],
             "ajax" : "Service_invoice/transaction/list-invoice",
             "language": {
                 "searchPlaceholder":"Search Invoice"
