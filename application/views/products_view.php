@@ -94,8 +94,8 @@ $(document).ready(function(){
                 {
                     targets:[4],data: "CurrentQty",
                     render: function (data, type, full, meta) {
-                        if(data=="na"){
-                            return parseFloat(data);
+                        if(isNaN(data)){
+                            return 0;
                         }else{
                             return parseFloat(data);
                         }

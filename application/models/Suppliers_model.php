@@ -164,6 +164,7 @@ class Suppliers_model extends CORE_Model {
 
     function get_list_supplier_invoice($supplier_id){
       $sql="
+     
       SELECT
       unpaid.dr_invoice_no, 
       unpaid.total_after_tax,
@@ -174,7 +175,7 @@ class Suppliers_model extends CORE_Model {
       FROM
 
       (SELECT 
-      dr_invoice_id, 
+      journal_id, 
       date_delivered as invoice_date,
       dr_invoice_no,
       total_after_tax
@@ -191,7 +192,7 @@ class Suppliers_model extends CORE_Model {
       WHERE is_active=TRUE AND is_deleted=FALSE AND supplier_id = $supplier_id
       GROUP BY dr_invoice_id) AS paid
 
-      ON paid.dr_invoice_id = unpaid.dr_invoice_id";
+      ON paid.dr_invoice_id = unpaid.journal_id";
 
       return $this->db->query($sql)->result();
     }

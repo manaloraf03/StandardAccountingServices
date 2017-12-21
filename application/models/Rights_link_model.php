@@ -83,7 +83,9 @@ class Rights_link_model extends CORE_Model{
                                           (73,'14','14-1','Treasury'),
                                           (74,'9','9-20','Replenishment Batch Report'),
                                           (75,'9','9-21','General Ledger'),
-                                          (76,'6','6-11','Email Report')
+                                          (76,'6','6-11','Email Report'),
+                                          (77,'12','12-6','Product Reorder (Pick-list)'),
+                                          (78,'12','12-7','Product List Report')
 
 
 
