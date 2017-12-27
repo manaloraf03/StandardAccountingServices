@@ -334,6 +334,34 @@ class Cash_disbursement extends CORE_Controller
 
                 break;
 
+            case 'approve':
+                $m_journal=$this->Journal_info_model;
+                $journal_id=$this->input->post('journal_id',TRUE);
+
+                //validate if this transaction is not yet closed
+                $not_closed=$m_journal->get_list('accounting_period_id>0 AND journal_id='.$journal_id);
+                if(count($not_closed)>0){
+                    $response['stat']='error';
+                    $response['title']='<b>Journal is Locked!</b>';
+                    $response['msg']='Sorry, you cannot approve journal that is already closed!<br />';
+                    die(json_encode($response));
+                }
+
+                //mark Items as deleted
+                $m_journal->journal_is_approved=1;
+                $m_journal->modify($journal_id);
+
+
+
+                $response['title']='Cancelled!';
+                $response['stat']='success';
+                $response['msg']='Journal successfully approved.';
+                $response['row_updated']=$this->get_response_rows($journal_id);
+
+                echo json_encode($response);
+
+                break;
+
         };
     }
 
@@ -359,6 +387,7 @@ class Cash_disbursement extends CORE_Controller
                 'payment_methods.payment_method',
                 'journal_info.bank',
                 'journal_info.check_no',
+                'journal_info.journal_is_approved',
                 'DATE_FORMAT(journal_info.check_date,"%m/%d/%Y") as check_date',
                 'journal_info.ref_type',
                 'journal_info.ref_no',

@@ -228,8 +228,9 @@
                                     <th>Method</th>
                                     <th>Txn Date</th>
                                     <th>Posted</th>
+                                    <th>Approval Status</th>
                                     <th>Status</th>
-                                    <th><center>Action</center></th>
+                                    <th style="width: 20%;"><center>Action</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -591,7 +592,7 @@
 
 <div id="modal_confirmation" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-sm">
-        <div class="modal-content"><!---content--->
+        <div class="modal-content">
             <div class="modal-header ">
                 <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
                 <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Cancellation</h4>
@@ -606,9 +607,30 @@
                 <button id="btn_yes" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
                 <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
             </div>
-        </div><!---content---->
+        </div>
     </div>
-</div><!---modal-->
+</div>
+
+<div id="modal_confirmation_approval" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header ">
+                <button type="button" class="close"   data-dismiss="modal" aria-hidden="true">X</button>
+                <h4 class="modal-title" style="color: white;"><span id="modal_mode"> </span>Confirm Approval</h4>
+
+            </div>
+
+            <div class="modal-body">
+                <span id="modal-body-message">Are you sure you want to approve this journal?<br><br> <i>Note: This process is irreversible.</i> </span>
+            </div>
+
+            <div class="modal-footer">
+                <button id="btn_yes_approve" type="button" class="btn btn-danger" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">Yes</button>
+                <button id="btn_close" type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;font-family: Tahoma, Georgia, Serif;">No</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="modal_print_check_list_option" class="modal fade" tabindex="-1" role="dialog"><!--modal-->
     <div class="modal-dialog modal-md">
@@ -1054,6 +1076,23 @@ $(document).ready(function(){
                     render: function (data, type, full, meta){
                         var _attribute='';
                         //console.log(data.is_email_sent);
+                        if(data.journal_is_approved=="1" && data.payment_method_id == 2 ){
+                            _attribute=' class="fa fa-check-circle" style="color:green;" ';
+                        }else if(data.payment_method_id == 2){
+                            _attribute=' class="fa fa-times-circle" style="color:red;" ';
+                        }else{
+                            _attribute=' ';
+                        }
+
+                        return '<center><i '+_attribute+'></i></center>';
+                    }
+
+                },
+                {
+                    targets:[8],data: null,
+                    render: function (data, type, full, meta){
+                        var _attribute='';
+                        //console.log(data.is_email_sent);
                         if(data.is_active=="1"){
                             _attribute=' class="fa fa-check-circle" style="color:green;" ';
                         }else{
@@ -1065,19 +1104,26 @@ $(document).ready(function(){
 
                 },
                 {
-                    targets:[7],
+                    targets:[9],data: null,
                     render: function (data, type, full, meta){
-                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_approve='<button class="btn btn-primary btn-sm <?php echo (in_array('15-1',$this->session->user_rights)?'':'remove_approval'); ?>" name="approve_journal"  style="margin-left:-15px;background-color:#fd9d2a!important;border-color:#fd9d2a!important;" data-toggle="tooltip" data-placement="top" title="Approve Journal"><i class="fa fa-check"></i> </button>';
+                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_cancel='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
                         var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-print"></i> Print Check</button>';
 
-
-                        return '<center>'+btn_edit+"&nbsp;"+btn_check_print+"&nbsp;"+btn_cancel+'</center>';
+                        if(data.journal_is_approved=="0" && data.payment_method_id == 2){
+                        return '<span style="float:right;">'+btn_approve+"&nbsp;"+btn_edit+"&nbsp;"+btn_check_print+"&nbsp;"+btn_cancel+'</span>';
+                    }else{
+                        return '<span style="float:right;">'+btn_edit+"&nbsp;"+btn_check_print+"&nbsp;"+btn_cancel+'</span>';
+                        }
                     }
                 }
             ]
         });
-        
+        setTimeout(function(){
+                $('.remove_approval').remove();
+                // alert();
+             }, 200);
         dtReview=$('#tbl_expense_for_review').DataTable({
             "bLengthChange":false,
             "ajax" : "Payable_payments/transaction/expense-for-review",
@@ -1357,6 +1403,8 @@ $(document).ready(function(){
         });
 
 
+
+
         $('#tbl_purchase_review tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = dtReview.row( tr );
@@ -1623,6 +1671,30 @@ $(document).ready(function(){
                 }
             });
         });
+
+        $('#btn_yes_approve').click(function(){
+            $.ajax({
+                "dataType":"json",
+                "type":"POST",
+                "url":"Cash_disbursement/transaction/approve",
+                "data":{journal_id : _selectedID},
+                "success": function(response){
+                    showNotification(response);
+                    if(response.stat=="success"){
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                    }
+
+                }
+            });
+        });
+
+        $('#tbl_cash_disbursement_list').on('click','button[name="approve_journal"]',function(){
+            _selectRowObj=$(this).closest('tr');
+            var data=dt.row(_selectRowObj).data();
+            _selectedID=data.journal_id;
+            $('#modal_confirmation_approval').modal('show');
+        });
+
 
         $('#tbl_cash_disbursement_list').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";

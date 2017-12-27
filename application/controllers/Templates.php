@@ -1561,6 +1561,8 @@ class Templates extends CORE_Controller {
                 $data['num_words']=$this->convertDecimalToWords($journal_info[0]->amount);
 
                 //preview on browser
+
+                if($journal_info[0]->journal_is_approved == 1){
                 if($type=='preview'){
                     $file_name=$journal_info[0]->txn_no;
                     $pdfFilePath = $file_name.".pdf"; //generate filename base on id
@@ -1570,6 +1572,10 @@ class Templates extends CORE_Controller {
                     $pdf->WriteHTML($content);
                     //download it.
                     $pdf->Output();
+                }}else{
+
+                $this->load->view('template/page_forbidden'); //load the template
+
                 }
 
                 break;
