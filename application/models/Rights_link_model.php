@@ -85,7 +85,8 @@ class Rights_link_model extends CORE_Model{
                                           (75,'9','9-21','General Ledger'),
                                           (76,'6','6-11','Email Report'),
                                           (77,'12','12-6','Product Reorder (Pick-list)'),
-                                          (78,'12','12-7','Product List Report')
+                                          (78,'12','12-7','Product List Report'),
+                                          (79,'2','2-6','Purchase History')
 
 
 
