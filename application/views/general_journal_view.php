@@ -1173,6 +1173,7 @@ $(document).ready(function(){
             $('#div_no_check').hide();
             _cboDepartments.select2('val',null);
             $('#date_txn').datepicker('setDate','today');
+            EnableForm($('#frm_journal'));
             showList(false);
             //$('#modal_journal_entry').modal('show');
         });
@@ -1318,6 +1319,7 @@ $(document).ready(function(){
                 reInitializeDropDownAccounts($('#tbl_entries'));
                 reComputeTotals($('#tbl_entries'));
             });
+            DisableForm($('#frm_journal'));
             showList(false);
         });
 
@@ -1607,7 +1609,21 @@ $(document).ready(function(){
     };
 
 
-
+    var DisableForm=function(f){
+        $('input[required],textarea[required],select[required]',f).each(function(){
+            $(this).prop('disabled',true);
+        });
+    };
+    var EnableForm=function(f){
+        $('input[required],textarea[required],select[required],select',f).each(function(){
+            $(this).prop('disabled',false);
+            $('#tbl_entries :input').prop('disabled',false);
+            $('.selectpicker').prop('disabled',false);
+            $('.add_account').prop('disabled',false);
+            $('.remove_account').prop('disabled',false);        
+    
+        });
+    };
 
 });
 

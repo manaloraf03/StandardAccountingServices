@@ -969,6 +969,7 @@
                 $('#cbo_suppliers').select2('val',null);
                 showList(false);
                 $('#date_txn').datepicker('setDate','today');
+                EnableForm($('#frm_journal'));
                 //$('#modal_journal_entry').modal('show');
             });
 
@@ -1122,7 +1123,7 @@
 
 
 
-
+                DisableForm($('#frm_journal'));
                 showList(false);
 
             });
@@ -1573,7 +1574,21 @@
 
         };
 
-
+    var DisableForm=function(f){
+        $('input[required],textarea[required],select[required],input,select',f).each(function(){
+            $(this).prop('disabled',true);
+        });
+    };
+    var EnableForm=function(f){
+        $('input[required],textarea[required],select[required],select,input',f).each(function(){
+            $(this).prop('disabled',false);
+            $('#tbl_entries :input').prop('disabled',false);
+            $('.selectpicker').prop('disabled',false);
+            $('.add_account').prop('disabled',false);
+            $('.remove_account').prop('disabled',false);        
+    
+        });
+    };
     });
 
 

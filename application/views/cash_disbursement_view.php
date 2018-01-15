@@ -1587,7 +1587,7 @@ $(document).ready(function(){
             //set defaults
             _cboPaymentMethod.select2('val',1);//set cash as default
             $('input[name="date_txn"]').val(_currentDate);
-
+            EnableForm($('#frm_journal'));
             showList(false);
 
         });
@@ -1737,7 +1737,7 @@ $(document).ready(function(){
                 reInitializeDropDownAccounts($('#tbl_entries'),false); //do not clear dropdown accounts
                 reComputeTotals($('#tbl_entries'));
             });
-
+            DisableForm($('#frm_journal'));
             showList(false);
 
         });
@@ -2245,6 +2245,21 @@ $(document).ready(function(){
 
     };
 
+    var DisableForm=function(f){
+        $('input[required],textarea[required],select[required],input,select',f).each(function(){
+            $(this).prop('disabled',true);
+        });
+    };
+    var EnableForm=function(f){
+        $('input[required],textarea[required],select[required],select,input',f).each(function(){
+            $(this).prop('disabled',false);
+            $('#tbl_entries :input').prop('disabled',false);
+            $('.selectpicker').prop('disabled',false);
+            $('.add_account').prop('disabled',false);
+            $('.remove_account').prop('disabled',false);        
+    
+        });
+    };
 
 });
 

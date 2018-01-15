@@ -259,19 +259,19 @@ class Cash_disbursement extends CORE_Controller
                     die(json_encode($response));
                 }
 
-                $m_journal->supplier_id=$this->input->post('supplier_id',TRUE);
+                // $m_journal->supplier_id=$this->input->post('supplier_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
-                $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
-                $m_journal->book_type='CDJ';
-                $m_journal->department_id=$this->input->post('department_id');
-                $m_journal->payment_method_id=$this->input->post('payment_method');
-                // $m_journal->bank=$this->input->post('bank');
-                $m_journal->bank_id=$this->input->post('bank_id');
-                $m_journal->check_no=$this->input->post('check_no');
-                $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
-                $m_journal->ref_type=$this->input->post('ref_type');
-                $m_journal->ref_no=$this->input->post('ref_no');
-                $m_journal->amount=$this->get_numeric_value($this->input->post('amount'));
+                // $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
+                // $m_journal->book_type='CDJ';
+                // $m_journal->department_id=$this->input->post('department_id');
+                // $m_journal->payment_method_id=$this->input->post('payment_method');
+                // // $m_journal->bank=$this->input->post('bank');
+                // $m_journal->bank_id=$this->input->post('bank_id');
+                // $m_journal->check_no=$this->input->post('check_no');
+                // $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
+                // $m_journal->ref_type=$this->input->post('ref_type');
+                // $m_journal->ref_no=$this->input->post('ref_no');
+                // $m_journal->amount=$this->get_numeric_value($this->input->post('amount'));
 
                 //for audit details
                 $m_journal->set('date_modified','NOW()');
@@ -279,21 +279,21 @@ class Cash_disbursement extends CORE_Controller
                 $m_journal->modify($journal_id);
 
 
-                $accounts=$this->input->post('accounts',TRUE);
-                $memos=$this->input->post('memo',TRUE);
-                $dr_amounts=$this->input->post('dr_amount',TRUE);
-                $cr_amounts=$this->input->post('cr_amount',TRUE);
+                // $accounts=$this->input->post('accounts',TRUE);
+                // $memos=$this->input->post('memo',TRUE);
+                // $dr_amounts=$this->input->post('dr_amount',TRUE);
+                // $cr_amounts=$this->input->post('cr_amount',TRUE);
 
-                $m_journal_accounts->delete_via_fk($journal_id);
+                // $m_journal_accounts->delete_via_fk($journal_id);
 
-                for($i=0;$i<=count($accounts)-1;$i++){
-                    $m_journal_accounts->journal_id=$journal_id;
-                    $m_journal_accounts->account_id=$accounts[$i];
-                    $m_journal_accounts->memo=$memos[$i];
-                    $m_journal_accounts->dr_amount=$this->get_numeric_value($dr_amounts[$i]);
-                    $m_journal_accounts->cr_amount=$this->get_numeric_value($cr_amounts[$i]);
-                    $m_journal_accounts->save();
-                }
+                // for($i=0;$i<=count($accounts)-1;$i++){
+                //     $m_journal_accounts->journal_id=$journal_id;
+                //     $m_journal_accounts->account_id=$accounts[$i];
+                //     $m_journal_accounts->memo=$memos[$i];
+                //     $m_journal_accounts->dr_amount=$this->get_numeric_value($dr_amounts[$i]);
+                //     $m_journal_accounts->cr_amount=$this->get_numeric_value($cr_amounts[$i]);
+                //     $m_journal_accounts->save();
+                // }
 
 
                 $response['stat']='success';
