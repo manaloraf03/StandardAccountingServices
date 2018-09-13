@@ -133,6 +133,7 @@
                                 <br />
 
                                 <input type="hidden" name="payment_id" value="<?php echo $payment_info->payment_id; ?>">
+                                <input type="hidden" name="ref_type" value="<?php echo ($payment_info->receipt_type==1?'CV' : 'JV'); ?>">
 
 
 

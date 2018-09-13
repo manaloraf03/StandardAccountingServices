@@ -41,7 +41,6 @@ class Rights_link_model extends CORE_Model{
                                           (30,'8','8-1','Sales Report'),
                                           (31,'8','8-2','Batch Inventory Report'),
                                           (32,'5','5-4','Salesperson Management'),
-                                          (33,'2','2-6','Item Adjustment (Out)'),
                                           (34,'8','8-3','Export Sales Summary'),
                                           (35,'9','9-3','Export Trial Balance'),
                                           (36,'6','6-7','Setup Check Layout'),
@@ -87,7 +86,7 @@ class Rights_link_model extends CORE_Model{
                                           (77,'12','12-6','Product Reorder (Pick-list)'),
                                           (78,'12','12-7','Product List Report'),
                                           (79,'15','15-1','Cash Disbursement Approval'),
-                                          (80,'2','2-6','Purchase History')
+                                          (80,'2','2-7','Purchase History')
  
 
 

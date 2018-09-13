@@ -147,7 +147,18 @@
         .select2-container { 
             width: 100% !important; 
         } 
-        
+        #tbl_cash_receipt_filter{ display: none; }
+        div.dataTables_processing{
+                position: absolute!important;
+        top: 0%!important;
+        right: -45%!important;
+        left: auto!important;
+        width: 100%!important;
+        height: 40px!important;
+        background: none!important;
+        background-color: transparent!important;
+        }
+        .remove_button_validate{display: none;}
     </style>
 
 </head>
@@ -216,7 +227,35 @@
                 <div class="panel-body" style="min-height: 400px;">
                 <h2 class="h2-panel-heading">Cash Receipt Journal (History)</h2><hr>
                     <div >
-                        <table id="tbl_accounts_receivable" class="table table-striped" cellspacing="0" width="100%">
+                    <div class="row">
+                    <div class="col-lg-3">
+                            <br />
+                            <button class="btn btn-primary"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Cash Receipt Journal" ><i class="fa fa-plus"></i> New Cash Receipt Journal</button>
+                    </div>
+                    <div class="col-lg-3">
+                            From :<br />
+                            <div class="input-group">
+                                <input type="text" id="txt_start_date" name="" class="date-picker form-control" value="<?php echo date("m").'/01/'.date("Y"); ?>">
+                                 <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                 </span>
+                            </div>
+                    </div>
+                    <div class="col-lg-3">
+                            To :<br />
+                            <div class="input-group">
+                                <input type="text" id="txt_end_date" name="" class="date-picker form-control" value="<?php echo date("m/t/Y"); ?>">
+                                 <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                 </span>
+                            </div>
+                    </div>
+                    <div class="col-lg-3 ">
+                            Search :<br />
+                             <input type="text" id="searchbox_cash_receipt" class="form-control">
+                    </div>
+                </div><br>
+                        <table id="tbl_cash_receipt" class="table table-striped" cellspacing="0" width="100%">
                             <thead class="">
                             <tr>
                                 <th></th>
@@ -783,11 +822,25 @@ $(document).ready(function(){
     var initializeControls=function(){
 
 
-        dt=$('#tbl_accounts_receivable').DataTable({
+        dt=$('#tbl_cash_receipt').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
+            oLanguage: {
+                    sProcessing: '<center><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></center>'
+            },
+            processing : true,
             "order": [[ 1, "desc" ]],
-            "ajax" : "Cash_receipt/transaction/list",
+            "ajax" : {
+                "url" : "Cash_receipt/transaction/list",
+                "bDestroy": true,            
+                "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "tsd":$('#txt_start_date').val(),
+                            "ted":$('#txt_end_date').val()
+
+                        });
+                    }
+            },
             "columns": [
                 {
                     "targets": [0],
@@ -821,7 +874,7 @@ $(document).ready(function(){
                     targets:[7],
                     render: function (data, type, full, meta){
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="margin-left:-15px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                        var btn_trash='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
+                        var btn_trash='<button class="btn btn-red btn-sm <?php  echo ($this->session->user_group_id==1?'':'remove_button_validate') ?>" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
 
                         /*return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';*/
                         return '<center>'+btn_edit+'&nbsp;'+btn_trash+'</center>';
@@ -900,16 +953,6 @@ $(document).ready(function(){
 
         });
 
-
-
-        var createToolBarButton=function() {
-            var _btnNew='<button class="btn btn-primary"  id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Cash Receipt Journal" >'+
-                '<i class="fa fa-plus"></i> New Cash Receipt Journal</button>';
-            $("div.toolbar").html(_btnNew);
-        }();
-
-
-
         _cboCustomers=$('#cbo_customers').select2({
             placeholder: "Please select customer.",
             allowClear: true
@@ -958,7 +1001,7 @@ $(document).ready(function(){
     var bindEventHandlers=function(){
         var detailRows = [];
 
-        $('#tbl_accounts_receivable tbody').on( 'click', 'tr td.details-control', function () {
+        $('#tbl_cash_receipt tbody').on( 'click', 'tr td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = dt.row( tr );
             var idx = $.inArray( tr.attr('id'), detailRows );
@@ -1154,7 +1197,7 @@ $(document).ready(function(){
             reComputeTotals($('#tbl_entries'));
         });
 
-        $('#tbl_accounts_receivable').on('click','button[name="cancel_info"]',function(){
+        $('#tbl_cash_receipt').on('click','button[name="cancel_info"]',function(){
             _selectRowObj=$(this).closest('tr');
             var data=dt.row(_selectRowObj).data();
             _selectedID=data.journal_id;
@@ -1171,7 +1214,8 @@ $(document).ready(function(){
                 "success": function(response){
                     showNotification(response);
                     if(response.stat=="success"){
-                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        // dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        dt.row(_selectRowObj).remove().draw(false);
                     }
 
                 }
@@ -1180,7 +1224,7 @@ $(document).ready(function(){
 
 
 
-        $('#tbl_accounts_receivable').on('click','button[name="edit_info"]',function(){
+        $('#tbl_cash_receipt').on('click','button[name="edit_info"]',function(){
             _txnMode="edit";
 
             _selectRowObj=$(this).closest('tr');
@@ -1313,7 +1357,7 @@ $(document).ready(function(){
                     updateJournal().done(function(response){
                         showNotification(response);
                         if(response.stat=="success"){
-                            dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                            dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
                             clearFields(f);
                             showList(true);
                         }
@@ -1326,6 +1370,22 @@ $(document).ready(function(){
             }
 
         });
+
+        $("#searchbox_cash_receipt").keyup(function(){         
+            dt
+                .search(this.value)
+                .draw();
+        });
+        $("#txt_start_date").on("change", function () {    
+            $('#tbl_cash_receipt tbody').html('');    
+            $('#tbl_cash_receipt').DataTable().ajax.reload()
+        });
+
+        $("#txt_end_date").on("change", function () {  
+            $('#tbl_cash_receipt tbody').html('');      
+            $('#tbl_cash_receipt').DataTable().ajax.reload()
+        });
+
 
         $('#btn_cancel_bank').click(function(){
              

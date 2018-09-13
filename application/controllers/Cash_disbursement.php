@@ -64,7 +64,10 @@ class Cash_disbursement extends CORE_Controller
         switch($txn){
             case 'list':
                 $m_journal=$this->Journal_info_model;
-                $response['data']=$this->get_response_rows();
+                $tsd = date('Y-m-d',strtotime($this->input->get('tsd')));
+                $ted = date('Y-m-d',strtotime($this->input->get('ted')));
+                $additional = " AND DATE(journal_info.date_txn) BETWEEN '$tsd' AND '$ted'";
+                $response['data']=$this->get_response_rows(null,$additional);
                 echo json_encode($response);
                 break;
             case 'print-check-list':
@@ -177,6 +180,9 @@ class Cash_disbursement extends CORE_Controller
                     die(json_encode($response));
                 }
 
+
+                $ref_type = $this->input->post('ref_type');
+                $ref_no_get = (COUNT($m_journal->get_list('book_type="CDJ" AND ref_type ="'.$ref_type.'"'))+1);
                 $m_journal->supplier_id=$this->input->post('supplier_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
                 $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
@@ -188,7 +194,9 @@ class Cash_disbursement extends CORE_Controller
                 $m_journal->check_no=$this->input->post('check_no');
                 $m_journal->check_date=date('Y-m-d',strtotime($this->input->post('check_date',TRUE)));
                 $m_journal->ref_type=$this->input->post('ref_type');
-                $m_journal->ref_no=$this->input->post('ref_no');
+                $m_journal->ref_type=$this->input->post('ref_type');
+                $m_journal->ref_no=$ref_no_get;
+                // $m_journal->ref_no=$this->input->post('ref_no');  ***************************** WILL BE AUTO 09132018
                 $m_journal->amount=$this->get_numeric_value($this->input->post('amount'));
 
 
@@ -226,6 +234,7 @@ class Cash_disbursement extends CORE_Controller
                     $m_payable_payment=$this->Payable_payment_model;
                     $m_payable_payment->journal_id=$journal_id;
                     $m_payable_payment->is_journal_posted=TRUE;
+                    $m_payable_payment->is_posted=TRUE;
                     $m_payable_payment->modify($payment_id);
                 }
 
@@ -367,11 +376,11 @@ class Cash_disbursement extends CORE_Controller
 
 
 
-    public function get_response_rows($criteria=null){
+    public function get_response_rows($criteria=null,$additional=null){
         $m_journal=$this->Journal_info_model;
         return $m_journal->get_list(
 
-            "journal_info.is_deleted=FALSE AND journal_info.book_type='CDJ'".($criteria==null?'':' AND journal_info.journal_id='.$criteria),
+            "journal_info.is_deleted=FALSE AND journal_info.is_active = TRUE AND journal_info.book_type='CDJ'".($criteria==null?'':' AND journal_info.journal_id='.$criteria)."".($additional==null?'':$additional),
 
             array(
                 'journal_info.journal_id',
@@ -392,6 +401,7 @@ class Cash_disbursement extends CORE_Controller
                 'journal_info.ref_type',
                 'journal_info.ref_no',
                 'journal_info.amount',
+                'CONCAT_WS("-",journal_info.ref_type,journal_info.ref_no)as voucher_no',
                 'CONCAT(IFNULL(customers.customer_name,""),IFNULL(suppliers.supplier_name,""))as particular',
                 'CONCAT_WS(" ",user_accounts.user_fname,user_accounts.user_lname)as posted_by'
             ),

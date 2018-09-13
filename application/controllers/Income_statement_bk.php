@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Income_statement extends CORE_Controller
@@ -51,8 +51,8 @@ class Income_statement extends CORE_Controller
                 $start=$this->input->get('start',TRUE);
                 $end=$this->input->get('end',TRUE);
 
-                $income_accounts = $m_journal->get_account_balance(4,null,date("Y-m-d",strtotime($start)),date("Y-m-d",strtotime($end)));
-                $expense_accounts = $m_journal->get_account_balance(5,null,date("Y-m-d",strtotime($start)),date("Y-m-d",strtotime($end)));
+                $income_accounts = $m_journal->get_account_balance(4);
+                $expense_accounts = $m_journal->get_account_balance(5);
 
                 $excel=$this->excel;
    
@@ -238,8 +238,8 @@ class Income_statement extends CORE_Controller
                 $start=$this->input->get('start',TRUE);
                 $end=$this->input->get('end',TRUE);
 
-                $income_accounts = $m_journal->get_account_balance(4,null,date("Y-m-d",strtotime($start)),date("Y-m-d",strtotime($end)));
-                $expense_accounts = $m_journal->get_account_balance(5,null,date("Y-m-d",strtotime($start)),date("Y-m-d",strtotime($end)));
+                $income_accounts = $m_journal->get_account_balance(4);
+                $expense_accounts = $m_journal->get_account_balance(5);
 
                 $excel=$this->excel;
 

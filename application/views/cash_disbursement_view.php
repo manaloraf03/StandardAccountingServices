@@ -139,10 +139,29 @@
           -o-transform: scale(1.5); /* Opera */
         }
 
-        #tbl_check_list td:nth-child(6),#tbl_check_list th:nth-child(6){
+/*        #tbl_check_list td:nth-child(6),#tbl_check_list th:nth-child(6){
             text-align: center;
-        }
+        }*/
         
+        .remove_button_validate{
+            display: none;
+        }
+        #tbl_cash_disbursement_list_filter{
+            display: none;
+        }
+        div.dataTables_processing{
+            position: absolute!important;
+            top: 0%!important;
+            right: -45%!important;
+            left: auto!important;
+            width: 100%!important;
+            height: 40px!important;
+            background: none!important;
+            background-color: transparent!important;
+        }
+        .right_align{
+            text-align: right;
+        }
     </style>
 
 </head>
@@ -218,19 +237,48 @@
               </a>
                 <div id="collapseOne" class="collapse in">
                         <div >
+                            <div class="row">
+                                <div class="col-lg-3">
+                                         <br />
+                                        <button class="btn btn-primary" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" ><i class="fa fa-plus"></i> New Cash Disbursement Journal</button>
+                                </div>
+                                <div class="col-lg-3">
+                                        From :<br />
+                                        <div class="input-group">
+                                            <input type="text" id="txt_start_date" name="" class="date-picker form-control" value="<?php echo date("m").'/01/'.date("Y"); ?>">
+                                             <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                             </span>
+                                        </div>
+                                </div>
+                                <div class="col-lg-3">
+                                        To :<br />
+                                        <div class="input-group">
+                                            <input type="text" id="txt_end_date" name="" class="date-picker form-control" value="<?php echo date("m/t/Y"); ?>">
+                                             <span class="input-group-addon">
+                                                    <i class="fa fa-calendar"></i>
+                                             </span>
+                                        </div>
+                                </div>
+                                <div class="col-lg-3 ">
+                                        Search :<br />
+                                         <input type="text" id="searchbox_cash_disbursement" class="form-control">
+                                </div>
+                            </div><br>
                             <table id="tbl_cash_disbursement_list" class="table-striped table" cellspacing="0" width="100%">
                                 <thead class="">
                                 <tr>
                                     <th></th>
                                     <th>Txn #</th>
                                     <th>Voucher #</th>
-                                    <th>Particular</th>
+                                    <th style="width: 20%;">Particular</th>
                                     <th>Method</th>
                                     <th>Txn Date</th>
                                     <th>Posted</th>
                                     <th>Approval Status</th>
                                     <th>Status</th>
                                     <th style="width: 20%;"><center>Action</center></th>
+                                    <th><center>ID</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -260,7 +308,7 @@
                                     <th>Check Date</th>
                                     <th>Voucher #</th>
                                     <th>Particular</th>
-                                    <th>Remarks</th>
+                                    <th width="25%">Remarks</th>
                                     <th>Issued</th>
                                     <th><center>Action</center></th>
                                 </tr>
@@ -339,7 +387,7 @@
                             <span class="input-group-addon">
                                 <i class="fa fa-code"></i>
                             </span>
-                            <input type="text" name="ref_no" maxlength="15" class="form-control"  data-error-msg="Reference # is required." required>
+                            <input type="text" name="ref_no" id="id_ref_no" maxlength="15" class="form-control"  data-error-msg="Reference # is required." required>
                         </div>
                     </div>
                     <div class="col-lg-4 col-lg-offset-2">
@@ -1055,8 +1103,22 @@ $(document).ready(function(){
         dt=$('#tbl_cash_disbursement_list').DataTable({
             "dom": '<"toolbar">frtip',
             "bLengthChange":false,
-            "order": [[ 1, "desc" ]],
-            "ajax" : "Cash_disbursement/transaction/list",
+            "order": [[ 10, "desc" ]],
+            "ajax" : {
+                "url" : "Cash_disbursement/transaction/list",
+                "bDestroy": true,            
+                "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "tsd":$('#txt_start_date').val(),
+                            "ted":$('#txt_end_date').val()
+
+                        });
+                    }
+            }, 
+            oLanguage: {
+                    sProcessing: '<center><br /><img src="assets/img/loader/ajax-loader-sm.gif" /><br /><br /></center>'
+            },
+            processing : true,
             "columns": [
                 {
                     "targets": [0],
@@ -1066,7 +1128,7 @@ $(document).ready(function(){
                     "defaultContent": ""
                 },
                 { targets:[1],data: "txn_no" },
-                { targets:[2],data: "ref_no" },
+                { targets:[2],data: "voucher_no" },
                 { targets:[3],data: "particular" },
                 { targets:[4],data: "payment_method" },
                 { targets:[5],data: "date_txn" },
@@ -1106,24 +1168,24 @@ $(document).ready(function(){
                 {
                     targets:[9],data: null,
                     render: function (data, type, full, meta){
-                        var btn_approve='<button class="btn btn-primary btn-sm <?php echo (in_array('15-1',$this->session->user_rights)?'':'remove_approval'); ?>" name="approve_journal"  style="margin-left:-15px;background-color:#fd9d2a!important;border-color:#fd9d2a!important;" data-toggle="tooltip" data-placement="top" title="Approve Journal"><i class="fa fa-check"></i> </button>';
+                        var btn_approve='<button class="btn btn-primary btn-sm <?php echo (in_array('15-1',$this->session->user_rights)?'':'remove_button_validate'); ?>" name="approve_journal"  style="margin-left:-15px;background-color:#fd9d2a!important;border-color:#fd9d2a!important;" data-toggle="tooltip" data-placement="top" title="Approve Journal"><i class="fa fa-check"></i> </button>';
                         var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
-                        var btn_cancel='<button class="btn btn-red btn-sm" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
-                        var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-print"></i> Print Check</button>';
+                        var btn_cancel='<button class="btn btn-red btn-sm  <?php  echo ($this->session->user_group_id==1?'':'remove_button_validate') ?>" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
+                        var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> Print Check</button>';
 
                         if(data.journal_is_approved=="0" && data.payment_method_id == 2){
-                        return '<span style="float:right;">'+btn_approve+"&nbsp;"+btn_edit+"&nbsp;"+btn_check_print+"&nbsp;"+btn_cancel+'</span>';
-                    }else{
-                        return '<span style="float:right;">'+btn_edit+"&nbsp;"+btn_check_print+"&nbsp;"+btn_cancel+'</span>';
+                            return '<span style="float:right;">'+btn_approve+"&nbsp;"+btn_edit+"&nbsp;"+btn_cancel+'</span>';
+                        } else if(data.journal_is_approved=="1" && data.payment_method_id == 2){
+                            return '<span style="float:right;">'+btn_check_print+"&nbsp;"+btn_edit+"&nbsp;"+btn_cancel+'</span>';
+                        }else{
+                            return '<span style="float:right;">'+btn_edit+"&nbsp;"+btn_cancel+'</span>';
                         }
                     }
-                }
+                },
+                { targets:[10],data: "journal_id",visible:false }
+
             ]
         });
-        setTimeout(function(){
-                $('.remove_approval').remove();
-                // alert();
-             }, 200);
         dtReview=$('#tbl_expense_for_review').DataTable({
             "bLengthChange":false,
             "ajax" : "Payable_payments/transaction/expense-for-review",
@@ -1158,7 +1220,16 @@ $(document).ready(function(){
             "dom": '<"print">frtip',
             "bLengthChange":false,
             "pageLength" : 7,
-            "ajax" : "Cash_disbursement/transaction/get-check-list",
+            "ajax" : {
+                "url" : "Cash_disbursement/transaction/get-check-list",
+                "bDestroy": true,            
+                "data": function ( d ) {
+                        return $.extend( {}, d, {
+                            "tsd":$('#txt_start_date').val(),
+                            "ted":$('#txt_end_date').val()
+                        });
+                    }
+            }, 
             "columnDefs": [
                 { "visible": false, "targets": 0 }
             ],
@@ -1166,7 +1237,7 @@ $(document).ready(function(){
 
                 { targets:[0],data: "bank" },
                 { targets:[1],data: "check_no" },
-                { targets:[2],data: "amount",
+                { sClass: "right_align", targets:[2],data: "amount",
                     render: function(data, type, full, meta){
                         return accounting.formatNumber(data,2);
                     }
@@ -1178,7 +1249,7 @@ $(document).ready(function(){
                 {  targets:[7],data: "check_status",
                     render: function (data, type, full, meta){
                         //alert(data.check_status);
-                        if(data=="1"){
+                        if(data=="Yes"){
                             _attribute=' class="fa fa-check-circle" style="color:green;" ';
                         }else{
                             _attribute=' class="fa fa-times-circle" style="color:red;" ';
@@ -1189,7 +1260,7 @@ $(document).ready(function(){
                 },
                 {  targets:[8],
                     render: function (data, type, full, meta){
-                        var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Move to trash"><i class="fa fa-print"></i> Print Check</button>';
+                        var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title="Print"><i class="fa fa-print"></i> Print Check</button>';
                         return '<center>'+btn_check_print+'</center>';
                     } }
             ],
@@ -1234,10 +1305,6 @@ $(document).ready(function(){
         });
 
         var createToolBarButton=function() {
-            var _btnNew='<button class="btn btn-primary" id="btn_new" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="New Journal" >'+
-                '<i class="fa fa-plus"></i> New Cash Disbursement Journal</button>';
-            $("div.toolbar").html(_btnNew);
-
             var _btnPrint='<button class="btn btn-primary" id="btn_print_check_list" style="text-transform: none;font-family: Tahoma, Georgia, Serif;" data-toggle="modal" data-target="" data-placement="left" title="Print Check list" >'+
                 '<i class="fa fa-print"></i> Print Check list</button>';
 
@@ -1402,6 +1469,21 @@ $(document).ready(function(){
             $('#modal_print_check_list_option').modal('show');
         });
 
+
+        $("#searchbox_cash_disbursement").keyup(function(){         
+            dt
+                .search(this.value)
+                .draw();
+        });
+        $("#txt_start_date").on("change", function () {    
+            $('#tbl_cash_disbursement_list tbody').html('');    
+            $('#tbl_cash_disbursement_list').DataTable().ajax.reload()
+        });
+
+        $("#txt_end_date").on("change", function () {  
+            $('#tbl_cash_disbursement_list tbody').html('');      
+            $('#tbl_cash_disbursement_list').DataTable().ajax.reload()
+        });
 
 
 
@@ -1588,6 +1670,8 @@ $(document).ready(function(){
             _cboPaymentMethod.select2('val',1);//set cash as default
             $('input[name="date_txn"]').val(_currentDate);
             EnableForm($('#frm_journal'));
+            $('#id_ref_no').prop('disabled',true);
+            $('#id_ref_no').val('XXXX');
             showList(false);
 
         });
@@ -1665,7 +1749,8 @@ $(document).ready(function(){
                 "success": function(response){
                     showNotification(response);
                     if(response.stat=="success"){
-                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        // dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
+                        dt.row(_selectRowObj).remove().draw(false);
                     }
 
                 }
@@ -1681,7 +1766,7 @@ $(document).ready(function(){
                 "success": function(response){
                     showNotification(response);
                     if(response.stat=="success"){
-                        dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                        dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
                     }
 
                 }
@@ -1803,7 +1888,7 @@ $(document).ready(function(){
                     updateJournal().done(function(response){
                         showNotification(response);
                         if(response.stat=="success"){
-                            dt.row(_selectRowObj).data(response.row_updated[0]).draw();
+                            dt.row(_selectRowObj).data(response.row_updated[0]).draw(false);
                             clearFields(f);
                             showList(true);
 
