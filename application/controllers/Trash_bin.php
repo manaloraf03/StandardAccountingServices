@@ -44,9 +44,9 @@ class Trash_bin extends CORE_Controller
         $data['methods']=$this->Payment_method_model->get_list('is_active=TRUE AND is_deleted=FALSE');
 
         $data['title'] = 'Trash Bin ';
-        // (in_array('1-1',$this->session->user_rights)? 
-        $this->load->view('trash_bin_view', $data);
-        // :redirect(base_url('dashboard')));
+        (in_array('1-7',$this->session->user_rights)? 
+        $this->load->view('trash_bin_view', $data)
+        :redirect(base_url('dashboard')));
         
 
 

@@ -1,78 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Cash Receipt</title>
-    <style type="text/css">
-        body {
-            font-family: 'Calibri',sans-serif;
-            font-size: 12px;
-        }
-
-        .align-right {
-            text-align: right;
-        }
-
-        .align-left {
-            text-align: left;
-        }
-
-        .data {
-            border-bottom: 1px solid #404040;
-        }
-
-        .align-center {
-            text-align: center;
-        }
-
-        .report-header {
-            font-weight: bolder;
-        }
-
-        hr {
-            /*border-top: 3px solid #404040;*/
-        }
-
-
-
-        tr:nth-child(even){
-/*            background: #414141 !important;*/
-           /* border: none!important;*/
-        }
-
-/*        tr:hover {
-            transition: .4s;
-            background: #414141 !important;
-            color: white;
-        }
-
-        tr:hover .btn {
-            border-color: #494949!important;
-            border-radius: 0!important;
-            -webkit-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-            -moz-box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-            box-shadow: 0px 0px 5px 1px rgba(0,0,0,0.75);
-        }
-    */
-        table.noborder{
-        border:none!important;
-    }
-    </style>
-</head>
-<body>
-    <table width="100%" class="noborder">
-        <tr>
-            <td width="10%"><img src="<?php echo $company_info->logo_path; ?>" style="height: 90px; width: 120px; text-align: left;"></td>
-            <td width="90%" class="">
-                <h1 class="report-header"><strong><?php echo $company_info->company_name; ?></strong></h1>
-                <p><?php echo $company_info->company_address; ?></p>
-                <p><?php echo $company_info->landline.'/'.$company_info->mobile_no; ?></p>
-                <p><?php echo $company_info->email_address; ?></p>
-            </td>
-        </tr>
-    </table><hr>
-    <div class="">
-        <h3 class="report-header"><strong>CASH RECEIPT JOURNAL</strong></h3>
-    </div>
     <table width="100%" border="0"  cellspacing="-1" >
         <tr>
             <td style="padding: 4px;" colspan="3"><strong>TXN # :</strong> <?php echo $journal_info->txn_no; ?></td>
@@ -149,23 +74,6 @@
                     </tr>
                 </tfoot>    
         </table><br><br>
-        <center>
-            <table style="text-align: center;" class="noborder">
-                <tr>
-                    <td width="30%" style="padding-right: 10px;">___________________________________</td>
-                    <td width="30%" style="padding-right: 10px;">___________________________________</td>
-                    <td width="30%" style="padding-right: 10px;">___________________________________</td>
-                </tr>
-                <tr>
-                    <td width="30%" style="padding-right: 10px;"><strong>Prepared by</strong></td>
-                    <td width="30%" style="padding-right: 10px;"><strong>Checked by</strong></td>
-                    <td width="30%" style="padding-right: 10px;"><strong>Posted by</strong></td>
-                </tr>
-            </table>
-        </center>
-</body>
-</html>
-
 
 
 

@@ -86,7 +86,9 @@ class Rights_link_model extends CORE_Model{
                                           (77,'12','12-6','Product Reorder (Pick-list)'),
                                           (78,'12','12-7','Product List Report'),
                                           (79,'15','15-1','Cash Disbursement Approval'),
-                                          (80,'2','2-7','Purchase History')
+                                          (80,'2','2-7','Purchase History'),
+                                          (81,'1','1-7','Trash Bin')
+
  
 
 

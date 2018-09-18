@@ -1169,7 +1169,7 @@ $(document).ready(function(){
                     targets:[9],data: null,
                     render: function (data, type, full, meta){
                         var btn_approve='<button class="btn btn-primary btn-sm <?php echo (in_array('15-1',$this->session->user_rights)?'':'remove_button_validate'); ?>" name="approve_journal"  style="margin-left:-15px;background-color:#fd9d2a!important;border-color:#fd9d2a!important;" data-toggle="tooltip" data-placement="top" title="Approve Journal"><i class="fa fa-check"></i> </button>';
-                        var btn_edit='<button class="btn btn-primary btn-sm" name="edit_info"  style="" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
+                        var btn_edit='<button class="btn btn-primary btn-sm <?php  echo ($this->session->user_group_id==1?'':'remove_button_validate') ?>" name="edit_info"  style="" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil"></i> </button>';
                         var btn_cancel='<button class="btn btn-red btn-sm  <?php  echo ($this->session->user_group_id==1?'':'remove_button_validate') ?>" name="cancel_info" style="margin-right:0px;" data-toggle="tooltip" data-placement="top" title="Cancel Journal"><i class="fa fa-times"></i> </button>';
                         var btn_check_print='<button class="btn btn-success btn-sm" name="print_check" style="margin-right:0px;text-transform: none;" data-toggle="tooltip" data-placement="top" title=""><i class="fa fa-print"></i> Print Check</button>';
 
