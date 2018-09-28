@@ -1029,7 +1029,7 @@ $(document).ready(function(){
             _cboCustomers.select2('val',null);
             _cboDepartments.select2('val',null);
             $('#date_txn').datepicker('setDate','today');
-            EnableForm($('#frm_journal'));
+            // EnableForm($('#frm_journal'));
             showList(false);
             //$('#modal_journal_entry').modal('show');
         });
@@ -1184,7 +1184,7 @@ $(document).ready(function(){
 
 
 
-            DisableForm($('#frm_journal'));
+            // DisableForm($('#frm_journal'));
             showList(false);
 
         });

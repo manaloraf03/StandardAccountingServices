@@ -1669,7 +1669,7 @@ $(document).ready(function(){
             //set defaults
             _cboPaymentMethod.select2('val',1);//set cash as default
             $('input[name="date_txn"]').val(_currentDate);
-            EnableForm($('#frm_journal'));
+            // EnableForm($('#frm_journal'));
             $('#id_ref_no').prop('disabled',true);
             $('#id_ref_no').val('XXXX');
             showList(false);
@@ -1822,7 +1822,7 @@ $(document).ready(function(){
                 reInitializeDropDownAccounts($('#tbl_entries'),false); //do not clear dropdown accounts
                 reComputeTotals($('#tbl_entries'));
             });
-            DisableForm($('#frm_journal'));
+            // DisableForm($('#frm_journal'));
             showList(false);
 
         });

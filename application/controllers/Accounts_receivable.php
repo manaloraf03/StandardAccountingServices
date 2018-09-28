@@ -155,11 +155,11 @@ class Accounts_receivable extends CORE_Controller
                 }
 
 
-                // $m_journal->customer_id=$this->input->post('customer_id',TRUE);
-                // $m_journal->department_id=$this->input->post('department_id',TRUE);
+                $m_journal->customer_id=$this->input->post('customer_id',TRUE);
+                $m_journal->department_id=$this->input->post('department_id',TRUE);
                 $m_journal->remarks=$this->input->post('remarks',TRUE);
-                // $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
-                // $m_journal->book_type='SJE';
+                $m_journal->date_txn=date('Y-m-d',strtotime($this->input->post('date_txn',TRUE)));
+                $m_journal->book_type='SJE';
 
                 //for audit details
                 $m_journal->set('date_modified','NOW()');
@@ -167,21 +167,21 @@ class Accounts_receivable extends CORE_Controller
                 $m_journal->modify($journal_id);
 
 
-                // $accounts=$this->input->post('accounts',TRUE);
-                // $memos=$this->input->post('memo',TRUE);
-                // $dr_amounts=$this->input->post('dr_amount',TRUE);
-                // $cr_amounts=$this->input->post('cr_amount',TRUE);
+                $accounts=$this->input->post('accounts',TRUE);
+                $memos=$this->input->post('memo',TRUE);
+                $dr_amounts=$this->input->post('dr_amount',TRUE);
+                $cr_amounts=$this->input->post('cr_amount',TRUE);
 
-                // $m_journal_accounts->delete_via_fk($journal_id);
+                $m_journal_accounts->delete_via_fk($journal_id);
 
-                // for($i=0;$i<=count($accounts)-1;$i++){
-                //     $m_journal_accounts->journal_id=$journal_id;
-                //     $m_journal_accounts->account_id=$accounts[$i];
-                //     $m_journal_accounts->memo=$memos[$i];
-                //     $m_journal_accounts->dr_amount=$this->get_numeric_value($dr_amounts[$i]);
-                //     $m_journal_accounts->cr_amount=$this->get_numeric_value($cr_amounts[$i]);
-                //     $m_journal_accounts->save();
-                // }
+                for($i=0;$i<=count($accounts)-1;$i++){
+                    $m_journal_accounts->journal_id=$journal_id;
+                    $m_journal_accounts->account_id=$accounts[$i];
+                    $m_journal_accounts->memo=$memos[$i];
+                    $m_journal_accounts->dr_amount=$this->get_numeric_value($dr_amounts[$i]);
+                    $m_journal_accounts->cr_amount=$this->get_numeric_value($cr_amounts[$i]);
+                    $m_journal_accounts->save();
+                }
 
 
                 $response['stat']='success';

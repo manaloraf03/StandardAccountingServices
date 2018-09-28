@@ -1160,7 +1160,7 @@ $(document).ready(function(){
             $('#account_type').select2('val',null);
 
             clearFields($('#frm_journal'));
-            EnableForm($('#frm_journal'));
+            // EnableForm($('#frm_journal'));
             showList(false);
 
         });
@@ -1269,7 +1269,7 @@ $(document).ready(function(){
                 reComputeTotals($('#tbl_entries'));
             });
 
-            DisableForm($('#frm_journal'));
+            // DisableForm($('#frm_journal'));
             showList(false);
 
         });

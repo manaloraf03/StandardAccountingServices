@@ -1008,7 +1008,7 @@
                 $('#cbo_suppliers').select2('val',null);
                 showList(false);
                 $('#date_txn').datepicker('setDate','today');
-                EnableForm($('#frm_journal'));
+                // EnableForm($('#frm_journal'));
                 //$('#modal_journal_entry').modal('show');
             });
 
@@ -1162,7 +1162,7 @@
 
 
 
-                DisableForm($('#frm_journal'));
+                // DisableForm($('#frm_journal'));
                 showList(false);
 
             });
