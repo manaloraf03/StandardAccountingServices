@@ -70,6 +70,16 @@ class Cash_disbursement extends CORE_Controller
                 $response['data']=$this->get_response_rows(null,$additional);
                 echo json_encode($response);
                 break;
+
+            case 'list-unposted':
+                $m_journal=$this->Journal_info_model;
+                // $tsd = date('Y-m-d',strtotime($this->input->get('tsd')));
+                // $ted = date('Y-m-d',strtotime($this->input->get('ted')));
+                // $additional = " AND DATE(journal_info.date_txn) BETWEEN '$tsd' AND '$ted'";
+                $additional = "AND journal_info.journal_is_approved = FALSE AND journal_info.payment_method_id = 2 AND journal_info.is_active = TRUE";
+                $response['data']=$this->get_response_rows(null,$additional);
+                echo json_encode($response);
+                break;
             case 'print-check-list':
                 $m_journal=$data['banks']=$this->Journal_info_model;
 
