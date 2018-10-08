@@ -87,7 +87,9 @@ class Rights_link_model extends CORE_Model{
                                           (78,'12','12-7','Product List Report'),
                                           (79,'15','15-1','Cash Disbursement Approval'),
                                           (80,'2','2-7','Purchase History'),
-                                          (81,'1','1-7','Trash Bin')
+                                          (81,'1','1-7','Trash Bin'),
+                                          (82,'6','6-12','Statement of Accounts Settings')
+
 
  
 

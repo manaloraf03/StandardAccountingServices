@@ -254,14 +254,14 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach($payments_list as $pay){ ?>
+                                        <?php foreach($payments_list as $pay){ if($pay->payment_amount > 0){ ?>
                                             <tr>
                                                 <td><?php echo $pay->txn_no; ?></td>
                                                 <td><?php echo $pay->date_txn; ?></td>
                                                 <td><?php echo $pay->remarks; ?></td>
                                                 <td align="right"><?php echo number_format($pay->payment_amount,2); ?></td>
                                             </tr>
-                                        <?php } ?>
+                                        <?php } } ?>
                                     </tbody>
                                     <tfoot>
                                     </tfoot>

@@ -377,6 +377,7 @@
                                                 <div class="row" style="margin-top: 20px;">
                                                   <div class="col-sm-12">
                                                     <div class="data-container table-responsive" style="padding: 20px 15px 20px 15px; min-height: 700px; max-height: 700px;">
+                                                     <h3 class="hidden-xs po_title" style=""><i class="fa fa-file-text-o"  style="color: #067cb2;"></i> <span >CASH DISBURSEMENT FOR APPROVAL</span></h3>
                                                     <table id="tbl_cash_disbursement_list_review" class="table-striped table" cellspacing="0" width="100%">
                                                         <thead class="">
                                                         <tr>
@@ -729,7 +730,7 @@ Chart.defaults.global.defaultFontColor = "#000000";
                 "order": [[ 9, "desc" ]],
                 "ajax" : "Cash_disbursement/transaction/list-unposted",
                 "language": {
-                  "searchPlaceholder":"Search Purchase Order"
+                  "searchPlaceholder":"Search Cash Disbursement"
                 },
                 "columns": [
                     {
